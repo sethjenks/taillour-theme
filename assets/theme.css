@@ -4,16 +4,21 @@ in here: trash all of it, keep bits of it, modify it, improve it...the choice
 is yours! :)
 */
 
+
+  
+
+
+
+
 :root {
   --max-width: 1230px;
-  --black: #000000;
-  --white: #ffffff;
-  --cream: #FFF6D1;
+  /* Colors are set via theme settings in theme.liquid */
+
   --font-stack: system-ui, sans-serif;
   --font-size: 1.125rem;
   --regular: 400;
   --bold: 900;
-  --border: 2px solid var(--black);
+  --border: 2px solid var(--night);
   --shading: repeating-linear-gradient(45deg, white, white 2px, black 1px, black 3px);
 
   --section-wrap-padding: 2rem 0;
@@ -52,7 +57,7 @@ body {
   font-family: var(--font-stack);
   font-size: var(--font-size);
   font-weight: var(--regular);
-  color: var(--black);
+  color: var(--night);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -160,7 +165,7 @@ body .hide {
 
 .fill {
   padding: 0.5rem 0;
-  background-color: var(--black);
+  background-color: var(--night);
   color: var(--white);
 }
 
@@ -186,7 +191,7 @@ a.skip-to-content {
   transform: translateX(-100%);
   background-color: var(--cream);
   padding: 10px;
-  color: var(--black);
+  color: var(--night);
   font-style: italic;
   text-decoration: underline;
   text-align: center;
@@ -236,7 +241,7 @@ textarea {
   font-family: monospace;
   font-size: 1rem;
   font-weight: var(--bold);
-  color: var(--black);
+  color: var(--night);
 }
 input[type="search"] {
   min-width: 400px;
@@ -283,7 +288,7 @@ fieldset legend,
   font-family: var(--font-stack);
   font-size: 1.25rem;
   font-weight: var(--bold);
-  color: var(--black);
+  color: var(--night);
 }
 
 /* !! Number stepper */
@@ -322,7 +327,7 @@ fieldset legend,
     height: 100%;
     font-size: 1.5rem;
     font-family: var(--font-stack);
-    color: var(--black);
+    color: var(--night);
     background-color: transparent;
   }
 }
@@ -336,14 +341,14 @@ table {
   margin-bottom: 2rem;
 }
 table th {
-  background-color: var(--black);
+  background-color: var(--night);
   color: var(--white);
 }
 table th,
 table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px dashed var(--black);
+  border-bottom: 1px dashed var(--night);
 }
 table tbody tr:nth-child(even) td {
   background-color: var(--cream);
@@ -361,7 +366,7 @@ main button:not([class*="input-stepper"]):not([data-index]),
   text-decoration: none;
   text-align: center;
   line-height: 1;
-  background-color: var(--black);
+  background-color: var(--night);
   color: var(--white);
   padding: 14px 16px;
   position: relative;
@@ -376,8 +381,8 @@ main button:not([class*="input-stepper"]):not(:disabled):hover,
 main button.button-white,
 .button.button-white {
   background-color: var(--white);
-  color: var(--black);
-  box-shadow: inset 0 0 0 2px var(--black);
+  color: var(--night);
+  box-shadow: inset 0 0 0 2px var(--night);
   font-weight: 600;
 }
 main button:not([class*="input-stepper"]):not([data-index]):before,
@@ -410,13 +415,13 @@ main#main-content .shopify-payment-button__button--unbranded {
   font-family: var(--font-stack);
   font-size: 1rem;
   font-weight: 600;
-  background-color: var(--black);
+  background-color: var(--night);
   text-transform: uppercase;
 }
 main#main-content .shopify-payment-button__button--unbranded:hover {
   background-color: var(--white);
-  color: var(--black);
-  box-shadow: inset 0 0 0 2px var(--black);
+  color: var(--night);
+  box-shadow: inset 0 0 0 2px var(--night);
   font-weight: 600;
 }
 
@@ -455,7 +460,7 @@ main ol {
 
 hr {
   background: none;
-  border-top: 2px dashed var(--black);
+  border-top: 2px dashed var(--night);
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -599,7 +604,7 @@ main details > div {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border: 2px solid var(--black);
+  border: 2px solid var(--night);
   padding: 1rem;
   text-decoration: none;
   background-color: var(--white);
@@ -673,10 +678,27 @@ nav {
   font-size: 1rem;
   font-weight: var(--bold);
 }
+nav .nav-bar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+nav .nav-logo {
+  display: flex;
+  align-items: center;
+}
 nav a {
   text-decoration: none;
 }
 nav ul.nav-parent-list {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+nav .nav-actions ul {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -689,6 +711,15 @@ nav li.nav-parent-list-item summary {
   align-items: center;
   white-space: nowrap;
   text-decoration: underline
+}
+nav .nav-actions a,
+nav .nav-actions summary {
+  padding: 12px 1rem;
+  font-weight: var(--bold);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-decoration: underline;
 }
 nav li.nav-parent-list-item summary {
   padding-right: 0.5rem;
@@ -707,6 +738,11 @@ nav li.nav-parent-list-item summary:after {
 nav li.nav-parent-list-item > a:hover,
 nav li.nav-parent-list-item summary:hover,
 nav li.nav-parent-list-item details[open] summary {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+nav .nav-actions a:hover,
+nav .nav-actions summary:hover,
+nav .nav-actions details[open] summary {
   background-color: rgba(255, 255, 255, 0.25);
 }
 nav details {
@@ -736,7 +772,7 @@ nav details[open] .submenu {
     margin: 0;
     padding: 0.5rem 0.75rem;
     font-weight: var(--regular);
-    color: var(--black);
+    color: var(--night);
   }
 }
 
@@ -763,7 +799,7 @@ blockquote:after {
 /* !! Footer */
 footer.section-wrap {
   padding: 1rem 0;
-  background-color: var(--black);
+  background-color: var(--night);
   color: white;
 }
 footer .container > div:not(:last-child) {
@@ -798,7 +834,7 @@ footer p a {
 dialog {
   position: fixed;
   z-index: 100;
-  background-color: var(--black);
+  background-color: var(--night);
   border: 0;
   border-radius: 20px;
   max-width: 480px;
@@ -854,7 +890,7 @@ article img {
   left: 0;
   right: 0;
   background-color: var(--white);
-  border: 2px solid var(--black);
+  border: 2px solid var(--night);
   padding-bottom: 1rem;
 }
 #predictive-search-results ul {
@@ -865,7 +901,7 @@ article img {
   text-align: left;
   margin: 0 0.75rem;
   padding: 0.5rem 0;
-  border-bottom: 2px dashed var(--black);
+  border-bottom: 2px dashed var(--night);
 }
 #predictive-search-results li:hover {
   background-color: #f7f7f7;
@@ -878,7 +914,7 @@ article img {
   text-decoration: none;
 }
 #predictive-search-results li img {
-  border: 1px solid var(--black);
+  border: 1px solid var(--night);
 }
 #predictive-search-results button {
   font-size: inherit;
@@ -922,12 +958,12 @@ article img {
 
 /* !! Swiper JS */
 .swiper {
-  --swiper-theme-color: var(--black);
+  --swiper-theme-color: var(--night);
   --swiper-pagination-bottom: 1rem;
   --swiper-pagination-bullet-size: 0.5rem;
   --swiper-pagination-bullet-width: 72px;
   --swiper-pagination-bullet-border-radius: 25px;
   --swiper-pagination-bullet-horizontal-gap: 0.5rem;
   --swiper-pagination-bullet-inactive-opacity: 0.5;
-  --swiper-pagination-bullet-inactive-color: var(--black);
+  --swiper-pagination-bullet-inactive-color: var(--night);
 }

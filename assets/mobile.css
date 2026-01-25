@@ -54,7 +54,7 @@ main#main-content #product {
 /* !! Header */
 header {
   padding: 0 0.5rem;
-  border-bottom: 2px solid var(--black);
+  border-bottom: 2px solid var(--night);
 }
 #logo {
   justify-content: center;
@@ -72,7 +72,7 @@ header {
   background-color: transparent;
 }
 #header-search-mobile {
-  background-color: var(--black);
+  background-color: var(--night);
   padding: 0.5rem;
 }
 #header-search-mobile input[type="search"] {
@@ -81,7 +81,7 @@ header {
 #header-search-mobile button {
   background-color: var(--white);
   padding: 0.6rem;
-  color: var(--black);
+  color: var(--night);
 }
 
 /* !! Nav */
@@ -94,6 +94,20 @@ nav {
   width: 300px;
   transition: left 0.3s ease-in-out;
   overflow-y: auto;
+}
+nav .nav-bar {
+  grid-template-columns: 1fr;
+  padding: 0 0.5rem;
+}
+nav .nav-logo {
+  justify-content: center;
+}
+nav .nav-actions ul {
+  justify-content: center;
+}
+nav .nav-close {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 nav#header-nav.nav-open {
   left: 0;
