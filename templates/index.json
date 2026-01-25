@@ -158,9 +158,9 @@
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "collection": "frontpage",
-        "limit": 8,
-        "products_per_row": 4,
+        "collection": "all-products",
+        "limit": 3,
+        "products_per_row": 3,
         "background": "#ffffff",
         "color": ""
       }
@@ -352,12 +352,15 @@
         "checkbox_wHnRgw"
       ],
       "settings": {
+        "show_heading": true,
         "heading": "Contact Form Section",
         "size": "h2",
+        "show_description": true,
         "text": "<p>This is the contact form section where you can add whatever fields you need via the customiser.</p>",
         "button_label": "Submit",
         "background": "#ffffff",
-        "color": ""
+        "color": "",
+        "thank_you_page": ""
       }
     },
     "raw_html_with_text_XjAjHG": {

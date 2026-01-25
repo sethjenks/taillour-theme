@@ -20,7 +20,7 @@
 }
 .cart-item {
   position: relative;
-  border-bottom: 1px dashed var(--black);
+  border-bottom: 1px dashed var(--night);
   margin: 1rem 0;
   padding-bottom: 1rem;
 }
@@ -78,7 +78,7 @@
 /* !! Spend more bar */
 .spend-more-content {
   background-color: rgba(0, 0, 0, 0.025);
-  border: 2px dashed var(--black);
+  border: 2px dashed var(--night);
   border-radius: 8px;
   padding: 0.5rem 1rem;
 }

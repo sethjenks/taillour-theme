@@ -27,6 +27,19 @@
   <link rel="stylesheet" href="{{ 'mobile.css' | asset_url }}" media="(max-width: 768px)">
   <script src="{{ 'theme.js' | asset_url }}"></script>
   <script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
+  <style>
+    :root {
+      --ink: {{ settings.color_ink }};
+      --night: {{ settings.color_night }};
+      --white: {{ settings.color_white }};
+      --cream: {{ settings.color_cream }};
+      --lavender: {{ settings.color_lavender }};
+      --purple: {{ settings.color_purple }};
+      --royal-purple: {{ settings.color_royal_purple }};
+      --mint: {{ settings.color_mint }};
+      --lemon: {{ settings.color_lemon }};
+    }
+  </style>
 
   {%- comment -%}
   Swiper JS used for the "image-carousel" section.

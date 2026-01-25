@@ -55,5 +55,64 @@
         "default": "Sign up"
       }
     ]
+  },
+  {
+    "name": "Theme Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink",
+        "default": "#181521"
+      },
+      {
+        "type": "color",
+        "id": "color_night",
+        "label": "Night",
+        "default": "#292237"
+      },
+      {
+        "type": "color",
+        "id": "color_white",
+        "label": "White",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_cream",
+        "label": "Cream",
+        "default": "#F5F1F1"
+      },
+      {
+        "type": "color",
+        "id": "color_lavender",
+        "label": "Lavender",
+        "default": "#E2D6FC"
+      },
+      {
+        "type": "color",
+        "id": "color_purple",
+        "label": "Purple",
+        "default": "#685196"
+      },
+      {
+        "type": "color",
+        "id": "color_royal_purple",
+        "label": "Royal Purple",
+        "default": "#3F0765"
+      },
+      {
+        "type": "color",
+        "id": "color_mint",
+        "label": "Mint",
+        "default": "#D2FDA7"
+      },
+      {
+        "type": "color",
+        "id": "color_lemon",
+        "label": "Lemon",
+        "default": "#EFFE75"
+      }
+    ]
   }
 ]
