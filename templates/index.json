@@ -43,11 +43,10 @@
         "buttons_zUiW9p"
       ],
       "settings": {
-        "image": "shopify://shop_images/dub-action-login.png",
-        "background": "#f5f5f5",
+        "background": "#F5F1F1",
         "object_fit": "cover",
         "object_position": "bottom",
-        "desktop_height": 33,
+        "desktop_height": 57,
         "mobile_height": 100
       }
     },

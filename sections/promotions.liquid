@@ -41,12 +41,12 @@
             {%- when 'buttons' -%}
               <div>
                 {%- if block.settings.button1_enable -%}
-                  <a class="button" href="{{ block.settings.button1_link | default: '#' }}">
+                  <a class="button button-primary" href="{{ block.settings.button1_link | default: '#' }}">
                     {{ block.settings.button1_label }}
                   </a>
                 {%- endif -%}
                 {% if block.settings.button2_enable %}
-                  <a class="button" href="{{ block.settings.button2_link | default: '#' }}">
+                  <a class="button button-primary" href="{{ block.settings.button2_link | default: '#' }}">
                     {{ block.settings.button2_label }}
                   </a>
                 {%- endif -%}

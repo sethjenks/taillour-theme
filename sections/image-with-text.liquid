@@ -35,8 +35,8 @@
                 {{ block.settings.text }}
               </div>
             {% when 'buttons' %}
-              <p>
-                <a class="button" href="{{ block.settings.button_link | default: '#' }}">
+            <p>
+                <a class="button button-primary" href="{{ block.settings.button_link | default: '#' }}">
                   {{ block.settings.button_label }}
                 </a>
               </p>

@@ -337,7 +337,7 @@ function renderCartSummary(showNotification=false) {
             <a class="button button-white" href="{{ routes.cart_url }}">
               {{ section.settings.cp_button_label }}
             </a>
-            <a class="button" href="/checkout">{{ section.settings.cp_checkout_label }}</a>
+            <a class="button button-primary" href="/checkout">{{ section.settings.cp_checkout_label }}</a>
           </div>
         </div>`;
       summary.innerHTML = template;

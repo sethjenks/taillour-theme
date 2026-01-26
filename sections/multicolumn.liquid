@@ -70,7 +70,7 @@ assign columns = section.blocks.size
         {% if block.settings.show_button == true %}
           <div>
             <p>
-              <a class="button" href="{{ block.settings.button_link | default: '#' }}">
+              <a class="button button-primary" href="{{ block.settings.button_link | default: '#' }}">
                 {{ block.settings.button_label | default: "Button Label" }}
               </a>
             </p>
