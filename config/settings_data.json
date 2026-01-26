@@ -9,6 +9,8 @@
  */
 {
   "current": {
+    "logo": "shopify://shop_images/dub-logo.svg",
+    "favicon": "shopify://shop_images/favicon2.png",
     "newsletter_heading": "Newsletter Sign-up",
     "newsletter_text": "This is the built-in newsletter signup pop-up form, which you can customise as required.",
     "content_for_index": []

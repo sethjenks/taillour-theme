@@ -43,11 +43,60 @@
         "buttons_zUiW9p"
       ],
       "settings": {
-        "background": "#F5F1F1",
+        "hero_image": "shopify://shop_images/hand-app_2x_cbb27645-c1b5-439e-8a81-cee6731e24b9.png",
+        "background_image": "shopify://shop_images/bg-blur_2x_1d8a4e86-22e5-4331-a07b-04de2b30a2bc.png",
+        "background": "#f5f1f1",
+        "primary_text": "Make picks.",
+        "secondary_text": "Get the dub.",
         "object_fit": "cover",
         "object_position": "bottom",
         "desktop_height": 57,
         "mobile_height": 100
+      }
+    },
+    "image_with_text_ykcntk": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_7EmBXk": {
+          "type": "heading",
+          "settings": {
+            "text": "Headline",
+            "size": "h2"
+          }
+        },
+        "text_rGcNx7": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Asperiores voluptatem rerum fuga assumenda similique voluptatem sapiente qui non voluptatibus.</p>"
+          }
+        },
+        "buttons_TE7J99": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_7EmBXk",
+        "text_rGcNx7",
+        "buttons_TE7J99"
+      ],
+      "name": "Image & Text",
+      "settings": {
+        "show_heading": true,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": true,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "background": "#ffffff",
+        "color": "",
+        "image": "shopify://shop_images/background-section-2.png",
+        "object_fit": "fill",
+        "object_position": "center",
+        "aspect_ratio": "16/9",
+        "image_position": "left"
       }
     },
     "image_with_text_pjRwPQ": {
@@ -85,8 +134,9 @@
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "background": "#ffffff",
+        "background": "#685196",
         "color": "",
+        "image": "shopify://shop_images/leaderboard-1_2x_5e8280f5-47a9-4cd8-9b39-24c0a724433d.png",
         "object_fit": "cover",
         "object_position": "center",
         "aspect_ratio": "1/1",
@@ -400,6 +450,7 @@
   },
   "order": [
     "image_banner_6NDtLC",
+    "image_with_text_ykcntk",
     "image_with_text_pjRwPQ",
     "text_GjxAeE",
     "image_with_video_NCkDCh",
