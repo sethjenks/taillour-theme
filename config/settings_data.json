@@ -15,6 +15,27 @@
     "secondary_font": "dm_sans_n4",
     "primary_font_color_use_custom": false,
     "secondary_font_color_source": "royal_purple",
+    "color_schemes": {
+      "scheme_1": {
+        "settings": {
+          "bg_primary": "#ffffff",
+          "bg_secondary": "#f5f1f1",
+          "bg_gradient": "",
+          "text_primary": "#181521",
+          "text_secondary": "#292237"
+        }
+      },
+      "scheme_2": {
+        "settings": {
+          "bg_primary": "#181521",
+          "bg_secondary": "#292237",
+          "bg_gradient": "",
+          "text_primary": "#ffffff",
+          "text_secondary": "#f5f1f1"
+        }
+      }
+    },
+    "default_color_scheme": "scheme_1",
     "newsletter_heading": "Newsletter Sign-up",
     "newsletter_text": "This is the built-in newsletter signup pop-up form, which you can customise as required.",
     "sections": {
@@ -22,8 +43,8 @@
         "type": "announcement-bar",
         "settings": {
           "text": "Welcome to dub",
-          "background": "",
-          "color": ""
+          "use_default_color_scheme": true,
+          "color_scheme": "scheme_1"
         }
       },
       "nav": {

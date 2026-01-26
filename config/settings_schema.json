@@ -254,5 +254,70 @@
         "default": "#EFFE75"
       }
     ]
+  },
+  {
+    "name": "Color Schemes",
+    "settings": [
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "header",
+            "content": "Theme colors"
+          },
+          {
+            "type": "color",
+            "id": "bg_primary",
+            "label": "Primary background",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "bg_secondary",
+            "label": "Secondary background",
+            "default": "#f5f1f1"
+          },
+          {
+            "type": "color_background",
+            "id": "bg_gradient",
+            "label": "Background gradient"
+          },
+          {
+            "type": "color",
+            "id": "text_primary",
+            "label": "Primary text",
+            "default": "#181521"
+          },
+          {
+            "type": "color",
+            "id": "text_secondary",
+            "label": "Secondary text",
+            "default": "#292237"
+          }
+        ],
+        "role": {
+          "text": "text_primary",
+          "background": {
+            "solid": "bg_primary",
+            "gradient": "bg_gradient"
+          },
+          "links": "text_secondary",
+          "icons": "text_primary",
+          "primary_button": "bg_secondary",
+          "on_primary_button": "text_secondary",
+          "primary_button_border": "bg_secondary",
+          "secondary_button": "bg_primary",
+          "on_secondary_button": "text_secondary",
+          "secondary_button_border": "text_secondary"
+        }
+      },
+      {
+        "type": "color_scheme",
+        "id": "default_color_scheme",
+        "label": "Default theme",
+        "default": "scheme_1"
+      }
+    ]
   }
 ]

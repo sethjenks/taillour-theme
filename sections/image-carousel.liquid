@@ -1,6 +1,14 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 {%- style -%}
 #{{ section.id }} {
-  background-color: {{ section.settings.background }};
+  background-color: var(--theme-bg-primary, #ffffff);
   height: {{ section.settings.desktop_height | append: "vw" }};
 }
 #{{ section.id }} img {
@@ -14,7 +22,7 @@
 }
 {%-endstyle -%}
 
-<div id="{{ section.id }}" class="swiper">
+<div id="{{ section.id }}" class="swiper {{ scheme_class }}">
   <div class="image-carousel-content swiper-wrapper">
     {%- for block in section.blocks -%}
       <div class="swiper-slide" data-swiper-autoplay="{{- block.settings.delay | times: 1000 -}}">
@@ -105,10 +113,17 @@ const swiper = new Swiper('{{ section.id | prepend: "#" }}', {
       "info": "Height of the section in relation to the device width."
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background Colour",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default theme",
+      "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Theme",
+      "default": "scheme_1"
     },
     {
       "type": "select",

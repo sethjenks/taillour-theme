@@ -1,10 +1,18 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 {%- style -%}
 #{{ section.id }}.large-media-section.section-wrap:before {
   background: linear-gradient(
     90deg,
-    {{ section.settings.background_left }} 0%,
-    {{ section.settings.background_left }} 45%,
-    {{ section.settings.background_right }} 100%
+    var(--theme-bg-primary, #ffffff) 0%,
+    var(--theme-bg-primary, #ffffff) 45%,
+    var(--theme-bg-secondary, #f4ff9b) 100%
   );
 }
 #{{ section.id }} .large-media-section__media img {
@@ -15,8 +23,8 @@
 
 <div
   id="{{ section.id }}"
-  class="section-wrap large-media-section"
-  style="color: {{ section.settings.text_color }}; --section-body-color: {{ section.settings.body_color }};"
+  class="section-wrap large-media-section {{ scheme_class }}"
+  style="color: var(--theme-text-primary, #1a1523); --section-body-color: var(--theme-text-secondary, #66626e);"
 >
   <div class="section large-media-section__inner">
     <div class="large-media-section__text">
@@ -80,35 +88,20 @@
     },
     {
       "type": "header",
-      "content": "Background"
+      "content": "Theme"
     },
     {
-      "type": "color",
-      "id": "background_left",
-      "label": "Background left",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default theme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "background_right",
-      "label": "Background right",
-      "default": "#f4ff9b"
-    },
-    {
-      "type": "header",
-      "content": "Text Colors"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Heading color",
-      "default": "#1a1523"
-    },
-    {
-      "type": "color",
-      "id": "body_color",
-      "label": "Body color",
-      "default": "#66626e"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Theme",
+      "default": "scheme_1"
     },
     {
       "type": "header",

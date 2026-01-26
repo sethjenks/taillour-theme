@@ -1,8 +1,16 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 {%- style -%}
 #{{ section.id }}.footer-section {
-  --footer-bg: {{ section.settings.background }};
-  --footer-text: {{ section.settings.text_color }};
-  --footer-muted: {{ section.settings.muted_color }};
+  --footer-bg: var(--theme-bg-primary, #1a1523);
+  --footer-text: var(--theme-text-primary, #ffffff);
+  --footer-muted: var(--theme-text-secondary, #d3cce2);
 }
 #{{ section.id }}.footer-section:before {
   {% if section.settings.background_image != blank %}
@@ -18,7 +26,7 @@
 }
 {%- endstyle -%}
 
-<section id="{{ section.id }}" class="footer-section section-wrap unpadded">
+<section id="{{ section.id }}" class="footer-section section-wrap unpadded {{ scheme_class }}">
   <div class="footer-section__inner section">
     <div class="footer-section__top">
       <div class="footer-section__brand">
@@ -97,22 +105,17 @@
       "label": "Background image"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background color",
-      "default": "#1a1523"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default theme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "muted_color",
-      "label": "Muted text color",
-      "default": "#d3cce2"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Theme",
+      "default": "scheme_1"
     },
     {
       "type": "link_list",

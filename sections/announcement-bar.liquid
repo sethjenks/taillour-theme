@@ -1,4 +1,12 @@
-<div class="fill center gradient-accent" style="background:{{ section.settings.background | default: 'var(--accent-gradient)' }};color:{{ section.settings.color | default: 'var(--ink)' }}">
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
+<div class="fill center gradient-accent {{ scheme_class }}" style="background: var(--theme-bg-primary, var(--accent-gradient)); color: var(--theme-text-primary, var(--ink));">
   {{ section.settings.text }}
 </div>
 
@@ -14,14 +22,17 @@
       "default": "Welcome to our store! <a href=\"#\"> Find out more</a>"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default theme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Theme",
+      "default": "scheme_1"
     }
   ]
 }

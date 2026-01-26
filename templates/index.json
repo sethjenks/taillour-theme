@@ -167,6 +167,7 @@
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "background": "#685196",
+        "background_image": "shopify://shop_images/bg-how-to-play_2x_4d2e9fc0-62e1-4069-bbb7-43deda11cd88.png",
         "color": "",
         "image": "shopify://shop_images/leaderboard-1_2x_5e8280f5-47a9-4cd8-9b39-24c0a724433d.png",
         "object_fit": "cover",

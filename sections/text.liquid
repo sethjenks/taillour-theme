@@ -1,9 +1,17 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 <style>
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: var(--theme-bg-primary, #ffffff);
 }
 {{ section.id | prepend: '#' }}.section-wrap {
-  color:{{ section.settings.color | default:'inherit' }};
+  color: var(--theme-text-primary, inherit);
 }
 {% unless section.settings.max_width == blank or section.settings.max_width == 0 %}
 {{ section.id | prepend: '#' }} .section {
@@ -20,7 +28,7 @@
 }
 </style>
 
-<div id="{{ section.id }}" class="section-wrap">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}">
   <div class="section {{ section.settings.alignment }} rte">
     {{ section.settings.text }}
   </div>
@@ -95,15 +103,17 @@
       "content": "Section Settings"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default theme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Theme",
+      "default": "scheme_1"
     }
   ]
 }

@@ -1,3 +1,11 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 {% style %}
 #{{ section.id }} .promotion-hero {
   min-height: {{ section.settings.desktop_height | append: "vw" }};
@@ -46,8 +54,8 @@
 
 <div
   id="{{ section.id }}"
-  class="promotion-hero"
-  style="background-color: {{ section.settings.background }};{% if section.settings.background_image != blank %} background-image: url({{ section.settings.background_image | image_url: width: 2000 }}); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}"
+  class="promotion-hero {{ scheme_class }}"
+  style="background-color: var(--theme-bg-primary, #ffffff); color: var(--theme-text-primary, inherit);{% if section.settings.background_image != blank %} background-image: url({{ section.settings.background_image | image_url: width: 2000 }}); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}"
 >
   <div class="section promotion-hero-inner">
     <div class="promotion-hero-content">
@@ -121,10 +129,17 @@
       "label": "Background Image"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background Colour",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default theme",
+      "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Theme",
+      "default": "scheme_1"
     },
     {
       "type": "header",

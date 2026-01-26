@@ -1,11 +1,19 @@
 {%- assign image_width = 1024 -%}
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 
 {%- style -%}
 .image-text-left .image-text-asset {
   order: -1;
 }
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color: {{ section.settings.background | default: '#ffffff' }};
+  background-color: var(--theme-bg-primary, #ffffff);
   {%- if section.settings.background_image != blank -%}
   background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
   background-size: cover;
@@ -15,8 +23,8 @@
 }
 {%- endstyle -%}
 
-<div id="{{ section.id }}" class="section-wrap"
-  style="color:{{ section.settings.color | default:'inherit' }};">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}"
+  style="color: var(--theme-text-primary, inherit);">
   <div class="section">
     {%- if section.settings.show_heading == true -%}
       <{{ section.settings.size }}>
@@ -158,20 +166,15 @@
       "default": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Theme",
+      "default": "scheme_1"
     },
     {
       "type": "image_picker",
       "id": "background_image",
       "label": "Background image"
-    },
-    {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
     },
     {
       "type": "header",
