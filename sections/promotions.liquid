@@ -1,60 +1,94 @@
 {% style %}
-#{{ section.id }} .promotion-asset {
-  height: {{ section.settings.desktop_height | append: "vw" }};
+#{{ section.id }} .promotion-hero {
+  min-height: {{ section.settings.desktop_height | append: "vw" }};
 }
-#{{ section.id }} .promotion-asset img {
+#{{ section.id }} .promotion-hero-media img {
   object-fit: {{ section.settings.object_fit }};
-  object-position:{{ section.settings.object_position }};
+  object-position: {{ section.settings.object_position }};
 }
 @media screen and (max-width: 768px) {
-  #{{ section.id }} .promotion-asset {
-    height: {{ section.settings.mobile_height | append: "vw" }};
+  #{{ section.id }} .promotion-hero {
+    min-height: {{ section.settings.mobile_height | append: "vw" }};
   }
 }
 {% endstyle %}
 
-<div id="{{ section.id }}" style="background-color:{{ section.settings.background }};">
-  <!-- image -->
-  <div class="promotion-asset">
-    {%- if section.settings.image == blank -%}
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
-    {%- else -%}
-      {%- assign image = section.settings.image -%}
-      <img src="{{ image | image_url: width: image.width }}"
-      width="{{ image.width }}"
-      height="{{ image.height }}"
-      alt="{{ image.alt }}"
-      loading="lazy">
-    {% endif %}
-  </div>
+{%- assign heading_text = '' -%}
+{%- assign heading_size = 'h1' -%}
+{%- assign body_text = '' -%}
+{%- assign button1_label = '' -%}
+{%- assign button1_link = '' -%}
+{%- assign button1_enable = false -%}
+{%- assign button2_label = '' -%}
+{%- assign button2_link = '' -%}
+{%- assign button2_enable = false -%}
 
-  <!-- content -->
-  <div class="section">
-    <div class="promotion-content">
-      <div class="rte">
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-            {%- when 'heading' -%}
-              <{{- block.settings.size }}>{{ block.settings.text }}</{{- block.settings.size -}}>
-            {%- when 'text' -%}
-              <p>{{ block.settings.text }}</p>
-            {%- when 'buttons' -%}
-              <div>
-                {%- if block.settings.button1_enable -%}
-                  <a class="button button-primary" href="{{ block.settings.button1_link | default: '#' }}">
-                    {{ block.settings.button1_label }}
-                  </a>
-                {%- endif -%}
-                {% if block.settings.button2_enable %}
-                  <a class="button button-primary" href="{{ block.settings.button2_link | default: '#' }}">
-                    {{ block.settings.button2_label }}
-                  </a>
-                {%- endif -%}
-              </div>
-          {%- endcase -%}
-        {%- endfor -%}
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'heading' -%}
+      {%- assign heading_text = block.settings.text -%}
+      {%- assign heading_size = block.settings.size -%}
+    {%- when 'text' -%}
+      {%- assign body_text = block.settings.text -%}
+    {%- when 'buttons' -%}
+      {%- assign button1_label = block.settings.button1_label -%}
+      {%- assign button1_link = block.settings.button1_link -%}
+      {%- assign button1_enable = block.settings.button1_enable -%}
+      {%- assign button2_label = block.settings.button2_label -%}
+      {%- assign button2_link = block.settings.button2_link -%}
+      {%- assign button2_enable = block.settings.button2_enable -%}
+  {%- endcase -%}
+{%- endfor -%}
+
+{%- assign hero_image = section.settings.hero_image | default: section.settings.image -%}
+{%- assign primary_heading = section.settings.primary_text | default: heading_text -%}
+{%- assign secondary_heading = section.settings.secondary_text -%}
+
+<div
+  id="{{ section.id }}"
+  class="promotion-hero"
+  style="background-color: {{ section.settings.background }};{% if section.settings.background_image != blank %} background-image: url({{ section.settings.background_image | image_url: width: 2000 }}); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}"
+>
+  <div class="section promotion-hero-inner">
+    <div class="promotion-hero-content">
+      {%- if primary_heading != blank -%}
+        <{{ heading_size }} class="promotion-hero-title">
+          <span class="promotion-hero-title-primary">{{ primary_heading }}</span>
+          {%- if secondary_heading != blank -%}
+            <span class="promotion-hero-title-secondary">{{ secondary_heading }}</span>
+          {%- endif -%}
+        </{{ heading_size }}>
+      {%- endif -%}
+      {%- if body_text != blank -%}
+        <p class="promotion-hero-body">{{ body_text }}</p>
+      {%- endif -%}
+      <div class="promotion-hero-buttons">
+        {%- if button1_enable and button1_label != blank -%}
+          <a class="button button-primary" href="{{ button1_link | default: '#' }}">
+            {{ button1_label }}
+          </a>
+        {%- endif -%}
+        {%- if button2_enable and button2_label != blank -%}
+          <a class="button button-secondary" href="{{ button2_link | default: '#' }}">
+            {{ button2_label }}
+          </a>
+        {%- endif -%}
       </div>
     </div>
+  </div>
+
+  <div class="promotion-hero-media" aria-hidden="true">
+    {%- if hero_image == blank -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
+    {%- else -%}
+      <img
+        src="{{ hero_image | image_url: width: 1400 }}"
+        width="{{ hero_image.width }}"
+        height="{{ hero_image.height }}"
+        alt="{{ hero_image.alt }}"
+        loading="lazy"
+      >
+    {%- endif -%}
   </div>
 </div>
 
@@ -77,10 +111,36 @@
       "label": "Image"
     },
     {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
       "type": "color",
       "id": "background",
       "label": "Background Colour",
       "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Hero Text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "primary_text",
+      "label": "Primary Text",
+      "default": "Make picks."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "secondary_text",
+      "label": "Secondary Text",
+      "default": "Get the dub."
     },
     {
       "type": "select",
