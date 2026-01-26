@@ -21,7 +21,7 @@
       {% for block in section.blocks %}
         {%- capture icon_style -%}
           --bullet-icon-bg: {{ block.settings.icon_background | default: '#a87be6' }};
-          --bullet-icon-border: {{ block.settings.icon_border_color | default: '#19212b' }};
+          --bullet-icon-border: {{ block.settings.icon_border_color | default: 'transparent' }};
           --bullet-icon-text: {{ block.settings.icon_text_color | default: '#ffffff' }};
           {%- if block.settings.icon_bg_image != blank -%}
             background-image: url('{{ block.settings.icon_bg_image | image_url: width: 128 }}');

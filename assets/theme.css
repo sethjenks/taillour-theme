@@ -446,8 +446,35 @@ main button.button-primary {
   transition: background-color 300ms ease, color 300ms ease, box-shadow 300ms ease;
 }
 
+.button.button-purple,
+main button.button-purple {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 48px;
+  background: var(--royal-purple, var(--purple));
+  color: var(--white);
+  font-family: var(--font-secondary);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: none;
+  border-radius: 75px;
+  box-shadow: 0 21px 48.5px 0 rgba(0, 0, 0, 0.25),
+    inset 0 4px 7px 1px rgba(255, 255, 255, 0.18),
+    inset 0 16px 23.5px -2.5px rgba(0, 0, 0, 0.24),
+    inset -17.5px 14.25px 26px 9px var(--smoke-purple),
+    inset 0 -8.25px 16px 1.25px rgba(46, 18, 64, 0.55);
+  transition: background-color 300ms ease, color 300ms ease, box-shadow 300ms ease;
+}
+
 .button.button-primary:before,
 main button.button-primary:before {
+  content: none;
+}
+
+.button.button-purple:before,
+main button.button-purple:before {
   content: none;
 }
 
@@ -497,6 +524,17 @@ main button.button-primary:hover {
     inset 0 16px 23.5px -2.5px rgba(0, 0, 0, 0.13),
     inset -17.5px 14.25px 26px 9px #f1ff9f,
     inset 0 -8.25px 16px 1.25px #d6ffb3;
+}
+
+.button.button-purple:hover,
+main button.button-purple:hover {
+  background: var(--purple);
+  color: var(--white);
+  box-shadow: 0 21px 48.5px 0 rgba(0, 0, 0, 0.25),
+    inset 0 4px 7px 1px rgba(255, 255, 255, 0.2),
+    inset 0 16px 23.5px -2.5px rgba(0, 0, 0, 0.28),
+    inset -17.5px 14.25px 26px 9px var(--lavender),
+    inset 0 -8.25px 16px 1.25px rgba(60, 24, 84, 0.65);
 }
 main button:not([class*="input-stepper"]):not(:disabled):hover:not(.button-primary):not(.button-white):not(.button-secondary),
 .button:not(:disabled):hover:not(.button-primary):not(.button-white):not(.button-secondary),
@@ -1574,7 +1612,7 @@ article img {
 .bullet-list__items {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 48px;
 }
 .bullet-item {
   display: flex;
@@ -1622,13 +1660,14 @@ article img {
 .bullet-item__content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   max-width: 600px;
 }
 .bullet-item__title {
+  color: inherit;
   font-size: 24px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1;
   letter-spacing: -0.04em;
 }
 .bullet-item__subtext {

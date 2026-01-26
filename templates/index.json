@@ -85,10 +85,10 @@
       ],
       "name": "Image & Text",
       "settings": {
-        "show_heading": true,
+        "show_heading": false,
         "text": "Headline",
         "size": "h2",
-        "show_description": true,
+        "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "background": "#ffffff",
         "color": "",
@@ -115,19 +115,51 @@
             "text": "<p>Taillour comes with a few pre-built sections to make building your clients Shopify store a little easier. This is one of them.</p>"
           }
         },
-        "buttons_hEXxe6": {
-          "type": "buttons",
+        "bullet_item_jVKF3V": {
+          "type": "bullet_item",
           "settings": {
-            "button_label": "Continue",
-            "button_link": "#"
+            "icon_text": "1",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Make your picks",
+            "subtext": "<p>Choose a tournament. Make your picks before play begins.</p>"
+          }
+        },
+        "bullet_item_aVmKKp": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "2",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Make your picks",
+            "subtext": "<p>Choose a tournament. Make your picks before play begins.</p>"
+          }
+        },
+        "bullet_item_VqwB6n": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "3",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Make your picks",
+            "subtext": "<p>Choose a tournament. Make your picks before play begins.</p>"
           }
         }
       },
       "block_order": [
         "heading_aRADHH",
         "text_amNwtU",
-        "buttons_hEXxe6"
+        "bullet_item_jVKF3V",
+        "bullet_item_aVmKKp",
+        "bullet_item_VqwB6n"
       ],
+      "name": "How it Works",
       "settings": {
         "show_heading": false,
         "text": "Headline",
