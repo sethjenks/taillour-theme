@@ -19,7 +19,12 @@
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon"
-      },
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
       {
         "type": "font_picker",
         "id": "primary_font",
