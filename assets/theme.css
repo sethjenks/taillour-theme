@@ -1617,7 +1617,10 @@ article img {
 .bullet-item {
   display: flex;
   gap: 24px;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 .bullet-item__icon {
   width: 64px;
@@ -1660,11 +1663,11 @@ article img {
 .bullet-item__content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0px;
   max-width: 600px;
 }
 .bullet-item__title {
-  color: inherit;
+  color: var(--lavender);
   font-size: 24px;
   font-weight: 600;
   line-height: 1;
@@ -1676,6 +1679,7 @@ article img {
   opacity: 0.8;
 }
 .bullet-item__subtext p {
+  color: var(--smoke-purple);
   margin: 0;
 }
 
@@ -1684,6 +1688,6 @@ article img {
     gap: 20px;
   }
   .bullet-item__content {
-    gap: 12px;
+    gap: 0px;
   }
 }

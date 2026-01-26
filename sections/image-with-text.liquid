@@ -5,7 +5,13 @@
   order: -1;
 }
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: {{ section.settings.background | default: '#ffffff' }};
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
 }
 {%- endstyle -%}
 
@@ -156,6 +162,11 @@
       "id": "background",
       "label": "Background",
       "default": "#ffffff"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
       "type": "color",
