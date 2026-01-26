@@ -23,6 +23,67 @@
 
   <link rel="canonical" href="{{ canonical_url }}">
 
+  {%- liquid
+    assign primary_color = settings.color_night
+    case settings.primary_font_color_source
+      when 'ink'
+        assign primary_color = settings.color_ink
+      when 'night'
+        assign primary_color = settings.color_night
+      when 'white'
+        assign primary_color = settings.color_white
+      when 'cream'
+        assign primary_color = settings.color_cream
+      when 'lavender'
+        assign primary_color = settings.color_lavender
+      when 'purple'
+        assign primary_color = settings.color_purple
+      when 'royal_purple'
+        assign primary_color = settings.color_royal_purple
+      when 'mint'
+        assign primary_color = settings.color_mint
+      when 'lemon'
+        assign primary_color = settings.color_lemon
+    endcase
+
+    assign secondary_color = settings.color_ink
+    case settings.secondary_font_color_source
+      when 'ink'
+        assign secondary_color = settings.color_ink
+      when 'night'
+        assign secondary_color = settings.color_night
+      when 'white'
+        assign secondary_color = settings.color_white
+      when 'cream'
+        assign secondary_color = settings.color_cream
+      when 'lavender'
+        assign secondary_color = settings.color_lavender
+      when 'purple'
+        assign secondary_color = settings.color_purple
+      when 'royal_purple'
+        assign secondary_color = settings.color_royal_purple
+      when 'mint'
+        assign secondary_color = settings.color_mint
+      when 'lemon'
+        assign secondary_color = settings.color_lemon
+    endcase
+
+    if settings.primary_font_color_use_custom and settings.primary_font_color_custom != blank
+      assign primary_color = settings.primary_font_color_custom
+    endif
+
+    if settings.secondary_font_color_use_custom and settings.secondary_font_color_custom != blank
+      assign secondary_color = settings.secondary_font_color_custom
+    endif
+  -%}
+
+  <style>
+    {{ settings.primary_font | font_face: font_display: 'swap' }}
+    {{ settings.primary_font | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+    {{ settings.secondary_font | font_face: font_display: 'swap' }}
+    {{ settings.secondary_font | font_modify: 'weight', '700' | font_face: font_display: 'swap' }}
+  </style>
+
   <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'mobile.css' | asset_url }}" media="(max-width: 768px)">
   <script src="{{ 'theme.js' | asset_url }}"></script>
@@ -38,6 +99,10 @@
       --royal-purple: {{ settings.color_royal_purple }};
       --mint: {{ settings.color_mint }};
       --lemon: {{ settings.color_lemon }};
+      --font-primary: {{ settings.primary_font.family }}, {{ settings.primary_font.fallback_families }};
+      --font-secondary: {{ settings.secondary_font.family }}, {{ settings.secondary_font.fallback_families }};
+      --font-primary-color: {{ primary_color }};
+      --font-secondary-color: {{ secondary_color }};
     }
   </style>
 

@@ -19,6 +19,130 @@
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon"
+      },
+      {
+        "type": "font_picker",
+        "id": "primary_font",
+        "label": "Primary font",
+        "default": "dm_sans_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "secondary_font",
+        "label": "Secondary font",
+        "default": "bricolage_grotesque_n4"
+      },
+      {
+        "type": "select",
+        "id": "primary_font_color_source",
+        "label": "Primary font color",
+        "options": [
+          {
+            "value": "ink",
+            "label": "Ink"
+          },
+          {
+            "value": "night",
+            "label": "Night"
+          },
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "cream",
+            "label": "Cream"
+          },
+          {
+            "value": "lavender",
+            "label": "Lavender"
+          },
+          {
+            "value": "purple",
+            "label": "Purple"
+          },
+          {
+            "value": "royal_purple",
+            "label": "Royal Purple"
+          },
+          {
+            "value": "mint",
+            "label": "Mint"
+          },
+          {
+            "value": "lemon",
+            "label": "Lemon"
+          }
+        ],
+        "default": "night"
+      },
+      {
+        "type": "checkbox",
+        "id": "primary_font_color_use_custom",
+        "label": "Override primary font color",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "primary_font_color_custom",
+        "label": "Custom primary font color",
+        "default": "#292237"
+      },
+      {
+        "type": "select",
+        "id": "secondary_font_color_source",
+        "label": "Secondary font color",
+        "options": [
+          {
+            "value": "ink",
+            "label": "Ink"
+          },
+          {
+            "value": "night",
+            "label": "Night"
+          },
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "cream",
+            "label": "Cream"
+          },
+          {
+            "value": "lavender",
+            "label": "Lavender"
+          },
+          {
+            "value": "purple",
+            "label": "Purple"
+          },
+          {
+            "value": "royal_purple",
+            "label": "Royal Purple"
+          },
+          {
+            "value": "mint",
+            "label": "Mint"
+          },
+          {
+            "value": "lemon",
+            "label": "Lemon"
+          }
+        ],
+        "default": "ink"
+      },
+      {
+        "type": "checkbox",
+        "id": "secondary_font_color_use_custom",
+        "label": "Override secondary font color",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "secondary_font_color_custom",
+        "label": "Custom secondary font color",
+        "default": "#181521"
       }
     ]
   },
