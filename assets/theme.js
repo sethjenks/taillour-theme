@@ -256,7 +256,11 @@ function checkVariants() {
  */
 function toggleNav() {
   let nav = document.querySelector('#header-nav');
-  nav.classList.toggle('nav-open');
+  let isOpen = nav.classList.toggle('nav-open');
+  document.querySelectorAll('[data-nav-toggle]').forEach(function (button) {
+    button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    button.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  });
 }
 
 /*

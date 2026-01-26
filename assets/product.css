@@ -26,7 +26,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
-  border: var(--border);
+  border: var(--field-border);
+  box-shadow: var(--field-shadow);
   padding: 0.325rem 0.5rem;
   border-radius: 50px;
   cursor: pointer;
@@ -69,7 +70,9 @@
   position: relative;
 }
 .product-images-slider {
-  border: var(--border);
+  border: var(--field-border);
+  border-radius: var(--field-radius);
+  box-shadow: var(--field-shadow);
 }
 .product-images-track {
   overflow-x: auto;
@@ -113,7 +116,7 @@
 .product-images-dots button {
   display: inline-flex;
   justify-content: center;
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 1);
+  box-shadow: inset 0 0 0 1px var(--field-border-color), var(--field-shadow);
   background-color: white;
   cursor: pointer;
   margin: 0;
