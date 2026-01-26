@@ -1,11 +1,11 @@
-<div class="fill center" style="background-color:{{ section.settings.background | default: 'var(--night)' }};color:{{ section.settings.color | default: 'var(--white)' }}">
+<div class="fill center gradient-accent" style="background:{{ section.settings.background | default: 'var(--accent-gradient)' }};color:{{ section.settings.color | default: 'var(--ink)' }}">
   {{ section.settings.text }}
 </div>
 
 {% schema %}
 {
   "name": "Announcement Bar",
-  "class": "announcement-bar-section",
+  "class": "announcement-bar-section gradient-accent",
   "settings": [
     {
       "type": "inline_richtext",
