@@ -14,6 +14,12 @@
     var(--theme-bg-primary, #ffffff) 45%,
     var(--theme-bg-secondary, #f4ff9b) 100%
   );
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
 }
 #{{ section.id }} .large-media-section__media img {
   object-fit: {{ section.settings.object_fit }};
@@ -24,7 +30,7 @@
 <div
   id="{{ section.id }}"
   class="section-wrap large-media-section {{ scheme_class }}"
-  style="color: var(--theme-text-primary, #1a1523); --section-body-color: var(--theme-text-secondary, #66626e);"
+  style="color: var(--theme-text-primary, #1a1523); --section-body-color: var(--theme-text-secondary, #66626e); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));"
 >
   <div class="section large-media-section__inner">
     <div class="large-media-section__text">
@@ -89,6 +95,11 @@
     {
       "type": "header",
       "content": "Theme"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
       "type": "checkbox",

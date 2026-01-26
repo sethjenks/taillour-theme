@@ -18,13 +18,19 @@ endif
 }
 {{ section.id | prepend: '#' }}.section-wrap:before {
   background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
 }
 {{ section.id | prepend: '#' }} .column-section {
   grid-template-columns: repeat({{ columns }}, 1fr);
 }
 {% endstyle %}
 
-<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit);">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
   {%- if section.settings.show_heading == true or section.settings.show_description == true -%}
     <div class="section">
       {%- if section.settings.show_heading == true -%}
@@ -147,6 +153,11 @@ endif
     {
       "type": "header",
       "content": "Section Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
       "type": "checkbox",

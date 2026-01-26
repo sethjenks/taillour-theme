@@ -9,6 +9,12 @@
 {%- style -%}
 #{{ section.id }} {
   background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
   height: {{ section.settings.desktop_height | append: "vw" }};
 }
 #{{ section.id }} img {
@@ -22,7 +28,7 @@
 }
 {%-endstyle -%}
 
-<div id="{{ section.id }}" class="swiper {{ scheme_class }}">
+<div id="{{ section.id }}" class="swiper {{ scheme_class }}" style="--font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
   <div class="image-carousel-content swiper-wrapper">
     {%- for block in section.blocks -%}
       <div class="swiper-slide" data-swiper-autoplay="{{- block.settings.delay | times: 1000 -}}">
@@ -111,6 +117,11 @@ const swiper = new Swiper('{{ section.id | prepend: "#" }}', {
       "step": 1,
       "default": 33,
       "info": "Height of the section in relation to the device width."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
       "type": "checkbox",

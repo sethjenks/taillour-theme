@@ -1667,7 +1667,7 @@ article img {
   max-width: 600px;
 }
 .bullet-item__title {
-  color: var(--lavender);
+  color: var(--theme-text-primary, var(--lavender));
   font-size: 24px;
   font-weight: 600;
   line-height: 1;
@@ -1679,7 +1679,7 @@ article img {
   opacity: 0.8;
 }
 .bullet-item__subtext p {
-  color: var(--smoke-purple);
+  color: var(--theme-text-secondary, var(--smoke-purple));
   margin: 0;
 }
 

@@ -45,7 +45,8 @@
       "settings": {
         "hero_image": "shopify://shop_images/hand-app_2x_cbb27645-c1b5-439e-8a81-cee6731e24b9.png",
         "background_image": "shopify://shop_images/bg-blur_2x_1d8a4e86-22e5-4331-a07b-04de2b30a2bc.png",
-        "background": "#f5f1f1",
+        "use_default_color_scheme": true,
+        "color_scheme": "",
         "primary_text": "Make picks.",
         "secondary_text": "Get the dub.",
         "object_fit": "cover",
@@ -90,8 +91,7 @@
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "background": "#ffffff",
-        "color": "",
+        "color_scheme": "",
         "image": "shopify://shop_images/background-section-2.png",
         "object_fit": "fill",
         "object_position": "center",
@@ -166,9 +166,8 @@
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "background": "#685196",
+        "color_scheme": "scheme_2",
         "background_image": "shopify://shop_images/bg-how-to-play_2x_4d2e9fc0-62e1-4069-bbb7-43deda11cd88.png",
-        "color": "",
         "image": "shopify://shop_images/leaderboard-1_2x_5e8280f5-47a9-4cd8-9b39-24c0a724433d.png",
         "object_fit": "cover",
         "object_position": "center",
@@ -184,8 +183,8 @@
         "font_size": 1.3,
         "line_height": 2,
         "alignment": "center",
-        "background": "#000000",
-        "color": "#ffffff"
+        "use_default_color_scheme": true,
+        "color_scheme": ""
       }
     },
     "image_with_video_NCkDCh": {
@@ -223,8 +222,8 @@
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "background": "#f5f5f5",
-        "color": "",
+        "use_default_color_scheme": true,
+        "color_scheme": "",
         "video": "",
         "object_fit": "contain",
         "object_position": "center",
@@ -244,8 +243,8 @@
         "collection": "all-products",
         "limit": 3,
         "products_per_row": 3,
-        "background": "#ffffff",
-        "color": ""
+        "use_default_color_scheme": true,
+        "color_scheme": ""
       }
     },
     "button_row_NkV6Bn": {
@@ -267,8 +266,8 @@
           "frontpage"
         ],
         "collections_per_row": 4,
-        "background": "#ffffff",
-        "color": ""
+        "use_default_color_scheme": true,
+        "color_scheme": ""
       }
     },
     "multicolumn_VbBRUF": {
@@ -331,8 +330,8 @@
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "background": "#ffffff",
-        "color": "",
+        "use_default_color_scheme": true,
+        "color_scheme": "",
         "swipe_on_mobile": true
       }
     },
@@ -344,8 +343,8 @@
         "text": "<p>A standard Shopify newsletter form that works with Shopify's marketing tools. </p>",
         "privacy_text": "I have read and accept the <a href=\"#\">privacy policy</a>.",
         "button_label": "Sign up",
-        "background": "#f5f5f5",
-        "color": ""
+        "use_default_color_scheme": true,
+        "color_scheme": ""
       }
     },
     "contact_form_EAWmhp": {
@@ -441,8 +440,8 @@
         "show_description": true,
         "text": "<p>This is the contact form section where you can add whatever fields you need via the customiser.</p>",
         "button_label": "Submit",
-        "background": "#ffffff",
-        "color": "",
+        "use_default_color_scheme": true,
+        "color_scheme": "",
         "thank_you_page": ""
       }
     },
@@ -476,8 +475,8 @@
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "html": "",
         "html_position": "right",
-        "background": "#f5f5f5",
-        "color": ""
+        "use_default_color_scheme": true,
+        "color_scheme": ""
       }
     }
   },
