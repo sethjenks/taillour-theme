@@ -42,9 +42,7 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "settings": {
-          "text": "Welcome to dub",
-          "use_default_color_scheme": true,
-          "color_scheme": "scheme_1"
+          "text": "Welcome to dub"
         }
       },
       "nav": {

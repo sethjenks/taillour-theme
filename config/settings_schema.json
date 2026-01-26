@@ -315,7 +315,7 @@
       {
         "type": "color_scheme",
         "id": "default_color_scheme",
-        "label": "Default theme",
+        "label": "Default color scheme",
         "default": "scheme_1"
       }
     ]

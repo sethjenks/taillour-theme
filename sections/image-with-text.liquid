@@ -1,6 +1,6 @@
 {%- assign image_width = 1024 -%}
 {%- assign active_scheme = settings.default_color_scheme -%}
-{%- if section.settings.color_scheme != blank -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
   {%- assign active_scheme = section.settings.color_scheme -%}
 {%- endif -%}
 {%- assign scheme_class = '' -%}
@@ -166,15 +166,22 @@
       "default": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>"
     },
     {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme_1"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background image"
     },
     {
       "type": "header",
