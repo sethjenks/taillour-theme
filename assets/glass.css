@@ -51,3 +51,13 @@
   font-family: system-ui, -apple-system, sans-serif;
   white-space: nowrap;
 }
+
+/* Frosted glass card */
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(33, 31, 38, 0.3);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}

@@ -1,23 +1,175 @@
-<ul>
-  {% assign menu_handle = section.settings.menu | default: "footer" %}
-  {% for link in linklists[menu_handle].links %}
-    <li>
-      <a href="{{ link.url }}">
-        {{ link.title }}
-      </a>
-    </li>
-  {% endfor %}
-</ul>
+{%- style -%}
+#{{ section.id }}.footer-section {
+  --footer-bg: {{ section.settings.background }};
+  --footer-text: {{ section.settings.text_color }};
+  --footer-muted: {{ section.settings.muted_color }};
+}
+#{{ section.id }}.footer-section:before {
+  {% if section.settings.background_image != blank %}
+  background-image: url({{ section.settings.background_image | image_url: width: 2200 }});
+  {% endif %}
+}
+#{{ section.id }}.footer-section:after {
+  background-image: linear-gradient(
+    268deg,
+    rgba(25, 21, 34, 0) 5%,
+    rgba(25, 21, 34, 1) 95%
+  );
+}
+{%- endstyle -%}
+
+<section id="{{ section.id }}" class="footer-section section-wrap unpadded">
+  <div class="footer-section__inner section">
+    <div class="footer-section__top">
+      <div class="footer-section__brand">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 180 }}"
+            width="{{ section.settings.logo.width }}"
+            height="{{ section.settings.logo.height }}"
+            alt="{{ section.settings.logo.alt | default: shop.name }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <span class="footer-section__brand-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </div>
+
+      <div class="footer-section__nav">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'menu' -%}
+            <div class="footer-section__menu" {{ block.shopify_attributes }}>
+              {%- if block.settings.heading != blank -%}
+                <p class="footer-section__menu-title">{{ block.settings.heading }}</p>
+              {%- endif -%}
+              {%- if block.settings.menu != blank -%}
+                <ul class="footer-section__menu-list">
+                  {%- for link in linklists[block.settings.menu].links -%}
+                    <li>
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.cta_label != blank -%}
+        <a class="footer-section__cta" href="{{ section.settings.cta_link | default: '#' }}">
+          {{ section.settings.cta_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="footer-section__divider"></div>
+
+    <div class="footer-section__bottom">
+      <div class="footer-section__credits">
+        <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+        {%- if section.settings.legal_menu != blank -%}
+          <div class="footer-section__legal">
+            {%- for link in linklists[section.settings.legal_menu].links -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
-  "name": "Links",
+  "name": "Footer",
+  "tag": "section",
+  "class": "footer-section",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color",
+      "default": "#1a1523"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Muted text color",
+      "default": "#d3cce2"
+    },
+    {
       "type": "link_list",
-      "id": "menu",
-      "label": "Menu",
+      "id": "legal_menu",
+      "label": "Legal menu",
       "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Login"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Company"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Company"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Support"
+          }
+        }
+      ]
     }
   ]
 }

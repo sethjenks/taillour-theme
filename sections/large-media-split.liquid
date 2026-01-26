@@ -1,0 +1,176 @@
+{%- style -%}
+#{{ section.id }}.large-media-section.section-wrap:before {
+  background: linear-gradient(
+    90deg,
+    {{ section.settings.background_left }} 0%,
+    {{ section.settings.background_left }} 45%,
+    {{ section.settings.background_right }} 100%
+  );
+}
+#{{ section.id }} .large-media-section__media img {
+  object-fit: {{ section.settings.object_fit }};
+  object-position: {{ section.settings.object_position }};
+}
+{%- endstyle -%}
+
+<div
+  id="{{ section.id }}"
+  class="section-wrap large-media-section"
+  style="color: {{ section.settings.text_color }}; --section-body-color: {{ section.settings.body_color }};"
+>
+  <div class="section large-media-section__inner">
+    <div class="large-media-section__text">
+      {%- if section.settings.title != blank -%}
+        <h2 class="large-media-section__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="large-media-section__body rte">
+          {{ section.settings.body }}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="large-media-section__media">
+      <div class="large-media-section__media-inner">
+        {%- if section.settings.image == blank -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
+        {%- else -%}
+          {%- assign image = section.settings.image -%}
+          <img
+            src="{{ image | image_url: width: 1600 }}"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            alt="{{ image.alt }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Large Media Split",
+  "tag": "section",
+  "class": "large-media-section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Friendly competition for all ages."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Everyone can be part of the dub club! Join our community of sports fans who enjoy predicting winners and competing for the top spot on the leaderboard.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "background_left",
+      "label": "Background left",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_right",
+      "label": "Background right",
+      "default": "#f4ff9b"
+    },
+    {
+      "type": "header",
+      "content": "Text Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading color",
+      "default": "#1a1523"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body color",
+      "default": "#66626e"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "select",
+      "id": "object_fit",
+      "label": "Fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "object_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Large Media Split"
+    }
+  ]
+}
+{% endschema %}
