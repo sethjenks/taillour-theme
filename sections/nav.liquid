@@ -59,13 +59,11 @@
     <div data-device="mobile" class="site-header__close">
       <button type="button" onclick="toggleNav();" aria-label="Close menu">&times;</button>
     </div>
-    {% if shop.customer_accounts_enabled %}
-      <a class="site-header__login" href="{{ routes.account_url }}">
-        {% if customer %}
-          Account
-        {% else %}
-          Login
-        {% endif %}
+    {% if shop.customer_accounts_enabled and section.settings.show_login %}
+      {% assign login_label = section.settings.login_label | default: 'Login' %}
+      {% assign login_link = section.settings.login_link | default: routes.account_url %}
+      <a class="site-header__login" href="{{ login_link }}">
+        {{ login_label }}
       </a>
     {% endif %}
     <div class="site-header__action-link site-header__cart">
@@ -94,6 +92,27 @@
     {
       "type": "header",
       "content": "Cart Summary Popup"
+    },
+    {
+      "type": "header",
+      "content": "Login button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_login",
+      "label": "Show login button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "login_label",
+      "label": "Login button label",
+      "default": "Login"
+    },
+    {
+      "type": "url",
+      "id": "login_link",
+      "label": "Login button link"
     },
     {
       "type": "checkbox",

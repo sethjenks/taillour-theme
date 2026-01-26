@@ -1556,3 +1556,95 @@ article img {
   --swiper-pagination-bullet-inactive-opacity: 0.5;
   --swiper-pagination-bullet-inactive-color: var(--night);
 }
+
+/* Bullet list */
+.bullet-list__header {
+  margin-bottom: clamp(24px, 4vw, 48px);
+}
+.bullet-list__title {
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+.bullet-list__subtitle {
+  margin-top: 16px;
+  max-width: 720px;
+}
+.bullet-list__items {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.bullet-item {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.bullet-item__icon {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  border-radius: 24px;
+  border: 1.75px solid var(--bullet-icon-border, #19212b);
+  background-color: var(--bullet-icon-bg, #a87be6);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.bullet-item__icon--shadow {
+  box-shadow: 0px 21px 48.5px 0px rgba(0, 0, 0, 0.25),
+    0px 3.5px 23.5px 0px rgba(32, 44, 61, 0.2);
+}
+.bullet-item__icon--shadow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0px 4px 7px 1px rgba(255, 255, 255, 0.25),
+    inset 0px 16px 23.5px -2.5px rgba(0, 0, 0, 0.13),
+    inset -17.5px 14.25px 26px 9px rgba(8, 12, 20, 0.1),
+    inset 0px -8.25px 16px 1.25px rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+.bullet-item__icon-text {
+  color: var(--bullet-icon-text, #ffffff);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+.bullet-item__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+}
+.bullet-item__title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+.bullet-item__subtext {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+.bullet-item__subtext p {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .bullet-item {
+    gap: 20px;
+  }
+  .bullet-item__content {
+    gap: 12px;
+  }
+}

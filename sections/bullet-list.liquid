@@ -1,0 +1,155 @@
+{% style %}
+{{ section.id | prepend: '#' }}.section-wrap:before {
+  background-color: {{ section.settings.background | default: 'transparent' }};
+}
+{% endstyle %}
+
+<div id="{{ section.id }}" class="section-wrap bullet-list-section" style="color:{{ section.settings.text_color | default: 'inherit' }};">
+  <div class="section">
+    {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      <div class="bullet-list__header">
+        {% if section.settings.title != blank %}
+          <h2 class="bullet-list__title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <div class="bullet-list__subtitle rte">{{ section.settings.subtitle }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="bullet-list__items">
+      {% for block in section.blocks %}
+        {%- capture icon_style -%}
+          --bullet-icon-bg: {{ block.settings.icon_background | default: '#a87be6' }};
+          --bullet-icon-border: {{ block.settings.icon_border_color | default: '#19212b' }};
+          --bullet-icon-text: {{ block.settings.icon_text_color | default: '#ffffff' }};
+          {%- if block.settings.icon_bg_image != blank -%}
+            background-image: url('{{ block.settings.icon_bg_image | image_url: width: 128 }}');
+          {%- endif -%}
+        {%- endcapture -%}
+
+        <div class="bullet-item" {{ block.shopify_attributes }}>
+          <div class="bullet-item__icon{% if block.settings.icon_shadow %} bullet-item__icon--shadow{% endif %}" style="{{ icon_style | strip }}">
+            {% unless block.settings.icon_text == blank %}
+              <span class="bullet-item__icon-text">{{ block.settings.icon_text }}</span>
+            {% endunless %}
+          </div>
+          <div class="bullet-item__content">
+            {% unless block.settings.title == blank %}
+              <div class="bullet-item__title">{{ block.settings.title }}</div>
+            {% endunless %}
+            {% unless block.settings.subtext == blank %}
+              <div class="bullet-item__subtext rte">{{ block.settings.subtext }}</div>
+            {% endunless %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bullet List",
+  "tag": "section",
+  "class": "bullet-list-section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "presets": [
+    {
+      "name": "Bullet List",
+      "blocks": [
+        {
+          "type": "bullet_item"
+        },
+        {
+          "type": "bullet_item"
+        },
+        {
+          "type": "bullet_item"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "How to play"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet_item",
+      "name": "Bullet item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon text",
+          "default": "01"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_bg_image",
+          "label": "Icon background image"
+        },
+        {
+          "type": "color",
+          "id": "icon_background",
+          "label": "Icon background color",
+          "default": "#a87be6"
+        },
+        {
+          "type": "color",
+          "id": "icon_border_color",
+          "label": "Icon border color",
+          "default": "#19212b"
+        },
+        {
+          "type": "color",
+          "id": "icon_text_color",
+          "label": "Icon text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "checkbox",
+          "id": "icon_shadow",
+          "label": "Show icon shadow",
+          "default": true
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Make your picks"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "<p>Choose a tournament. Make your picks before play begins.</p>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -96,6 +96,7 @@
       --cream: {{ settings.color_cream }};
       --lavender: {{ settings.color_lavender }};
       --purple: {{ settings.color_purple }};
+      --smoke-purple: {{ settings.color_smoke_purple }};
       --royal-purple: {{ settings.color_royal_purple }};
       --mint: {{ settings.color_mint }};
       --lemon: {{ settings.color_lemon }};
@@ -125,7 +126,8 @@
     <span>Skip to content</span>
   </a>
 
-  {% sections 'header-group' %}
+  {% section 'announcement-bar' %}
+  {% section 'nav' %}
 
   {% liquid
   unless template == "index" or template == "cart" or template == "blog"

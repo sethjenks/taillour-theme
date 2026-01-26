@@ -231,6 +231,12 @@
       },
       {
         "type": "color",
+        "id": "color_smoke_purple",
+        "label": "Smoke Purple",
+        "default": "#66626E"
+      },
+      {
+        "type": "color",
         "id": "color_royal_purple",
         "label": "Royal Purple",
         "default": "#3F0765"

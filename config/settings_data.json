@@ -17,6 +17,36 @@
     "secondary_font_color_source": "royal_purple",
     "newsletter_heading": "Newsletter Sign-up",
     "newsletter_text": "This is the built-in newsletter signup pop-up form, which you can customise as required.",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "Welcome to dub",
+          "background": "",
+          "color": ""
+        }
+      },
+      "nav": {
+        "type": "nav",
+        "settings": {
+          "menu": "main-navigation",
+          "show_login": true,
+          "login_label": "Login",
+          "login_link": "",
+          "enable_cart_popup": true,
+          "cp_heading": "Your cart summary",
+          "cp_show_cart_items": true,
+          "cp_show_cart_total": true,
+          "cp_duration": 8,
+          "cp_thumbnail_size": 50,
+          "cp_show_additional_info": false,
+          "cp_additional_info": "",
+          "cp_button_label": "View Cart",
+          "cp_checkout_label": "Checkout now",
+          "cp_notification": "Item added to your cart."
+        }
+      }
+    },
     "content_for_index": []
   }
 }
