@@ -133,7 +133,7 @@ footer img {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: -5;
+  z-index: 0;
 }
 .section {
   max-width: var(--max-width);
@@ -141,6 +141,8 @@ footer img {
 }
 .section-wrap > * {
   padding: 0.5rem 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .button-section {
@@ -1101,17 +1103,53 @@ nav details {
   display: none;
 }
 
-.site-header__login {
+.site-header__login,
+.site-header__account {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.6rem 1.4rem;
   border-radius: 999px;
-  border: 2px solid #19212b;
   background: rgba(26, 21, 35, 0.1);
   color: #1a1523;
   font-weight: 600;
   text-decoration: none;
+  transition: background-color 400ms ease, color 400ms ease, box-shadow 400ms ease;
+}
+
+.site-header__signup {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-header__signup:hover {
+  text-decoration: underline;
+}
+
+.site-header__login:hover,
+.site-header__account:hover {
+  background: rgba(235, 255, 89, 0.98);
+  color: #1a1523;
+  box-shadow: 0 21px 48.5px 0 rgba(0, 0, 0, 0.25),
+    inset 0 4px 7px 1px rgba(255, 255, 255, 0.25),
+    inset 0 16px 23.5px -2.5px rgba(0, 0, 0, 0.13),
+    inset -17.5px 14.25px 26px 9px #f1ff9f,
+    inset 0 -8.25px 16px 1.25px #d6ffb3;
+}
+
+.site-header__icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+.site-header__action-link a,
+#js--cart-popup summary,
+.site-header__account {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 nav details[open] .submenu {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.15);
@@ -1170,6 +1208,7 @@ blockquote:after {
 .footer-section {
   color: var(--footer-text, #ffffff);
   background-color: var(--footer-bg, #1a1523);
+  position: relative;
   overflow: hidden;
 }
 .footer-section:before,
@@ -1177,22 +1216,24 @@ blockquote:after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
 }
 .footer-section:before {
   background-position: center;
   background-size: cover;
-  opacity: 0.7;
-  mix-blend-mode: luminosity;
+  opacity: 1;
+  z-index: 1;
 }
 .footer-section:after {
-  z-index: -1;
+  z-index: 0;
 }
 .footer-section__inner {
   display: flex;
   flex-direction: column;
   gap: 32px;
   padding: clamp(48px, 6vw, 84px) 0;
+  position: relative;
+  z-index: 2;
 }
 .footer-section__top {
   display: flex;

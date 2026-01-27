@@ -3,6 +3,9 @@
   position: relative;
   summary {
     text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 }
 #cart-popup-summary {
@@ -139,7 +142,14 @@
 {% endstyle %}
 
 <details id="js--cart-popup">
-  <summary>Cart (<span class="js--cart-counter">{{ cart.item_count }}</span>)</summary>
+  <summary>
+    <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="8" cy="21" r="1"></circle>
+      <circle cx="19" cy="21" r="1"></circle>
+      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 1.95-1.57L22 6H6"></path>
+    </svg>
+    Cart (<span class="js--cart-counter">{{ cart.item_count }}</span>)
+  </summary>
   <div id="cart-popup-summary"></div>
 </details>
 

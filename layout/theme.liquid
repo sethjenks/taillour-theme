@@ -139,12 +139,6 @@
   {% section 'announcement-bar' %}
   {% section 'nav' %}
 
-  {% liquid
-  unless template == "index" or template == "cart" or template == "blog"
-    render 'breadcrumb'
-  endunless
-  %}
-
   <main id="main-content">
     {{ content_for_layout }}
   </main>

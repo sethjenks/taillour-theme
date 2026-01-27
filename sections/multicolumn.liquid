@@ -28,6 +28,18 @@ endif
 {{ section.id | prepend: '#' }} .column-section {
   grid-template-columns: repeat({{ columns }}, 1fr);
 }
+{{ section.id | prepend: '#' }} .column-section .column-image {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--column-object-fit, cover);
+  object-position: var(--column-object-position-desktop, center);
+  aspect-ratio: var(--column-image-aspect-ratio);
+}
+@media screen and (max-width: 768px) {
+  {{ section.id | prepend: '#' }} .column-section .column-image {
+    object-position: var(--column-object-position-mobile, center);
+  }
+}
 {% endstyle %}
 
 <div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
@@ -57,16 +69,32 @@ endif
               {% if block.settings.image == blank %}
                 {{ 'collection-1' | placeholder_svg_tag: "placeholder" }}
               {% else %}
-                {%- capture image_sizes -%}
-                width:100%; height:100%; object-fit: {{ block.settings.object_fit }}; object-position: {{ block.settings.object_position }}; aspect-ratio: {{ block.settings.aspect_ratio }};
+                {%- assign position_mode = block.settings.position_mode | default: 'preset' -%}
+                {%- assign object_position_desktop = block.settings.object_position -%}
+                {%- if position_mode == 'custom' -%}
+                  {%- assign object_position_desktop = block.settings.object_position_x | append: '% ' | append: block.settings.object_position_y | append: '%' -%}
+                {%- endif -%}
+                {%- assign object_position_mobile = block.settings.object_position_mobile | default: block.settings.object_position -%}
+                {%- if position_mode == 'custom' -%}
+                  {%- assign object_position_mobile = block.settings.object_position_x_mobile | append: '% ' | append: block.settings.object_position_y_mobile | append: '%' -%}
+                {%- endif -%}
+                {%- capture image_styles -%}
+                --column-object-fit: {{ block.settings.object_fit }};
+                --column-object-position-desktop: {{ object_position_desktop }};
+                --column-object-position-mobile: {{ object_position_mobile }};
+                --column-image-aspect-ratio: {{ block.settings.aspect_ratio }};
                 {%- endcapture -%}
                 <div>
-                  <img src="{{ block.settings.image | image_url: width: image_width }}"
-                    width="{{ image_width }}"
-                    height="{{ image_height }}"
-                    style="{{- image_sizes | strip -}}"
-                    alt="{{- block.settings.image.alt -}}"
-                    loading="lazy">
+                  {% if block.settings.use_focal_point %}
+                    {{ block.settings.image | image_url: width: image_width | image_tag: alt: block.settings.image.alt, loading: 'lazy', class: 'column-image', style: image_styles | strip }}
+                  {% else %}
+                    <img class="column-image" src="{{ block.settings.image | image_url: width: image_width }}"
+                      width="{{ image_width }}"
+                      height="{{ image_height }}"
+                      style="{{- image_styles | strip -}}"
+                      alt="{{- block.settings.image.alt -}}"
+                      loading="lazy">
+                  {% endif %}
                 </div>
               {% endif %}
             {% endif %}
@@ -276,27 +304,156 @@ endif
           "label": "Position",
           "options": [
             {
+              "value": "left top",
+              "label": "Top left"
+            },
+            {
+              "value": "center top",
+              "label": "Top center"
+            },
+            {
+              "value": "right top",
+              "label": "Top right"
+            },
+            {
+              "value": "left center",
+              "label": "Center left"
+            },
+            {
               "value": "center",
               "label": "Center"
             },
             {
-              "value": "top",
-              "label": "Top"
+              "value": "right center",
+              "label": "Center right"
             },
             {
-              "value": "bottom",
-              "label": "Bottom"
+              "value": "left bottom",
+              "label": "Bottom left"
             },
             {
-              "value": "left",
-              "label": "Left"
+              "value": "center bottom",
+              "label": "Bottom center"
             },
             {
-              "value": "right",
-              "label": "Right"
+              "value": "right bottom",
+              "label": "Bottom right"
             }
           ],
           "default": "center"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "select",
+          "id": "position_mode",
+          "label": "Position mode",
+          "options": [
+            {
+              "value": "preset",
+              "label": "Preset positions"
+            },
+            {
+              "value": "custom",
+              "label": "Custom X/Y"
+            }
+          ],
+          "default": "preset"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true and block.settings.position_mode == 'custom' }}",
+          "type": "range",
+          "id": "object_position_x",
+          "label": "Position X (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true and block.settings.position_mode == 'custom' }}",
+          "type": "range",
+          "id": "object_position_y",
+          "label": "Position Y (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "select",
+          "id": "object_position_mobile",
+          "label": "Position (mobile)",
+          "options": [
+            {
+              "value": "left top",
+              "label": "Top left"
+            },
+            {
+              "value": "center top",
+              "label": "Top center"
+            },
+            {
+              "value": "right top",
+              "label": "Top right"
+            },
+            {
+              "value": "left center",
+              "label": "Center left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right center",
+              "label": "Center right"
+            },
+            {
+              "value": "left bottom",
+              "label": "Bottom left"
+            },
+            {
+              "value": "center bottom",
+              "label": "Bottom center"
+            },
+            {
+              "value": "right bottom",
+              "label": "Bottom right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true and block.settings.position_mode == 'custom' }}",
+          "type": "range",
+          "id": "object_position_x_mobile",
+          "label": "Position X (mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true and block.settings.position_mode == 'custom' }}",
+          "type": "range",
+          "id": "object_position_y_mobile",
+          "label": "Position Y (mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "checkbox",
+          "id": "use_focal_point",
+          "label": "Use image focal point",
+          "default": false
         },
         {
           "visible_if": "{{ block.settings.show_image == true }}",

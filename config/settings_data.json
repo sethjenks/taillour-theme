@@ -15,6 +15,44 @@
     "secondary_font": "dm_sans_n4",
     "primary_font_color_use_custom": false,
     "secondary_font_color_source": "royal_purple",
+    "newsletter_heading": "Newsletter Sign-up",
+    "newsletter_text": "This is the built-in newsletter signup pop-up form, which you can customise as required.",
+    "default_color_scheme": "scheme_1",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_bar": false,
+          "text": "Welcome to dub",
+          "use_default_color_scheme": true,
+          "color_scheme": ""
+        }
+      },
+      "nav": {
+        "type": "nav",
+        "settings": {
+          "menu": "main-navigation",
+          "show_signup": true,
+          "signup_label": "Sign Up",
+          "signup_link": "",
+          "show_login": true,
+          "login_label": "Login",
+          "login_link": "",
+          "enable_cart_popup": true,
+          "cp_heading": "Your cart summary",
+          "cp_show_cart_items": true,
+          "cp_show_cart_total": true,
+          "cp_duration": 8,
+          "cp_thumbnail_size": 50,
+          "cp_show_additional_info": false,
+          "cp_additional_info": "",
+          "cp_button_label": "View Cart",
+          "cp_checkout_label": "Checkout now",
+          "cp_notification": "Item added to your cart."
+        }
+      }
+    },
+    "content_for_index": [],
     "color_schemes": {
       "scheme_1": {
         "settings": {
@@ -33,39 +71,16 @@
           "text_primary": "#ffffff",
           "text_secondary": "#f5f1f1"
         }
-      }
-    },
-    "default_color_scheme": "scheme_1",
-    "newsletter_heading": "Newsletter Sign-up",
-    "newsletter_text": "This is the built-in newsletter signup pop-up form, which you can customise as required.",
-    "sections": {
-      "announcement-bar": {
-        "type": "announcement-bar",
-        "settings": {
-          "text": "Welcome to dub"
-        }
       },
-      "nav": {
-        "type": "nav",
+      "scheme-ee222970-1679-436a-9f5c-1986d6d291fc": {
         "settings": {
-          "menu": "main-navigation",
-          "show_login": true,
-          "login_label": "Login",
-          "login_link": "",
-          "enable_cart_popup": true,
-          "cp_heading": "Your cart summary",
-          "cp_show_cart_items": true,
-          "cp_show_cart_total": true,
-          "cp_duration": 8,
-          "cp_thumbnail_size": 50,
-          "cp_show_additional_info": false,
-          "cp_additional_info": "",
-          "cp_button_label": "View Cart",
-          "cp_checkout_label": "Checkout now",
-          "cp_notification": "Item added to your cart."
+          "bg_primary": "#d2fda7",
+          "bg_secondary": "#effe75",
+          "bg_gradient": "linear-gradient(136deg, rgba(210, 253, 167, 1) 11%, rgba(239, 254, 117, 1) 84%)",
+          "text_primary": "#181521",
+          "text_secondary": "#292237"
         }
       }
-    },
-    "content_for_index": []
+    }
   }
 }

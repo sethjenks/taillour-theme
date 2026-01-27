@@ -6,6 +6,15 @@
 {%- if active_scheme != blank -%}
   {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
 {%- endif -%}
+{%- assign position_mode = section.settings.position_mode | default: 'preset' -%}
+{%- assign object_position_desktop = section.settings.object_position -%}
+{%- if position_mode == 'custom' -%}
+  {%- assign object_position_desktop = section.settings.object_position_x | append: '% ' | append: section.settings.object_position_y | append: '%' -%}
+{%- endif -%}
+{%- assign object_position_mobile = section.settings.object_position_mobile | default: section.settings.object_position -%}
+{%- if position_mode == 'custom' -%}
+  {%- assign object_position_mobile = section.settings.object_position_x_mobile | append: '% ' | append: section.settings.object_position_y_mobile | append: '%' -%}
+{%- endif -%}
 {%- style -%}
 #{{ section.id }} {
   background-color: var(--theme-bg-primary, #ffffff);
@@ -19,11 +28,14 @@
 }
 #{{ section.id }} img {
   object-fit:{{ section.settings.object_fit }};
-  object-position:{{ section.settings.object_position }};
+  object-position:{{ object_position_desktop }};
 }
 @media screen and (max-width: 768px) {
   #{{ section.id }} {
     height: {{ section.settings.mobile_height | append: "vw" }};
+  }
+  #{{ section.id }} img {
+    object-position: {{ object_position_mobile }};
   }
 }
 {%-endstyle -%}
@@ -40,11 +52,15 @@
           assign image_width = 2000
           assign image_height = image_width | divided_by: image.aspect_ratio | ceil
           -%}
-          <img src="{{image | image_url: width: image_width }}"
-            width="{{ image_width }}"
-            height="{{ image_height }}"
-            alt="{{ image.alt }}"
-          loading="lazy">
+          {%- if section.settings.use_focal_point -%}
+            {{ image | image_url: width: image_width | image_tag: alt: image.alt, loading: 'lazy' }}
+          {%- else -%}
+            <img src="{{image | image_url: width: image_width }}"
+              width="{{ image_width }}"
+              height="{{ image_height }}"
+              alt="{{ image.alt }}"
+            loading="lazy">
+          {%- endif -%}
         {%- endif -%}
       </div>
     {%- endfor -%}
@@ -125,6 +141,12 @@ const swiper = new Swiper('{{ section.id | prepend: "#" }}', {
     },
     {
       "type": "checkbox",
+      "id": "use_focal_point",
+      "label": "Use image focal point",
+      "default": false
+    },
+    {
+      "type": "checkbox",
       "id": "use_default_color_scheme",
       "label": "Use default color scheme",
       "default": true
@@ -166,27 +188,147 @@ const swiper = new Swiper('{{ section.id | prepend: "#" }}', {
       "label": "Position",
       "options": [
         {
+          "value": "left top",
+          "label": "Top left"
+        },
+        {
+          "value": "center top",
+          "label": "Top center"
+        },
+        {
+          "value": "right top",
+          "label": "Top right"
+        },
+        {
+          "value": "left center",
+          "label": "Center left"
+        },
+        {
           "value": "center",
           "label": "Center"
         },
         {
-          "value": "top",
-          "label": "Top"
+          "value": "right center",
+          "label": "Center right"
         },
         {
-          "value": "bottom",
-          "label": "Bottom"
+          "value": "left bottom",
+          "label": "Bottom left"
         },
         {
-          "value": "left",
-          "label": "Left"
+          "value": "center bottom",
+          "label": "Bottom center"
         },
         {
-          "value": "right",
-          "label": "Right"
+          "value": "right bottom",
+          "label": "Bottom right"
         }
       ],
       "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "position_mode",
+      "label": "Position mode",
+      "options": [
+        {
+          "value": "preset",
+          "label": "Preset positions"
+        },
+        {
+          "value": "custom",
+          "label": "Custom X/Y"
+        }
+      ],
+      "default": "preset"
+    },
+    {
+      "type": "range",
+      "id": "object_position_x",
+      "label": "Position X (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "object_position_y",
+      "label": "Position Y (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "object_position_mobile",
+      "label": "Position (mobile)",
+      "options": [
+        {
+          "value": "left top",
+          "label": "Top left"
+        },
+        {
+          "value": "center top",
+          "label": "Top center"
+        },
+        {
+          "value": "right top",
+          "label": "Top right"
+        },
+        {
+          "value": "left center",
+          "label": "Center left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right center",
+          "label": "Center right"
+        },
+        {
+          "value": "left bottom",
+          "label": "Bottom left"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom center"
+        },
+        {
+          "value": "right bottom",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "object_position_x_mobile",
+      "label": "Position X (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "object_position_y_mobile",
+      "label": "Position Y (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
     },
     {
       "type": "header",
