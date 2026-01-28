@@ -43,12 +43,16 @@
         "buttons_zUiW9p"
       ],
       "settings": {
-        "hero_image": "shopify://shop_images/hand-app_2x_cbb27645-c1b5-439e-8a81-cee6731e24b9.png",
-        "use_focal_point": false,
-        "use_default_color_scheme": false,
-        "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
         "primary_text": "Make picks.",
         "secondary_text": "Get the dub.",
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
+        "hero_image": "shopify://shop_images/hand-app_2x_cbb27645-c1b5-439e-8a81-cee6731e24b9.png",
+        "use_focal_point": false,
+        "media_offset_x": 0,
+        "media_offset_y": 0,
+        "media_offset_x_mobile": 0,
+        "media_offset_y_mobile": 0,
         "object_fit": "cover",
         "object_position": "bottom",
         "position_mode": "preset",
@@ -57,10 +61,6 @@
         "object_position_mobile": "center",
         "object_position_x_mobile": 50,
         "object_position_y_mobile": 50,
-        "desktop_height": 57,
-        "mobile_height": 100,
-        "media_max_height": 66,
-        "media_top_inset": 84,
         "blob1_enable": true,
         "blob1_color": "#b68bff",
         "blob1_size": 25,
@@ -74,7 +74,11 @@
         "blob2_x": 55,
         "blob2_y": 40,
         "blob2_blur": 40,
-        "blob2_opacity": 65
+        "blob2_opacity": 65,
+        "desktop_height": 35,
+        "mobile_height": 100,
+        "media_max_height": 66,
+        "media_top_inset": 84
       }
     },
     "image_with_text_ykcntk": {
