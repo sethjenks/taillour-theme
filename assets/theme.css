@@ -30,6 +30,10 @@ is yours! :)
   /* --shading: repeating-linear-gradient(45deg, white, white 2px, black 1px, black 3px); */
 
   --section-wrap-padding: 2rem 0;
+  --section-wrap-padding-top: 2rem;
+  --site-header-height: 5rem;
+  --site-header-top: 1rem;
+  --site-header-offset: calc(var(--site-header-height) + var(--site-header-top));
   --default-gap: 1rem;
   --column-section-gap: 4rem;
   --grid-2-gap: 6.25rem;
@@ -110,6 +114,11 @@ header {
   max-width: var(--max-width);
 }
 
+.announcement-bar {
+  position: relative;
+  z-index: 250;
+}
+
 main img,
 main svg,
 footer img {
@@ -143,6 +152,11 @@ footer img {
   padding: 0.5rem 1rem;
   position: relative;
   z-index: 1;
+}
+
+main#main-content > :first-child {
+  margin-top: calc(-1 * var(--site-header-offset));
+  padding-top: calc(var(--site-header-offset) + var(--section-wrap-padding-top));
 }
 
 .button-section {
@@ -944,6 +958,12 @@ nav details {
   color: var(--night);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+#header-nav {
+  position: sticky;
+  top: var(--site-header-top);
+  z-index: 200;
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
