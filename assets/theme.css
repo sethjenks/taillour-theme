@@ -1581,6 +1581,14 @@ article img {
   position: absolute;
   right: 0;
   bottom: 0;
+  transform: translate(
+    var(--promotion-media-offset-x, 0%),
+    var(--promotion-media-offset-y, 0%)
+  );
+  height: min(
+    var(--promotion-media-max-height, 90vh),
+    calc(100% - var(--promotion-media-top, 0px))
+  );
   max-height: min(
     var(--promotion-media-max-height, 90vh),
     calc(100% - var(--promotion-media-top, 0px))
@@ -1594,7 +1602,7 @@ article img {
 }
 .promotion-hero-media img,
 .promotion-hero-media svg {
-  width: auto;
+  width: 100%;
   height: 100%;
   max-width: 100%;
   max-height: 100%;

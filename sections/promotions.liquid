@@ -20,6 +20,8 @@
   min-height: {{ section.settings.desktop_height | append: "vw" }};
   --promotion-media-max-height: {{ section.settings.media_max_height | append: "vh" }};
   --promotion-media-top: {{ section.settings.media_top_inset | append: "px" }};
+  --promotion-media-offset-x: {{ section.settings.media_offset_x | append: "%" }};
+  --promotion-media-offset-y: {{ section.settings.media_offset_y | append: "%" }};
   --promotion-blob-1-size: {{ section.settings.blob1_size | append: "vw" }};
   --promotion-blob-1-x: {{ section.settings.blob1_x | append: "%" }};
   --promotion-blob-1-y: {{ section.settings.blob1_y | append: "%" }};
@@ -40,6 +42,8 @@
 @media screen and (max-width: 768px) {
   #{{ section.id }}.promotion-hero {
     min-height: {{ section.settings.mobile_height | append: "vw" }};
+    --promotion-media-offset-x: {{ section.settings.media_offset_x_mobile | append: "%" }};
+    --promotion-media-offset-y: {{ section.settings.media_offset_y_mobile | append: "%" }};
   }
   #{{ section.id }} .promotion-hero-media img {
     object-position: {{ object_position_mobile }};
@@ -192,6 +196,46 @@
       "id": "use_focal_point",
       "label": "Use image focal point",
       "default": false
+    },
+    {
+      "type": "range",
+      "id": "media_offset_x",
+      "label": "Hero image offset X (desktop)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_y",
+      "label": "Hero image offset Y (desktop)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_x_mobile",
+      "label": "Hero image offset X (mobile)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_y_mobile",
+      "label": "Hero image offset Y (mobile)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "unit": "%"
     },
     {
       "type": "select",
