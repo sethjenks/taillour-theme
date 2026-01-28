@@ -10,9 +10,6 @@ improve it...the choice is yours! :)
   --products-grid-gap: 1rem;
   --collections-grid-gap: 1rem;
   --articles-grid-gap: 1rem;
-  --section-wrap-padding-top: 1rem;
-  --site-header-height: 3.5rem;
-  --site-header-top: 0.5rem;
 }
 
 body [data-device="desktop"] {
@@ -93,9 +90,8 @@ header {
 }
 
 #header-nav {
-  position: sticky;
-  top: var(--site-header-top);
-  z-index: 200;
+  position: relative;
+  z-index: 100;
   width: calc(100% - 2rem);
   height: 3.5rem;
   padding: 0.35rem 1rem;

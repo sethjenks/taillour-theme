@@ -1,0 +1,25 @@
+<div class="footer-copyright">
+  <div class="page-width rte">
+    {% if section.settings.text != blank %}
+      {{ section.settings.text }}
+    {% else %}
+      <p>Copyright &copy;{{ 'now' | date: '%Y' }}, {{ shop.name }}.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Copyright",
+  "tag": "section",
+  "class": "copyright-section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Copyright &copy;{{ 'now' | date: '%Y' }}, {{ shop.name }}.</p>"
+    }
+  ]
+}
+{% endschema %}

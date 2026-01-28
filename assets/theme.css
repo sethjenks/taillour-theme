@@ -30,10 +30,6 @@ is yours! :)
   /* --shading: repeating-linear-gradient(45deg, white, white 2px, black 1px, black 3px); */
 
   --section-wrap-padding: 2rem 0;
-  --section-wrap-padding-top: 2rem;
-  --site-header-height: 5rem;
-  --site-header-top: 1rem;
-  --site-header-offset: calc(var(--site-header-height) + var(--site-header-top));
   --default-gap: 1rem;
   --column-section-gap: 4rem;
   --grid-2-gap: 6.25rem;
@@ -114,11 +110,6 @@ header {
   max-width: var(--max-width);
 }
 
-.announcement-bar {
-  position: relative;
-  z-index: 250;
-}
-
 main img,
 main svg,
 footer img {
@@ -152,11 +143,6 @@ footer img {
   padding: 0.5rem 1rem;
   position: relative;
   z-index: 1;
-}
-
-main#main-content > :first-child {
-  margin-top: calc(-1 * var(--site-header-offset));
-  padding-top: calc(var(--site-header-offset) + var(--section-wrap-padding-top));
 }
 
 .button-section {
@@ -960,12 +946,6 @@ nav details {
   -webkit-backdrop-filter: blur(20px);
 }
 
-#header-nav {
-  position: sticky;
-  top: var(--site-header-top);
-  z-index: 200;
-}
-
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .site-header {
     background: rgba(255, 255, 255, 0.92);
@@ -1481,7 +1461,7 @@ article img {
 /* !! Section: Image banner (hero) */
 .promotions-section {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 .promotion-hero {
   position: relative;
@@ -1489,6 +1469,44 @@ article img {
   align-items: center;
   padding: 24px 0;
   background-color: var(--cream);
+  overflow: visible;
+}
+.promotion-hero__blobs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.promotion-hero__blob {
+  position: absolute;
+  width: var(--promotion-blob-size);
+  height: var(--promotion-blob-size);
+  left: var(--promotion-blob-x);
+  top: var(--promotion-blob-y);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    var(--promotion-blob-color) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: var(--promotion-blob-opacity);
+  filter: blur(var(--promotion-blob-blur));
+}
+.promotion-hero__blob--one {
+  --promotion-blob-size: var(--promotion-blob-1-size);
+  --promotion-blob-x: var(--promotion-blob-1-x);
+  --promotion-blob-y: var(--promotion-blob-1-y);
+  --promotion-blob-color: var(--promotion-blob-1-color);
+  --promotion-blob-blur: var(--promotion-blob-1-blur);
+  --promotion-blob-opacity: var(--promotion-blob-1-opacity);
+}
+.promotion-hero__blob--two {
+  --promotion-blob-size: var(--promotion-blob-2-size);
+  --promotion-blob-x: var(--promotion-blob-2-x);
+  --promotion-blob-y: var(--promotion-blob-2-y);
+  --promotion-blob-color: var(--promotion-blob-2-color);
+  --promotion-blob-blur: var(--promotion-blob-2-blur);
+  --promotion-blob-opacity: var(--promotion-blob-2-opacity);
 }
 .promotion-hero-inner {
   position: relative;
@@ -1538,6 +1556,10 @@ article img {
   position: absolute;
   right: 0;
   bottom: 0;
+  max-height: min(
+    var(--promotion-media-max-height, 90vh),
+    calc(100% - var(--promotion-media-top, 0px))
+  );
   width: min(48vw, 640px);
   display: flex;
   align-items: flex-end;
@@ -1547,8 +1569,10 @@ article img {
 }
 .promotion-hero-media img,
 .promotion-hero-media svg {
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   display: block;
 }
 .image-carousel-section img,

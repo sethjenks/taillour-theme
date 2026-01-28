@@ -18,6 +18,20 @@
 {% style %}
 #{{ section.id }} .promotion-hero {
   min-height: {{ section.settings.desktop_height | append: "vw" }};
+  --promotion-media-max-height: {{ section.settings.media_max_height | append: "vh" }};
+  --promotion-media-top: {{ section.settings.media_top_inset | append: "px" }};
+  --promotion-blob-1-size: {{ section.settings.blob1_size | append: "vw" }};
+  --promotion-blob-1-x: {{ section.settings.blob1_x | append: "%" }};
+  --promotion-blob-1-y: {{ section.settings.blob1_y | append: "%" }};
+  --promotion-blob-1-color: {{ section.settings.blob1_color }};
+  --promotion-blob-1-blur: {{ section.settings.blob1_blur | append: "px" }};
+  --promotion-blob-1-opacity: {{ section.settings.blob1_opacity | divided_by: 100.0 }};
+  --promotion-blob-2-size: {{ section.settings.blob2_size | append: "vw" }};
+  --promotion-blob-2-x: {{ section.settings.blob2_x | append: "%" }};
+  --promotion-blob-2-y: {{ section.settings.blob2_y | append: "%" }};
+  --promotion-blob-2-color: {{ section.settings.blob2_color }};
+  --promotion-blob-2-blur: {{ section.settings.blob2_blur | append: "px" }};
+  --promotion-blob-2-opacity: {{ section.settings.blob2_opacity | divided_by: 100.0 }};
 }
 #{{ section.id }} .promotion-hero-media img {
   object-fit: {{ section.settings.object_fit }};
@@ -69,6 +83,16 @@
   class="promotion-hero {{ scheme_class }}"
   style="background-color: var(--theme-bg-primary, #ffffff); color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));{% if section.settings.background_image != blank %} background-image: url({{ section.settings.background_image | image_url: width: 2000 }}); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}"
 >
+  {%- if section.settings.blob1_enable or section.settings.blob2_enable -%}
+    <div class="promotion-hero__blobs" aria-hidden="true">
+      {%- if section.settings.blob1_enable -%}
+        <span class="promotion-hero__blob promotion-hero__blob--one"></span>
+      {%- endif -%}
+      {%- if section.settings.blob2_enable -%}
+        <span class="promotion-hero__blob promotion-hero__blob--two"></span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
   <div class="section promotion-hero-inner">
     <div class="promotion-hero-content">
       {%- if primary_heading != blank -%}
@@ -372,6 +396,160 @@
       "default": 100,
       "unit": "vw",
       "info": "Height of the section in relation to the device width."
+    },
+    {
+      "type": "header",
+      "content": "Hero Image Bounds"
+    },
+    {
+      "type": "range",
+      "id": "media_max_height",
+      "label": "Max image height",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "default": 90,
+      "unit": "vh",
+      "info": "Caps the image height so it does not overlap the header."
+    },
+    {
+      "type": "range",
+      "id": "media_top_inset",
+      "label": "Top boundary inset",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 0,
+      "unit": "px",
+      "info": "Adds extra space above the image while keeping it bottom-aligned."
+    },
+    {
+      "type": "header",
+      "content": "Decorative Blobs"
+    },
+    {
+      "type": "checkbox",
+      "id": "blob1_enable",
+      "label": "Show Blob 1",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "blob1_color",
+      "label": "Blob 1 color",
+      "default": "#b68bff"
+    },
+    {
+      "type": "range",
+      "id": "blob1_size",
+      "label": "Blob 1 size",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "default": 40,
+      "unit": "vw"
+    },
+    {
+      "type": "range",
+      "id": "blob1_x",
+      "label": "Blob 1 position X",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 75,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob1_y",
+      "label": "Blob 1 position Y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 55,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob1_blur",
+      "label": "Blob 1 blur",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "blob1_opacity",
+      "label": "Blob 1 opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 80,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "blob2_enable",
+      "label": "Show Blob 2",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "blob2_color",
+      "label": "Blob 2 color",
+      "default": "#f4ff85"
+    },
+    {
+      "type": "range",
+      "id": "blob2_size",
+      "label": "Blob 2 size",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "default": 36,
+      "unit": "vw"
+    },
+    {
+      "type": "range",
+      "id": "blob2_x",
+      "label": "Blob 2 position X",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 55,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob2_y",
+      "label": "Blob 2 position Y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob2_blur",
+      "label": "Blob 2 blur",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "blob2_opacity",
+      "label": "Blob 2 opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 80,
+      "unit": "%"
     }
   ],
   "blocks": [

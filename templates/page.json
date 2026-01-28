@@ -11,6 +11,7 @@
   "sections": {
     "page": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "max_width": 0
       }
@@ -18,6 +19,20 @@
     "multicolumn_e3JAxU": {
       "type": "multicolumn",
       "blocks": {
+        "header_gHd7W7": {
+          "type": "header",
+          "settings": {
+            "title": "Headline",
+            "title_alignment": "center",
+            "title_size": "h2",
+            "subtitle": "<p>Describe the section in a short sentence.</p>",
+            "subtitle_alignment": "center",
+            "show_button": false,
+            "button_label": "Learn more",
+            "button_link": "",
+            "button_alignment": "align-left"
+          }
+        },
         "column_FQFPUx": {
           "type": "column",
           "settings": {
@@ -35,6 +50,7 @@
             "aspect_ratio": "4/3",
             "text": "Easy to join",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>Find friends or make new ones with one click.</p>",
             "show_button": false,
             "button_label": "Button label",
@@ -58,6 +74,7 @@
             "aspect_ratio": "4/3",
             "text": "Fun to follow",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>Pick winners and watch your choices play out in real time.</p>",
             "show_button": false,
             "button_label": "Button label",
@@ -81,6 +98,7 @@
             "aspect_ratio": "4/3",
             "text": "Compete for merch",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>Climb the leaderboard and earn points to win cool dub merch.</p>",
             "show_button": false,
             "button_label": "Button label",
@@ -89,6 +107,7 @@
         }
       },
       "block_order": [
+        "header_gHd7W7",
         "column_FQFPUx",
         "column_dHUR7X",
         "column_VR4XkX"
@@ -179,6 +198,7 @@
             "aspect_ratio": "4/3",
             "text": "<strong>Make your picks</strong>",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>Browse through matchups to find your perfect tournament. Pick who you predict will win. </p>",
             "show_button": false,
             "button_label": "Button label",
@@ -202,6 +222,7 @@
             "aspect_ratio": "4/3",
             "text": "<strong>Watch it play out</strong>",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>If your picks perform well, your points will start to stack up. </p>",
             "show_button": true,
             "button_label": "Get Started",
@@ -225,6 +246,7 @@
             "aspect_ratio": "4/3",
             "text": "<strong>3 Track your progress. </strong>",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>See how you stack up on the leaderboard. Join a group for a little more competitive fun.</p>",
             "show_button": false,
             "button_label": "Button label",
@@ -303,6 +325,7 @@
             "aspect_ratio": "4/3",
             "text": "The idea took shape. We saw how friendly competition  reconnects people and strengthens local communities.",
             "size": "h3",
+            "alignment": "align-left",
             "content": "",
             "show_button": false,
             "button_label": "Button label",
@@ -326,6 +349,7 @@
             "aspect_ratio": "4/3",
             "text": "dub launched with pickleball and the first groups started competing.",
             "size": "h3",
+            "alignment": "align-left",
             "content": "",
             "show_button": false,
             "button_label": "Button label",
@@ -349,6 +373,7 @@
             "aspect_ratio": "4/3",
             "text": "More sports. More tournaments. More ways to play together.",
             "size": "h3",
+            "alignment": "align-left",
             "content": "",
             "show_button": false,
             "button_label": "Button label",
