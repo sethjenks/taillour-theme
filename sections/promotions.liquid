@@ -16,7 +16,7 @@
   {%- assign object_position_mobile = section.settings.object_position_x_mobile | append: '% ' | append: section.settings.object_position_y_mobile | append: '%' -%}
 {%- endif -%}
 {% style %}
-#{{ section.id }} .promotion-hero {
+#{{ section.id }}.promotion-hero {
   min-height: {{ section.settings.desktop_height | append: "vw" }};
   --promotion-media-max-height: {{ section.settings.media_max_height | append: "vh" }};
   --promotion-media-top: {{ section.settings.media_top_inset | append: "px" }};
@@ -38,7 +38,7 @@
   object-position: {{ object_position_desktop }};
 }
 @media screen and (max-width: 768px) {
-  #{{ section.id }} .promotion-hero {
+  #{{ section.id }}.promotion-hero {
     min-height: {{ section.settings.mobile_height | append: "vw" }};
   }
   #{{ section.id }} .promotion-hero-media img {
@@ -74,7 +74,7 @@
   {%- endcase -%}
 {%- endfor -%}
 
-{%- assign hero_image = section.settings.hero_image | default: section.settings.image -%}
+{%- assign hero_image = section.settings.hero_image -%}
 {%- assign primary_heading = section.settings.primary_text | default: heading_text -%}
 {%- assign secondary_heading = section.settings.secondary_text -%}
 
@@ -151,28 +151,19 @@
   "settings": [
     {
       "type": "header",
-      "content": "Image Settings"
+      "content": "Hero Text"
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
+      "type": "inline_richtext",
+      "id": "primary_text",
+      "label": "Primary Text",
+      "default": "Make picks."
     },
     {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "background_image",
-      "label": "Background Image"
-    },
-    {
-      "type": "checkbox",
-      "id": "use_focal_point",
-      "label": "Use image focal point",
-      "default": false
+      "type": "inline_richtext",
+      "id": "secondary_text",
+      "label": "Secondary Text",
+      "default": "Get the dub."
     },
     {
       "type": "checkbox",
@@ -189,19 +180,18 @@
     },
     {
       "type": "header",
-      "content": "Hero Text"
+      "content": "Hero Image"
     },
     {
-      "type": "inline_richtext",
-      "id": "primary_text",
-      "label": "Primary Text",
-      "default": "Make picks."
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
     },
     {
-      "type": "inline_richtext",
-      "id": "secondary_text",
-      "label": "Secondary Text",
-      "default": "Get the dub."
+      "type": "checkbox",
+      "id": "use_focal_point",
+      "label": "Use image focal point",
+      "default": false
     },
     {
       "type": "select",
@@ -376,56 +366,13 @@
       "visible_if": "{{ section.settings.position_mode == 'custom' }}"
     },
     {
-      "type": "range",
-      "id": "desktop_height",
-      "label": "Height (desktop)",
-      "min": 25,
-      "max": 100,
-      "step": 1,
-      "default": 33,
-      "unit": "vw",
-      "info": "Height of the section in relation to the browser width."
-    },
-    {
-      "type": "range",
-      "id": "mobile_height",
-      "label": "Height (mobile)",
-      "min": 50,
-      "max": 100,
-      "step": 1,
-      "default": 100,
-      "unit": "vw",
-      "info": "Height of the section in relation to the device width."
-    },
-    {
       "type": "header",
-      "content": "Hero Image Bounds"
+      "content": "Background & Blobs"
     },
     {
-      "type": "range",
-      "id": "media_max_height",
-      "label": "Max image height",
-      "min": 40,
-      "max": 120,
-      "step": 1,
-      "default": 90,
-      "unit": "vh",
-      "info": "Caps the image height so it does not overlap the header."
-    },
-    {
-      "type": "range",
-      "id": "media_top_inset",
-      "label": "Top boundary inset",
-      "min": 0,
-      "max": 200,
-      "step": 2,
-      "default": 0,
-      "unit": "px",
-      "info": "Adds extra space above the image while keeping it bottom-aligned."
-    },
-    {
-      "type": "header",
-      "content": "Decorative Blobs"
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
     },
     {
       "type": "checkbox",
@@ -550,6 +497,58 @@
       "step": 5,
       "default": 80,
       "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Height (desktop)",
+      "min": 25,
+      "max": 100,
+      "step": 1,
+      "default": 33,
+      "unit": "vw",
+      "info": "Height of the section in relation to the browser width."
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Height (mobile)",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "vw",
+      "info": "Height of the section in relation to the device width."
+    },
+    {
+      "type": "header",
+      "content": "Hero Image Bounds"
+    },
+    {
+      "type": "range",
+      "id": "media_max_height",
+      "label": "Max image height",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "default": 90,
+      "unit": "vh",
+      "info": "Caps the image height so it does not overlap the header."
+    },
+    {
+      "type": "range",
+      "id": "media_top_inset",
+      "label": "Top boundary inset",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 0,
+      "unit": "px",
+      "info": "Adds extra space above the image while keeping it bottom-aligned."
     }
   ],
   "blocks": [

@@ -36,6 +36,7 @@ ready(function () {
   handleNumberStepper();
   handleVariantSelector();
   handleCloseDropdownMenus();
+  handleNavToggleButtons();
   handleNavToggles();
 });
 
@@ -254,12 +255,38 @@ function checkVariants() {
  * Open/close main nav on mobile. This just applies a class
  * and the rest is done in CSS.
  */
-function toggleNav() {
+function setNavOpen(isOpen) {
   let nav = document.querySelector('#header-nav');
-  let isOpen = nav.classList.toggle('nav-open');
+  if (!nav) {
+    return;
+  }
+  nav.classList.toggle('nav-open', isOpen);
+  let drawer = nav.querySelector('.site-header__drawer');
+  if (drawer) {
+    drawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  }
+  document.body.classList.toggle('nav-open', isOpen);
   document.querySelectorAll('[data-nav-toggle]').forEach(function (button) {
     button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     button.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  });
+}
+
+function toggleNav() {
+  let nav = document.querySelector('#header-nav');
+  if (!nav) {
+    return;
+  }
+  let isOpen = !nav.classList.contains('nav-open');
+  setNavOpen(isOpen);
+}
+
+function handleNavToggleButtons() {
+  document.querySelectorAll('[data-nav-toggle]').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      toggleNav();
+    });
   });
 }
 
@@ -303,11 +330,17 @@ function handleNumberStepper() {
  */
 function handleCloseDropdownMenus() {
   const nav = document.querySelector('#header-nav');
+  if (!nav) {
+    return;
+  }
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
       nav.querySelectorAll('details[open]').forEach((detail) => {
         detail.removeAttribute('open');
       });
+      if (nav.classList.contains('nav-open')) {
+        setNavOpen(false);
+      }
     }
   });
 }

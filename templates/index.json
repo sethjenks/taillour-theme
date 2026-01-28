@@ -44,10 +44,9 @@
       ],
       "settings": {
         "hero_image": "shopify://shop_images/hand-app_2x_cbb27645-c1b5-439e-8a81-cee6731e24b9.png",
-        "background_image": "shopify://shop_images/bg-blur_2x_1d8a4e86-22e5-4331-a07b-04de2b30a2bc.png",
         "use_focal_point": false,
-        "use_default_color_scheme": true,
-        "color_scheme": "",
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
         "primary_text": "Make picks.",
         "secondary_text": "Get the dub.",
         "object_fit": "cover",
@@ -59,7 +58,23 @@
         "object_position_x_mobile": 50,
         "object_position_y_mobile": 50,
         "desktop_height": 57,
-        "mobile_height": 100
+        "mobile_height": 100,
+        "media_max_height": 66,
+        "media_top_inset": 84,
+        "blob1_enable": true,
+        "blob1_color": "#b68bff",
+        "blob1_size": 25,
+        "blob1_x": 27,
+        "blob1_y": 55,
+        "blob1_blur": 40,
+        "blob1_opacity": 80,
+        "blob2_enable": true,
+        "blob2_color": "#f4ff85",
+        "blob2_size": 36,
+        "blob2_x": 55,
+        "blob2_y": 40,
+        "blob2_blur": 40,
+        "blob2_opacity": 65
       }
     },
     "image_with_text_ykcntk": {

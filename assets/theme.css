@@ -985,6 +985,14 @@ nav details {
   gap: 0.75rem;
 }
 
+.site-header__overlay {
+  display: none;
+}
+
+.site-header__drawer {
+  display: contents;
+}
+
 .site-header__toggle {
   display: none;
   align-items: center;
@@ -1044,7 +1052,24 @@ nav details {
   margin: 0;
   padding: 0;
   list-style: none;
-  font-weight: 600;
+  font-weight: 400;
+}
+
+.site-header__menu-list a,
+.site-header__menu-list summary,
+.site-header__actions,
+.site-header__actions a,
+.site-header__actions button,
+.site-header__action-link,
+.site-header__login,
+.site-header__account,
+.site-header__signup {
+  font-weight: 400;
+}
+
+#header-nav nav li.nav-parent-list-item > a,
+#header-nav nav li.nav-parent-list-item summary {
+  font-weight: 400;
 }
 
 .site-header__menu-list summary {
@@ -1094,6 +1119,7 @@ nav details {
   text-decoration: none;
   color: inherit;
   position: relative;
+  font-weight: 400;
 }
 
 .site-header__close {
@@ -1109,14 +1135,13 @@ nav details {
   border-radius: 999px;
   background: rgba(26, 21, 35, 0.1);
   color: #1a1523;
-  font-weight: 600;
   text-decoration: none;
   transition: background-color 400ms ease, color 400ms ease, box-shadow 400ms ease;
 }
 
 .site-header__signup {
   color: inherit;
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
 }
 
@@ -1479,18 +1504,18 @@ article img {
 }
 .promotion-hero__blob {
   position: absolute;
-  width: var(--promotion-blob-size);
-  height: var(--promotion-blob-size);
-  left: var(--promotion-blob-x);
-  top: var(--promotion-blob-y);
+  width: var(--promotion-blob-size, 30vw);
+  height: var(--promotion-blob-size, 30vw);
+  left: var(--promotion-blob-x, 50%);
+  top: var(--promotion-blob-y, 50%);
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    var(--promotion-blob-color) 0%,
+    var(--promotion-blob-color, rgba(182, 139, 255, 0.9)) 0%,
     rgba(255, 255, 255, 0) 70%
   );
-  opacity: var(--promotion-blob-opacity);
-  filter: blur(var(--promotion-blob-blur));
+  opacity: var(--promotion-blob-opacity, 0.8);
+  filter: blur(var(--promotion-blob-blur, 40px));
 }
 .promotion-hero__blob--one {
   --promotion-blob-size: var(--promotion-blob-1-size);
