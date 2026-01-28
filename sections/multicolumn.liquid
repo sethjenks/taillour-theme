@@ -1,6 +1,11 @@
 {% liquid
 assign image_width = 600
-assign columns = section.blocks.size
+assign columns = 0
+for block in section.blocks
+  if block.type != 'header'
+    assign columns = columns | plus: 1
+  endif
+endfor
 assign active_scheme = settings.default_color_scheme
 if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank
   assign active_scheme = section.settings.color_scheme
@@ -59,12 +64,43 @@ endif
     </div>
   {%- endif -%}
 
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'header' %}
+        {%- assign title_alignment = block.settings.title_alignment | default: 'align-left' -%}
+        {%- assign subtitle_alignment = block.settings.subtitle_alignment | default: 'align-left' -%}
+        {%- assign button_alignment = block.settings.button_alignment | default: 'align-left' -%}
+        <div class="section" {{ block.shopify_attributes }}>
+          {% unless block.settings.title == blank %}
+            <{{ block.settings.title_size }} class="{{ title_alignment }}">
+              {{ block.settings.title }}
+            </{{ block.settings.title_size }}>
+          {% endunless %}
+
+          {% unless block.settings.subtitle == blank %}
+            <div class="rte {{ subtitle_alignment }}">
+              {{ block.settings.subtitle }}
+            </div>
+          {% endunless %}
+
+          {% if block.settings.show_button == true and block.settings.button_label != blank %}
+            <div class="{{ button_alignment }}">
+              <a class="button button-primary" href="{{ block.settings.button_link | default: '#' }}">
+                {{ block.settings.button_label }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+    {% endcase %}
+  {% endfor %}
+
   <div class="section column-section{% if section.settings.swipe_on_mobile == true %} scrolly{% endif %}">
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'column' %}
           {% assign image_height = image_width | divided_by: block.settings.image.aspect_ratio | ceil %}
-          <div {{ block.shopify_attributes }}>
+          {%- assign column_alignment = block.settings.alignment | default: 'align-left' -%}
+          <div class="{{ column_alignment }}" {{ block.shopify_attributes }}>
             {% if block.settings.show_image == true %}
               {% if block.settings.image == blank %}
                 {{ 'collection-1' | placeholder_svg_tag: "placeholder" }}
@@ -256,6 +292,125 @@ endif
     }
   ],
   "blocks": [
+    {
+      "type": "header",
+      "name": "Header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Headline"
+        },
+        {
+          "type": "select",
+          "id": "title_alignment",
+          "label": "Title alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
+        },
+        {
+          "type": "select",
+          "id": "title_size",
+          "label": "Title size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "<p>Describe the section in a short sentence.</p>"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_alignment",
+          "label": "Subtitle alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "label": "Show button",
+          "default": false
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Learn more"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "select",
+          "id": "button_alignment",
+          "label": "Button alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
+        }
+      ]
+    },
     {
       "type": "column",
       "name": "Column",
@@ -510,6 +665,26 @@ endif
             }
           ],
           "default": "h3"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
         },
         {
           "type": "richtext",

@@ -45,12 +45,19 @@
       "settings": {
         "hero_image": "shopify://shop_images/hand-app_2x_cbb27645-c1b5-439e-8a81-cee6731e24b9.png",
         "background_image": "shopify://shop_images/bg-blur_2x_1d8a4e86-22e5-4331-a07b-04de2b30a2bc.png",
+        "use_focal_point": false,
         "use_default_color_scheme": true,
         "color_scheme": "",
         "primary_text": "Make picks.",
         "secondary_text": "Get the dub.",
         "object_fit": "cover",
         "object_position": "bottom",
+        "position_mode": "preset",
+        "object_position_x": 50,
+        "object_position_y": 50,
+        "object_position_mobile": "center",
+        "object_position_x_mobile": 50,
+        "object_position_y_mobile": 50,
         "desktop_height": 57,
         "mobile_height": 100
       }
@@ -94,8 +101,15 @@
         "use_default_color_scheme": true,
         "color_scheme": "",
         "image": "shopify://shop_images/background-section-2.png",
+        "use_focal_point": false,
         "object_fit": "fill",
         "object_position": "center",
+        "position_mode": "preset",
+        "object_position_x": 50,
+        "object_position_y": 50,
+        "object_position_mobile": "center",
+        "object_position_x_mobile": 50,
+        "object_position_y_mobile": 50,
         "aspect_ratio": "16/9",
         "image_position": "left"
       }
@@ -171,8 +185,15 @@
         "use_default_color_scheme": false,
         "color_scheme": "scheme_2",
         "image": "shopify://shop_images/leaderboard-1_2x_5e8280f5-47a9-4cd8-9b39-24c0a724433d.png",
+        "use_focal_point": false,
         "object_fit": "cover",
         "object_position": "center",
+        "position_mode": "preset",
+        "object_position_x": 50,
+        "object_position_y": 50,
+        "object_position_mobile": "center",
+        "object_position_x_mobile": 50,
+        "object_position_y_mobile": 50,
         "aspect_ratio": "1/1",
         "image_position": "right"
       }
@@ -218,6 +239,7 @@
         "text_VhigEQ",
         "buttons_jzKH3h"
       ],
+      "disabled": true,
       "settings": {
         "show_heading": false,
         "text": "Headline",
@@ -253,11 +275,12 @@
       "type": "button-row",
       "settings": {
         "text": "Go Shopping",
-        "link": "shopify://collections"
+        "link": "shopify://collections/all-products"
       }
     },
     "collection_grid_7w6HWG": {
       "type": "collection-grid",
+      "disabled": true,
       "settings": {
         "show_heading": true,
         "text": "Collections Section",
@@ -281,9 +304,17 @@
             "show_image": true,
             "object_fit": "cover",
             "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
             "aspect_ratio": "4/3",
             "text": "Columns Section",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>This section allows you to add 1 to 4 columns of text, each can have an optional image, heading and button.</p><p>The layout adjusts accordingly, but you can refactor as required depending on your project.</p>",
             "show_button": true,
             "button_label": "Button label",
@@ -296,9 +327,17 @@
             "show_image": true,
             "object_fit": "cover",
             "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
             "aspect_ratio": "4/3",
             "text": "Customisable",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>Like all the sections of the Taillour theme, you have complete control over everything. There's no nested components or complicated javascript - just basic HTML/CSS and Liquid is all you need.</p>",
             "show_button": true,
             "button_label": "",
@@ -311,9 +350,17 @@
             "show_image": true,
             "object_fit": "cover",
             "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
             "aspect_ratio": "4/3",
             "text": "Headline",
             "size": "h3",
+            "alignment": "align-left",
             "content": "<p>Molestiae et repudiandae et voluptatem temporibus deleniti nemo dolor et. Aut et ipsa ab quas tempora eum voluptas nihil cumque. Totam nemo nobis quia et dolores. Officia in vitae exercitationem dolor iste ut possimus. </p>",
             "show_button": true,
             "button_label": "",
@@ -326,6 +373,7 @@
         "column_CNfgmM",
         "column_kbECRk"
       ],
+      "disabled": true,
       "settings": {
         "show_heading": false,
         "text": "Headline",
@@ -339,6 +387,7 @@
     },
     "newsletter_form_JJALbH": {
       "type": "newsletter-form",
+      "disabled": true,
       "settings": {
         "heading": "Newsletter Signup",
         "size": "h2",
@@ -435,6 +484,7 @@
         "checkbox_HGGwkP",
         "checkbox_wHnRgw"
       ],
+      "disabled": true,
       "settings": {
         "show_heading": true,
         "heading": "Contact Form Section",
@@ -468,6 +518,7 @@
         "heading_rcNraU",
         "text_8JAgq6"
       ],
+      "disabled": true,
       "name": "Custom Liquid & Text",
       "settings": {
         "show_heading": false,

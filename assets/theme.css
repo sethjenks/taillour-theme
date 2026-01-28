@@ -850,12 +850,12 @@ nav {
   font-weight: var(--bold);
 }
 
+#shopify-section-nav,
 #shopify-section-sections--26566843990089__nav {
-  position: fixed;
-  top: 24px;
-  left: 0;
-  right: 0;
+  position: sticky;
+  top: 0;
   z-index: 1000;
+  padding-top: 32px;
 }
 nav .nav-bar {
   display: grid;
@@ -929,10 +929,7 @@ nav details {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 2rem;
-  position: fixed;
-  top: 32px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   width: min(1100px, calc(100% - var(--page-margin, 20px) * 2));
   z-index: 100;
   padding: 0.5rem 1.5rem;

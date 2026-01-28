@@ -1,6 +1,7 @@
 {% style %}
 #js--cart-popup {
   position: relative;
+  overflow: visible;
   summary {
     text-decoration: underline;
     display: inline-flex;
@@ -9,10 +10,10 @@
   }
 }
 #cart-popup-summary {
-  position: fixed;
-  right: calc(((100vw - var(--max-width)) / 2) + 1rem);
-  width: 400px;
-  margin-top: 1rem;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.75rem);
+  width: min(400px, calc(100vw - 2rem));
   background-color: var(--white);
   border: var(--field-border);
   border-radius: var(--field-radius);
@@ -142,13 +143,13 @@
 {% endstyle %}
 
 <details id="js--cart-popup">
-  <summary>
+  <summary aria-label="Cart">
     <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <circle cx="8" cy="21" r="1"></circle>
       <circle cx="19" cy="21" r="1"></circle>
       <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 1.95-1.57L22 6H6"></path>
     </svg>
-    Cart (<span class="js--cart-counter">{{ cart.item_count }}</span>)
+    <span class="js--cart-counter">{{ cart.item_count }}</span>
   </summary>
   <div id="cart-popup-summary"></div>
 </details>
@@ -286,22 +287,27 @@ function renderCartSummary(showNotification=false) {
       template += `<div class="cart-popup-summary_item-group">`;
         cart.items.forEach(function(item){
           // Reduce the size of the image - we don't need fullsize for this!
-          let filepath = item.image;
-          let extIndex = filepath.lastIndexOf('.');
-          let filepathWithoutExtension = filepath.substring(0, extIndex);
-          let fileExtension = filepath.substring(extIndex);
-          let updatedImageSrc = `${filepathWithoutExtension}_{{ section.settings.cp_thumbnail_size | times: 2 }}x{{ section.settings.cp_thumbnail_size | times: 2 }}${fileExtension}`;
+          let imageSrc = item.image || (item.featured_image ? item.featured_image.url : null);
+          let updatedImageSrc = '';
+          if (imageSrc) {
+            let extIndex = imageSrc.lastIndexOf('.');
+            let filepathWithoutExtension = imageSrc.substring(0, extIndex);
+            let fileExtension = imageSrc.substring(extIndex);
+            updatedImageSrc = `${filepathWithoutExtension}_{{ section.settings.cp_thumbnail_size | times: 2 }}x{{ section.settings.cp_thumbnail_size | times: 2 }}${fileExtension}`;
+          }
 
           // Put the template together.
           template += `
             <div class="cart-popup-summary_item">
               <div class="cart-popup-summary_image">
-                <a href="${item.url}">
-                  <img src="${updatedImageSrc}"
-                    width="{{ section.settings.cp_thumbnail_size }}"
-                    height="{{ section.settings.cp_thumbnail_size }}"
-                    alt="${item.title}">
-                </a>
+                ${updatedImageSrc ? `
+                  <a href="${item.url}">
+                    <img src="${updatedImageSrc}"
+                      width="{{ section.settings.cp_thumbnail_size }}"
+                      height="{{ section.settings.cp_thumbnail_size }}"
+                      alt="${item.title}">
+                  </a>
+                ` : ''}
               </div>
               <div class="cart-popup-summary_title">
                 <a href="${item.url}">${item.quantity} x ${item.title}</a>
@@ -363,6 +369,11 @@ function renderCartSummary(showNotification=false) {
  */
 function handleCloseCartSummary() {
   const cartSummary = document.querySelector('#js--cart-popup');
+  cartSummary.addEventListener('toggle', function () {
+    if (cartSummary.open) {
+      renderCartSummary();
+    }
+  });
   // Close on escape.
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {

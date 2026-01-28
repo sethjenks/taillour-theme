@@ -33,11 +33,11 @@
         "settings": {
           "menu": "main-navigation",
           "show_signup": true,
-          "signup_label": "Sign Up",
+          "signup_label": "Login",
           "signup_link": "",
           "show_login": true,
-          "login_label": "Login",
-          "login_link": "",
+          "login_label": "Get started",
+          "login_link": "https://app.getdub.com/register",
           "enable_cart_popup": true,
           "cp_heading": "Your cart summary",
           "cp_show_cart_items": true,
@@ -77,6 +77,15 @@
           "bg_primary": "#d2fda7",
           "bg_secondary": "#effe75",
           "bg_gradient": "linear-gradient(136deg, rgba(210, 253, 167, 1) 11%, rgba(239, 254, 117, 1) 84%)",
+          "text_primary": "#181521",
+          "text_secondary": "#292237"
+        }
+      },
+      "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f": {
+        "settings": {
+          "bg_primary": "#f5f1f1",
+          "bg_secondary": "#f5f1f1",
+          "bg_gradient": "",
           "text_primary": "#181521",
           "text_secondary": "#292237"
         }
