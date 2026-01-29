@@ -22,10 +22,10 @@
         "header_gHd7W7": {
           "type": "header",
           "settings": {
-            "title": "Dubs are better together.",
+            "title": "How to get your dub in 3 steps.",
             "title_alignment": "center",
             "title_size": "h1",
-            "subtitle": "<p>dub is a place where competition brings people together. Whether you’re here to follow your instincts, study every matchup, or just play along for fun, there’s room for everyone.</p>",
+            "subtitle": "",
             "subtitle_alignment": "center",
             "show_button": false,
             "button_label": "Learn more",
@@ -33,8 +33,45 @@
             "button_alignment": "align-left"
           }
         },
+        "bullet_item_Fb7j99": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "1",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Make your picks",
+            "subtext": "<p>Choose a tournament. Make your picks before play begins.</p>"
+          }
+        },
+        "bullet_item_N6HNwe": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "2",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Watch it play out",
+            "subtext": "<p>Watch the results in real time. If your picks perform well, your points will start to stack up.</p>"
+          }
+        },
+        "bullet_item_mQxjHF": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "3",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Track your progress.",
+            "subtext": "<p>See how you stack up on the leaderboard. Join a group for a little more competitive fun. </p>"
+          }
+        },
         "column_FQFPUx": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/badge-device_2x_f90f8a28-acd8-44bf-80d0-163154a2c371.png",
             "show_image": true,
@@ -61,6 +98,7 @@
         },
         "column_dHUR7X": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/badge-follow_2x_95013499-9d48-424b-ae29-8af4007cf096.png",
             "show_image": true,
@@ -87,6 +125,7 @@
         },
         "column_VR4XkX": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/badge-award_2x_0441acd0-5676-4a69-b2fb-b2e1c47c34e0.png",
             "show_image": true,
@@ -114,6 +153,9 @@
       },
       "block_order": [
         "header_gHd7W7",
+        "bullet_item_Fb7j99",
+        "bullet_item_N6HNwe",
+        "bullet_item_mQxjHF",
         "column_FQFPUx",
         "column_dHUR7X",
         "column_VR4XkX"
@@ -176,11 +218,13 @@
         "padding_top": 6,
         "padding_bottom": 6,
         "use_default_color_scheme": false,
-        "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
+        "color_scheme": "scheme_1",
         "text_columns": 6,
         "media_columns": 6,
+        "image_position": "right",
         "family_image": "shopify://shop_images/phone-sports_2x_a5c6b444-86d7-405c-ac93-6dcbee11ce38.png",
         "family_use_focal_point": false,
+        "family_aspect_ratio": "1/1",
         "family_object_fit": "cover",
         "family_object_position": "center",
         "family_position_mode": "preset",
@@ -199,6 +243,7 @@
         "family_width_mobile": 100,
         "family_height_mobile": 100,
         "app_use_focal_point": false,
+        "app_aspect_ratio": "1/1",
         "app_object_fit": "contain",
         "app_object_position": "center",
         "app_position_mode": "preset",
@@ -222,9 +267,7 @@
         "blob_x": 0,
         "blob_y": 100,
         "blob_blur": 120,
-        "blob_opacity": 50,
-        "aspect_ratio": "1/1",
-        "image_position": "right"
+        "blob_opacity": 50
       }
     },
     "multicolumn_QPBVAR": {
@@ -355,7 +398,8 @@
             "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
             "name": "Marcus Chen",
             "title": "Pickleball enthusiast",
-            "location": "Member, Dallas"
+            "location": "Member, Dallas",
+            "avatar": "shopify://shop_images/Testimonial-image-1.png"
           }
         },
         "testimonial_MQPrd4": {
@@ -364,7 +408,8 @@
             "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
             "name": "Marcus Chen",
             "title": "Pickleball enthusiast",
-            "location": "Member, Dallas"
+            "location": "Member, Dallas",
+            "avatar": "shopify://shop_images/Testimonial-image-2.png"
           }
         }
       },
@@ -380,109 +425,6 @@
         "padding_bottom": 6,
         "use_default_color_scheme": true,
         "color_scheme": ""
-      }
-    },
-    "multicolumn_eziH6G": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_YjWgNi": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/bullet-icon-purple_2x_10068075-d136-401d-b9be-1ee0eef72a19.png",
-            "show_image": true,
-            "image_alignment": "center",
-            "image_max_width": 120,
-            "object_fit": "cover",
-            "object_position": "center",
-            "position_mode": "preset",
-            "object_position_x": 50,
-            "object_position_y": 50,
-            "object_position_mobile": "center",
-            "object_position_x_mobile": 50,
-            "object_position_y_mobile": 50,
-            "use_focal_point": false,
-            "aspect_ratio": "4/3",
-            "text": "<strong>Make your picks</strong>",
-            "size": "h3",
-            "alignment": "align-left",
-            "content": "<p>Browse through matchups to find your perfect tournament. Pick who you predict will win. </p>",
-            "show_button": false,
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        },
-        "column_UEPRNU": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/bullet-icon-purple_2x_10068075-d136-401d-b9be-1ee0eef72a19.png",
-            "show_image": true,
-            "image_alignment": "center",
-            "image_max_width": 120,
-            "object_fit": "cover",
-            "object_position": "center",
-            "position_mode": "preset",
-            "object_position_x": 50,
-            "object_position_y": 50,
-            "object_position_mobile": "center",
-            "object_position_x_mobile": 50,
-            "object_position_y_mobile": 50,
-            "use_focal_point": false,
-            "aspect_ratio": "4/3",
-            "text": "<strong>Watch it play out</strong>",
-            "size": "h3",
-            "alignment": "align-left",
-            "content": "<p>If your picks perform well, your points will start to stack up. </p>",
-            "show_button": true,
-            "button_label": "Get Started",
-            "button_link": "https://app.getdub.com/signup"
-          }
-        },
-        "column_UmwTME": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/bullet-icon-purple_2x_10068075-d136-401d-b9be-1ee0eef72a19.png",
-            "show_image": true,
-            "image_alignment": "center",
-            "image_max_width": 120,
-            "object_fit": "cover",
-            "object_position": "center",
-            "position_mode": "preset",
-            "object_position_x": 50,
-            "object_position_y": 50,
-            "object_position_mobile": "center",
-            "object_position_x_mobile": 50,
-            "object_position_y_mobile": 50,
-            "use_focal_point": false,
-            "aspect_ratio": "4/3",
-            "text": "<strong>3 Track your progress. </strong>",
-            "size": "h3",
-            "alignment": "align-left",
-            "content": "<p>See how you stack up on the leaderboard. Join a group for a little more competitive fun.</p>",
-            "show_button": false,
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_YjWgNi",
-        "column_UEPRNU",
-        "column_UmwTME"
-      ],
-      "name": "Columns/Richtext",
-      "settings": {
-        "padding_top_bottom": 6,
-        "enable_padding_overrides": false,
-        "padding_top": 6,
-        "padding_bottom": 6,
-        "show_heading": false,
-        "text": "Headline",
-        "size": "h2",
-        "show_description": false,
-        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "use_default_color_scheme": true,
-        "color_scheme": "",
-        "swipe_on_mobile": false
       }
     },
     "raw_html_with_text_Ed7Kir": {
@@ -508,10 +450,10 @@
       ],
       "name": "Custom Liquid & Text",
       "settings": {
-        "padding_top_bottom": 6,
-        "enable_padding_overrides": false,
-        "padding_top": 6,
-        "padding_bottom": 6,
+        "padding_top_bottom": 0,
+        "enable_padding_overrides": true,
+        "padding_top": 0,
+        "padding_bottom": 0,
         "show_heading": false,
         "text": "Headline",
         "size": "h2",
@@ -520,7 +462,7 @@
         "html": "",
         "html_position": "right",
         "use_default_color_scheme": false,
-        "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f"
+        "color_scheme": "scheme_1"
       }
     },
     "multicolumn_dtMBeX": {
@@ -613,8 +555,8 @@
       "name": "Columns/Richtext",
       "settings": {
         "padding_top_bottom": 6,
-        "enable_padding_overrides": false,
-        "padding_top": 6,
+        "enable_padding_overrides": true,
+        "padding_top": 0,
         "padding_bottom": 6,
         "show_heading": false,
         "text": "Headline",
@@ -622,7 +564,7 @@
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "use_default_color_scheme": false,
-        "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
+        "color_scheme": "scheme_1",
         "swipe_on_mobile": false
       }
     },
@@ -682,7 +624,6 @@
     "image_with_text_A6KVWi",
     "multicolumn_QPBVAR",
     "testimonials_TGp8N6",
-    "multicolumn_eziH6G",
     "raw_html_with_text_Ed7Kir",
     "multicolumn_dtMBeX",
     "multicolumn_K4yF7Q"

@@ -79,7 +79,7 @@
         "blob2_y": 40,
         "blob2_blur": 40,
         "blob2_opacity": 65,
-        "desktop_height": 45,
+        "desktop_height": 50,
         "mobile_height": 100,
         "media_max_height": 66,
         "media_top_inset": 84
@@ -123,26 +123,28 @@
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "padding_top_bottom": 6,
-        "enable_padding_overrides": false,
-        "padding_top": 6,
-        "padding_bottom": 0,
+        "enable_padding_overrides": true,
+        "padding_top": 0,
+        "padding_bottom": 6,
         "use_default_color_scheme": true,
         "color_scheme": "",
         "text_columns": 9,
         "media_columns": 3,
+        "image_position": "left",
         "family_image": "shopify://shop_images/family-1_2x_551dc045-6289-4984-9df5-84ddda09625d.png",
         "family_use_focal_point": false,
+        "family_aspect_ratio": "1/1",
         "family_object_fit": "contain",
         "family_object_position": "center",
         "family_position_mode": "custom",
-        "family_object_position_x": 57,
+        "family_object_position_x": 50,
         "family_object_position_y": 50,
         "family_object_position_mobile": "center bottom",
         "family_object_position_x_mobile": 50,
         "family_object_position_y_mobile": 50,
         "family_enable_absolute": true,
-        "family_x": 45,
-        "family_y": 85,
+        "family_x": 50,
+        "family_y": 90,
         "family_width": 150,
         "family_height": 100,
         "family_x_mobile": 50,
@@ -151,6 +153,7 @@
         "family_height_mobile": 100,
         "app_image": "shopify://shop_images/group-leaderboard_2x_c4fba7a7-1f86-46df-9336-c38cd7e71eaa.png",
         "app_use_focal_point": true,
+        "app_aspect_ratio": "2/3",
         "app_object_fit": "contain",
         "app_object_position": "center",
         "app_position_mode": "preset",
@@ -161,8 +164,8 @@
         "app_object_position_y_mobile": 50,
         "app_enable_absolute": true,
         "app_x": 50,
-        "app_y": 60,
-        "app_width": 150,
+        "app_y": 73,
+        "app_width": 116,
         "app_height": 150,
         "app_x_mobile": 50,
         "app_y_mobile": 50,
@@ -174,9 +177,7 @@
         "blob_x": 85,
         "blob_y": 50,
         "blob_blur": 40,
-        "blob_opacity": 80,
-        "aspect_ratio": "16/9",
-        "image_position": "left"
+        "blob_opacity": 80
       }
     },
     "image_with_text_pjRwPQ": {
@@ -255,8 +256,10 @@
         "color_scheme": "scheme_2",
         "text_columns": 6,
         "media_columns": 6,
+        "image_position": "right",
         "family_image": "shopify://shop_images/Leaderboard_3x_a5f6eb32-9108-4ae9-8c36-565467c0197f.png",
         "family_use_focal_point": false,
+        "family_aspect_ratio": "1/1",
         "family_object_fit": "contain",
         "family_object_position": "center",
         "family_position_mode": "preset",
@@ -275,6 +278,7 @@
         "family_width_mobile": 100,
         "family_height_mobile": 100,
         "app_use_focal_point": false,
+        "app_aspect_ratio": "1/1",
         "app_object_fit": "contain",
         "app_object_position": "center",
         "app_position_mode": "preset",
@@ -298,9 +302,7 @@
         "blob_x": 50,
         "blob_y": 50,
         "blob_blur": 40,
-        "blob_opacity": 80,
-        "aspect_ratio": "1/1",
-        "image_position": "right"
+        "blob_opacity": 80
       }
     },
     "image_with_video_NCkDCh": {
@@ -358,7 +360,8 @@
             "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
             "name": "Marcus Chen",
             "title": "Pickleball enthusiast",
-            "location": "Member, Dallas"
+            "location": "Member, Dallas",
+            "avatar": "shopify://shop_images/Testimonial-image-2.png"
           }
         },
         "testimonial_8D3xb8": {
@@ -367,7 +370,8 @@
             "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
             "name": "Marcus Chen",
             "title": "Pickleball enthusiast",
-            "location": "Member, Dallas"
+            "location": "Member, Dallas",
+            "avatar": "shopify://shop_images/Testimonial-image.png"
           }
         },
         "testimonial_qAjaNm": {
@@ -376,7 +380,8 @@
             "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
             "name": "Marcus Chen",
             "title": "Pickleball enthusiast",
-            "location": "Member, Dallas"
+            "location": "Member, Dallas",
+            "avatar": "shopify://shop_images/Testimonial-image-4.png"
           }
         }
       },
@@ -395,12 +400,50 @@
         "color_scheme": ""
       }
     },
+    "raw_html_with_text_Jbkcak": {
+      "type": "raw-html-with-text",
+      "blocks": {
+        "heading_AyVjHE": {
+          "type": "heading",
+          "settings": {
+            "text": "Win more than just bragging rights",
+            "size": "h2"
+          }
+        },
+        "text_hRDek3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Winners get free Dub merch. Everyone else pays.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_AyVjHE",
+        "text_hRDek3"
+      ],
+      "name": "Custom Liquid & Text",
+      "settings": {
+        "padding_top_bottom": 0,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "show_heading": false,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "html": "",
+        "html_position": "right",
+        "use_default_color_scheme": true,
+        "color_scheme": ""
+      }
+    },
     "product_grid_9e9FqV": {
       "type": "product-grid",
       "settings": {
         "padding_top_bottom": 6,
         "enable_padding_overrides": true,
-        "padding_top": 2,
+        "padding_top": 0,
         "padding_bottom": 6,
         "blob1_enable": true,
         "blob1_color": "#b68bff",
@@ -417,7 +460,7 @@
         "blob2_blur": 40,
         "blob2_opacity": 80,
         "show_heading": true,
-        "text": "Products Section",
+        "text": "",
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
@@ -752,6 +795,7 @@
     "image_with_text_pjRwPQ",
     "image_with_video_NCkDCh",
     "testimonials_8h9VTE",
+    "raw_html_with_text_Jbkcak",
     "product_grid_9e9FqV",
     "multicolumn_dabeKn",
     "collection_grid_7w6HWG",
