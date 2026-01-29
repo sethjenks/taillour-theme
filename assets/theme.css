@@ -1888,8 +1888,8 @@ article img {
 .bullet-item {
   display: flex;
   gap: 24px;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   padding-top: 16px;
   padding-bottom: 16px;
 }
