@@ -26,7 +26,10 @@ input[type="search"] {
 
 /* !! Sections and grids */
 .section-wrap {
-  padding: 1rem 0;
+  --section-padding-scale: 0.5;
+}
+.section-pad {
+  --section-padding-scale: 0.5;
 }
 .section-wrap > * {
   padding: 0.5rem;

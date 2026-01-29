@@ -124,11 +124,22 @@ footer img {
 
 /* !! Sections & Containers */
 .section-wrap {
-  padding: var(--section-wrap-padding);
+  --section-padding-scale: 1;
+  padding-top: calc(var(--section-padding-top, var(--section-padding-default, 6rem)) * var(--section-padding-scale, 1));
+  padding-bottom: calc(var(--section-padding-bottom, var(--section-padding-default, 6rem)) * var(--section-padding-scale, 1));
+  padding-left: 0;
+  padding-right: 0;
   position: relative;
 }
 .section-wrap.unpadded {
-  padding: 0;
+  --section-padding-default: 0rem;
+  --section-padding-top: 0rem;
+  --section-padding-bottom: 0rem;
+}
+.section-pad {
+  --section-padding-scale: 1;
+  padding-top: calc(var(--section-padding-top, var(--section-padding-default, 6rem)) * var(--section-padding-scale, 1));
+  padding-bottom: calc(var(--section-padding-bottom, var(--section-padding-default, 6rem)) * var(--section-padding-scale, 1));
 }
 .section-wrap:before {
   content: '';
