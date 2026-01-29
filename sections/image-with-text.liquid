@@ -14,35 +14,65 @@
   {%- assign padding_top = section.settings.padding_top -%}
   {%- assign padding_bottom = section.settings.padding_bottom -%}
 {%- endif -%}
-{%- assign position_mode = section.settings.position_mode | default: 'preset' -%}
-{%- assign object_position_desktop = section.settings.object_position -%}
-{%- if position_mode == 'custom' -%}
-  {%- assign object_position_desktop = section.settings.object_position_x | append: '% ' | append: section.settings.object_position_y | append: '%' -%}
-{%- endif -%}
-{%- assign object_position_mobile = section.settings.object_position_mobile | default: section.settings.object_position -%}
-{%- if position_mode == 'custom' -%}
-  {%- assign object_position_mobile = section.settings.object_position_x_mobile | append: '% ' | append: section.settings.object_position_y_mobile | append: '%' -%}
-{%- endif -%}
-{%- assign family_position_mode = section.settings.family_position_mode | default: position_mode -%}
-{%- assign family_object_position_desktop = section.settings.family_object_position | default: object_position_desktop -%}
+{%- assign family_absolute_enabled = section.settings.family_enable_absolute | default: true -%}
+{%- assign family_position_mode = section.settings.family_position_mode | default: 'preset' -%}
+{%- assign family_object_position_desktop = section.settings.family_object_position | default: 'center' -%}
 {%- if family_position_mode == 'custom' -%}
   {%- assign family_object_position_desktop = section.settings.family_object_position_x | append: '% ' | append: section.settings.family_object_position_y | append: '%' -%}
 {%- endif -%}
-{%- assign family_object_position_mobile = section.settings.family_object_position_mobile | default: object_position_mobile -%}
+{%- assign family_object_position_mobile = section.settings.family_object_position_mobile | default: 'center' -%}
 {%- if family_position_mode == 'custom' -%}
   {%- assign family_object_position_mobile = section.settings.family_object_position_x_mobile | append: '% ' | append: section.settings.family_object_position_y_mobile | append: '%' -%}
 {%- endif -%}
-{%- assign app_position_mode = section.settings.app_position_mode | default: position_mode -%}
-{%- assign app_object_position_desktop = section.settings.app_object_position | default: object_position_desktop -%}
+{%- assign family_layer_x = section.settings.family_x | append: '%' -%}
+{%- assign family_layer_y = section.settings.family_y | append: '%' -%}
+{%- assign family_layer_width = section.settings.family_width | append: '%' -%}
+{%- assign family_layer_height = section.settings.family_height | append: '%' -%}
+{%- assign family_layer_x_mobile = section.settings.family_x_mobile | append: '%' -%}
+{%- assign family_layer_y_mobile = section.settings.family_y_mobile | append: '%' -%}
+{%- assign family_layer_width_mobile = section.settings.family_width_mobile | append: '%' -%}
+{%- assign family_layer_height_mobile = section.settings.family_height_mobile | append: '%' -%}
+{%- if family_absolute_enabled == false -%}
+  {%- assign family_layer_x = '50%' -%}
+  {%- assign family_layer_y = '50%' -%}
+  {%- assign family_layer_width = '100%' -%}
+  {%- assign family_layer_height = '100%' -%}
+  {%- assign family_layer_x_mobile = '50%' -%}
+  {%- assign family_layer_y_mobile = '50%' -%}
+  {%- assign family_layer_width_mobile = '100%' -%}
+  {%- assign family_layer_height_mobile = '100%' -%}
+{%- endif -%}
+
+{%- assign app_absolute_enabled = section.settings.app_enable_absolute | default: true -%}
+{%- assign app_position_mode = section.settings.app_position_mode | default: 'preset' -%}
+{%- assign app_object_position_desktop = section.settings.app_object_position | default: 'center' -%}
 {%- if app_position_mode == 'custom' -%}
   {%- assign app_object_position_desktop = section.settings.app_object_position_x | append: '% ' | append: section.settings.app_object_position_y | append: '%' -%}
 {%- endif -%}
-{%- assign app_object_position_mobile = section.settings.app_object_position_mobile | default: object_position_mobile -%}
+{%- assign app_object_position_mobile = section.settings.app_object_position_mobile | default: 'center' -%}
 {%- if app_position_mode == 'custom' -%}
   {%- assign app_object_position_mobile = section.settings.app_object_position_x_mobile | append: '% ' | append: section.settings.app_object_position_y_mobile | append: '%' -%}
 {%- endif -%}
-{%- assign family_object_fit = section.settings.family_object_fit | default: section.settings.object_fit -%}
-{%- assign app_object_fit = section.settings.app_object_fit | default: section.settings.object_fit -%}
+{%- assign app_layer_x = section.settings.app_x | append: '%' -%}
+{%- assign app_layer_y = section.settings.app_y | append: '%' -%}
+{%- assign app_layer_width = section.settings.app_width | append: '%' -%}
+{%- assign app_layer_height = section.settings.app_height | append: '%' -%}
+{%- assign app_layer_x_mobile = section.settings.app_x_mobile | append: '%' -%}
+{%- assign app_layer_y_mobile = section.settings.app_y_mobile | append: '%' -%}
+{%- assign app_layer_width_mobile = section.settings.app_width_mobile | append: '%' -%}
+{%- assign app_layer_height_mobile = section.settings.app_height_mobile | append: '%' -%}
+{%- if app_absolute_enabled == false -%}
+  {%- assign app_layer_x = '50%' -%}
+  {%- assign app_layer_y = '50%' -%}
+  {%- assign app_layer_width = '100%' -%}
+  {%- assign app_layer_height = '100%' -%}
+  {%- assign app_layer_x_mobile = '50%' -%}
+  {%- assign app_layer_y_mobile = '50%' -%}
+  {%- assign app_layer_width_mobile = '100%' -%}
+  {%- assign app_layer_height_mobile = '100%' -%}
+{%- endif -%}
+{%- assign family_object_fit = section.settings.family_object_fit | default: 'contain' -%}
+{%- assign app_object_fit = section.settings.app_object_fit | default: 'contain' -%}
 
 {%- style -%}
 .image-text-left .image-text-asset {
@@ -57,16 +87,25 @@
   background-repeat: no-repeat;
   {%- endif -%}
 }
+{{ section.id | prepend: '#' }}.section-wrap {
+  --image-text-text-columns: {{ section.settings.text_columns | default: 4 }}fr;
+  --image-text-media-columns: {{ section.settings.media_columns | default: 8 }}fr;
+}
+@media screen and (min-width: 769px) {
+  {{ section.id | prepend: '#' }} .grid-2 {
+    grid-template-columns: var(--image-text-text-columns) var(--image-text-media-columns);
+  }
+}
 {{ section.id | prepend: '#' }} .image-text-asset--layered {
   --image-text-asset-ratio: {{ section.settings.aspect_ratio }};
-  --image-text-family-x: {{ section.settings.family_x | append: '%' }};
-  --image-text-family-y: {{ section.settings.family_y | append: '%' }};
-  --image-text-family-width: {{ section.settings.family_width | append: '%' }};
-  --image-text-family-height: {{ section.settings.family_height | append: '%' }};
-  --image-text-app-x: {{ section.settings.app_x | append: '%' }};
-  --image-text-app-y: {{ section.settings.app_y | append: '%' }};
-  --image-text-app-width: {{ section.settings.app_width | append: '%' }};
-  --image-text-app-height: {{ section.settings.app_height | append: '%' }};
+  --image-text-family-x: {{ family_layer_x }};
+  --image-text-family-y: {{ family_layer_y }};
+  --image-text-family-width: {{ family_layer_width }};
+  --image-text-family-height: {{ family_layer_height }};
+  --image-text-app-x: {{ app_layer_x }};
+  --image-text-app-y: {{ app_layer_y }};
+  --image-text-app-width: {{ app_layer_width }};
+  --image-text-app-height: {{ app_layer_height }};
   --image-text-blob-size: {{ section.settings.blob_size | append: '%' }};
   --image-text-blob-x: {{ section.settings.blob_x | append: '%' }};
   --image-text-blob-y: {{ section.settings.blob_y | append: '%' }};
@@ -95,14 +134,14 @@
 }
 @media screen and (max-width: 768px) {
   {{ section.id | prepend: '#' }} .image-text-asset--layered {
-    --image-text-family-x: {{ section.settings.family_x_mobile | append: '%' }};
-    --image-text-family-y: {{ section.settings.family_y_mobile | append: '%' }};
-    --image-text-family-width: {{ section.settings.family_width_mobile | append: '%' }};
-    --image-text-family-height: {{ section.settings.family_height_mobile | append: '%' }};
-    --image-text-app-x: {{ section.settings.app_x_mobile | append: '%' }};
-    --image-text-app-y: {{ section.settings.app_y_mobile | append: '%' }};
-    --image-text-app-width: {{ section.settings.app_width_mobile | append: '%' }};
-    --image-text-app-height: {{ section.settings.app_height_mobile | append: '%' }};
+    --image-text-family-x: {{ family_layer_x_mobile }};
+    --image-text-family-y: {{ family_layer_y_mobile }};
+    --image-text-family-width: {{ family_layer_width_mobile }};
+    --image-text-family-height: {{ family_layer_height_mobile }};
+    --image-text-app-x: {{ app_layer_x_mobile }};
+    --image-text-app-y: {{ app_layer_y_mobile }};
+    --image-text-app-width: {{ app_layer_width_mobile }};
+    --image-text-app-height: {{ app_layer_height_mobile }};
   }
   {{ section.id | prepend: '#' }} .image-text-layer--family img {
     object-position: {{ family_object_position_mobile }};
@@ -174,9 +213,6 @@
       </div>
 
       {%- assign family_image = section.settings.family_image -%}
-      {%- if family_image == blank -%}
-        {%- assign family_image = section.settings.image -%}
-      {%- endif -%}
       {%- assign app_image = section.settings.app_image -%}
       {%- assign family_use_focal_point = section.settings.family_use_focal_point | default: section.settings.use_focal_point -%}
       {%- assign app_use_focal_point = section.settings.app_use_focal_point | default: section.settings.use_focal_point -%}
@@ -346,194 +382,37 @@
     },
     {
       "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "text_columns",
+      "label": "Left column span (desktop)",
+      "min": 1,
+      "max": 11,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "media_columns",
+      "label": "Right column span (desktop)",
+      "min": 1,
+      "max": 11,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "header",
       "content": "Image Settings"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
-      "type": "checkbox",
-      "id": "use_focal_point",
-      "label": "Use image focal point",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "object_fit",
-      "label": "Fit",
-      "options": [
-        {
-          "value": "contain",
-          "label": "Contain"
-        },
-        {
-          "value": "cover",
-          "label": "Cover"
-        },
-        {
-          "value": "fill",
-          "label": "Fill"
-        },
-        {
-          "value": "none",
-          "label": "None"
-        }
-      ],
-      "default": "contain"
-    },
-    {
-      "type": "select",
-      "id": "object_position",
-      "label": "Position",
-      "options": [
-        {
-          "value": "left top",
-          "label": "Top left"
-        },
-        {
-          "value": "center top",
-          "label": "Top center"
-        },
-        {
-          "value": "right top",
-          "label": "Top right"
-        },
-        {
-          "value": "left center",
-          "label": "Center left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right center",
-          "label": "Center right"
-        },
-        {
-          "value": "left bottom",
-          "label": "Bottom left"
-        },
-        {
-          "value": "center bottom",
-          "label": "Bottom center"
-        },
-        {
-          "value": "right bottom",
-          "label": "Bottom right"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "select",
-      "id": "position_mode",
-      "label": "Position mode",
-      "options": [
-        {
-          "value": "preset",
-          "label": "Preset positions"
-        },
-        {
-          "value": "custom",
-          "label": "Custom X/Y"
-        }
-      ],
-      "default": "preset"
-    },
-    {
-      "type": "range",
-      "id": "object_position_x",
-      "label": "Position X (desktop)",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "default": 50,
-      "unit": "%",
-      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
-    },
-    {
-      "type": "range",
-      "id": "object_position_y",
-      "label": "Position Y (desktop)",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "default": 50,
-      "unit": "%",
-      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
-    },
-    {
-      "type": "select",
-      "id": "object_position_mobile",
-      "label": "Position (mobile)",
-      "options": [
-        {
-          "value": "left top",
-          "label": "Top left"
-        },
-        {
-          "value": "center top",
-          "label": "Top center"
-        },
-        {
-          "value": "right top",
-          "label": "Top right"
-        },
-        {
-          "value": "left center",
-          "label": "Center left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right center",
-          "label": "Center right"
-        },
-        {
-          "value": "left bottom",
-          "label": "Bottom left"
-        },
-        {
-          "value": "center bottom",
-          "label": "Bottom center"
-        },
-        {
-          "value": "right bottom",
-          "label": "Bottom right"
-        }
-      ],
-      "default": "center"
-    },
-    {
-      "type": "range",
-      "id": "object_position_x_mobile",
-      "label": "Position X (mobile)",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "default": 50,
-      "unit": "%",
-      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
-    },
-    {
-      "type": "range",
-      "id": "object_position_y_mobile",
-      "label": "Position Y (mobile)",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "default": 50,
-      "unit": "%",
-      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
     },
     {
       "type": "header",
       "content": "Primary Image"
+    },
+    {
+      "type": "paragraph",
+      "content": "Choose the primary image and control how it crops inside its layer."
     },
     {
       "type": "image_picker",
@@ -719,88 +598,125 @@
       "visible_if": "{{ section.settings.family_position_mode == 'custom' }}"
     },
     {
+      "type": "header",
+      "content": "Layer positioning"
+    },
+    {
+      "type": "checkbox",
+      "id": "family_enable_absolute",
+      "label": "Enable absolute positioning",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "When enabled, use the layer controls to position and size the image within the image column.",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "header",
+      "content": "Desktop",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
       "type": "range",
       "id": "family_x",
-      "label": "Layer position X (desktop)",
+      "label": "Layer position X",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_y",
-      "label": "Layer position Y (desktop)",
+      "label": "Layer position Y",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_width",
-      "label": "Layer width (desktop)",
+      "label": "Layer width",
       "min": 10,
       "max": 150,
       "step": 2,
       "default": 100,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_height",
-      "label": "Layer height (desktop)",
+      "label": "Layer height",
       "min": 10,
       "max": 150,
       "step": 2,
       "default": 100,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "header",
+      "content": "Mobile",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_x_mobile",
-      "label": "Layer position X (mobile)",
+      "label": "Layer position X",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_y_mobile",
-      "label": "Layer position Y (mobile)",
+      "label": "Layer position Y",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_width_mobile",
-      "label": "Layer width (mobile)",
+      "label": "Layer width",
       "min": 10,
       "max": 150,
       "step": 2,
       "default": 100,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_height_mobile",
-      "label": "Layer height (mobile)",
+      "label": "Layer height",
       "min": 10,
       "max": 150,
       "step": 2,
       "default": 100,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "header",
       "content": "Secondary Image"
+    },
+    {
+      "type": "paragraph",
+      "content": "Choose the secondary image and control how it crops inside its layer."
     },
     {
       "type": "image_picker",
@@ -986,84 +902,117 @@
       "visible_if": "{{ section.settings.app_position_mode == 'custom' }}"
     },
     {
+      "type": "header",
+      "content": "Layer positioning"
+    },
+    {
+      "type": "checkbox",
+      "id": "app_enable_absolute",
+      "label": "Enable absolute positioning",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "When enabled, use the layer controls to position and size the image within the image column.",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "header",
+      "content": "Desktop",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
       "type": "range",
       "id": "app_x",
-      "label": "Layer position X (desktop)",
+      "label": "Layer position X",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_y",
-      "label": "Layer position Y (desktop)",
+      "label": "Layer position Y",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_width",
-      "label": "Layer width (desktop)",
+      "label": "Layer width",
       "min": 10,
       "max": 150,
       "step": 2,
       "default": 60,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_height",
-      "label": "Layer height (desktop)",
+      "label": "Layer height",
       "min": 10,
       "max": 150,
       "step": 2,
       "default": 60,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "header",
+      "content": "Mobile",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_x_mobile",
-      "label": "Layer position X (mobile)",
+      "label": "Layer position X",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_y_mobile",
-      "label": "Layer position Y (mobile)",
+      "label": "Layer position Y",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_width_mobile",
-      "label": "Layer width (mobile)",
+      "label": "Layer width",
       "min": 10,
       "max": 150,
       "step": 2,
       "default": 80,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_height_mobile",
-      "label": "Layer height (mobile)",
+      "label": "Layer height",
       "min": 10,
       "max": 150,
       "step": 2,
       "default": 80,
-      "unit": "%"
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "header",

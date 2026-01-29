@@ -91,18 +91,19 @@
         "heading_7EmBXk": {
           "type": "heading",
           "settings": {
-            "text": "Headline",
+            "text": "Friendly competition for all ages.",
             "size": "h2"
           }
         },
         "text_rGcNx7": {
           "type": "text",
           "settings": {
-            "text": "<p>Asperiores voluptatem rerum fuga assumenda similique voluptatem sapiente qui non voluptatibus.</p>"
+            "text": "<p>Everyone can be part of the dub club!  Join our community of sports fans who enjoy predicting winners and competing for the top spot on the leaderboard.</p>"
           }
         },
         "buttons_TE7J99": {
           "type": "buttons",
+          "disabled": true,
           "settings": {
             "button_label": "Button label",
             "button_link": ""
@@ -124,12 +125,11 @@
         "padding_top_bottom": 6,
         "enable_padding_overrides": false,
         "padding_top": 6,
-        "padding_bottom": 6,
+        "padding_bottom": 0,
         "use_default_color_scheme": true,
         "color_scheme": "",
-        "image": "shopify://shop_images/background-section-2.png",
         "use_focal_point": false,
-        "object_fit": "fill",
+        "object_fit": "cover",
         "object_position": "center",
         "position_mode": "preset",
         "object_position_x": 50,
@@ -137,16 +137,17 @@
         "object_position_mobile": "center",
         "object_position_x_mobile": 50,
         "object_position_y_mobile": 50,
+        "family_image": "shopify://shop_images/family-1_2x_551dc045-6289-4984-9df5-84ddda09625d.png",
         "family_use_focal_point": false,
         "family_object_fit": "contain",
         "family_object_position": "center",
-        "family_position_mode": "preset",
+        "family_position_mode": "custom",
         "family_object_position_x": 50,
         "family_object_position_y": 50,
-        "family_object_position_mobile": "center",
+        "family_object_position_mobile": "center bottom",
         "family_object_position_x_mobile": 50,
         "family_object_position_y_mobile": 50,
-        "family_x": 50,
+        "family_x": 77,
         "family_y": 50,
         "family_width": 100,
         "family_height": 100,
@@ -154,6 +155,7 @@
         "family_y_mobile": 50,
         "family_width_mobile": 100,
         "family_height_mobile": 100,
+        "app_image": "shopify://shop_images/group-leaderboard_2x_c4fba7a7-1f86-46df-9336-c38cd7e71eaa.png",
         "app_use_focal_point": false,
         "app_object_fit": "contain",
         "app_object_position": "center",
