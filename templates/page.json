@@ -335,7 +335,7 @@
         "padding_top_bottom": 6,
         "enable_padding_overrides": true,
         "padding_top": 12,
-        "padding_bottom": 6,
+        "padding_bottom": 8,
         "show_heading": false,
         "text": "Headline",
         "size": "h2",
@@ -344,6 +344,42 @@
         "use_default_color_scheme": false,
         "color_scheme": "scheme_2",
         "swipe_on_mobile": false
+      }
+    },
+    "testimonials_TGp8N6": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_3F9x3A": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
+            "name": "Marcus Chen",
+            "title": "Pickleball enthusiast",
+            "location": "Member, Dallas"
+          }
+        },
+        "testimonial_MQPrd4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
+            "name": "Marcus Chen",
+            "title": "Pickleball enthusiast",
+            "location": "Member, Dallas"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_3F9x3A",
+        "testimonial_MQPrd4"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "padding_top_bottom": 0,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "use_default_color_scheme": true,
+        "color_scheme": ""
       }
     },
     "multicolumn_eziH6G": {
@@ -645,6 +681,7 @@
     "multicolumn_e3JAxU",
     "image_with_text_A6KVWi",
     "multicolumn_QPBVAR",
+    "testimonials_TGp8N6",
     "multicolumn_eziH6G",
     "raw_html_with_text_Ed7Kir",
     "multicolumn_dtMBeX",

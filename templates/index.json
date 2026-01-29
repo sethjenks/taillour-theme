@@ -349,12 +349,58 @@
         "video_position": "left"
       }
     },
+    "testimonials_8h9VTE": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_hdjBQR": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
+            "name": "Marcus Chen",
+            "title": "Pickleball enthusiast",
+            "location": "Member, Dallas"
+          }
+        },
+        "testimonial_8D3xb8": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
+            "name": "Marcus Chen",
+            "title": "Pickleball enthusiast",
+            "location": "Member, Dallas"
+          }
+        },
+        "testimonial_qAjaNm": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
+            "name": "Marcus Chen",
+            "title": "Pickleball enthusiast",
+            "location": "Member, Dallas"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_hdjBQR",
+        "testimonial_8D3xb8",
+        "testimonial_qAjaNm"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "padding_top_bottom": 0,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "use_default_color_scheme": true,
+        "color_scheme": ""
+      }
+    },
     "product_grid_9e9FqV": {
       "type": "product-grid",
       "settings": {
         "padding_top_bottom": 6,
-        "enable_padding_overrides": false,
-        "padding_top": 6,
+        "enable_padding_overrides": true,
+        "padding_top": 2,
         "padding_bottom": 6,
         "blob1_enable": true,
         "blob1_color": "#b68bff",
@@ -705,6 +751,7 @@
     "image_with_text_ykcntk",
     "image_with_text_pjRwPQ",
     "image_with_video_NCkDCh",
+    "testimonials_8h9VTE",
     "product_grid_9e9FqV",
     "multicolumn_dabeKn",
     "collection_grid_7w6HWG",

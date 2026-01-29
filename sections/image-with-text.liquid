@@ -97,7 +97,9 @@
   }
 }
 {{ section.id | prepend: '#' }} .image-text-asset--layered {
-  --image-text-asset-ratio: {{ section.settings.aspect_ratio }};
+  --image-text-asset-ratio: {{ section.settings.family_aspect_ratio | default: '1/1' }};
+  --image-text-family-aspect-ratio: {{ section.settings.family_aspect_ratio | default: '1/1' }};
+  --image-text-app-aspect-ratio: {{ section.settings.app_aspect_ratio | default: '1/1' }};
   --image-text-family-x: {{ family_layer_x }};
   --image-text-family-y: {{ family_layer_y }};
   --image-text-family-width: {{ family_layer_width }};
@@ -407,6 +409,22 @@
       "default": 6
     },
     {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
       "type": "header",
       "content": "Image Settings"
     },
@@ -428,6 +446,34 @@
       "id": "family_use_focal_point",
       "label": "Use image focal point",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "family_aspect_ratio",
+      "label": "Aspect Ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "1:1 (Square)"
+        },
+        {
+          "value": "2/3",
+          "label": "2:3 (Portrait)"
+        },
+        {
+          "value": "4/5",
+          "label": "4:5 (Portrait)"
+        },
+        {
+          "value": "4/3",
+          "label": "4:3 (Landscape)"
+        },
+        {
+          "value": "16/9",
+          "label": "16:9 (Landscape)"
+        }
+      ],
+      "default": "1/1"
     },
     {
       "type": "select",
@@ -732,6 +778,34 @@
       "id": "app_use_focal_point",
       "label": "Use image focal point",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "app_aspect_ratio",
+      "label": "Aspect Ratio",
+      "options": [
+        {
+          "value": "1/1",
+          "label": "1:1 (Square)"
+        },
+        {
+          "value": "2/3",
+          "label": "2:3 (Portrait)"
+        },
+        {
+          "value": "4/5",
+          "label": "4:5 (Portrait)"
+        },
+        {
+          "value": "4/3",
+          "label": "4:3 (Landscape)"
+        },
+        {
+          "value": "16/9",
+          "label": "16:9 (Landscape)"
+        }
+      ],
+      "default": "1/1"
     },
     {
       "type": "select",
@@ -1085,48 +1159,8 @@
       "unit": "%"
     },
     {
-      "type": "select",
-      "id": "aspect_ratio",
-      "label": "Aspect Ratio",
-      "options": [
-        {
-          "value": "1/1",
-          "label": "1:1 (Square)"
-        },
-        {
-          "value": "2/3",
-          "label": "2:3 (Portrait)"
-        },
-        {
-          "value": "4/5",
-          "label": "4:5 (Portrait)"
-        },
-        {
-          "value": "4/3",
-          "label": "4:3 (Landscape)"
-        },
-        {
-          "value": "16/9",
-          "label": "16:9 (Landscape)"
-        }
-      ],
-      "default": "1/1"
-    },
-    {
-      "type": "select",
-      "id": "image_position",
-      "label": "Image Position",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "right"
+      "type": "header",
+      "content": "Blob"
     }
   ],
   "blocks": [

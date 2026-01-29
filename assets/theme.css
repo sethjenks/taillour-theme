@@ -1440,6 +1440,7 @@ blockquote:after {
   align-items: center;
   font-family: var(--font-secondary);
   font-size: 14px;
+  color: var(--footer-muted, #d3cce2);
 }
 .footer-section__legal {
   display: flex;
@@ -1595,6 +1596,7 @@ article img {
   top: var(--image-text-layer-y, 50%);
   width: var(--image-text-layer-width, 100%);
   height: var(--image-text-layer-height, 100%);
+  aspect-ratio: var(--image-text-layer-aspect-ratio, auto);
   transform: translate(-50%, -50%);
 }
 .image-text-layer img {
@@ -1611,6 +1613,7 @@ article img {
   --image-text-layer-y: var(--image-text-family-y);
   --image-text-layer-width: var(--image-text-family-width);
   --image-text-layer-height: var(--image-text-family-height);
+  --image-text-layer-aspect-ratio: var(--image-text-family-aspect-ratio);
 }
 .image-text-layer--app {
   z-index: 2;
@@ -1618,6 +1621,7 @@ article img {
   --image-text-layer-y: var(--image-text-app-y);
   --image-text-layer-width: var(--image-text-app-width);
   --image-text-layer-height: var(--image-text-app-height);
+  --image-text-layer-aspect-ratio: var(--image-text-app-aspect-ratio);
 }
 .image-text-blob {
   position: absolute;
