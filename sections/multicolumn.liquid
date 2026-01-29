@@ -43,9 +43,30 @@ endif
 {{ section.id | prepend: '#' }} .column-section .column-image {
   width: 100%;
   height: 100%;
+  max-width: var(--column-image-max-width, 100%);
   object-fit: var(--column-object-fit, cover);
   object-position: var(--column-object-position-desktop, center);
   aspect-ratio: var(--column-image-aspect-ratio);
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper {
+  display: flex;
+  margin-bottom: var(--column-image-gap, 0.5rem);
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper.align-left {
+  justify-content: flex-start;
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper.center {
+  justify-content: center;
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper.align-right {
+  justify-content: flex-end;
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h1,
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h2,
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h3,
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h4,
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h5 {
+  margin-top: 0;
 }
 @media screen and (max-width: 768px) {
   {{ section.id | prepend: '#' }} .column-section .column-image {
@@ -107,10 +128,13 @@ endif
         {% when 'column' %}
           {% assign image_height = image_width | divided_by: block.settings.image.aspect_ratio | ceil %}
           {%- assign column_alignment = block.settings.alignment | default: 'align-left' -%}
+          {%- assign image_alignment = block.settings.image_alignment | default: 'center' -%}
           <div class="{{ column_alignment }}" {{ block.shopify_attributes }}>
             {% if block.settings.show_image == true %}
               {% if block.settings.image == blank %}
-                {{ 'collection-1' | placeholder_svg_tag: "placeholder" }}
+                <div class="column-image-wrapper {{ image_alignment }}">
+                  {{ 'collection-1' | placeholder_svg_tag: "placeholder" }}
+                </div>
               {% else %}
                 {%- assign position_mode = block.settings.position_mode | default: 'preset' -%}
                 {%- assign object_position_desktop = block.settings.object_position -%}
@@ -126,8 +150,9 @@ endif
                 --column-object-position-desktop: {{ object_position_desktop }};
                 --column-object-position-mobile: {{ object_position_mobile }};
                 --column-image-aspect-ratio: {{ block.settings.aspect_ratio }};
+                --column-image-max-width: {{ block.settings.image_max_width | append: 'px' }};
                 {%- endcapture -%}
-                <div>
+                <div class="column-image-wrapper {{ image_alignment }}">
                   {% if block.settings.use_focal_point %}
                     {{ block.settings.image | image_url: width: image_width | image_tag: alt: block.settings.image.alt, loading: 'lazy', class: 'column-image', style: image_styles | strip }}
                   {% else %}
@@ -471,6 +496,38 @@ endif
           "id": "show_image",
           "label": "Show image",
           "default": true
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "select",
+          "id": "image_alignment",
+          "label": "Image alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "range",
+          "id": "image_max_width",
+          "label": "Image max width",
+          "min": 40,
+          "max": 400,
+          "step": 4,
+          "default": 120,
+          "unit": "px"
         },
         {
           "visible_if": "{{ block.settings.show_image == true }}",
