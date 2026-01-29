@@ -101,10 +101,11 @@
 }
 #cart-popup-summary_buttons {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   .button {
     margin-left: 0;
-    flex: 1;
+    width: 100%;
   }
 }
 #cart-popup-summary_notification {
@@ -354,10 +355,10 @@ function renderCartSummary(showNotification=false) {
             </div>
           {% endif %}
           <div id="cart-popup-summary_buttons" class="cart-popup-summary_section">
-            <a class="button button-white" href="{{ routes.cart_url }}">
+            <a class="button button-white button-medium" href="{{ routes.cart_url }}">
               {{ section.settings.cp_button_label }}
             </a>
-            <a class="button button-primary" href="/checkout">{{ section.settings.cp_checkout_label }}</a>
+            <a class="button button-primary button-medium" href="/checkout">{{ section.settings.cp_checkout_label }}</a>
           </div>
         </div>`;
       summary.innerHTML = template;

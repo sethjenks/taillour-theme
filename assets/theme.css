@@ -579,6 +579,40 @@ button + button,
 .button + .button {
   margin-left: 1rem;
 }
+.button.button-medium,
+main button.button-medium {
+  padding: 18px 36px;
+  font-size: 18px;
+}
+.button.button-medium.button-primary,
+main button.button-medium.button-primary,
+.button.button-medium.button-purple,
+main button.button-medium.button-purple {
+  border-radius: 60px;
+}
+.button.button-medium.button-secondary,
+main button.button-medium.button-secondary,
+.button.button-medium.button-white,
+main button.button-medium.button-white {
+  border-radius: 160px;
+}
+.button.button-small,
+main button.button-small {
+  padding: 14px 28px;
+  font-size: 16px;
+}
+.button.button-small.button-primary,
+main button.button-small.button-primary,
+.button.button-small.button-purple,
+main button.button-small.button-purple {
+  border-radius: 48px;
+}
+.button.button-small.button-secondary,
+main button.button-small.button-secondary,
+.button.button-small.button-white,
+main button.button-small.button-white {
+  border-radius: 120px;
+}
 .button-small {
   padding: 8px;
 }
