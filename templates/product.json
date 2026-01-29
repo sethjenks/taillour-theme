@@ -127,12 +127,18 @@
           }
         }
       },
-      "block_order": ["text_M6ENnC", "text_DYzPwt", "text_ABWMfy"],
+      "block_order": [
+        "text_M6ENnC",
+        "text_DYzPwt",
+        "text_ABWMfy"
+      ],
       "settings": {
-        "background": "#ffffff",
-        "color": "",
+        "use_default_color_scheme": true,
+        "color_scheme": "",
         "heading": "Frequently Asked Questions",
-        "size": "h2"
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>"
       }
     },
     "product_recommendations_jRYYgX": {
@@ -142,8 +148,8 @@
         "size": "h2",
         "limit": 4,
         "products_per_row": 4,
-        "background": "#f5f5f5",
-        "color": ""
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f"
       }
     },
     "recently_viewed_yG6Mdn": {
@@ -153,10 +159,15 @@
         "size": "h2",
         "limit": 4,
         "products_per_row": 4,
-        "background": "#ffffff",
-        "color": ""
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme_1"
       }
     }
   },
-  "order": ["product", "faqs_M7fRxe", "product_recommendations_jRYYgX", "recently_viewed_yG6Mdn"]
+  "order": [
+    "product",
+    "faqs_M7fRxe",
+    "product_recommendations_jRYYgX",
+    "recently_viewed_yG6Mdn"
+  ]
 }
