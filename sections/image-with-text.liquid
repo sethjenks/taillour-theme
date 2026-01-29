@@ -23,6 +23,26 @@
 {%- if position_mode == 'custom' -%}
   {%- assign object_position_mobile = section.settings.object_position_x_mobile | append: '% ' | append: section.settings.object_position_y_mobile | append: '%' -%}
 {%- endif -%}
+{%- assign family_position_mode = section.settings.family_position_mode | default: position_mode -%}
+{%- assign family_object_position_desktop = section.settings.family_object_position | default: object_position_desktop -%}
+{%- if family_position_mode == 'custom' -%}
+  {%- assign family_object_position_desktop = section.settings.family_object_position_x | append: '% ' | append: section.settings.family_object_position_y | append: '%' -%}
+{%- endif -%}
+{%- assign family_object_position_mobile = section.settings.family_object_position_mobile | default: object_position_mobile -%}
+{%- if family_position_mode == 'custom' -%}
+  {%- assign family_object_position_mobile = section.settings.family_object_position_x_mobile | append: '% ' | append: section.settings.family_object_position_y_mobile | append: '%' -%}
+{%- endif -%}
+{%- assign app_position_mode = section.settings.app_position_mode | default: position_mode -%}
+{%- assign app_object_position_desktop = section.settings.app_object_position | default: object_position_desktop -%}
+{%- if app_position_mode == 'custom' -%}
+  {%- assign app_object_position_desktop = section.settings.app_object_position_x | append: '% ' | append: section.settings.app_object_position_y | append: '%' -%}
+{%- endif -%}
+{%- assign app_object_position_mobile = section.settings.app_object_position_mobile | default: object_position_mobile -%}
+{%- if app_position_mode == 'custom' -%}
+  {%- assign app_object_position_mobile = section.settings.app_object_position_x_mobile | append: '% ' | append: section.settings.app_object_position_y_mobile | append: '%' -%}
+{%- endif -%}
+{%- assign family_object_fit = section.settings.family_object_fit | default: section.settings.object_fit -%}
+{%- assign app_object_fit = section.settings.app_object_fit | default: section.settings.object_fit -%}
 
 {%- style -%}
 .image-text-left .image-text-asset {
@@ -37,16 +57,47 @@
   background-repeat: no-repeat;
   {%- endif -%}
 }
-{{ section.id | prepend: '#' }} .image-text-asset img {
-  width: 100%;
-  height: 100%;
-  object-fit: {{ section.settings.object_fit }};
-  object-position: {{ object_position_desktop }};
-  aspect-ratio: {{ section.settings.aspect_ratio }};
+{{ section.id | prepend: '#' }} .image-text-asset--layered {
+  --image-text-asset-ratio: {{ section.settings.aspect_ratio }};
+  --image-text-family-x: {{ section.settings.family_x | append: '%' }};
+  --image-text-family-y: {{ section.settings.family_y | append: '%' }};
+  --image-text-family-width: {{ section.settings.family_width | append: '%' }};
+  --image-text-family-height: {{ section.settings.family_height | append: '%' }};
+  --image-text-app-x: {{ section.settings.app_x | append: '%' }};
+  --image-text-app-y: {{ section.settings.app_y | append: '%' }};
+  --image-text-app-width: {{ section.settings.app_width | append: '%' }};
+  --image-text-app-height: {{ section.settings.app_height | append: '%' }};
+  --image-text-blob-size: {{ section.settings.blob_size | append: '%' }};
+  --image-text-blob-x: {{ section.settings.blob_x | append: '%' }};
+  --image-text-blob-y: {{ section.settings.blob_y | append: '%' }};
+  --image-text-blob-color: {{ section.settings.blob_color }};
+  --image-text-blob-blur: {{ section.settings.blob_blur | append: 'px' }};
+  --image-text-blob-opacity: {{ section.settings.blob_opacity | divided_by: 100.0 }};
+}
+{{ section.id | prepend: '#' }} .image-text-layer--family img {
+  object-fit: {{ family_object_fit }};
+  object-position: {{ family_object_position_desktop }};
+}
+{{ section.id | prepend: '#' }} .image-text-layer--app img {
+  object-fit: {{ app_object_fit }};
+  object-position: {{ app_object_position_desktop }};
 }
 @media screen and (max-width: 768px) {
-  {{ section.id | prepend: '#' }} .image-text-asset img {
-    object-position: {{ object_position_mobile }};
+  {{ section.id | prepend: '#' }} .image-text-asset--layered {
+    --image-text-family-x: {{ section.settings.family_x_mobile | append: '%' }};
+    --image-text-family-y: {{ section.settings.family_y_mobile | append: '%' }};
+    --image-text-family-width: {{ section.settings.family_width_mobile | append: '%' }};
+    --image-text-family-height: {{ section.settings.family_height_mobile | append: '%' }};
+    --image-text-app-x: {{ section.settings.app_x_mobile | append: '%' }};
+    --image-text-app-y: {{ section.settings.app_y_mobile | append: '%' }};
+    --image-text-app-width: {{ section.settings.app_width_mobile | append: '%' }};
+    --image-text-app-height: {{ section.settings.app_height_mobile | append: '%' }};
+  }
+  {{ section.id | prepend: '#' }} .image-text-layer--family img {
+    object-position: {{ family_object_position_mobile }};
+  }
+  {{ section.id | prepend: '#' }} .image-text-layer--app img {
+    object-position: {{ app_object_position_mobile }};
   }
 }
 {%- endstyle -%}
@@ -111,23 +162,56 @@
         {%- endfor -%}
       </div>
 
-      <div class="image-text-asset">
-        <div>
-          {% if section.settings.image == blank %}
-            {{ 'collection-4' | placeholder_svg_tag: "placeholder" }}
-          {% else %}
-            {% assign image = section.settings.image %}
-            {% if section.settings.use_focal_point %}
+      {%- assign family_image = section.settings.family_image -%}
+      {%- if family_image == blank -%}
+        {%- assign family_image = section.settings.image -%}
+      {%- endif -%}
+      {%- assign app_image = section.settings.app_image -%}
+      {%- assign family_use_focal_point = section.settings.family_use_focal_point | default: section.settings.use_focal_point -%}
+      {%- assign app_use_focal_point = section.settings.app_use_focal_point | default: section.settings.use_focal_point -%}
+
+      <div class="image-text-asset image-text-asset--layered">
+        {%- if section.settings.blob_enable -%}
+          <span class="image-text-blob" aria-hidden="true"></span>
+        {%- endif -%}
+
+        {%- if app_image != blank -%}
+          <div class="image-text-layer image-text-layer--app">
+            {%- assign image = app_image -%}
+            {%- if app_use_focal_point -%}
               {{ image | image_url: width: image_width | image_tag: alt: image.alt, loading: 'lazy' }}
-            {% else %}
-              <img src="{{ image | image_url: width: image_width }}"
+            {%- else -%}
+              <img
+                src="{{ image | image_url: width: image_width }}"
                 width="{{ image_width }}"
                 height="{{ image_width | divided_by: image.aspect_ratio | ceil }}"
                 alt="{{ image.alt }}"
-                loading="lazy">
-            {% endif %}
-          {% endif %}
-        </div>
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if family_image != blank -%}
+          <div class="image-text-layer image-text-layer--family">
+            {%- assign image = family_image -%}
+            {%- if family_use_focal_point -%}
+              {{ image | image_url: width: image_width | image_tag: alt: image.alt, loading: 'lazy' }}
+            {%- else -%}
+              <img
+                src="{{ image | image_url: width: image_width }}"
+                width="{{ image_width }}"
+                height="{{ image_width | divided_by: image.aspect_ratio | ceil }}"
+                alt="{{ image.alt }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if family_image == blank and app_image == blank -%}
+          {{ 'collection-4' | placeholder_svg_tag: "placeholder" }}
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -157,7 +241,7 @@
       "type": "inline_richtext",
       "id": "text",
       "label": "Heading",
-      "default": "Headline",
+      "default": "Headline"
     },
     {
       "visible_if": "{{ section.settings.show_heading == true }}",
@@ -437,6 +521,606 @@
       "visible_if": "{{ section.settings.position_mode == 'custom' }}"
     },
     {
+      "type": "header",
+      "content": "Primary Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "family_image",
+      "label": "Primary image"
+    },
+    {
+      "type": "checkbox",
+      "id": "family_use_focal_point",
+      "label": "Use image focal point",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "family_object_fit",
+      "label": "Fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "select",
+      "id": "family_object_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "left top",
+          "label": "Top left"
+        },
+        {
+          "value": "center top",
+          "label": "Top center"
+        },
+        {
+          "value": "right top",
+          "label": "Top right"
+        },
+        {
+          "value": "left center",
+          "label": "Center left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right center",
+          "label": "Center right"
+        },
+        {
+          "value": "left bottom",
+          "label": "Bottom left"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom center"
+        },
+        {
+          "value": "right bottom",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "family_position_mode",
+      "label": "Position mode",
+      "options": [
+        {
+          "value": "preset",
+          "label": "Preset positions"
+        },
+        {
+          "value": "custom",
+          "label": "Custom X/Y"
+        }
+      ],
+      "default": "preset"
+    },
+    {
+      "type": "range",
+      "id": "family_object_position_x",
+      "label": "Position X (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "family_object_position_y",
+      "label": "Position Y (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_position_mode == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "family_object_position_mobile",
+      "label": "Position (mobile)",
+      "options": [
+        {
+          "value": "left top",
+          "label": "Top left"
+        },
+        {
+          "value": "center top",
+          "label": "Top center"
+        },
+        {
+          "value": "right top",
+          "label": "Top right"
+        },
+        {
+          "value": "left center",
+          "label": "Center left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right center",
+          "label": "Center right"
+        },
+        {
+          "value": "left bottom",
+          "label": "Bottom left"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom center"
+        },
+        {
+          "value": "right bottom",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "family_object_position_x_mobile",
+      "label": "Position X (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "family_object_position_y_mobile",
+      "label": "Position Y (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "family_x",
+      "label": "Layer position X (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "family_y",
+      "label": "Layer position Y (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "family_width",
+      "label": "Layer width (desktop)",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "family_height",
+      "label": "Layer height (desktop)",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "family_x_mobile",
+      "label": "Layer position X (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "family_y_mobile",
+      "label": "Layer position Y (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "family_width_mobile",
+      "label": "Layer width (mobile)",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "family_height_mobile",
+      "label": "Layer height (mobile)",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "app_image",
+      "label": "Secondary image"
+    },
+    {
+      "type": "checkbox",
+      "id": "app_use_focal_point",
+      "label": "Use image focal point",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "app_object_fit",
+      "label": "Fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "select",
+      "id": "app_object_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "left top",
+          "label": "Top left"
+        },
+        {
+          "value": "center top",
+          "label": "Top center"
+        },
+        {
+          "value": "right top",
+          "label": "Top right"
+        },
+        {
+          "value": "left center",
+          "label": "Center left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right center",
+          "label": "Center right"
+        },
+        {
+          "value": "left bottom",
+          "label": "Bottom left"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom center"
+        },
+        {
+          "value": "right bottom",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "app_position_mode",
+      "label": "Position mode",
+      "options": [
+        {
+          "value": "preset",
+          "label": "Preset positions"
+        },
+        {
+          "value": "custom",
+          "label": "Custom X/Y"
+        }
+      ],
+      "default": "preset"
+    },
+    {
+      "type": "range",
+      "id": "app_object_position_x",
+      "label": "Position X (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "app_object_position_y",
+      "label": "Position Y (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_position_mode == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "app_object_position_mobile",
+      "label": "Position (mobile)",
+      "options": [
+        {
+          "value": "left top",
+          "label": "Top left"
+        },
+        {
+          "value": "center top",
+          "label": "Top center"
+        },
+        {
+          "value": "right top",
+          "label": "Top right"
+        },
+        {
+          "value": "left center",
+          "label": "Center left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right center",
+          "label": "Center right"
+        },
+        {
+          "value": "left bottom",
+          "label": "Bottom left"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom center"
+        },
+        {
+          "value": "right bottom",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "app_object_position_x_mobile",
+      "label": "Position X (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "app_object_position_y_mobile",
+      "label": "Position Y (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "app_x",
+      "label": "Layer position X (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "app_y",
+      "label": "Layer position Y (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "app_width",
+      "label": "Layer width (desktop)",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "app_height",
+      "label": "Layer height (desktop)",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "app_x_mobile",
+      "label": "Layer position X (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "app_y_mobile",
+      "label": "Layer position Y (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "app_width_mobile",
+      "label": "Layer width (mobile)",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 80,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "app_height_mobile",
+      "label": "Layer height (mobile)",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 80,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Blob"
+    },
+    {
+      "type": "checkbox",
+      "id": "blob_enable",
+      "label": "Show blob",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "blob_color",
+      "label": "Blob color",
+      "default": "#b68bff"
+    },
+    {
+      "type": "range",
+      "id": "blob_size",
+      "label": "Blob size",
+      "min": 10,
+      "max": 150,
+      "step": 2,
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob_x",
+      "label": "Blob position X",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob_y",
+      "label": "Blob position Y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob_blur",
+      "label": "Blob blur",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "blob_opacity",
+      "label": "Blob opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 80,
+      "unit": "%"
+    },
+    {
       "type": "select",
       "id": "aspect_ratio",
       "label": "Aspect Ratio",
@@ -491,7 +1175,7 @@
           "type": "inline_richtext",
           "id": "text",
           "label": "Text",
-          "default": "Headline",
+          "default": "Headline"
         },
         {
           "type": "select",

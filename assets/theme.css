@@ -1507,6 +1507,58 @@ article img {
   padding: 0.5rem;
 }
 
+/* !! Section: Image with text (layered media) */
+.image-text-asset--layered {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--image-text-asset-ratio, 1 / 1);
+  overflow: visible;
+}
+.image-text-layer {
+  position: absolute;
+  left: var(--image-text-layer-x, 50%);
+  top: var(--image-text-layer-y, 50%);
+  width: var(--image-text-layer-width, 100%);
+  height: var(--image-text-layer-height, 100%);
+  transform: translate(-50%, -50%);
+}
+.image-text-layer img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.image-text-layer--family {
+  z-index: 3;
+  --image-text-layer-x: var(--image-text-family-x);
+  --image-text-layer-y: var(--image-text-family-y);
+  --image-text-layer-width: var(--image-text-family-width);
+  --image-text-layer-height: var(--image-text-family-height);
+}
+.image-text-layer--app {
+  z-index: 2;
+  --image-text-layer-x: var(--image-text-app-x);
+  --image-text-layer-y: var(--image-text-app-y);
+  --image-text-layer-width: var(--image-text-app-width);
+  --image-text-layer-height: var(--image-text-app-height);
+}
+.image-text-blob {
+  position: absolute;
+  left: var(--image-text-blob-x, 50%);
+  top: var(--image-text-blob-y, 50%);
+  width: var(--image-text-blob-size, 60%);
+  height: var(--image-text-blob-size, 60%);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    var(--image-text-blob-color, rgba(182, 139, 255, 0.9)) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: var(--image-text-blob-opacity, 0.8);
+  filter: blur(var(--image-text-blob-blur, 40px));
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* !! Section: Image banner (hero) */
 .promotions-section {
   position: relative;
