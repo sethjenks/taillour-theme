@@ -113,6 +113,10 @@
   --image-text-blob-blur: {{ section.settings.blob_blur | append: 'px' }};
   --image-text-blob-opacity: {{ section.settings.blob_opacity | divided_by: 100.0 }};
 }
+{{ section.id | prepend: '#' }} .image-text-content {
+  position: relative;
+  z-index: 2;
+}
 {{ section.id | prepend: '#' }} .image-text-layer--family img {
   object-fit: {{ family_object_fit }};
   object-position: {{ family_object_position_desktop }};
