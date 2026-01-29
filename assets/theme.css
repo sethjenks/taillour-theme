@@ -40,6 +40,10 @@ is yours! :)
 
   --shopify-accelerated-checkout-button-block-size: 44px;
   --shopify-accelerated-checkout-button-border-radius: 999px;
+
+  --nav-height: 5rem;
+  --nav-top-gap: 1.25rem;
+  --nav-offset: calc(var(--nav-height) + var(--nav-top-gap));
 }
 
 * {
@@ -855,7 +859,8 @@ nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  padding-top: 32px;
+  padding-top: 0px;
+  height: 0px;
 }
 nav .nav-bar {
   display: grid;
@@ -944,6 +949,14 @@ nav details {
   color: var(--night);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+#header-nav {
+  position: fixed;
+  top: var(--nav-top-gap);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
