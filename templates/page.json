@@ -476,6 +476,55 @@
         "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
         "swipe_on_mobile": false
       }
+    },
+    "multicolumn_K4yF7Q": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_BgFABU": {
+          "type": "column",
+          "settings": {
+            "show_image": false,
+            "image_alignment": "center",
+            "image_max_width": 120,
+            "object_fit": "cover",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
+            "aspect_ratio": "4/3",
+            "text": "Ready to get your dub?",
+            "size": "h1",
+            "alignment": "center",
+            "content": "<p>Winning feels good. We made it even better.</p>",
+            "show_button": true,
+            "button_label": "Make your picks",
+            "button_link": "https://app.getdub.com"
+          }
+        }
+      },
+      "block_order": [
+        "column_BgFABU"
+      ],
+      "name": "CTA",
+      "settings": {
+        "background_image": "shopify://shop_images/bg-cta_2x_aa7703f9-cfb4-4792-a0f2-d524d925d337.png",
+        "padding_top_bottom": 12,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "show_heading": false,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme-ee222970-1679-436a-9f5c-1986d6d291fc",
+        "swipe_on_mobile": false
+      }
     }
   },
   "order": [
@@ -484,6 +533,7 @@
     "image_with_text_A6KVWi",
     "multicolumn_eziH6G",
     "raw_html_with_text_Ed7Kir",
-    "multicolumn_dtMBeX"
+    "multicolumn_dtMBeX",
+    "multicolumn_K4yF7Q"
   ]
 }

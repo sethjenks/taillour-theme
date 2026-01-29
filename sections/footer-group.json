@@ -45,11 +45,12 @@
         "color_scheme": "scheme_2",
         "legal_menu": "footer",
         "cta_label": "Login",
-        "cta_link": ""
+        "cta_link": "https://app.getdub.com"
       }
     },
     "copyright": {
       "type": "copyright",
+      "disabled": true,
       "settings": {
         "padding_top_bottom": 0,
         "enable_padding_overrides": false,
