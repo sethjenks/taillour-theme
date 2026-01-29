@@ -22,18 +22,18 @@
         "text_yz7Gyj": {
           "type": "text",
           "settings": {
-            "text": "Welcome to the demo store for the Taillour theme. This is the hero/image banner section where you can add a heading, text, CTA and image."
+            "text": "From pickleball to football, predict winners, compete with friends, and get cool merch."
           }
         },
         "buttons_zUiW9p": {
           "type": "buttons",
           "settings": {
-            "button1_label": "Browse Products",
-            "button1_link": "shopify://collections/classics",
+            "button1_label": "Make your picks",
+            "button1_link": "https://app.getdub.com/register",
             "button1_enable": true,
-            "button2_label": "Button label",
-            "button2_link": "",
-            "button2_enable": false
+            "button2_label": "How it works",
+            "button2_link": "shopify://pages/how-it-works",
+            "button2_enable": true
           }
         }
       },
@@ -63,11 +63,11 @@
         "object_position_y_mobile": 50,
         "blob1_enable": true,
         "blob1_color": "#b68bff",
-        "blob1_size": 25,
-        "blob1_x": 27,
+        "blob1_size": 30,
+        "blob1_x": 65,
         "blob1_y": 55,
-        "blob1_blur": 40,
-        "blob1_opacity": 80,
+        "blob1_blur": 18,
+        "blob1_opacity": 100,
         "blob2_enable": true,
         "blob2_color": "#f4ff85",
         "blob2_size": 36,
@@ -75,7 +75,7 @@
         "blob2_y": 40,
         "blob2_blur": 40,
         "blob2_opacity": 65,
-        "desktop_height": 35,
+        "desktop_height": 45,
         "mobile_height": 100,
         "media_max_height": 66,
         "media_top_inset": 84

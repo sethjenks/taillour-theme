@@ -1572,9 +1572,11 @@ article img {
   color: var(--ink);
 }
 .promotion-hero-title-primary {
+  font-family: var(--font-primary);
   color: var(--ink);
 }
 .promotion-hero-title-secondary {
+  font-family: var(--font-primary);
   color: var(--purple);
 }
 .promotion-hero-body {
