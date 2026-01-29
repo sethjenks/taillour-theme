@@ -26,6 +26,17 @@
   background-repeat: no-repeat;
   {%- endif -%}
 }
+{{ section.id | prepend: '#' }} .html-text-content h1,
+{{ section.id | prepend: '#' }} .html-text-content h2,
+{{ section.id | prepend: '#' }} .html-text-content h3,
+{{ section.id | prepend: '#' }} .html-text-content h4,
+{{ section.id | prepend: '#' }} .html-text-content h5 {
+  color: var(--theme-text-primary, var(--font-primary-color));
+}
+{{ section.id | prepend: '#' }} .html-text-content .rte,
+{{ section.id | prepend: '#' }} .html-text-content .rte p {
+  color: var(--theme-text-secondary, var(--font-secondary-color));
+}
 {%- endstyle -%}
 
 <div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">

@@ -16,6 +16,18 @@
   background-repeat: no-repeat;
   {%- endif -%}
 }
+{{ section.id | prepend: '#' }} .section h1,
+{{ section.id | prepend: '#' }} .section h2,
+{{ section.id | prepend: '#' }} .section h3,
+{{ section.id | prepend: '#' }} .section h4,
+{{ section.id | prepend: '#' }} .section h5,
+{{ section.id | prepend: '#' }} .section summary {
+  color: var(--theme-text-primary, var(--font-primary-color));
+}
+{{ section.id | prepend: '#' }} .section .rte,
+{{ section.id | prepend: '#' }} .section .rte p {
+  color: var(--theme-text-secondary, var(--font-secondary-color));
+}
 {% endstyle %}
 
 <div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">

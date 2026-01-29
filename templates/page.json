@@ -36,10 +36,10 @@
         "column_FQFPUx": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/badge-award_2x_d46c42ae-1815-4f9c-84c5-fe62b9e91e1f.png",
+            "image": "shopify://shop_images/badge-device_2x_35cd44ee-9abb-4b57-9b34-5f39f424c5a9.png",
             "show_image": true,
             "image_alignment": "center",
-            "image_max_width": 128,
+            "image_max_width": 64,
             "object_fit": "contain",
             "object_position": "center",
             "position_mode": "preset",
@@ -62,13 +62,13 @@
         "column_dHUR7X": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/badge-follow_2x_f29aafa4-9d9c-45a0-a59f-086e8e5a1639.png",
+            "image": "shopify://shop_images/badge-follow_2x_0cc703fe-ed2f-47f6-b64a-5e60652eb78d.png",
             "show_image": true,
             "image_alignment": "center",
-            "image_max_width": 128,
+            "image_max_width": 64,
             "object_fit": "contain",
-            "object_position": "center",
-            "position_mode": "preset",
+            "object_position": "center top",
+            "position_mode": "custom",
             "object_position_x": 50,
             "object_position_y": 50,
             "object_position_mobile": "center",
@@ -88,10 +88,10 @@
         "column_VR4XkX": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/badge-award_2x_d46c42ae-1815-4f9c-84c5-fe62b9e91e1f.png",
+            "image": "shopify://shop_images/badge-award_2x_cd5275c1-723f-4f3a-a4ed-15ed77d9be36.png",
             "show_image": true,
             "image_alignment": "center",
-            "image_max_width": 120,
+            "image_max_width": 64,
             "object_fit": "contain",
             "object_position": "center",
             "position_mode": "preset",
