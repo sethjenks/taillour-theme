@@ -187,6 +187,42 @@
         "id": "newsletter_btn_label",
         "label": "Submit button label",
         "default": "Sign up"
+      },
+      {
+        "type": "checkbox",
+        "id": "newsletter_use_default_color_scheme",
+        "label": "Use default color scheme",
+        "default": true
+      },
+      {
+        "type": "color_scheme",
+        "id": "newsletter_color_scheme",
+        "label": "Color scheme",
+        "default": "scheme_1"
+      },
+      {
+        "type": "select",
+        "id": "newsletter_content_alignment",
+        "label": "Content alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "justify",
+            "label": "Justify"
+          }
+        ],
+        "default": "center"
       }
     ]
   },

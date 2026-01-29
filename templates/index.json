@@ -169,7 +169,7 @@
         "app_width_mobile": 58,
         "app_height_mobile": 80,
         "blob_enable": true,
-        "blob_color": "#EFFE75",
+        "blob_color": "#effe75",
         "blob_size": 150,
         "blob_x": 85,
         "blob_y": 50,
@@ -185,7 +185,7 @@
         "heading_aRADHH": {
           "type": "heading",
           "settings": {
-            "text": "Image/Text Section",
+            "text": "How to play",
             "size": "h2"
           }
         },
@@ -215,8 +215,8 @@
             "icon_border_color": "rgba(0,0,0,0)",
             "icon_text_color": "#ffffff",
             "icon_shadow": true,
-            "title": "Make your picks",
-            "subtext": "<p>Choose a tournament. Make your picks before play begins.</p>"
+            "title": "Follow the action",
+            "subtext": "<p>Watch the real-world event while Rooting for your picks to win.</p>"
           }
         },
         "bullet_item_VqwB6n": {
@@ -227,8 +227,8 @@
             "icon_border_color": "rgba(0,0,0,0)",
             "icon_text_color": "#ffffff",
             "icon_shadow": true,
-            "title": "Make your picks",
-            "subtext": "<p>Choose a tournament. Make your picks before play begins.</p>"
+            "title": "See how you stack up",
+            "subtext": "<p>Track your points on the leaderboard to see how your picks performed. </p>"
           }
         }
       },
@@ -255,6 +255,7 @@
         "color_scheme": "scheme_2",
         "text_columns": 6,
         "media_columns": 6,
+        "family_image": "shopify://shop_images/Leaderboard_3x_a5f6eb32-9108-4ae9-8c36-565467c0197f.png",
         "family_use_focal_point": false,
         "family_object_fit": "contain",
         "family_object_position": "center",
@@ -265,10 +266,10 @@
         "family_object_position_x_mobile": 50,
         "family_object_position_y_mobile": 50,
         "family_enable_absolute": true,
-        "family_x": 50,
-        "family_y": 50,
-        "family_width": 100,
-        "family_height": 100,
+        "family_x": 43,
+        "family_y": 75,
+        "family_width": 150,
+        "family_height": 150,
         "family_x_mobile": 50,
         "family_y_mobile": 50,
         "family_width_mobile": 100,
@@ -355,6 +356,20 @@
         "enable_padding_overrides": false,
         "padding_top": 6,
         "padding_bottom": 6,
+        "blob1_enable": false,
+        "blob1_color": "#b68bff",
+        "blob1_size": 40,
+        "blob1_x": 75,
+        "blob1_y": 55,
+        "blob1_blur": 40,
+        "blob1_opacity": 80,
+        "blob2_enable": false,
+        "blob2_color": "#f4ff85",
+        "blob2_size": 36,
+        "blob2_x": 55,
+        "blob2_y": 40,
+        "blob2_blur": 40,
+        "blob2_opacity": 80,
         "show_heading": true,
         "text": "Products Section",
         "size": "h2",
