@@ -152,6 +152,31 @@
     ]
   },
   {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_block_padding_top",
+        "label": "Button block padding top",
+        "min": 0,
+        "max": 12,
+        "step": 0.5,
+        "default": 0,
+        "unit": "rem"
+      },
+      {
+        "type": "range",
+        "id": "button_block_padding_bottom",
+        "label": "Button block padding bottom",
+        "min": 0,
+        "max": 12,
+        "step": 0.5,
+        "default": 0,
+        "unit": "rem"
+      }
+    ]
+  },
+  {
     "name": "Newsletter Popup",
     "settings": [
       {

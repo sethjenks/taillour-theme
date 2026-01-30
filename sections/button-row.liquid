@@ -5,8 +5,10 @@
   {%- assign padding_top = section.settings.padding_top -%}
   {%- assign padding_bottom = section.settings.padding_bottom -%}
 {%- endif -%}
+{%- assign button_padding_top = settings.button_block_padding_top | default: 0 -%}
+{%- assign button_padding_bottom = settings.button_block_padding_bottom | default: 0 -%}
 <div id="{{ section.id }}" class="section-wrap" style="--section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
-  <div class="section">
+  <div class="section" style="padding-top: {{ button_padding_top | append: 'rem' }}; padding-bottom: {{ button_padding_bottom | append: 'rem' }};">
     <div class="center">
       <a class="button button-primary" href="{{ section.settings.link | default: '#' }}">
         {{ section.settings.text }}

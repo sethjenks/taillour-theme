@@ -144,8 +144,10 @@ endif
       {% when 'button' %}
         {%- assign button_alignment = block.settings.alignment | default: 'align-left' -%}
         {%- assign button_style = block.settings.style | default: 'primary' -%}
+        {%- assign button_padding_top = settings.button_block_padding_top | default: 0 -%}
+        {%- assign button_padding_bottom = settings.button_block_padding_bottom | default: 0 -%}
         {% unless block.settings.label == blank %}
-          <div class="section {{ button_alignment }}" {{ block.shopify_attributes }}>
+          <div class="section {{ button_alignment }}" style="padding-top: {{ button_padding_top | append: 'rem' }}; padding-bottom: {{ button_padding_bottom | append: 'rem' }};" {{ block.shopify_attributes }}>
             <a class="button button-{{ button_style }}" href="{{ block.settings.link | default: '#' }}">
               {{ block.settings.label }}
             </a>

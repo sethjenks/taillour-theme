@@ -33,6 +33,15 @@
             "button_alignment": "align-left"
           }
         },
+        "button_Wwyt3t": {
+          "type": "button",
+          "settings": {
+            "label": "Learn more",
+            "link": "",
+            "style": "primary",
+            "alignment": "center"
+          }
+        },
         "bullet_item_Fb7j99": {
           "type": "bullet_item",
           "settings": {
@@ -153,6 +162,7 @@
       },
       "block_order": [
         "header_gHd7W7",
+        "button_Wwyt3t",
         "bullet_item_Fb7j99",
         "bullet_item_N6HNwe",
         "bullet_item_mQxjHF",
