@@ -41,6 +41,19 @@ main#main-content .collections-grid {
   gap: var(--products-grid-gap);
 }
 
+main#main-content .products-grid-swiper {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+main#main-content .products-grid-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+main#main-content .products-grid-swiper .swiper-slide {
+  height: auto;
+}
+
 main#main-content .column-section,
 main#main-content .articles-grid,
 main#main-content #collection,
