@@ -46,6 +46,14 @@ main#main-content .products-grid-swiper {
   margin-bottom: 2rem;
 }
 
+main#main-content .product-grid--mobile-carousel .products-grid {
+  display: none;
+}
+
+main#main-content .product-grid--mobile-carousel .products-grid-swiper {
+  display: block;
+}
+
 main#main-content .products-grid-swiper .swiper-wrapper {
   align-items: stretch;
 }
