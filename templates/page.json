@@ -246,8 +246,8 @@
         "family_enable_absolute": true,
         "family_x": 30,
         "family_y": 75,
-        "family_width": 150,
-        "family_height": 150,
+        "family_width": 100,
+        "family_height": 100,
         "family_x_mobile": 50,
         "family_y_mobile": 47,
         "family_width_mobile": 100,
@@ -273,10 +273,10 @@
         "app_height_mobile": 80,
         "blob_enable": true,
         "blob_color": "#b68bff",
-        "blob_size": 150,
+        "blob_size": 100,
         "blob_x": 0,
         "blob_y": 100,
-        "blob_blur": 120,
+        "blob_blur": 100,
         "blob_opacity": 50
       }
     },
