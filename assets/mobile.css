@@ -102,11 +102,12 @@ header {
 
 #header-nav {
   position: fixed;
-  top: var(--nav-top-gap);
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: none;
   z-index: 100;
-  width: calc(100% - 2rem);
+  width: 100%;
   height: 3.5rem;
   padding: 0.35rem 1rem;
   gap: 0.75rem;
@@ -137,7 +138,6 @@ header {
   inset: 0;
   background-color: rgba(0, 0, 0, 0.35);
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
   transition: opacity 200ms ease;
   border: 0;
@@ -154,25 +154,27 @@ header {
   background-color: var(--white);
   box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
   transform: translateX(100%);
-  transition: transform 250ms ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 250ms ease, opacity 250ms ease;
   z-index: 110;
-  padding: 1rem;
+  padding: 3.25rem 1rem 1.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
   overflow-y: auto;
-  visibility: hidden;
 }
 
 #header-nav.nav-open .site-header__overlay {
   opacity: 1;
-  visibility: visible;
   pointer-events: auto;
 }
 
 #header-nav.nav-open .site-header__drawer {
   transform: translateX(0);
-  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #header-nav .site-header__menu,
@@ -184,6 +186,7 @@ header {
 #header-nav .site-header__menu {
   justify-content: flex-start;
   margin-top: 0;
+  flex: 1;
 }
 
 #header-nav .site-header__menu-list {
@@ -197,7 +200,7 @@ header {
   width: 100%;
   display: block;
   border-right: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 0;
   background-color: transparent;
 }
 
@@ -210,11 +213,33 @@ header {
   align-items: stretch;
   gap: 0.5rem;
   margin-top: 0;
+  margin-top: auto;
 }
 
 #header-nav .site-header__close {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  position: fixed;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 120;
+}
+
+#header-nav .site-header__close button {
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 24px;
+  padding: 0;
+}
+
+#header-nav .site-header__menu {
+  margin-top: calc(44px + 24px + 0.75rem);
 }
 
 #header-nav .site-header__login {
@@ -245,6 +270,9 @@ footer ul {
   flex-direction: column;
   gap: 0.25rem;
   align-items: stretch;
+}
+footer .footer-section__menu-list {
+  gap: 0;
 }
 footer ul a {
   display: block;

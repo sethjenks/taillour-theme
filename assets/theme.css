@@ -1397,7 +1397,7 @@ blockquote:after {
 .footer-section__menu-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1406,6 +1406,7 @@ blockquote:after {
 }
 .footer-section__menu-list a {
   color: inherit;
+  font-size: 14px;
   text-decoration: none;
 }
 .footer-section__menu-list a:hover {
@@ -2060,14 +2061,36 @@ article img {
 }
 @media screen and (max-width: 768px) {
   .testimonials-spacer {
-    min-height: calc(var(--testimonial-panel-min-height, 16rem) - var(--testimonial-float-offset, -2rem));
+    min-height: calc(
+      var(--testimonial-panel-min-height, 16rem) -
+        var(--testimonial-float-offset-mobile, var(--testimonial-float-offset, -2rem))
+    );
   }
   .testimonials-panel {
-    transform: translate(-50%, var(--testimonial-float-offset, -2rem));
+    transform: translate(
+      -50%,
+      var(--testimonial-float-offset-mobile, var(--testimonial-float-offset, -2rem))
+    );
+    width: 100%;
+    border-radius: 0;
+    overflow: hidden;
     padding: 2rem 1.5rem;
   }
   .testimonials-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    gap: 1.5rem;
+  }
+  .testimonials-panel .testimonials-grid.scrolly {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .testimonials-grid.scrolly > .testimonial-card {
+    flex: 0 0 80%;
+    max-width: 22rem;
+    scroll-snap-align: center;
   }
 }

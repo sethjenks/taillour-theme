@@ -51,11 +51,11 @@ endif
 <div
   id="{{ section.id }}"
   class="section-wrap testimonials-section {{ scheme_class }}"
-  style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }}; --testimonial-columns: {{ columns }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}"
+  style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }}; --testimonial-columns: {{ columns }}; --testimonial-float-offset-mobile: {{ section.settings.mobile_float_offset | append: 'px' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}"
 >
   <div class="testimonials-spacer" aria-hidden="true"></div>
   <div class="testimonials-panel">
-    <div class="testimonials-grid">
+    <div class="testimonials-grid scrolly">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'testimonial' -%}
@@ -140,6 +140,17 @@ endif
       "step": 0.5,
       "default": 6,
       "unit": "rem"
+    },
+    {
+      "type": "range",
+      "id": "mobile_float_offset",
+      "label": "Mobile float offset (px)",
+      "info": "Negative values raise the panel on mobile.",
+      "min": -240,
+      "max": 0,
+      "step": 5,
+      "default": -100,
+      "unit": "px"
     },
     {
       "type": "checkbox",

@@ -33,7 +33,7 @@
 }
 {%- endstyle -%}
 
-<section id="{{ section.id }}" class="footer-section section-wrap unpadded {{ scheme_class }}" style="--font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
+<section id="{{ section.id }}" class="footer-section section-wrap {{ scheme_class }}" style="--font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
   <div class="footer-section__inner section">
     <div class="footer-section__top">
       <div class="footer-section__brand">
