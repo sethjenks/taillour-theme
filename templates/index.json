@@ -49,7 +49,7 @@
         "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
         "hero_image": "shopify://shop_images/hand-app_2x_cbb27645-c1b5-439e-8a81-cee6731e24b9.png",
         "use_focal_point": false,
-        "media_offset_x": -30,
+        "media_offset_x": -21,
         "media_offset_y": 0,
         "media_offset_x_mobile": -16,
         "media_offset_y_mobile": 0,
@@ -67,11 +67,11 @@
         "padding_bottom": 6,
         "blob1_enable": true,
         "blob1_color": "#b68bff",
-        "blob1_size": 30,
+        "blob1_size": 54,
         "blob1_x": 65,
         "blob1_y": 55,
-        "blob1_blur": 18,
-        "blob1_opacity": 100,
+        "blob1_blur": 42,
+        "blob1_opacity": 35,
         "blob2_enable": true,
         "blob2_color": "#f4ff85",
         "blob2_size": 26,
@@ -81,8 +81,8 @@
         "blob2_opacity": 65,
         "desktop_height": 50,
         "mobile_height": 100,
-        "media_max_height": 66,
-        "media_top_inset": 84
+        "media_max_height": 90,
+        "media_top_inset": 128
       }
     },
     "image_with_text_ykcntk": {

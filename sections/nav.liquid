@@ -85,20 +85,22 @@
           </a>
         {% endif %}
       {% endif %}
-      <div class="site-header__action-link site-header__cart">
-        {% if section.settings.enable_cart_popup == true and request.path != "/cart" %}
-          {% render 'cart-popup', section: section %}
-        {% else %}
-          <a href="{{ routes.cart_url }}" aria-label="Cart">
-            <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 1.95-1.57L22 6H6"></path>
-            </svg>
-            (<span class="js--cart-counter">{{ cart.item_count }}</span>)
-          </a>
-        {% endif %}
-      </div>
+      {% if section.settings.show_cart %}
+        <div class="site-header__action-link site-header__cart">
+          {% if section.settings.enable_cart_popup == true and request.path != "/cart" %}
+            {% render 'cart-popup', section: section %}
+          {% else %}
+            <a href="{{ routes.cart_url }}" aria-label="Cart">
+              <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="8" cy="21" r="1"></circle>
+                <circle cx="19" cy="21" r="1"></circle>
+                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 1.95-1.57L22 6H6"></path>
+              </svg>
+              (<span class="js--cart-counter">{{ cart.item_count }}</span>)
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </header>
@@ -116,6 +118,12 @@
     {
       "type": "header",
       "content": "Cart Summary Popup"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show cart link",
+      "default": true
     },
     {
       "type": "header",

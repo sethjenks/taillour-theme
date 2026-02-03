@@ -17,7 +17,7 @@
     padding-bottom: 0.75rem;
     border-bottom: var(--field-border);
   }
-  .custom_signup-header h3 {
+  .custom_signup-title h3 {
     font-size: 2rem;
     margin: 0;
     flex: 1;
@@ -83,10 +83,14 @@
 
   <dialog id="custom_signup" class="{{ scheme_class }} custom_signup-align-{{ settings.newsletter_content_alignment | default: 'center' }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
     <div class="custom_signup-header">
-      <h3>{{ settings.newsletter_heading }}</h3>
-      <button class="custom_signup-close" type="button" onclick="dismissPopup();">
-        &times;
-      </button>
+      <div class="custom_signup-title">
+        <h3>{{ settings.newsletter_heading }}</h3>
+      </div>
+      <div class="custom_signup-actions">
+        <button class="custom_signup-close" type="button" onclick="dismissPopup();">
+          &times;
+        </button>
+      </div>
     </div>
     <div class="custom_signup-body">
       <p>{{ settings.newsletter_text }}</p>
@@ -97,7 +101,6 @@
           </div>
         {% endif %}
         <div class="form-row">
-          <label for="email">Email</label>
           <input type="email" name="contact[email]" placeholder="Enter email address" required>
         </div>
         <div class="form-row">

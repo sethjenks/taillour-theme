@@ -1147,7 +1147,7 @@ nav details {
 .site-header__menu-list {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1826,7 +1826,8 @@ article img {
 
 @media screen and (max-width: 768px) {
   .promotion-hero {
-    padding: 16px 0;
+    padding-top: calc(16px + var(--nav-offset));
+    padding-bottom: 16px;
   }
   .promotion-hero-inner {
     padding: 0 24px;
@@ -1834,12 +1835,17 @@ article img {
   .promotion-hero-content {
     max-width: 100%;
     padding: 24px 0;
+    gap: 8px;
   }
   .promotion-hero-title {
     font-size: clamp(36px, 10vw, 56px);
   }
   .promotion-hero-body {
     font-size: 18px;
+  }
+  .promotion-hero-buttons button + button,
+  .promotion-hero-buttons .button + .button {
+    margin-left: 0;
   }
   .promotion-hero-media {
     display: none;
@@ -2013,10 +2019,10 @@ article img {
 .testimonial-card__avatar {
   width: 56px;
   height: 56px;
-  border-radius: 50%;
+  border-radius: 24px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: unset;
+  border: 0;
   display: grid;
   place-items: center;
 }
@@ -2050,6 +2056,7 @@ article img {
 .testimonial-card__location {
   font-size: 0.95rem;
   line-height: 1.4;
+  color: var(--theme-text-secondary, var(--font-secondary-color));
 }
 @media screen and (max-width: 768px) {
   .testimonials-spacer {

@@ -86,6 +86,7 @@
 {%- endfor -%}
 
 {%- assign hero_image = section.settings.hero_image -%}
+{%- assign hero_image_mobile = section.settings.hero_image_mobile -%}
 {%- assign primary_heading = section.settings.primary_text | default: heading_text -%}
 {%- assign secondary_heading = section.settings.secondary_text -%}
 
@@ -137,15 +138,31 @@
       {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
     {%- else -%}
       {%- if section.settings.use_focal_point -%}
-        {{ hero_image | image_url: width: 1400 | image_tag: alt: hero_image.alt, loading: 'lazy' }}
+        <picture>
+          {%- if hero_image_mobile != blank -%}
+            <source
+              media="(max-width: 768px)"
+              srcset="{{ hero_image_mobile | image_url: width: 900 }}"
+            >
+          {%- endif -%}
+          {{ hero_image | image_url: width: 1400 | image_tag: alt: hero_image.alt, loading: 'lazy' }}
+        </picture>
       {%- else -%}
-        <img
-          src="{{ hero_image | image_url: width: 1400 }}"
-          width="{{ hero_image.width }}"
-          height="{{ hero_image.height }}"
-          alt="{{ hero_image.alt }}"
-          loading="lazy"
-        >
+        <picture>
+          {%- if hero_image_mobile != blank -%}
+            <source
+              media="(max-width: 768px)"
+              srcset="{{ hero_image_mobile | image_url: width: 900 }}"
+            >
+          {%- endif -%}
+          <img
+            src="{{ hero_image | image_url: width: 1400 }}"
+            width="{{ hero_image.width }}"
+            height="{{ hero_image.height }}"
+            alt="{{ hero_image.alt }}"
+            loading="lazy"
+          >
+        </picture>
       {%- endif -%}
     {%- endif -%}
   </div>
@@ -197,6 +214,12 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Hero Image (mobile)",
+      "info": "Optional. Falls back to the desktop image when empty."
     },
     {
       "type": "checkbox",
