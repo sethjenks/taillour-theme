@@ -177,6 +177,31 @@
     ]
   },
   {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "form_max_width",
+        "label": "Form max width",
+        "min": 320,
+        "max": 900,
+        "step": 10,
+        "default": 600,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "dialog_max_width",
+        "label": "Dialog max width",
+        "min": 320,
+        "max": 720,
+        "step": 10,
+        "default": 480,
+        "unit": "px"
+      }
+    ]
+  },
+  {
     "name": "Newsletter Popup",
     "settings": [
       {

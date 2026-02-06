@@ -104,6 +104,8 @@
       --font-secondary: {{ settings.secondary_font.family }}, {{ settings.secondary_font.fallback_families }};
       --font-primary-color: {{ primary_color }};
       --font-secondary-color: {{ secondary_color }};
+      --form-max-width: {{ settings.form_max_width | append: 'px' }};
+      --dialog-max-width: {{ settings.dialog_max_width | append: 'px' }};
     }
 
     {%- for scheme in settings.color_schemes -%}

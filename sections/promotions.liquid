@@ -29,6 +29,8 @@
   --promotion-media-top: {{ section.settings.media_top_inset | append: "px" }};
   --promotion-media-offset-x: {{ section.settings.media_offset_x | append: "%" }};
   --promotion-media-offset-y: {{ section.settings.media_offset_y | append: "%" }};
+  --promotion-content-max: {{ section.settings.content_max_width | append: "px" }};
+  --promotion-body-max: {{ section.settings.body_max_width | append: "px" }};
   --promotion-blob-1-size: {{ section.settings.blob1_size | append: "vw" }};
   --promotion-blob-1-x: {{ section.settings.blob1_x | append: "%" }};
   --promotion-blob-1-y: {{ section.settings.blob1_y | append: "%" }};
@@ -194,6 +196,26 @@
       "default": "Get the dub."
     },
     {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 320,
+      "max": 900,
+      "step": 10,
+      "default": 640,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "body_max_width",
+      "label": "Body max width",
+      "min": 240,
+      "max": 800,
+      "step": 10,
+      "default": 520,
+      "unit": "px"
+    },
+    {
       "type": "checkbox",
       "id": "use_default_color_scheme",
       "label": "Use default color scheme",
@@ -226,6 +248,32 @@
       "id": "use_focal_point",
       "label": "Use image focal point",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "Hero Image Bounds"
+    },
+    {
+      "type": "range",
+      "id": "media_max_height",
+      "label": "Max image height",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "default": 90,
+      "unit": "vh",
+      "info": "Caps the image height so it does not overlap the header."
+    },
+    {
+      "type": "range",
+      "id": "media_top_inset",
+      "label": "Top boundary inset",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "default": 0,
+      "unit": "px",
+      "info": "Adds extra space above the image while keeping it bottom-aligned."
     },
     {
       "type": "range",
@@ -635,32 +683,6 @@
       "default": 100,
       "unit": "vw",
       "info": "Height of the section in relation to the device width."
-    },
-    {
-      "type": "header",
-      "content": "Hero Image Bounds"
-    },
-    {
-      "type": "range",
-      "id": "media_max_height",
-      "label": "Max image height",
-      "min": 40,
-      "max": 120,
-      "step": 1,
-      "default": 90,
-      "unit": "vh",
-      "info": "Caps the image height so it does not overlap the header."
-    },
-    {
-      "type": "range",
-      "id": "media_top_inset",
-      "label": "Top boundary inset",
-      "min": 0,
-      "max": 200,
-      "step": 2,
-      "default": 0,
-      "unit": "px",
-      "info": "Adds extra space above the image while keeping it bottom-aligned."
     }
   ],
   "blocks": [

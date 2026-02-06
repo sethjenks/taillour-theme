@@ -23,17 +23,8 @@
     flex: 1;
     text-align: inherit;
   }
-  .custom_signup-close {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
-    color: var(--theme-text-primary, var(--night));
-    padding: 0;
-    line-height: 1;
+  dialog#custom_signup .button-close:focus-visible {
+    outline: none;
   }
   .custom_signup-body {
     padding-top: 0.75rem;
@@ -87,7 +78,7 @@
         <h3>{{ settings.newsletter_heading }}</h3>
       </div>
       <div class="custom_signup-actions">
-        <button class="custom_signup-close" type="button" onclick="dismissPopup();">
+        <button class="custom_signup-close button-close" type="button" onclick="dismissPopup();">
           &times;
         </button>
       </div>

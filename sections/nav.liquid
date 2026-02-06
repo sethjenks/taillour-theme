@@ -1,4 +1,10 @@
 {% assign menu_handle = section.settings.menu %}
+{% style %}
+#header-nav {
+  --header-max-width: {{ section.settings.header_max_width | append: 'px' }};
+  --nav-drawer-max-width: {{ section.settings.drawer_max_width | append: 'px' }};
+}
+{% endstyle %}
 <header id="header-nav" class="site-header site-header--glass">
   <div class="site-header__brand">
     <button
@@ -59,7 +65,7 @@
     </nav>
     <div class="site-header__actions">
       <div data-device="mobile" class="site-header__close">
-        <button type="button" onclick="toggleNav();" aria-label="Close menu">&times;</button>
+        <button class="button-close" type="button" onclick="toggleNav();" aria-label="Close menu">&times;</button>
       </div>
       {% if shop.customer_accounts_enabled %}
         {% if customer %}
@@ -114,6 +120,30 @@
       "id": "menu",
       "label": "Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "header_max_width",
+      "label": "Header max width",
+      "min": 800,
+      "max": 1400,
+      "step": 20,
+      "default": 1100,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "drawer_max_width",
+      "label": "Mobile drawer max width",
+      "min": 240,
+      "max": 420,
+      "step": 10,
+      "default": 320,
+      "unit": "px"
     },
     {
       "type": "header",

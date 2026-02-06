@@ -6,7 +6,7 @@ assign image_height = image_width | divided_by: article.image.aspect_ratio | cei
 {% unless section.settings.max_width == blank or section.settings.max_width == 0 %}
 <style>
 {{ section.id | prepend: '#' }} .section {
-  max-width: {{ section.settings.max_width | append: 'px' }};
+  max-width: clamp(320px, 80vw, {{ section.settings.max_width | append: 'px' }});
 }
 </style>
 {% endunless %}
