@@ -2119,6 +2119,7 @@ article img {
 /* !! Testimonials */
 .testimonials-section {
   position: relative;
+  height: var(--testimonials-section-height, 320px);
 }
 .testimonials-section > * {
   padding-top: clamp(1rem, 4vw, 3rem);
@@ -2139,7 +2140,7 @@ article img {
     clamp(320px, 85vw, var(--testimonials-max-width, var(--max-width))),
     calc(100% - var(--page-margin, 20px) * 2)
   );
-  padding: 24px;
+  padding: 32px;
   border-radius: 2.25rem;
   background: linear-gradient(
     135deg,
@@ -2213,6 +2214,9 @@ article img {
   color: var(--theme-text-secondary, var(--font-secondary-color));
 }
 @media screen and (max-width: 768px) {
+  .testimonials-section {
+    height: auto;
+  }
   .testimonials-spacer {
     display: none;
     min-height: 0;

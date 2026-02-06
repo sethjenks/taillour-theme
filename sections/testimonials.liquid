@@ -51,7 +51,7 @@ endif
 <div
   id="{{ section.id }}"
   class="section-wrap testimonials-section {{ scheme_class }}"
-  style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }}; --testimonial-columns: {{ columns }}; --testimonial-float-offset-mobile: {{ section.settings.mobile_float_offset | append: 'px' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}"
+  style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }}; --testimonial-columns: {{ columns }}; --testimonial-float-offset-mobile: {{ section.settings.mobile_float_offset | append: 'px' }}; --testimonials-section-height: {{ section.settings.section_height | default: 320 | append: 'px' }}; --testimonial-panel-min-height: {{ section.settings.section_height | default: 320 | append: 'px' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}"
 >
   <div class="testimonials-spacer" aria-hidden="true"></div>
   <div class="testimonials-panel">
@@ -130,6 +130,16 @@ endif
       "type": "image_picker",
       "id": "background_image",
       "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section height (desktop)",
+      "min": 240,
+      "max": 600,
+      "step": 10,
+      "default": 320,
+      "unit": "px"
     },
     {
       "type": "range",

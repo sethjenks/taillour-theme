@@ -47,6 +47,8 @@ endif
   object-fit: var(--column-object-fit, cover);
   object-position: var(--column-object-position-desktop, center);
   aspect-ratio: var(--column-image-aspect-ratio);
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 {{ section.id | prepend: '#' }} .column-section .column-image-wrapper {
   display: flex;
@@ -144,8 +146,8 @@ endif
       {% when 'button' %}
         {%- assign button_alignment = block.settings.alignment | default: 'align-left' -%}
         {%- assign button_style = block.settings.style | default: 'primary' -%}
-        {%- assign button_padding_top = settings.button_block_padding_top | default: 0 -%}
-        {%- assign button_padding_bottom = settings.button_block_padding_bottom | default: 0 -%}
+        {%- assign button_padding_top = block.settings.padding_top | default: 0 -%}
+        {%- assign button_padding_bottom = block.settings.padding_bottom | default: 0 -%}
         {% unless block.settings.label == blank %}
           <div class="section {{ button_alignment }}" style="padding-top: {{ button_padding_top | append: 'rem' }}; padding-bottom: {{ button_padding_bottom | append: 'rem' }};" {{ block.shopify_attributes }}>
             <a class="button button-{{ button_style }}" href="{{ block.settings.link | default: '#' }}">
@@ -529,6 +531,26 @@ endif
           "type": "url",
           "id": "link",
           "label": "Button link"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
         },
         {
           "type": "select",
