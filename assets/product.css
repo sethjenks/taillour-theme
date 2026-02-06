@@ -70,9 +70,9 @@
   position: relative;
 }
 .product-images-slider {
-  border: var(--field-border);
+  border: none;
   border-radius: var(--field-radius);
-  box-shadow: var(--field-shadow);
+  box-shadow: none;
 }
 .product-images-track {
   overflow-x: auto;
@@ -94,6 +94,10 @@
   scroll-snap-align: center;
   object-fit: contain;
   aspect-ratio: 1/1;
+  border-style: none;
+  border-width: 0;
+  border-color: rgba(0, 0, 0, 0);
+  border-image: none;
 }
 .product-image-item {
   scroll-snap-align: center;

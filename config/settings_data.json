@@ -32,7 +32,10 @@
         "type": "nav",
         "settings": {
           "menu": "main-navigation",
-          "show_signup": true,
+          "header_max_width": 1100,
+          "drawer_max_width": 320,
+          "show_cart": true,
+          "show_signup": false,
           "signup_label": "Login",
           "signup_link": "",
           "show_login": true,
@@ -69,7 +72,7 @@
           "bg_secondary": "#292237",
           "bg_gradient": "",
           "text_primary": "#ffffff",
-          "text_secondary": "#E2D6FC"
+          "text_secondary": "#e2d6fc"
         }
       },
       "scheme-ee222970-1679-436a-9f5c-1986d6d291fc": {

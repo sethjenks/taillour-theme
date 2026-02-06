@@ -1,6 +1,8 @@
 {% comment %}
 Get the first available variant
 {% endcomment %}
+{%- assign padding_top = section.settings.padding_top | default: 0 -%}
+{%- assign padding_bottom = section.settings.padding_bottom | default: 0 -%}
 {% assign current_variant = product.selected_or_first_available_variant %}
 
 <script>
@@ -11,7 +13,7 @@ var default_image = {{ product.featured_image.id | default: 'null' }};
 
 <link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
 
-<div class="section-wrap">
+<div class="section-wrap" style="--section-padding-default: 0rem; --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};">
   <div id="product" class="section">
     {% comment %}
     Product gallery.
@@ -207,7 +209,32 @@ function goToImage(index, container=false) {
 {% schema %}
 {
   "name": "Product Details",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 0,
+      "unit": "rem"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 0,
+      "unit": "rem"
+    }
+  ],
   "blocks": [
     {
       "type":"@app"
