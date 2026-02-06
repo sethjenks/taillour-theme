@@ -25,10 +25,19 @@
 {% style %}
 #{{ section.id }}.promotion-hero {
   min-height: {{ section.settings.desktop_height | append: "vw" }};
+  --promotion-media-max-height-min: {{ section.settings.media_max_height_min | append: "vh" }};
   --promotion-media-max-height: {{ section.settings.media_max_height | append: "vh" }};
+  --promotion-media-max-height-max: {{ section.settings.media_max_height_max | append: "vh" }};
+  --promotion-media-width-min: {{ section.settings.media_width_min | append: "px" }};
+  --promotion-media-width-preferred: {{ section.settings.media_width_preferred | append: "vw" }};
+  --promotion-media-width-max: {{ section.settings.media_width_max | append: "px" }};
   --promotion-media-top: {{ section.settings.media_top_inset | append: "px" }};
+  --promotion-media-offset-x-min: {{ section.settings.media_offset_x_min | append: "%" }};
   --promotion-media-offset-x: {{ section.settings.media_offset_x | append: "%" }};
+  --promotion-media-offset-x-max: {{ section.settings.media_offset_x_max | append: "%" }};
+  --promotion-media-offset-y-min: {{ section.settings.media_offset_y_min | append: "%" }};
   --promotion-media-offset-y: {{ section.settings.media_offset_y | append: "%" }};
+  --promotion-media-offset-y-max: {{ section.settings.media_offset_y_max | append: "%" }};
   --promotion-content-max: {{ section.settings.content_max_width | append: "px" }};
   --promotion-body-max: {{ section.settings.body_max_width | append: "px" }};
   --promotion-blob-1-size: {{ section.settings.blob1_size | append: "vw" }};
@@ -53,8 +62,18 @@
 @media screen and (max-width: 768px) {
   #{{ section.id }}.promotion-hero {
     min-height: {{ section.settings.mobile_height | append: "vw" }};
+    --promotion-media-max-height-min: {{ section.settings.media_max_height_min_mobile | append: "vh" }};
+    --promotion-media-max-height: {{ section.settings.media_max_height_mobile | append: "vh" }};
+    --promotion-media-max-height-max: {{ section.settings.media_max_height_max_mobile | append: "vh" }};
+    --promotion-media-width-min: {{ section.settings.media_width_min_mobile | append: "px" }};
+    --promotion-media-width-preferred: {{ section.settings.media_width_preferred_mobile | append: "vw" }};
+    --promotion-media-width-max: {{ section.settings.media_width_max_mobile | append: "px" }};
+    --promotion-media-offset-x-min: {{ section.settings.media_offset_x_min_mobile | append: "%" }};
     --promotion-media-offset-x: {{ section.settings.media_offset_x_mobile | append: "%" }};
+    --promotion-media-offset-x-max: {{ section.settings.media_offset_x_max_mobile | append: "%" }};
+    --promotion-media-offset-y-min: {{ section.settings.media_offset_y_min_mobile | append: "%" }};
     --promotion-media-offset-y: {{ section.settings.media_offset_y_mobile | append: "%" }};
+    --promotion-media-offset-y-max: {{ section.settings.media_offset_y_max_mobile | append: "%" }};
   }
   {%- unless section.settings.use_focal_point -%}
   #{{ section.id }} .promotion-hero-media img {
@@ -259,14 +278,34 @@
     },
     {
       "type": "range",
+      "id": "media_max_height_min",
+      "label": "Image height minimum (desktop)",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "default": 60,
+      "unit": "vh"
+    },
+    {
+      "type": "range",
       "id": "media_max_height",
-      "label": "Max image height",
+      "label": "Image height preferred (desktop)",
       "min": 40,
       "max": 120,
       "step": 1,
       "default": 90,
       "unit": "vh",
       "info": "Caps the image height so it does not overlap the header."
+    },
+    {
+      "type": "range",
+      "id": "media_max_height_max",
+      "label": "Image height maximum (desktop)",
+      "min": 40,
+      "max": 140,
+      "step": 1,
+      "default": 120,
+      "unit": "vh"
     },
     {
       "type": "range",
@@ -281,28 +320,172 @@
     },
     {
       "type": "range",
+      "id": "media_width_min",
+      "label": "Hero image width min (desktop)",
+      "min": 240,
+      "max": 640,
+      "step": 10,
+      "default": 320,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "media_width_preferred",
+      "label": "Hero image width preferred (desktop)",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 42,
+      "unit": "vw"
+    },
+    {
+      "type": "range",
+      "id": "media_width_max",
+      "label": "Hero image width max (desktop)",
+      "min": 320,
+      "max": 900,
+      "step": 10,
+      "default": 640,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_x_min",
+      "label": "Hero image offset X min (desktop)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": -30,
+      "unit": "%"
+    },
+    {
+      "type": "range",
       "id": "media_offset_x",
-      "label": "Hero image offset X (desktop)",
+      "label": "Hero image offset X preferred (desktop)",
       "min": -30,
       "max": 30,
       "step": 1,
       "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_x_max",
+      "label": "Hero image offset X max (desktop)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": 30,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_y_min",
+      "label": "Hero image offset Y min (desktop)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": -30,
       "unit": "%"
     },
     {
       "type": "range",
       "id": "media_offset_y",
-      "label": "Hero image offset Y (desktop)",
+      "label": "Hero image offset Y preferred (desktop)",
       "min": -30,
       "max": 30,
       "step": 1,
       "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_y_max",
+      "label": "Hero image offset Y max (desktop)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": 30,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Hero Image Bounds (mobile)"
+    },
+    {
+      "type": "range",
+      "id": "media_max_height_min_mobile",
+      "label": "Image height minimum (mobile)",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "default": 60,
+      "unit": "vh"
+    },
+    {
+      "type": "range",
+      "id": "media_max_height_mobile",
+      "label": "Image height preferred (mobile)",
+      "min": 40,
+      "max": 120,
+      "step": 1,
+      "default": 90,
+      "unit": "vh"
+    },
+    {
+      "type": "range",
+      "id": "media_max_height_max_mobile",
+      "label": "Image height maximum (mobile)",
+      "min": 40,
+      "max": 140,
+      "step": 1,
+      "default": 120,
+      "unit": "vh"
+    },
+    {
+      "type": "range",
+      "id": "media_width_min_mobile",
+      "label": "Hero image width min (mobile)",
+      "min": 200,
+      "max": 520,
+      "step": 10,
+      "default": 260,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "media_width_preferred_mobile",
+      "label": "Hero image width preferred (mobile)",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 48,
+      "unit": "vw"
+    },
+    {
+      "type": "range",
+      "id": "media_width_max_mobile",
+      "label": "Hero image width max (mobile)",
+      "min": 260,
+      "max": 720,
+      "step": 10,
+      "default": 520,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_x_min_mobile",
+      "label": "Hero image offset X min (mobile)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": -30,
       "unit": "%"
     },
     {
       "type": "range",
       "id": "media_offset_x_mobile",
-      "label": "Hero image offset X (mobile)",
+      "label": "Hero image offset X preferred (mobile)",
       "min": -30,
       "max": 30,
       "step": 1,
@@ -311,12 +494,42 @@
     },
     {
       "type": "range",
+      "id": "media_offset_x_max_mobile",
+      "label": "Hero image offset X max (mobile)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": 30,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_y_min_mobile",
+      "label": "Hero image offset Y min (mobile)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": -30,
+      "unit": "%"
+    },
+    {
+      "type": "range",
       "id": "media_offset_y_mobile",
-      "label": "Hero image offset Y (mobile)",
+      "label": "Hero image offset Y preferred (mobile)",
       "min": -30,
       "max": 30,
       "step": 1,
       "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "media_offset_y_max_mobile",
+      "label": "Hero image offset Y max (mobile)",
+      "min": -30,
+      "max": 30,
+      "step": 1,
+      "default": 30,
       "unit": "%"
     },
     {

@@ -114,6 +114,10 @@ header {
   max-width: var(--max-width);
 }
 
+img {
+  overflow: visible;
+}
+
 main img,
 main svg,
 footer img {
@@ -1666,10 +1670,26 @@ article img {
 }
 .image-text-layer {
   position: absolute;
-  left: var(--image-text-layer-x, 50%);
-  top: var(--image-text-layer-y, 50%);
-  width: var(--image-text-layer-width, 100%);
-  height: var(--image-text-layer-height, 100%);
+  left: clamp(
+    var(--image-text-layer-x-min, 0%),
+    var(--image-text-layer-x, 50%),
+    var(--image-text-layer-x-max, 100%)
+  );
+  top: clamp(
+    var(--image-text-layer-y-min, 0%),
+    var(--image-text-layer-y, 50%),
+    var(--image-text-layer-y-max, 100%)
+  );
+  width: clamp(
+    var(--image-text-layer-width-min, 10%),
+    var(--image-text-layer-width, 100%),
+    var(--image-text-layer-width-max, 100%)
+  );
+  height: clamp(
+    var(--image-text-layer-height-min, 10%),
+    var(--image-text-layer-height, 100%),
+    var(--image-text-layer-height-max, 100%)
+  );
   aspect-ratio: var(--image-text-layer-aspect-ratio, auto);
   transform: translate(-50%, -50%);
 }
@@ -1687,6 +1707,14 @@ article img {
   --image-text-layer-y: var(--image-text-family-y);
   --image-text-layer-width: var(--image-text-family-width);
   --image-text-layer-height: var(--image-text-family-height);
+  --image-text-layer-x-min: var(--image-text-family-x-min);
+  --image-text-layer-x-max: var(--image-text-family-x-max);
+  --image-text-layer-y-min: var(--image-text-family-y-min);
+  --image-text-layer-y-max: var(--image-text-family-y-max);
+  --image-text-layer-width-min: var(--image-text-family-width-min);
+  --image-text-layer-width-max: var(--image-text-family-width-max);
+  --image-text-layer-height-min: var(--image-text-family-height-min);
+  --image-text-layer-height-max: var(--image-text-family-height-max);
   --image-text-layer-aspect-ratio: var(--image-text-family-aspect-ratio);
 }
 .image-text-layer--app {
@@ -1695,6 +1723,14 @@ article img {
   --image-text-layer-y: var(--image-text-app-y);
   --image-text-layer-width: var(--image-text-app-width);
   --image-text-layer-height: var(--image-text-app-height);
+  --image-text-layer-x-min: var(--image-text-app-x-min);
+  --image-text-layer-x-max: var(--image-text-app-x-max);
+  --image-text-layer-y-min: var(--image-text-app-y-min);
+  --image-text-layer-y-max: var(--image-text-app-y-max);
+  --image-text-layer-width-min: var(--image-text-app-width-min);
+  --image-text-layer-width-max: var(--image-text-app-width-max);
+  --image-text-layer-height-min: var(--image-text-app-height-min);
+  --image-text-layer-height-max: var(--image-text-app-height-max);
   --image-text-layer-aspect-ratio: var(--image-text-app-aspect-ratio);
 }
 .image-text-blob {
@@ -1725,7 +1761,6 @@ article img {
   display: flex;
   align-items: center;
   background-color: var(--cream);
-  overflow: visible;
 }
 .promotion-hero__blobs {
   position: absolute;
@@ -1815,18 +1850,38 @@ article img {
   right: 0;
   bottom: 0;
   transform: translate(
-    var(--promotion-media-offset-x, 0%),
-    var(--promotion-media-offset-y, 0%)
+    clamp(
+      var(--promotion-media-offset-x-min, -30%),
+      var(--promotion-media-offset-x, 0%),
+      var(--promotion-media-offset-x-max, 30%)
+    ),
+    clamp(
+      var(--promotion-media-offset-y-min, -30%),
+      var(--promotion-media-offset-y, 0%),
+      var(--promotion-media-offset-y-max, 30%)
+    )
   );
   height: min(
-    var(--promotion-media-max-height, 90vh),
+    clamp(
+      var(--promotion-media-max-height-min, 40vh),
+      var(--promotion-media-max-height, 90vh),
+      var(--promotion-media-max-height-max, 120vh)
+    ),
     calc(100% - var(--promotion-media-top, 0px))
   );
   max-height: min(
-    var(--promotion-media-max-height, 90vh),
+    clamp(
+      var(--promotion-media-max-height-min, 40vh),
+      var(--promotion-media-max-height, 90vh),
+      var(--promotion-media-max-height-max, 120vh)
+    ),
     calc(100% - var(--promotion-media-top, 0px))
   );
-  width: clamp(320px, 42vw, 640px);
+  width: clamp(
+    var(--promotion-media-width-min, 320px),
+    var(--promotion-media-width-preferred, 42vw),
+    var(--promotion-media-width-max, 640px)
+  );
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1896,7 +1951,11 @@ article img {
     max-width: 560px;
   }
   .promotion-hero-media {
-    width: clamp(260px, 48vw, 520px);
+    width: clamp(
+      var(--promotion-media-width-min, 320px),
+      var(--promotion-media-width-preferred, 42vw),
+      var(--promotion-media-width-max, 640px)
+    );
   }
 }
 

@@ -109,13 +109,29 @@
   --image-text-family-aspect-ratio: {{ section.settings.family_aspect_ratio | default: '1/1' }};
   --image-text-app-aspect-ratio: {{ section.settings.app_aspect_ratio | default: '1/1' }};
   --image-text-family-x: {{ family_layer_x }};
+  --image-text-family-x-min: {{ section.settings.family_x_min | append: '%' }};
+  --image-text-family-x-max: {{ section.settings.family_x_max | append: '%' }};
   --image-text-family-y: {{ family_layer_y }};
+  --image-text-family-y-min: {{ section.settings.family_y_min | append: '%' }};
+  --image-text-family-y-max: {{ section.settings.family_y_max | append: '%' }};
   --image-text-family-width: {{ family_layer_width }};
+  --image-text-family-width-min: {{ section.settings.family_width_min | append: '%' }};
+  --image-text-family-width-max: {{ section.settings.family_width_max | append: '%' }};
   --image-text-family-height: {{ family_layer_height }};
+  --image-text-family-height-min: {{ section.settings.family_height_min | append: '%' }};
+  --image-text-family-height-max: {{ section.settings.family_height_max | append: '%' }};
   --image-text-app-x: {{ app_layer_x }};
+  --image-text-app-x-min: {{ section.settings.app_x_min | append: '%' }};
+  --image-text-app-x-max: {{ section.settings.app_x_max | append: '%' }};
   --image-text-app-y: {{ app_layer_y }};
+  --image-text-app-y-min: {{ section.settings.app_y_min | append: '%' }};
+  --image-text-app-y-max: {{ section.settings.app_y_max | append: '%' }};
   --image-text-app-width: {{ app_layer_width }};
+  --image-text-app-width-min: {{ section.settings.app_width_min | append: '%' }};
+  --image-text-app-width-max: {{ section.settings.app_width_max | append: '%' }};
   --image-text-app-height: {{ app_layer_height }};
+  --image-text-app-height-min: {{ section.settings.app_height_min | append: '%' }};
+  --image-text-app-height-max: {{ section.settings.app_height_max | append: '%' }};
   --image-text-blob-size: {{ section.settings.blob_size | append: '%' }};
   --image-text-blob-x: {{ section.settings.blob_x | append: '%' }};
   --image-text-blob-y: {{ section.settings.blob_y | append: '%' }};
@@ -173,13 +189,29 @@
   }
   {{ section.id | prepend: '#' }} .image-text-asset--layered {
     --image-text-family-x: {{ family_layer_x_mobile }};
+    --image-text-family-x-min: {{ section.settings.family_x_min_mobile | append: '%' }};
+    --image-text-family-x-max: {{ section.settings.family_x_max_mobile | append: '%' }};
     --image-text-family-y: {{ family_layer_y_mobile }};
+    --image-text-family-y-min: {{ section.settings.family_y_min_mobile | append: '%' }};
+    --image-text-family-y-max: {{ section.settings.family_y_max_mobile | append: '%' }};
     --image-text-family-width: {{ family_layer_width_mobile }};
+    --image-text-family-width-min: {{ section.settings.family_width_min_mobile | append: '%' }};
+    --image-text-family-width-max: {{ section.settings.family_width_max_mobile | append: '%' }};
     --image-text-family-height: {{ family_layer_height_mobile }};
+    --image-text-family-height-min: {{ section.settings.family_height_min_mobile | append: '%' }};
+    --image-text-family-height-max: {{ section.settings.family_height_max_mobile | append: '%' }};
     --image-text-app-x: {{ app_layer_x_mobile }};
+    --image-text-app-x-min: {{ section.settings.app_x_min_mobile | append: '%' }};
+    --image-text-app-x-max: {{ section.settings.app_x_max_mobile | append: '%' }};
     --image-text-app-y: {{ app_layer_y_mobile }};
+    --image-text-app-y-min: {{ section.settings.app_y_min_mobile | append: '%' }};
+    --image-text-app-y-max: {{ section.settings.app_y_max_mobile | append: '%' }};
     --image-text-app-width: {{ app_layer_width_mobile }};
+    --image-text-app-width-min: {{ section.settings.app_width_min_mobile | append: '%' }};
+    --image-text-app-width-max: {{ section.settings.app_width_max_mobile | append: '%' }};
     --image-text-app-height: {{ app_layer_height_mobile }};
+    --image-text-app-height-min: {{ section.settings.app_height_min_mobile | append: '%' }};
+    --image-text-app-height-max: {{ section.settings.app_height_max_mobile | append: '%' }};
   }
   {{ section.id | prepend: '#' }} .image-text-layer--family img {
     object-position: {{ family_object_position_mobile }};
@@ -769,19 +801,52 @@
     },
     {
       "type": "range",
+      "id": "family_x_min",
+      "label": "Layer position X minimum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "family_x",
-      "label": "Layer position X",
+      "label": "Layer position X preferred",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_x_max",
+      "label": "Layer position X maximum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_y_min",
+      "label": "Layer position Y minimum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
       "unit": "%",
       "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_y",
-      "label": "Layer position Y",
+      "label": "Layer position Y preferred",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -791,8 +856,30 @@
     },
     {
       "type": "range",
+      "id": "family_y_max",
+      "label": "Layer position Y maximum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_width_min",
+      "label": "Layer width minimum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "family_width",
-      "label": "Layer width",
+      "label": "Layer width preferred",
       "min": 10,
       "max": 100,
       "step": 2,
@@ -802,8 +889,41 @@
     },
     {
       "type": "range",
+      "id": "family_width_max",
+      "label": "Layer width maximum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_height_min",
+      "label": "Layer height minimum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "family_height",
-      "label": "Layer height",
+      "label": "Layer height preferred",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_height_max",
+      "label": "Layer height maximum",
       "min": 10,
       "max": 100,
       "step": 2,
@@ -818,19 +938,52 @@
     },
     {
       "type": "range",
+      "id": "family_x_min_mobile",
+      "label": "Layer position X minimum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "family_x_mobile",
-      "label": "Layer position X",
+      "label": "Layer position X preferred",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_x_max_mobile",
+      "label": "Layer position X maximum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_y_min_mobile",
+      "label": "Layer position Y minimum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
       "unit": "%",
       "visible_if": "{{ section.settings.family_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "family_y_mobile",
-      "label": "Layer position Y",
+      "label": "Layer position Y preferred",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -840,8 +993,30 @@
     },
     {
       "type": "range",
+      "id": "family_y_max_mobile",
+      "label": "Layer position Y maximum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_width_min_mobile",
+      "label": "Layer width minimum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "family_width_mobile",
-      "label": "Layer width",
+      "label": "Layer width preferred",
       "min": 10,
       "max": 100,
       "step": 2,
@@ -851,8 +1026,41 @@
     },
     {
       "type": "range",
+      "id": "family_width_max_mobile",
+      "label": "Layer width maximum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_height_min_mobile",
+      "label": "Layer height minimum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "family_height_mobile",
-      "label": "Layer height",
+      "label": "Layer height preferred",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "family_height_max_mobile",
+      "label": "Layer height maximum",
       "min": 10,
       "max": 100,
       "step": 2,
@@ -1101,19 +1309,52 @@
     },
     {
       "type": "range",
+      "id": "app_x_min",
+      "label": "Layer position X minimum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "app_x",
-      "label": "Layer position X",
+      "label": "Layer position X preferred",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_x_max",
+      "label": "Layer position X maximum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_y_min",
+      "label": "Layer position Y minimum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
       "unit": "%",
       "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_y",
-      "label": "Layer position Y",
+      "label": "Layer position Y preferred",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -1123,8 +1364,30 @@
     },
     {
       "type": "range",
+      "id": "app_y_max",
+      "label": "Layer position Y maximum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_width_min",
+      "label": "Layer width minimum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "app_width",
-      "label": "Layer width",
+      "label": "Layer width preferred",
       "min": 10,
       "max": 100,
       "step": 2,
@@ -1134,12 +1397,45 @@
     },
     {
       "type": "range",
+      "id": "app_width_max",
+      "label": "Layer width maximum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_height_min",
+      "label": "Layer height minimum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "app_height",
-      "label": "Layer height",
+      "label": "Layer height preferred",
       "min": 10,
       "max": 100,
       "step": 2,
       "default": 60,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_height_max",
+      "label": "Layer height maximum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 100,
       "unit": "%",
       "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
@@ -1150,19 +1446,52 @@
     },
     {
       "type": "range",
+      "id": "app_x_min_mobile",
+      "label": "Layer position X minimum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "app_x_mobile",
-      "label": "Layer position X",
+      "label": "Layer position X preferred",
       "min": 0,
       "max": 100,
       "step": 1,
       "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_x_max_mobile",
+      "label": "Layer position X maximum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_y_min_mobile",
+      "label": "Layer position Y minimum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0,
       "unit": "%",
       "visible_if": "{{ section.settings.app_enable_absolute }}"
     },
     {
       "type": "range",
       "id": "app_y_mobile",
-      "label": "Layer position Y",
+      "label": "Layer position Y preferred",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -1172,8 +1501,30 @@
     },
     {
       "type": "range",
+      "id": "app_y_max_mobile",
+      "label": "Layer position Y maximum",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_width_min_mobile",
+      "label": "Layer width minimum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "app_width_mobile",
-      "label": "Layer width",
+      "label": "Layer width preferred",
       "min": 10,
       "max": 100,
       "step": 2,
@@ -1183,12 +1534,45 @@
     },
     {
       "type": "range",
+      "id": "app_width_max_mobile",
+      "label": "Layer width maximum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_height_min_mobile",
+      "label": "Layer height minimum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 10,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
       "id": "app_height_mobile",
-      "label": "Layer height",
+      "label": "Layer height preferred",
       "min": 10,
       "max": 100,
       "step": 2,
       "default": 80,
+      "unit": "%",
+      "visible_if": "{{ section.settings.app_enable_absolute }}"
+    },
+    {
+      "type": "range",
+      "id": "app_height_max_mobile",
+      "label": "Layer height maximum",
+      "min": 10,
+      "max": 100,
+      "step": 2,
+      "default": 100,
       "unit": "%",
       "visible_if": "{{ section.settings.app_enable_absolute }}"
     },

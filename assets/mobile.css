@@ -167,10 +167,10 @@ header {
 }
 
 #header-nav .site-header__drawer {
-  position: absolute;
-  top: -17px;
-  left: 116px;
+  position: fixed;
+  top: 0;
   right: 0;
+  left: auto;
   height: 100vh;
   width: clamp(16rem, 85vw, var(--nav-drawer-max-width, 20rem));
   background-color: var(--white);
@@ -186,6 +186,11 @@ header {
   justify-content: space-between;
   gap: 1rem;
   overflow-y: auto;
+}
+
+#header-nav.nav-transition-off .site-header__drawer,
+#header-nav.nav-transition-off .site-header__overlay {
+  transition: none;
 }
 
 #header-nav.nav-open .site-header__overlay {
