@@ -46,7 +46,9 @@
 }
 #{{ section.id }} .promotion-hero-media img {
   object-fit: {{ section.settings.object_fit }};
+  {%- unless section.settings.use_focal_point -%}
   object-position: {{ object_position_desktop }};
+  {%- endunless -%}
 }
 @media screen and (max-width: 768px) {
   #{{ section.id }}.promotion-hero {
@@ -54,9 +56,11 @@
     --promotion-media-offset-x: {{ section.settings.media_offset_x_mobile | append: "%" }};
     --promotion-media-offset-y: {{ section.settings.media_offset_y_mobile | append: "%" }};
   }
+  {%- unless section.settings.use_focal_point -%}
   #{{ section.id }} .promotion-hero-media img {
     object-position: {{ object_position_mobile }};
   }
+  {%- endunless -%}
 }
 {% endstyle %}
 

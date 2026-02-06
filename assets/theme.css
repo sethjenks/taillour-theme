@@ -1724,7 +1724,6 @@ article img {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 24px 0;
   background-color: var(--cream);
   overflow: visible;
 }
@@ -1903,8 +1902,14 @@ article img {
 
 @media screen and (max-width: 768px) {
   .promotion-hero {
-    padding-top: calc(16px + var(--nav-offset));
-    padding-bottom: 16px;
+    padding-top: calc(
+      var(--section-padding-top, var(--section-padding-default, 6rem)) *
+        var(--section-padding-scale, 1) + var(--nav-offset)
+    );
+    padding-bottom: calc(
+      var(--section-padding-bottom, var(--section-padding-default, 6rem)) *
+        var(--section-padding-scale, 1)
+    );
   }
   .promotion-hero-inner {
     padding: 0 24px;
