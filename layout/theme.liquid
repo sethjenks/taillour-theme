@@ -86,7 +86,7 @@
 
   <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'mobile.css' | asset_url }}" media="(max-width: 768px)">
-  <script src="{{ 'theme.js' | asset_url }}"></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
   <script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
   <style>
     :root {
@@ -118,19 +118,13 @@
     {%- endfor -%}
   </style>
 
-  {%- comment -%}
-  Swiper JS used for the "image-carousel" section.
-  {%- endcomment -%}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
   {% render 'schemas' %}
   {% render 'social-meta-tags' %}
   {{ content_for_header }}
 </head>
 
 {%- assign default_scheme = settings.default_color_scheme -%}
-<body{% if default_scheme != blank %} class="color-{{ default_scheme.id }}"{% endif %}>
+<body class="{% if default_scheme != blank %}color-{{ default_scheme.id }} {% endif %}page-{{ request.page_type | handle }}">
   {% comment %}
   Skip to content accessibility link
   {% endcomment %}

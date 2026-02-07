@@ -77,27 +77,52 @@
 </div>
 
 <script>
-const swiper = new Swiper('{{ section.id | prepend: "#" }}', {
-  // Optional parameters
-  loop: {{ section.settings.loop }},
-  autoplay: {{ section.settings.autoplay }},
-
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  breakpoints: {
-    "768": {
-      slidesPerView: {{ section.settings.slides_per_view }}
-    }
-  }
-});
+(() => {
+  const target = '{{ section.id | prepend: "#" }}';
+  const init = () => {
+    new Swiper(target, {
+      loop: {{ section.settings.loop }},
+      autoplay: {{ section.settings.autoplay }},
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        "768": {
+          slidesPerView: {{ section.settings.slides_per_view }}
+        }
+      }
+    });
+  };
+  const loadSwiper = () => {
+    if (window.Swiper) return Promise.resolve();
+    if (window.__swiperLoaderPromise) return window.__swiperLoaderPromise;
+    window.__swiperLoaderPromise = new Promise((resolve, reject) => {
+      if (!document.querySelector('link[data-swiper-css]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+        link.dataset.swiperCss = 'true';
+        document.head.appendChild(link);
+      }
+      let script = document.querySelector('script[data-swiper-js]');
+      if (!script) {
+        script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+        script.defer = true;
+        script.dataset.swiperJs = 'true';
+        document.head.appendChild(script);
+      }
+      script.addEventListener('load', () => resolve());
+      script.addEventListener('error', () => reject());
+    });
+    return window.__swiperLoaderPromise;
+  };
+  loadSwiper().then(init);
+})();
 </script>
 
 {% schema %}

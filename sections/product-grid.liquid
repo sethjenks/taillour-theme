@@ -103,6 +103,30 @@
 {%- if mobile_layout == 'carousel' -%}
   <script>
     (() => {
+      const loadSwiper = () => {
+        if (window.Swiper) return Promise.resolve();
+        if (window.__swiperLoaderPromise) return window.__swiperLoaderPromise;
+        window.__swiperLoaderPromise = new Promise((resolve, reject) => {
+          if (!document.querySelector('link[data-swiper-css]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+            link.dataset.swiperCss = 'true';
+            document.head.appendChild(link);
+          }
+          let script = document.querySelector('script[data-swiper-js]');
+          if (!script) {
+            script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+            script.defer = true;
+            script.dataset.swiperJs = 'true';
+            document.head.appendChild(script);
+          }
+          script.addEventListener('load', () => resolve());
+          script.addEventListener('error', () => reject());
+        });
+        return window.__swiperLoaderPromise;
+      };
       const container = document.querySelector('#{{ section.id }}-mobile-carousel');
       if (!container) return;
       let swiperInstance = null;
@@ -122,12 +146,14 @@
           watchOverflow: true
         });
       };
-      initSwiper();
-      if (mql.addEventListener) {
-        mql.addEventListener('change', initSwiper);
-      } else {
-        mql.addListener(initSwiper);
-      }
+      loadSwiper().then(() => {
+        initSwiper();
+        if (mql.addEventListener) {
+          mql.addEventListener('change', initSwiper);
+        } else {
+          mql.addListener(initSwiper);
+        }
+      });
     })();
   </script>
 {%- endif -%}

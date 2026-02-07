@@ -73,6 +73,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body.page-cart {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body.page-cart main#main-content {
+  flex: 1 0 auto;
+}
+body.page-cart .site-footer {
+  margin-top: auto;
+}
 .gradient-accent {
   background: var(--accent-gradient);
 }
@@ -246,7 +257,7 @@ a.skip-to-content:focus-visible {
 @media (min-width: 769px) {
   *:focus-visible,
   a.skip-to-content:focus-visible span {
-    outline: 2px solid orange;
+    outline: 2px solid var(--royal-purple, var(--purple));
   }
 }
 
@@ -1337,6 +1348,22 @@ nav details {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  text-decoration: none;
+}
+#js--cart-popup summary .js--cart-counter {
+  text-decoration: none !important;
+  text-align: left;
+  border-bottom: 0;
+  box-shadow: none;
+  background-image: none;
+}
+#js--cart-popup summary,
+#js--cart-popup summary * {
+  text-decoration: none !important;
+}
+#js--cart-popup summary::before,
+#js--cart-popup summary::after {
+  content: none;
 }
 nav details[open] .submenu {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.15);

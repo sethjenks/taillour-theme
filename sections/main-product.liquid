@@ -154,8 +154,16 @@ sliderComponents.forEach(function(sliderComponent) {
   `);
     sliderContainer.insertAdjacentHTML("beforeend", `
       <div class="product-image-controls">
-        <button type="button" onclick="goToImage('prev');" class="image-prev">&larr;</button>
-        <button type="button" onclick="goToImage('next');" class="image-next">&rarr;</button>
+        <button type="button" onclick="goToImage('prev');" class="image-prev" aria-label="Previous image">
+          <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+        <button type="button" onclick="goToImage('next');" class="image-next" aria-label="Next image">
+          <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </button>
       </div>
   `);
   }

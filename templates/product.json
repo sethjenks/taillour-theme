@@ -97,7 +97,10 @@
         "detail_gzcnpK",
         "detail_NhMUn6"
       ],
-      "settings": {}
+      "settings": {
+        "padding_top": 10,
+        "padding_bottom": 0
+      }
     },
     "faqs_M7fRxe": {
       "type": "faqs",
