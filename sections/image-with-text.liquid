@@ -151,6 +151,12 @@
   object-fit: {{ app_object_fit }};
   object-position: {{ app_object_position_desktop }};
 }
+{{ section.id | prepend: '#' }} .image-text-layer--family {
+  --image-text-layer-y-overhang: {{ section.settings.family_y_overhang | default: 0 | append: 'px' }};
+}
+{{ section.id | prepend: '#' }} .image-text-layer--app {
+  --image-text-layer-y-overhang: {{ section.settings.app_y_overhang | default: 0 | append: 'px' }};
+}
 {{ section.id | prepend: '#' }} .image-text-content h1,
 {{ section.id | prepend: '#' }} .image-text-content h2,
 {{ section.id | prepend: '#' }} .image-text-content h3,
@@ -218,6 +224,12 @@
   }
   {{ section.id | prepend: '#' }} .image-text-layer--app img {
     object-position: {{ app_object_position_mobile }};
+  }
+  {{ section.id | prepend: '#' }} .image-text-layer--family {
+    --image-text-layer-y-overhang: {{ section.settings.family_y_overhang_mobile | default: section.settings.family_y_overhang | default: 0 | append: 'px' }};
+  }
+  {{ section.id | prepend: '#' }} .image-text-layer--app {
+    --image-text-layer-y-overhang: {{ section.settings.app_y_overhang_mobile | default: section.settings.app_y_overhang | default: 0 | append: 'px' }};
   }
 }
 {%- endstyle -%}
@@ -784,6 +796,24 @@
       "content": "Layer positioning"
     },
     {
+      "type": "header",
+      "content": "Overhang (Y axis)"
+    },
+    {
+      "type": "number",
+      "id": "family_y_overhang",
+      "label": "Primary image Y overhang",
+      "default": 0,
+      "info": "Positive values push the image down (px)."
+    },
+    {
+      "type": "number",
+      "id": "app_y_overhang",
+      "label": "Secondary image Y overhang",
+      "default": 0,
+      "info": "Positive values push the image down (px)."
+    },
+    {
       "type": "checkbox",
       "id": "family_enable_absolute",
       "label": "Enable absolute positioning",
@@ -935,6 +965,24 @@
       "type": "header",
       "content": "Mobile",
       "visible_if": "{{ section.settings.family_enable_absolute }}"
+    },
+    {
+      "type": "header",
+      "content": "Mobile overhang (Y axis)"
+    },
+    {
+      "type": "number",
+      "id": "family_y_overhang_mobile",
+      "label": "Primary image Y overhang (mobile)",
+      "default": 0,
+      "info": "Positive values push the image down (px)."
+    },
+    {
+      "type": "number",
+      "id": "app_y_overhang_mobile",
+      "label": "Secondary image Y overhang (mobile)",
+      "default": 0,
+      "info": "Positive values push the image down (px)."
     },
     {
       "type": "range",

@@ -257,7 +257,7 @@ a.skip-to-content:focus-visible {
 @media (min-width: 769px) {
   *:focus-visible,
   a.skip-to-content:focus-visible span {
-    outline: 2px solid var(--royal-purple, var(--purple));
+    outline: 2px solid orange;
   }
 }
 
@@ -1702,10 +1702,12 @@ article img {
     var(--image-text-layer-x, 50%),
     var(--image-text-layer-x-max, 100%)
   );
-  top: clamp(
-    var(--image-text-layer-y-min, 0%),
-    var(--image-text-layer-y, 50%),
-    var(--image-text-layer-y-max, 100%)
+  top: calc(
+    clamp(
+      var(--image-text-layer-y-min, 0%),
+      var(--image-text-layer-y, 50%),
+      var(--image-text-layer-y-max, 100%)
+    ) + var(--image-text-layer-y-overhang, 0px)
   );
   width: clamp(
     var(--image-text-layer-width-min, 10%),
@@ -2146,13 +2148,7 @@ article img {
 /* !! Testimonials */
 .testimonials-section {
   position: relative;
-  height: var(--testimonials-section-height, 320px);
-}
-.testimonials-section > * {
-  padding-top: clamp(1rem, 4vw, 3rem);
-  padding-bottom: clamp(1rem, 4vw, 3rem);
-  padding-left: clamp(1rem, 4vw, 3rem);
-  padding-right: clamp(1rem, 4vw, 3rem);
+  min-height: var(--testimonials-section-height, 320px);
 }
 .testimonials-spacer {
   min-height: calc(var(--testimonial-panel-min-height, 18rem) - var(--testimonial-float-offset, -4rem));
