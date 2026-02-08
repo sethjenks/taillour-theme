@@ -26,7 +26,7 @@
 {%- endstyle -%}
 <div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
   <div class="footer-copyright">
-    <div class="page-width rte">
+    <div class="section rte">
       {% if section.settings.text != blank %}
         {{ section.settings.text }}
       {% else %}
