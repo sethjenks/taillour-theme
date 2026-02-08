@@ -37,7 +37,8 @@ input[type="search"] {
 
 main#main-content .products-grid,
 main#main-content .collections-grid {
-  grid-template-columns: repeat(2, 1fr);
+  --product-card-min: 274px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--product-card-min), 1fr));
   gap: var(--products-grid-gap);
 }
 

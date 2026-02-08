@@ -104,6 +104,7 @@
         "blob2_y": 40,
         "blob2_blur": 40,
         "blob2_opacity": 65,
+        "vertical_alignment": "center",
         "desktop_height": 50,
         "mobile_height": 100
       }
@@ -153,6 +154,7 @@
         "color_scheme": "",
         "text_columns": 9,
         "media_columns": 3,
+        "vertical_alignment": "center",
         "image_position": "left",
         "mobile_media_absolute": false,
         "mobile_media_top_offset": 0,
@@ -255,12 +257,6 @@
             "size": "h2"
           }
         },
-        "text_amNwtU": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Taillour comes with a few pre-built sections to make building your clients Shopify store a little easier. This is one of them.</p>"
-          }
-        },
         "bullet_item_jVKF3V": {
           "type": "bullet_item",
           "settings": {
@@ -282,7 +278,7 @@
             "icon_text_color": "#ffffff",
             "icon_shadow": true,
             "title": "Follow the action",
-            "subtext": "<p>Watch the real-world event while Rooting for your picks to win.</p>"
+            "subtext": "<p>Watch the real-world event while rooting for your picks to win.</p>"
           }
         },
         "bullet_item_VqwB6n": {
@@ -300,7 +296,6 @@
       },
       "block_order": [
         "heading_aRADHH",
-        "text_amNwtU",
         "bullet_item_jVKF3V",
         "bullet_item_aVmKKp",
         "bullet_item_VqwB6n"
@@ -321,6 +316,7 @@
         "color_scheme": "scheme_2",
         "text_columns": 6,
         "media_columns": 6,
+        "vertical_alignment": "center",
         "image_position": "right",
         "mobile_media_absolute": false,
         "mobile_media_top_offset": 0,
@@ -450,6 +446,7 @@
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "use_default_color_scheme": true,
         "color_scheme": "",
+        "vertical_alignment": "center",
         "video": "",
         "object_fit": "contain",
         "object_position": "center",
@@ -522,7 +519,7 @@
         "text_hRDek3": {
           "type": "text",
           "settings": {
-            "text": "<p>Winners get free dub merch. Everyone else pays.</p>"
+            "text": "<p>Winners get free dub merch. The rest keep chasing the dub.</p>"
           }
         }
       },
@@ -542,6 +539,7 @@
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "html": "",
+        "vertical_alignment": "center",
         "html_position": "right",
         "use_default_color_scheme": true,
         "color_scheme": ""
@@ -897,6 +895,7 @@
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "html": "",
+        "vertical_alignment": "center",
         "html_position": "right",
         "use_default_color_scheme": true,
         "color_scheme": ""
