@@ -73,15 +73,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-body.page-cart {
+body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-body.page-cart main#main-content {
+main#main-content {
   flex: 1 0 auto;
 }
-body.page-cart .site-footer {
+.site-footer {
   margin-top: auto;
 }
 .gradient-accent {

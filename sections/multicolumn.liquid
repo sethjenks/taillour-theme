@@ -136,8 +136,9 @@ endif
           {% endunless %}
 
           {% if block.settings.show_button == true and block.settings.button_label != blank %}
+            {%- assign header_button_style = block.settings.button_style | default: 'primary' -%}
             <div class="{{ button_alignment }}">
-              <a class="button button-primary" href="{{ block.settings.button_link | default: '#' }}">
+              <a class="button button-{{ header_button_style }}" href="{{ block.settings.button_link | default: '#' }}">
                 {{ block.settings.button_label }}
               </a>
             </div>
@@ -216,9 +217,10 @@ endif
             {% endunless %}
 
             {% if block.settings.show_button == true %}
+              {%- assign column_button_style = block.settings.button_style | default: 'primary' -%}
               <div>
                 <p>
-                  <a class="button button-primary" href="{{ block.settings.button_link | default: '#' }}">
+                  <a class="button button-{{ column_button_style }}" href="{{ block.settings.button_link | default: '#' }}">
                     {{ block.settings.button_label | default: "Button Label" }}
                   </a>
                 </p>
@@ -497,6 +499,27 @@ endif
         {
           "visible_if": "{{ block.settings.show_button == true }}",
           "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "select",
           "id": "button_alignment",
           "label": "Button alignment",
           "options": [
@@ -564,6 +587,10 @@ endif
             {
               "value": "secondary",
               "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
             }
           ],
           "default": "primary"
@@ -922,6 +949,27 @@ endif
           "type": "url",
           "id": "button_link",
           "label": "Button Link"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "primary"
         }
       ]
     },
