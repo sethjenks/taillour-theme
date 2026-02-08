@@ -32,7 +32,7 @@ input[type="search"] {
   --section-padding-scale: 0.5;
 }
 .section-wrap > * {
-  padding: 0.5rem;
+  padding: 0.5rem clamp(24px, 4vw, 48px);
 }
 
 main#main-content .products-grid,
