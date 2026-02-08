@@ -46,7 +46,7 @@
         <li class="nav-parent-list-item">
           {%- if parent_link.links.size > 0 -%}
             <details class="nav-parent-list-dropdown">
-              <summary>
+              <summary{% if parent_link.active or parent_link.child_active %} class="is-active"{% endif %}>
                 {{- parent_link.title -}}
               </summary>
               <ul class="submenu">
@@ -58,7 +58,9 @@
               </ul>
             </details>
           {%- else -%}
-            <a href="{{- parent_link.url -}}">{{- parent_link.title -}}</a>
+            <a href="{{- parent_link.url -}}"{% if parent_link.active %} class="is-active"{% endif %}>
+              {{- parent_link.title -}}
+            </a>
           {% endif %}
         </li>
       {%- endfor -%}

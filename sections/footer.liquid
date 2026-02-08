@@ -86,7 +86,9 @@
         {%- if section.settings.legal_menu != blank -%}
           <div class="footer-section__legal">
             {%- for link in linklists[section.settings.legal_menu].links -%}
-              <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- unless link.url == '/search' or link.url == '/pages/data-sharing-opt-out' -%}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- endunless -%}
             {%- endfor -%}
           </div>
         {%- endif -%}
