@@ -237,6 +237,7 @@
         "color_scheme": "scheme_1",
         "text_columns": 6,
         "media_columns": 6,
+        "vertical_alignment": "center",
         "image_position": "right",
         "mobile_media_absolute": false,
         "mobile_media_top_offset": 0,
@@ -334,10 +335,10 @@
         "header_anbTCp": {
           "type": "header",
           "settings": {
-            "title": "dubs are better together.",
+            "title": "Wins are better together.",
             "title_alignment": "center",
             "title_size": "h1",
-            "subtitle": "<p>dub is a place where competition brings people together. Whether you’re here to follow your instincts, study every matchup, or just play along for fun, there’s room for everyone.</p>",
+            "subtitle": "<p>With dub, competition brings people together. Whether you’re here to follow your instincts, study every matchup, or just play along for fun, there’s room for everyone.</p>",
             "subtitle_alignment": "center",
             "show_button": false,
             "button_label": "Learn more",
@@ -504,7 +505,7 @@
         "text_tiAiqR": {
           "type": "text",
           "settings": {
-            "text": "<p>We started with a simple idea: sports already bring people together. dub was built to make that connection easier and more fun.</p>"
+            "text": "<p>We started with a simple idea: sports already bring people together. The dub app was built to make that connection easier and more fun.</p>"
           }
         }
       },
@@ -524,6 +525,7 @@
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "html": "",
+        "vertical_alignment": "center",
         "html_position": "right",
         "use_default_color_scheme": false,
         "color_scheme": "scheme_1"

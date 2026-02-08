@@ -32,6 +32,37 @@ function getParam(name) {
   }
 }
 
+/*
+ * BUY IT NOW BUTTON SIZE
+ * Ensures Shopify accelerated checkout button matches sizing.
+ */
+function applyCheckoutButtonSizeClass() {
+  var selector = '.shopify-payment-button__button--unbranded';
+  var sizeClass = 'button-size-lg';
+
+  function applySize() {
+    document.querySelectorAll(selector).forEach(function (button) {
+      if (!button.classList.contains(sizeClass)) {
+        button.classList.add(sizeClass);
+      }
+    });
+  }
+
+  applySize();
+
+  var container = document.querySelector('.dynamic_checkout_buttons') || document.body;
+  if (!container || container.__sizeObserverAttached) {
+    return;
+  }
+  container.__sizeObserverAttached = true;
+
+  var observer = new MutationObserver(function () {
+    applySize();
+  });
+
+  observer.observe(container, { childList: true, subtree: true });
+}
+
 ready(function () {
   handleNumberStepper();
   handleVariantSelector();
@@ -39,6 +70,7 @@ ready(function () {
   handleNavToggleButtons();
   handleNavBreakpointTransition();
   handleNavToggles();
+  applyCheckoutButtonSizeClass();
 });
 
 /*
