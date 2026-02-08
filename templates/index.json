@@ -31,9 +31,11 @@
             "button1_label": "Make your picks",
             "button1_link": "https://app.getdub.com/register",
             "button1_enable": true,
+            "button1_style": "primary",
             "button2_label": "How it works",
             "button2_link": "shopify://pages/how-it-works",
-            "button2_enable": true
+            "button2_enable": true,
+            "button2_style": "secondary"
           }
         }
       },
@@ -161,7 +163,7 @@
         "family_image": "shopify://shop_images/dub-family_2x_87de8592-1038-436d-8427-e82b3808303a.png",
         "family_use_focal_point": false,
         "family_aspect_ratio": "16/9",
-        "family_object_fit": "none",
+        "family_object_fit": "cover",
         "family_object_position": "center bottom",
         "family_position_mode": "custom",
         "family_object_position_x": 50,
@@ -169,7 +171,7 @@
         "family_object_position_mobile": "center bottom",
         "family_object_position_x_mobile": 46,
         "family_object_position_y_mobile": 63,
-        "family_y_overhang": 0,
+        "family_y_overhang": 8,
         "app_y_overhang": 0,
         "family_enable_absolute": true,
         "family_x_min": 35,
@@ -184,7 +186,7 @@
         "family_height_min": 10,
         "family_height": 72,
         "family_height_max": 100,
-        "family_y_overhang_mobile": 0,
+        "family_y_overhang_mobile": 8,
         "app_y_overhang_mobile": 0,
         "family_x_min_mobile": 40,
         "family_x_mobile": 64,
@@ -604,7 +606,8 @@
             "content": "<p>Winning feels good. We made it even better.</p>",
             "show_button": true,
             "button_label": "Make your picks",
-            "button_link": "https://app.getdub.com"
+            "button_link": "https://app.getdub.com",
+            "button_style": "primary"
           }
         }
       },
@@ -670,7 +673,8 @@
             "content": "<p>This section allows you to add 1 to 4 columns of text, each can have an optional image, heading and button.</p><p>The layout adjusts accordingly, but you can refactor as required depending on your project.</p>",
             "show_button": true,
             "button_label": "Button label",
-            "button_link": "#"
+            "button_link": "#",
+            "button_style": "primary"
           }
         },
         "column_CNfgmM": {
@@ -695,7 +699,8 @@
             "content": "<p>Like all the sections of the Taillour theme, you have complete control over everything. There's no nested components or complicated javascript - just basic HTML/CSS and Liquid is all you need.</p>",
             "show_button": true,
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "button_style": "primary"
           }
         },
         "column_kbECRk": {
@@ -720,7 +725,8 @@
             "content": "<p>Molestiae et repudiandae et voluptatem temporibus deleniti nemo dolor et. Aut et ipsa ab quas tempora eum voluptas nihil cumque. Totam nemo nobis quia et dolores. Officia in vitae exercitationem dolor iste ut possimus. </p>",
             "show_button": true,
             "button_label": "",
-            "button_link": ""
+            "button_link": "",
+            "button_style": "primary"
           }
         }
       },

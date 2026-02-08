@@ -25,6 +25,7 @@
 {% style %}
 #{{ section.id }}.promotion-hero {
   min-height: {{ section.settings.desktop_height | append: "vw" }};
+  --promotion-hero-align: {{ section.settings.vertical_alignment | default: 'center' }};
   --promotion-media-max-height-min: {{ section.settings.media_max_height_min | append: "vh" }};
   --promotion-media-max-height: {{ section.settings.media_max_height | append: "vh" }};
   --promotion-media-max-height-max: {{ section.settings.media_max_height_max | append: "vh" }};
@@ -52,6 +53,7 @@
   --promotion-blob-2-color: {{ section.settings.blob2_color }};
   --promotion-blob-2-blur: {{ section.settings.blob2_blur | append: "px" }};
   --promotion-blob-2-opacity: {{ section.settings.blob2_opacity | divided_by: 100.0 }};
+  align-items: var(--promotion-hero-align);
 }
 #{{ section.id }} .promotion-hero-media img {
   object-fit: {{ section.settings.object_fit }};
@@ -782,6 +784,26 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "range",

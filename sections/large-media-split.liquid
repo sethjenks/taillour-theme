@@ -30,6 +30,12 @@
   background-repeat: no-repeat;
   {%- endif -%}
 }
+#{{ section.id }}.large-media-section.section-wrap {
+  --large-media-align: {{ section.settings.vertical_alignment | default: 'center' }};
+}
+#{{ section.id }} .large-media-section__inner {
+  align-items: var(--large-media-align);
+}
 #{{ section.id }} .large-media-section__media img {
   object-fit: {{ section.settings.object_fit }};
   object-position: {{ object_position_desktop }};
@@ -109,6 +115,30 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "header",

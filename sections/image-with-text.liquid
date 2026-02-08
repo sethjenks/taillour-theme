@@ -91,6 +91,7 @@
 {{ section.id | prepend: '#' }}.section-wrap {
   --image-text-text-columns: {{ section.settings.text_columns | default: 4 }}fr;
   --image-text-media-columns: {{ section.settings.media_columns | default: 8 }}fr;
+  --image-text-grid-align: {{ section.settings.vertical_alignment | default: 'center' }};
 }
 {{ section.id | prepend: '#' }}.section-wrap {
   --image-text-mobile-media-top: calc(100% + {{ section.settings.mobile_media_top_offset | default: 0 | append: 'px' }});
@@ -102,6 +103,7 @@
 @media screen and (min-width: 769px) {
   {{ section.id | prepend: '#' }} .grid-2 {
     grid-template-columns: var(--image-text-text-columns) var(--image-text-media-columns);
+    align-items: var(--image-text-grid-align);
   }
 }
 {{ section.id | prepend: '#' }} .image-text-asset--layered {
@@ -249,7 +251,7 @@
       </div>
     {%- endif -%}
 
-    <div class="grid-2 middle image-text-{{ section.settings.image_position }}">
+    <div class="grid-2 image-text-{{ section.settings.image_position }}">
       <div class="image-text-content">
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -486,6 +488,26 @@
       "max": 11,
       "step": 1,
       "default": 6
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "select",

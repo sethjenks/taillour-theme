@@ -24,9 +24,12 @@ endif
 #recently-viewed .products-grid {
   grid-template-columns: repeat({{ section.settings.products_per_row }}, 1fr);
 }
+  #recently-viewed.recently-viewed--hidden {
+    display: none;
+  }
 {% endstyle %}
 
-<section id="recently-viewed" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+<section id="recently-viewed" class="section-wrap recently-viewed--hidden {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
   <div class="section">
     <{{- section.settings.size }}>
       {{- section.settings.heading -}}
@@ -93,8 +96,12 @@ function displayRecentlyViewed() {
   let items = _getRecentlyViewed();
   const limit = {{ section.settings.limit }};
   const el = document.getElementById("js--recently_viewed");
-  if (document.getElementById("recently-viewed") != null) {
+  const section = document.getElementById("recently-viewed");
+  if (section != null) {
     if (items.length > 0) {
+      const total = Math.min(items.length, limit);
+      let loadedCount = 0;
+      let insertedCount = 0;
       items.forEach(function(item, index) {
         if ((index + 1) <= limit) {
           let url = `/products/${item.handle}?view=card`;
@@ -113,17 +120,27 @@ function displayRecentlyViewed() {
               }
             })
             .then(function(card) {
-              el.insertAdjacentHTML("beforeend", card);
+              if (card) {
+                el.insertAdjacentHTML("beforeend", card);
+                insertedCount += 1;
+                section.classList.remove("recently-viewed--hidden");
+              }
             })
             .catch(function(error) {
               // Remove this item from the array.
               let cleanUpArray = items.filter((i) => i.handle != item.handle);
               localStorage.setItem("recentlyViewed", JSON.stringify(cleanUpArray));
+            })
+            .finally(function() {
+              loadedCount += 1;
+              if (loadedCount === total && insertedCount === 0) {
+                section.classList.add("recently-viewed--hidden");
+              }
             });
         }
       });
     } else {
-      document.getElementById("recently-viewed").style.display = "none";
+      section.classList.add("recently-viewed--hidden");
     }
   }
 };

@@ -26,6 +26,14 @@
   background-repeat: no-repeat;
   {%- endif -%}
 }
+{{ section.id | prepend: '#' }}.section-wrap {
+  --html-text-grid-align: {{ section.settings.vertical_alignment | default: 'center' }};
+}
+@media screen and (min-width: 769px) {
+  {{ section.id | prepend: '#' }} .grid-2 {
+    align-items: var(--html-text-grid-align);
+  }
+}
 {{ section.id | prepend: '#' }} .html-text-content h1,
 {{ section.id | prepend: '#' }} .html-text-content h2,
 {{ section.id | prepend: '#' }} .html-text-content h3,
@@ -53,7 +61,7 @@
       </div>
     {%- endif -%}
 
-    <div class="grid-2 middle html-text-{{ section.settings.html_position }}">
+    <div class="grid-2 html-text-{{ section.settings.html_position }}">
       <!-- content -->
       <div class="html-text-content">
         {%- for block in section.blocks -%}
@@ -190,6 +198,30 @@
       "id": "html",
       "label": "HTML/Liquid",
       "info": "You can add HTML, CSS and limited Liquid markup."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "select",

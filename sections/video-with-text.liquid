@@ -19,6 +19,14 @@
   background-repeat: no-repeat;
   {%- endif -%}
 }
+{{ section.id | prepend: '#' }}.section-wrap {
+  --video-text-grid-align: {{ section.settings.vertical_alignment | default: 'center' }};
+}
+@media screen and (min-width: 769px) {
+  {{ section.id | prepend: '#' }} .grid-2 {
+    align-items: var(--video-text-grid-align);
+  }
+}
 {{ section.id | prepend: '#' }} .video-text-content h1,
 {{ section.id | prepend: '#' }} .video-text-content h2,
 {{ section.id | prepend: '#' }} .video-text-content h3,
@@ -46,7 +54,7 @@
       </div>
     {%- endif -%}
 
-    <div class="grid-2 middle video-text-{{ section.settings.video_position }}">
+    <div class="grid-2 video-text-{{ section.settings.video_position }}">
       <!-- content -->
       <div class="video-text-content">
         {%- for block in section.blocks -%}
@@ -203,6 +211,30 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme_1"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "header",
