@@ -107,7 +107,7 @@ p a {
 }
 
 a {
-  color: inherit;
+  color: var(--night);
   text-decoration: none;
 }
 
@@ -509,20 +509,46 @@ main button.button-purple {
   align-items: center;
   justify-content: center;
   padding: 24px 48px;
-  background: var(--royal-purple, var(--purple));
-  color: var(--white);
+  background: var(--royal-purple);
+  color: var(--lavender);
   font-family: var(--font-secondary);
   font-size: 20px;
   font-weight: 500;
   line-height: 1;
   text-transform: none;
+  position: relative;
+  isolation: isolate;
   border-radius: 75px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--purple);
   box-shadow: 0 21px 48.5px 0 rgba(0, 0, 0, 0.25),
-    inset 0 4px 7px 1px rgba(255, 255, 255, 0.18),
-    inset 0 16px 23.5px -2.5px rgba(0, 0, 0, 0.24),
-    inset -17.5px 14.25px 26px 9px var(--smoke-purple),
-    inset 0 -8.25px 16px 1.25px rgba(46, 18, 64, 0.55);
+    0 3.5px 23.5px 0 rgba(32, 44, 61, 0.2),
+    inset 0 4px 7px 0 rgba(255, 255, 255, 0.25),
+    inset 0 16px 23.5px 0 rgba(0, 0, 0, 0.13),
+    inset -17.5px 14.25px 26px 0 rgba(8, 12, 20, 0.1),
+    inset 0 -8.25px 16px 0 rgba(255, 255, 255, 0.3);
   transition: background-color 300ms ease, color 300ms ease, box-shadow 300ms ease;
+}
+
+.button.button-purple::after,
+main button.button-purple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  border-radius: 56px;
+  background: linear-gradient(
+    180deg,
+    var(--royal-purple, var(--purple)) 0%,
+    var(--purple) 52%,
+    var(--royal-purple, var(--purple)) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .button.button-primary:before,
@@ -597,17 +623,21 @@ main button.button-primary:hover {
 }
 
 .button.button-purple:hover,
-main button.button-purple:hover {
-  background: var(--purple);
-  color: var(--white);
+.button.button-purple:active,
+main button.button-purple:hover,
+main button.button-purple:active {
+  background: rgba(168, 123, 230, 0.7);
+  color: #1a1523;
+  border-color: var(--smoke-purple);
   box-shadow: 0 21px 48.5px 0 rgba(0, 0, 0, 0.25),
-    inset 0 4px 7px 1px rgba(255, 255, 255, 0.2),
-    inset 0 16px 23.5px -2.5px rgba(0, 0, 0, 0.28),
-    inset -17.5px 14.25px 26px 9px var(--lavender),
-    inset 0 -8.25px 16px 1.25px rgba(60, 24, 84, 0.65);
+    0 3.5px 23.5px 0 rgba(32, 44, 61, 0.2),
+    inset 0 4px 7px 0 rgba(255, 255, 255, 0.25),
+    inset 0 16px 23.5px 0 rgba(0, 0, 0, 0.13),
+    inset -17.5px 14.25px 26px 0 rgba(8, 12, 20, 0.1),
+    inset 0 -8.25px 16px 0 rgba(255, 255, 255, 0.3);
 }
-main button:not([class*="input-stepper"]):not(:disabled):hover:not(.button-primary):not(.button-white):not(.button-secondary),
-.button:not(:disabled):hover:not(.button-primary):not(.button-white):not(.button-secondary),
+main button:not([class*="input-stepper"]):not(:disabled):hover:not(.button-primary):not(.button-white):not(.button-secondary):not(.button-purple),
+.button:not(:disabled):hover:not(.button-primary):not(.button-white):not(.button-secondary):not(.button-purple),
 main button.button-white,
 .button.button-white {
   background-color: var(--white);
@@ -1073,7 +1103,7 @@ nav .nav-actions ul {
 nav li.nav-parent-list-item > a,
 nav li.nav-parent-list-item summary {
   padding: 12px 1rem;
-  font-weight: var(--bold);
+  font-weight: var(--regular);
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -1166,7 +1196,17 @@ nav details {
 }
 
 .site-header__drawer {
-  display: contents;
+  position: fixed;
+  top: var(--nav-top-gap);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(
+    clamp(720px, 80vw, var(--header-max-width, 1100px)),
+    calc(100% - var(--page-margin, 20px) * 2)
+  );
+  height: var(--nav-height);
+  z-index: 101;
+  pointer-events: none;
 }
 
 .site-header__toggle {
@@ -1219,6 +1259,11 @@ nav details {
 .site-header__menu {
   display: flex;
   justify-content: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
 }
 
 .site-header__menu-list {
@@ -1289,6 +1334,11 @@ nav details {
   align-items: center;
   gap: 1rem;
   justify-content: flex-end;
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
 }
 
 .site-header__action-link {

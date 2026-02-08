@@ -262,7 +262,7 @@ function setNavOpen(isOpen) {
     return;
   }
   nav.classList.toggle('nav-open', isOpen);
-  let drawer = nav.querySelector('.site-header__drawer');
+  let drawer = document.querySelector('.site-header__drawer');
   if (drawer) {
     drawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
   }
@@ -365,11 +365,14 @@ function handleCloseDropdownMenus() {
   if (!nav) {
     return;
   }
+  const drawer = document.querySelector('.site-header__drawer');
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
-      nav.querySelectorAll('details[open]').forEach((detail) => {
-        detail.removeAttribute('open');
-      });
+      if (drawer) {
+        drawer.querySelectorAll('details[open]').forEach((detail) => {
+          detail.removeAttribute('open');
+        });
+      }
       if (nav.classList.contains('nav-open')) {
         setNavOpen(false);
       }
@@ -383,7 +386,14 @@ function handleCloseDropdownMenus() {
  */
 function handleNavToggles() {
   const nav = document.getElementById('header-nav');
-  let details = nav.querySelectorAll('details');
+  if (!nav) {
+    return;
+  }
+  const drawer = document.querySelector('.site-header__drawer');
+  if (!drawer) {
+    return;
+  }
+  let details = drawer.querySelectorAll('details');
   details.forEach(function (detail) {
     detail.addEventListener('toggle', function (event) {
       if (detail.open) {

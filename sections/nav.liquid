@@ -37,79 +37,79 @@
       {% endif %}
     </a>
   </div>
-  <button class="site-header__overlay" data-nav-toggle type="button" aria-label="Close menu"></button>
-  <div class="site-header__drawer" aria-hidden="true">
-    <nav class="site-header__menu" aria-label="Main navigation">
-      <ul class="site-header__menu-list">
-        {%- for parent_link in linklists[menu_handle].links -%}
-          <li class="nav-parent-list-item">
-            {%- if parent_link.links.size > 0 -%}
-              <details class="nav-parent-list-dropdown">
-                <summary>
-                  {{- parent_link.title -}}
-                </summary>
-                <ul class="submenu">
-                  {%- for child_link in parent_link.links -%}
-                    <li>
-                      <a href="{{- child_link.url -}}">{{- child_link.title -}}</a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              </details>
-            {%- else -%}
-              <a href="{{- parent_link.url -}}">{{- parent_link.title -}}</a>
-            {%- endif -%}
-          </li>
-        {%- endfor -%}
-      </ul>
-    </nav>
-    <div class="site-header__actions">
-      <div data-device="mobile" class="site-header__close">
-        <button class="button-close" type="button" onclick="toggleNav();" aria-label="Close menu">&times;</button>
-      </div>
-      {% if shop.customer_accounts_enabled %}
-        {% if customer %}
-          <a class="site-header__account" href="{{ routes.account_url }}">
-            <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            Account
-          </a>
-        {% elsif section.settings.show_login %}
-          {% assign signup_label = section.settings.signup_label | default: 'Sign Up' %}
-          {% assign signup_link = section.settings.signup_link | default: routes.account_register_url %}
-          {% assign login_label = section.settings.login_label | default: 'Login' %}
-          {% assign login_link = section.settings.login_link | default: routes.account_url %}
-          {% if section.settings.show_signup %}
-            <a class="site-header__signup" href="{{ signup_link }}">
-              {{ signup_label }}
-            </a>
+</header>
+<button class="site-header__overlay" data-nav-toggle type="button" aria-label="Close menu"></button>
+<div class="site-header__drawer" aria-hidden="true">
+  <nav class="site-header__menu" aria-label="Main navigation">
+    <ul class="site-header__menu-list">
+      {%- for parent_link in linklists[menu_handle].links -%}
+        <li class="nav-parent-list-item">
+          {%- if parent_link.links.size > 0 -%}
+            <details class="nav-parent-list-dropdown">
+              <summary>
+                {{- parent_link.title -}}
+              </summary>
+              <ul class="submenu">
+                {%- for child_link in parent_link.links -%}
+                  <li>
+                    <a href="{{- child_link.url -}}">{{- child_link.title -}}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          {%- else -%}
+            <a href="{{- parent_link.url -}}">{{- parent_link.title -}}</a>
           {% endif %}
-          <a class="site-header__login" href="{{ login_link }}">
-            {{ login_label }}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+  <div class="site-header__actions">
+    <div data-device="mobile" class="site-header__close">
+      <button class="button-close" type="button" onclick="toggleNav();" aria-label="Close menu">&times;</button>
+    </div>
+    {% if shop.customer_accounts_enabled %}
+      {% if customer %}
+        <a class="site-header__account" href="{{ routes.account_url }}">
+          <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Account
+        </a>
+      {% elsif section.settings.show_login %}
+        {% assign signup_label = section.settings.signup_label | default: 'Sign Up' %}
+        {% assign signup_link = section.settings.signup_link | default: routes.account_register_url %}
+        {% assign login_label = section.settings.login_label | default: 'Login' %}
+        {% assign login_link = section.settings.login_link | default: routes.account_url %}
+        {% if section.settings.show_signup %}
+          <a class="site-header__signup" href="{{ signup_link }}">
+            {{ signup_label }}
           </a>
         {% endif %}
+        <a class="site-header__login" href="{{ login_link }}">
+          {{ login_label }}
+        </a>
       {% endif %}
-      {% if section.settings.show_cart %}
-        <div class="site-header__action-link site-header__cart">
-          {% if section.settings.enable_cart_popup == true and request.path != "/cart" %}
-            {% render 'cart-popup', section: section %}
-          {% else %}
-            <a href="{{ routes.cart_url }}" aria-label="Cart">
-              <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="8" cy="21" r="1"></circle>
-                <circle cx="19" cy="21" r="1"></circle>
-                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 1.95-1.57L22 6H6"></path>
-              </svg>
-              (<span class="js--cart-counter">{{ cart.item_count }}</span>)
-            </a>
-          {% endif %}
-        </div>
-      {% endif %}
-    </div>
+    {% endif %}
+    {% if section.settings.show_cart %}
+      <div class="site-header__action-link site-header__cart">
+        {% if section.settings.enable_cart_popup == true and request.path != "/cart" %}
+          {% render 'cart-popup', section: section %}
+        {% else %}
+          <a href="{{ routes.cart_url }}" aria-label="Cart">
+            <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 1.95-1.57L22 6H6"></path>
+            </svg>
+            (<span class="js--cart-counter">{{ cart.item_count }}</span>)
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
-</header>
+</div>
 
 {% schema %}
 {

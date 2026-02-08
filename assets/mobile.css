@@ -154,7 +154,7 @@ header {
   height: 1.6rem;
 }
 
-#header-nav .site-header__overlay {
+#header-nav + .site-header__overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.35);
@@ -166,7 +166,7 @@ header {
   z-index: 90;
 }
 
-#header-nav .site-header__drawer {
+.site-header__drawer {
   position: fixed;
   top: 0;
   right: 0;
@@ -188,42 +188,46 @@ header {
   overflow-y: auto;
 }
 
-#header-nav.nav-transition-off .site-header__drawer,
-#header-nav.nav-transition-off .site-header__overlay {
+#header-nav.nav-transition-off + .site-header__overlay,
+#header-nav.nav-transition-off + .site-header__overlay + .site-header__drawer {
   transition: none;
 }
 
-#header-nav.nav-open .site-header__overlay {
+#header-nav.nav-open + .site-header__overlay {
   opacity: 1;
   pointer-events: auto;
 }
 
-#header-nav.nav-open .site-header__drawer {
+#header-nav.nav-open + .site-header__overlay + .site-header__drawer {
   transform: translateX(0);
   opacity: 1;
   pointer-events: auto;
 }
 
-#header-nav .site-header__menu,
-#header-nav .site-header__actions {
+.site-header__drawer .site-header__menu,
+.site-header__drawer .site-header__actions {
   display: flex;
   width: 100%;
 }
 
-#header-nav .site-header__menu {
+.site-header__drawer .site-header__menu {
   justify-content: flex-start;
   margin-top: 0;
   flex: 1;
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
 }
 
-#header-nav .site-header__menu-list {
+.site-header__drawer .site-header__menu-list {
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   gap: 0;
 }
 
-#header-nav .site-header__menu-list li {
+.site-header__drawer .site-header__menu-list li {
   width: 100%;
   display: block;
   border-right: 0;
@@ -231,19 +235,23 @@ header {
   background-color: transparent;
 }
 
-#header-nav .site-header__menu-list li:last-child {
+.site-header__drawer .site-header__menu-list li:last-child {
   border-bottom: 0;
 }
 
-#header-nav .site-header__actions {
+.site-header__drawer .site-header__actions {
   flex-direction: column;
   align-items: stretch;
   gap: 0.5rem;
   margin-top: 0;
   margin-top: auto;
+  position: static;
+  right: auto;
+  top: auto;
+  transform: none;
 }
 
-#header-nav .site-header__close {
+.site-header__drawer .site-header__close {
   display: flex;
   justify-content: flex-start;
   position: fixed;
@@ -252,11 +260,11 @@ header {
   z-index: 120;
 }
 
-#header-nav .site-header__menu {
+.site-header__drawer .site-header__menu {
   margin-top: calc(44px + 24px + 0.75rem);
 }
 
-#header-nav .site-header__login {
+.site-header__drawer .site-header__login {
   justify-content: center;
 }
 nav li.nav-parent-list-item summary {
