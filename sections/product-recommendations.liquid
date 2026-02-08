@@ -17,7 +17,8 @@
   {%- endif -%}
 }
 #{{ section.id }} .products-grid {
-  grid-template-columns: repeat({{ section.settings.products_per_row }}, 1fr);
+  --product-card-min: 274px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--product-card-min), 1fr));
 }
 {% endstyle %}
 

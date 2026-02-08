@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="custom_signup-body">
-      <p>{{ settings.newsletter_text }}</p>
+      <p class="custom_signup-text">{{ settings.newsletter_text }}</p>
       {% form 'customer' %}
         {% if form.posted_successfully? %}
           <div class="rte">
@@ -104,7 +104,20 @@
   <script>
   const dialog = document.querySelector('#custom_signup');
   const durationInSecs = {{ settings.newsletter_duration }};
-  const formSuccess = getParam('contact_posted');
+  const getParamFallback = function(name) {
+    if ('URLSearchParams' in window) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+    const params = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (params == null) {
+      return null;
+    }
+    return decodeURI(params[1]) || 0;
+  };
+  const formSuccess = typeof window.getParam === 'function'
+    ? window.getParam('contact_posted')
+    : getParamFallback('contact_posted');
   // Check cookie.
   let cookieValue = false;
   if (document.cookie.includes("dismiss_popup=")) {

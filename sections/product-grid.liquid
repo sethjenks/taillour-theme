@@ -39,7 +39,8 @@
   --product-blob-2-opacity: {{ section.settings.blob2_opacity | divided_by: 100.0 }};
 }
 {{ section.id | prepend: '#' }} .products-grid {
-  grid-template-columns: repeat({{ section.settings.products_per_row }}, 1fr);
+  --product-card-min: 274px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--product-card-min), 1fr));
 }
 </style>
 
