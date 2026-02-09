@@ -18,7 +18,7 @@
           "type": "menu",
           "settings": {
             "heading": "Company",
-            "menu": "footer"
+            "menu": "main-navigation"
           }
         },
         "menu_tmPWFm": {
@@ -27,11 +27,19 @@
             "heading": "Support",
             "menu": "footer"
           }
+        },
+        "menu_3a6iVJ": {
+          "type": "menu",
+          "settings": {
+            "heading": "Merch",
+            "menu": "footer-navigation-1"
+          }
         }
       },
       "block_order": [
         "menu_pmkrgT",
-        "menu_tmPWFm"
+        "menu_tmPWFm",
+        "menu_3a6iVJ"
       ],
       "name": "Footer",
       "settings": {
@@ -43,7 +51,7 @@
         "padding_bottom": 6,
         "use_default_color_scheme": false,
         "color_scheme": "scheme_2",
-        "legal_menu": "footer",
+        "legal_menu": "legal-menu",
         "cta_label": "Login",
         "cta_link": "https://app.getdub.com"
       }

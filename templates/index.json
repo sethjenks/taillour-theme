@@ -605,7 +605,7 @@
             "show_button": true,
             "button_label": "Make your picks",
             "button_link": "https://app.getdub.com",
-            "button_style": "primary"
+            "button_style": "purple"
           }
         }
       },

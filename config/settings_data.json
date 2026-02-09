@@ -41,7 +41,7 @@
           "show_login": true,
           "login_label": "Get started",
           "login_link": "https://app.getdub.com/register",
-          "enable_cart_popup": true,
+          "enable_cart_popup": false,
           "cp_heading": "Your cart summary",
           "cp_show_cart_items": true,
           "cp_show_cart_total": true,
