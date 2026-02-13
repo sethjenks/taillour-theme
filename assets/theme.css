@@ -610,7 +610,37 @@ main button.button-purple:before {
 }
 
 .button.button-secondary,
-main button.button-secondary,
+main button.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 48px;
+  font-family: var(--font-secondary);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: none;
+  background-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #191522;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 4px 12px 0 rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(33, 31, 38, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(0);
+  transition:
+    background-color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 main button.button-white,
 .button.button-white {
   display: inline-flex;
@@ -631,7 +661,10 @@ main button.button-white,
 }
 
 .button.button-secondary:before,
-main button.button-secondary:before,
+main button.button-secondary:before {
+  content: none;
+}
+
 .button.button-white:before,
 main button.button-white:before {
   content: none;
@@ -639,17 +672,38 @@ main button.button-white:before {
 
 .button.button-secondary:hover,
 main button.button-secondary:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.75),
-    rgba(255, 255, 255, 0.45)
-  );
-  color: #1a1523;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 21px 48.5px 0 rgba(0, 0, 0, 0.25),
-    inset 0 4px 7px 1px rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(240, 236, 248, 0.55);
+  border-color: rgba(240, 236, 248, 0.6);
+  box-shadow:
+    0 10px 24px 0 rgba(0, 0, 0, 0.08),
+    0 4px 12px 0 rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  transform: translateY(-1px);
+}
+
+.button.button-secondary:active,
+main button.button-secondary:active {
+  box-shadow:
+    0 2px 6px 0 rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(33, 31, 38, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(0);
+  transition:
+    background-color 120ms ease-out,
+    border-color 120ms ease-out,
+    box-shadow 120ms ease-out,
+    transform 120ms ease-out,
+    color 120ms ease-out;
+}
+
+.button.button-secondary:disabled,
+main button.button-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: transparent;
+  border-color: rgba(25, 21, 34, 0.08);
+  color: rgba(25, 21, 34, 0.6);
+  box-shadow: none;
 }
 
 .button.button-white:hover,
@@ -749,8 +803,6 @@ main button.button-medium {
 main button.button-medium.button-purple {
   border-radius: 60px;
 }
-.button.button-medium.button-secondary,
-main button.button-medium.button-secondary,
 .button.button-medium.button-white,
 main button.button-medium.button-white {
   border-radius: 160px;
@@ -770,8 +822,6 @@ main button.button-small {
 main button.button-small.button-purple {
   border-radius: 48px;
 }
-.button.button-small.button-secondary,
-main button.button-small.button-secondary,
 .button.button-small.button-white,
 main button.button-small.button-white {
   border-radius: 120px;
@@ -1410,14 +1460,20 @@ nav details {
 .site-header__menu-list a,
 .site-header__menu-list summary {
   text-decoration: none;
-  color: inherit;
-  padding: 0.25rem 0.5rem;
-  border-radius: 999px;
+  color: #66626E;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  transition: background-color 200ms ease, box-shadow 200ms ease,
-    transform 200ms ease, color 300ms ease;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition:
+    background-color 200ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 200ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    transform 200ms cubic-bezier(0.25, 0.1, 0.25, 1),
+    color 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .site-header__menu-list summary:after {
@@ -1434,21 +1490,25 @@ nav details {
 .site-header__menu-list > li > a:hover,
 .site-header__menu-list summary:hover,
 .site-header__menu-list details[open] summary {
-  background-color: rgba(0, 0, 0, 0.06);
-  color: var(--purple);
+  color: var(--ink);
+  background-color: rgba(108, 80, 155, 0.03);
+  box-shadow:
+    0 1px 2px rgba(24, 18, 41, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .site-header__menu-list > li > a.is-active,
 .site-header__menu-list summary.is-active {
-  background-color: color-mix(in srgb, var(--smoke-purple) 5%, white);
+  background-color: rgba(108, 80, 155, 0.05);
   color: var(--ink);
-  box-shadow: inset 0 2px 6px rgba(24, 18, 41, 0.07),
+  border: 1px solid rgba(108, 80, 155, 0.18);
+  box-shadow:
+    inset 0 2px 6px rgba(24, 18, 41, 0.07),
     inset 0 1px 1px rgba(255, 255, 255, 0.26);
   transform: translateY(0.4px);
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
   animation: nav-active-fade 240ms ease;
-  justify-content: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 @keyframes nav-active-fade {
@@ -1515,11 +1575,54 @@ nav details {
   justify-content: center;
   padding: 0.6rem 1.4rem;
   font-size: 16px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--smoke-purple) 18%, white);
-  color: #1a1523;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #191522;
   text-decoration: none;
-  transition: background-color 400ms ease, color 400ms ease, box-shadow 400ms ease;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 4px 12px 0 rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(33, 31, 38, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  transform: translateY(0);
+  transition:
+    background-color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-header__login::before,
+.site-header__account::before {
+  content: "";
+  position: absolute;
+  inset: -4px -6px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(235, 255, 89, 0.5) 0%,
+    rgba(198, 255, 156, 0.35) 35%,
+    rgba(198, 255, 156, 0.12) 60%,
+    transparent 80%
+  );
+  filter: blur(6px);
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-header__login:hover::before,
+.site-header__account:hover::before {
+  opacity: 1;
 }
 
 .site-header__signup {
@@ -1534,15 +1637,18 @@ nav details {
 
 .site-header__login:hover,
 .site-header__account:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(235, 255, 89, 1) 0%,
-    rgba(206, 255, 132, 1) 100%
-  );
-  color: #1a1523;
-  box-shadow: 0 16px 34px 0 rgba(0, 0, 0, 0.24),
-    inset 0 2px 4px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -6px 10px 0 rgba(0, 0, 0, 0.14);
+  background: linear-gradient(135deg, var(--lemon) 30%, var(--mint) 100%);
+  color: var(--ink);
+  border-color: #C0D9AB;
+  box-shadow:
+    0 14px 32px 0 rgba(0, 0, 0, 0.13),
+    0 4px 18px 0 rgba(0, 0, 0, 0.08),
+    0 0 28px 0 rgba(198, 255, 156, 0.18),
+    inset 0 4px 7px 0 rgba(245, 255, 200, 0.79),
+    inset 0 16px 23.5px 0 rgba(80, 120, 20, 0.144),
+    inset -17.5px 14.25px 26px 0 rgba(60, 100, 10, 0.10),
+    inset 0 -8.25px 16px 0 rgba(220, 255, 160, 0.72);
+  transform: translateY(-1px);
 }
 
 .site-header__icon {

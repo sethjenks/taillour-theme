@@ -176,6 +176,7 @@
         "column_dHUR7X",
         "column_VR4XkX"
       ],
+      "disabled": true,
       "name": "Columns/Richtext",
       "settings": {
         "background_image": "shopify://shop_images/bg-purple-fade-bottom.png",
@@ -480,6 +481,7 @@
         "testimonial_3F9x3A",
         "testimonial_MQPrd4"
       ],
+      "disabled": true,
       "name": "Testimonials",
       "settings": {
         "section_height": 320,
@@ -513,6 +515,7 @@
         "heading_TNtVnw",
         "text_tiAiqR"
       ],
+      "disabled": true,
       "name": "Custom Liquid & Text",
       "settings": {
         "padding_top_bottom": 0,
@@ -621,6 +624,7 @@
         "column_9QxF7y",
         "column_MzWcBw"
       ],
+      "disabled": true,
       "name": "Columns/Richtext",
       "settings": {
         "padding_top_bottom": 6,
@@ -670,6 +674,7 @@
       "block_order": [
         "column_BgFABU"
       ],
+      "disabled": true,
       "name": "CTA",
       "settings": {
         "background_image": "shopify://shop_images/bg-cta_2x_aa7703f9-cfb4-4792-a0f2-d524d925d337.png",
