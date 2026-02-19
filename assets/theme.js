@@ -71,6 +71,7 @@ ready(function () {
   handleNavBreakpointTransition();
   handleNavToggles();
   applyCheckoutButtonSizeClass();
+  initSmoothScroll();
 });
 
 /*
@@ -434,6 +435,39 @@ function handleNavToggles() {
             otherDetail.open = false;
           }
         });
+      }
+    });
+  });
+}
+
+/*
+ * SMOOTH SCROLL
+ * Initializes Lenis for smooth scrolling and intercepts
+ * anchor link clicks to scroll to the target element.
+ */
+function initSmoothScroll() {
+  if (typeof Lenis === 'undefined') {
+    return;
+  }
+
+  var lenis = new Lenis();
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var targetId = this.getAttribute('href').substring(1);
+      if (!targetId) {
+        return;
+      }
+      var target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        lenis.scrollTo(target);
       }
     });
   });

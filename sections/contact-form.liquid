@@ -19,6 +19,7 @@
 </style>
 
 <div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section">
     <div class="center">
       {%- if section.settings.show_heading == true -%}
@@ -412,6 +413,12 @@
       "id": "thank_you_page",
       "label": "Thank you page",
       "info": "Set thank you page – defaults to /pages/thank-you if not set. Don't forget to update theme.liquid with noindex, or robots.txt if using different thank you page."
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ]
 }

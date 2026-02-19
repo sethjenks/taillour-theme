@@ -52,6 +52,7 @@
   class="section-wrap large-media-section {{ scheme_class }}"
   style="color: var(--theme-text-primary, #1a1523); --section-body-color: var(--theme-text-secondary, #66626e); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));"
 >
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section large-media-section__inner">
     <div class="large-media-section__text">
       {%- if section.settings.title != blank -%}
@@ -343,6 +344,12 @@
       "default": 50,
       "unit": "%",
       "visible_if": "{{ section.settings.position_mode == 'custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
   "presets": [

@@ -100,6 +100,7 @@ endif
 {% endstyle %}
 
 <div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   {%- if section.settings.show_heading == true or section.settings.show_description == true -%}
     <div class="section">
       {%- if section.settings.show_heading == true -%}
@@ -138,7 +139,7 @@ endif
           {% if block.settings.show_button == true and block.settings.button_label != blank %}
             {%- assign header_button_style = block.settings.button_style | default: 'primary' -%}
             <div class="{{ button_alignment }}">
-              <a class="button button-{{ header_button_style }}" href="{{ block.settings.button_link | default: '#' }}">
+              <a class="button button-{{ header_button_style }}" href="{{ block.settings.anchor_link | default: block.settings.button_link | default: '#' }}">
                 {{ block.settings.button_label }}
               </a>
             </div>
@@ -151,7 +152,7 @@ endif
         {%- assign button_padding_bottom = block.settings.padding_bottom | default: 0 -%}
         {% unless block.settings.label == blank %}
           <div class="section {{ button_alignment }}" style="padding-top: {{ button_padding_top | append: 'rem' }}; padding-bottom: {{ button_padding_bottom | append: 'rem' }};" {{ block.shopify_attributes }}>
-            <a class="button button-{{ button_style }}" href="{{ block.settings.link | default: '#' }}">
+            <a class="button button-{{ button_style }}" href="{{ block.settings.anchor_link | default: block.settings.link | default: '#' }}">
               {{ block.settings.label }}
             </a>
           </div>
@@ -220,7 +221,7 @@ endif
               {%- assign column_button_style = block.settings.button_style | default: 'primary' -%}
               <div>
                 <p>
-                  <a class="button button-{{ column_button_style }}" href="{{ block.settings.button_link | default: '#' }}">
+                  <a class="button button-{{ column_button_style }}" href="{{ block.settings.anchor_link | default: block.settings.button_link | default: '#' }}">
                     {{ block.settings.button_label | default: "Button Label" }}
                   </a>
                 </p>
@@ -397,6 +398,12 @@ endif
       "label": "Swipe on mobile",
       "info": "Makes the columns left to right swipeable on mobile",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
   "blocks": [
@@ -498,6 +505,13 @@ endif
         },
         {
           "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "text",
+          "id": "anchor_link",
+          "label": "Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
           "type": "select",
           "id": "button_style",
           "label": "Button style",
@@ -554,6 +568,12 @@ endif
           "type": "url",
           "id": "link",
           "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "anchor_link",
+          "label": "Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
         },
         {
           "type": "range",
@@ -949,6 +969,13 @@ endif
           "type": "url",
           "id": "button_link",
           "label": "Button Link"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "text",
+          "id": "anchor_link",
+          "label": "Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
         },
         {
           "visible_if": "{{ block.settings.show_button == true }}",

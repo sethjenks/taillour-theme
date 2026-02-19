@@ -32,9 +32,9 @@
             "button1_link": "https://app.getdub.com/register",
             "button1_enable": true,
             "button1_style": "primary",
-            "button2_label": "How it works",
+            "button2_label": "Shop merch",
             "button2_link": "shopify://pages/how-it-works",
-            "button2_enable": true,
+            "button2_enable": false,
             "button2_style": "secondary"
           }
         }
@@ -51,7 +51,7 @@
         "body_max_width": 520,
         "use_default_color_scheme": false,
         "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
-        "hero_image": "shopify://shop_images/hand-app-2_2x_73125081-135c-42a8-950b-99dadf345852.png",
+        "hero_image": "shopify://shop_images/hand-app-3_2x_e392d65f-b857-491d-bee7-ae750af53ad1.png",
         "use_focal_point": false,
         "media_max_height_min": 60,
         "media_max_height": 60,
@@ -154,7 +154,7 @@
         "color_scheme": "",
         "text_columns": 9,
         "media_columns": 3,
-        "vertical_alignment": "center",
+        "vertical_alignment": "end",
         "image_position": "left",
         "mobile_media_absolute": false,
         "mobile_media_top_offset": 0,
@@ -461,25 +461,26 @@
         "testimonial_hdjBQR": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
-            "name": "Marcus Chen",
-            "title": "Pickleball enthusiast",
-            "location": "Member, Dallas",
+            "quote": "<p>“The predictions keep me sharp. I study the games harder than I ever did before.”</p>",
+            "name": "James Jenkins",
+            "title": "",
+            "location": "Member, Florida",
             "avatar": "shopify://shop_images/Testimonial-image-2.png"
           }
         },
         "testimonial_8D3xb8": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
-            "name": "Marcus Chen",
-            "title": "Pickleball enthusiast",
+            "quote": "<p>“It’s not just about winning. It’s about being part of something fun with people I care about.”</p>",
+            "name": "Sarah Mitchell",
+            "title": "",
             "location": "Member, Dallas",
             "avatar": "shopify://shop_images/Testimonial-image.png"
           }
         },
         "testimonial_qAjaNm": {
           "type": "testimonial",
+          "disabled": true,
           "settings": {
             "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
             "name": "Marcus Chen",

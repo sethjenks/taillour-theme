@@ -106,11 +106,11 @@
       {%- assign body_text = block.settings.text -%}
     {%- when 'buttons' -%}
       {%- assign button1_label = block.settings.button1_label -%}
-      {%- assign button1_link = block.settings.button1_link -%}
+      {%- assign button1_link = block.settings.button1_anchor_link | default: block.settings.button1_link -%}
       {%- assign button1_enable = block.settings.button1_enable -%}
       {%- assign button1_style = block.settings.button1_style | default: 'primary' -%}
       {%- assign button2_label = block.settings.button2_label -%}
-      {%- assign button2_link = block.settings.button2_link -%}
+      {%- assign button2_link = block.settings.button2_anchor_link | default: block.settings.button2_link -%}
       {%- assign button2_enable = block.settings.button2_enable -%}
       {%- assign button2_style = block.settings.button2_style | default: 'secondary' -%}
   {%- endcase -%}
@@ -126,6 +126,7 @@
   class="promotion-hero section-pad {{ scheme_class }}"
   style="background-color: var(--theme-bg-primary, #ffffff); color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}{% if section.settings.background_image != blank %} background-image: url({{ section.settings.background_image | image_url: width: 2000 }}); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}"
 >
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   {%- if section.settings.blob1_enable or section.settings.blob2_enable -%}
     <div class="promotion-hero__blobs" aria-hidden="true">
       {%- if section.settings.blob1_enable -%}
@@ -826,6 +827,12 @@
       "default": 100,
       "unit": "vw",
       "info": "Height of the section in relation to the device width."
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
   "blocks": [
@@ -892,6 +899,12 @@
           "label": "Button 1 Link"
         },
         {
+          "type": "text",
+          "id": "button1_anchor_link",
+          "label": "Button 1 Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
           "type": "checkbox",
           "id": "button1_enable",
           "default": true,
@@ -927,6 +940,12 @@
           "type": "url",
           "id": "button2_link",
           "label": "Button 2 Link"
+        },
+        {
+          "type": "text",
+          "id": "button2_anchor_link",
+          "label": "Button 2 Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
         },
         {
           "type": "checkbox",

@@ -23,6 +23,7 @@
         },
         "menu_tmPWFm": {
           "type": "menu",
+          "disabled": true,
           "settings": {
             "heading": "Support",
             "menu": "footer"

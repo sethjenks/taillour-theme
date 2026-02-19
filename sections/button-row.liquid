@@ -8,9 +8,10 @@
 {%- assign button_padding_top = settings.button_block_padding_top | default: 0 -%}
 {%- assign button_padding_bottom = settings.button_block_padding_bottom | default: 0 -%}
 <div id="{{ section.id }}" class="section-wrap" style="--section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section" style="padding-top: {{ button_padding_top | append: 'rem' }}; padding-bottom: {{ button_padding_bottom | append: 'rem' }};">
     <div class="center">
-      <a class="button button-primary" href="{{ section.settings.link | default: '#' }}">
+      <a class="button button-primary" href="{{ section.settings.anchor_link | default: section.settings.link | default: '#' }}">
         {{ section.settings.text }}
       </a>
     </div>
@@ -79,6 +80,18 @@
       "type": "url",
       "id": "link",
       "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "anchor_link",
+      "label": "Anchor link",
+      "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ]
 }

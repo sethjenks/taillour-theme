@@ -5,6 +5,95 @@
 .filter-group input[type="number"] {
   padding: 0.5rem 1rem;
 }
+.price-slider {
+  position: relative;
+  height: 44px;
+  margin-top: 0.5rem;
+}
+.price-slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 2;
+}
+.price-slider__track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  border-radius: 2px;
+  background: var(--field-border-color, #ddd);
+  z-index: 0;
+}
+.price-slider__fill {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  border-radius: 2px;
+  background: var(--purple, #4a2d73);
+  z-index: 1;
+}
+.price-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 36px;
+  margin-top: -16px;
+  border-radius: 4px;
+  background-color: var(--purple, #4a2d73);
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  cursor: grab;
+  pointer-events: auto;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='14'%3E%3Ccircle cx='2' cy='3' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='6' cy='3' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='2' cy='7' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='6' cy='7' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='2' cy='11' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='6' cy='11' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.price-slider input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+.price-slider input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 36px;
+  border-radius: 4px;
+  background-color: var(--purple, #4a2d73);
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+  cursor: grab;
+  pointer-events: auto;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='14'%3E%3Ccircle cx='2' cy='3' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='6' cy='3' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='2' cy='7' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='6' cy='7' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='2' cy='11' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3Ccircle cx='6' cy='11' r='1.2' fill='rgba(255,255,255,0.7)'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.price-slider input[type="range"]::-moz-range-thumb:active {
+  cursor: grabbing;
+}
+.price-slider input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: transparent;
+}
+.price-slider input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: transparent;
+  border: none;
+}
+.price-slider__labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
 </style>
 
 <form>
@@ -49,9 +138,6 @@
           </label>
         </li>
       </ul>
-      <div>
-        <button type="submit" class="button button-small">Apply</button>
-      </div>
     </div>
   </details>
 
@@ -96,10 +182,6 @@
                   >{{ filter.false_value.label }}</label>
                 </li>
             </ul>
-
-            <div>
-              <button type="submit" class="button button-small">Apply</button>
-            </div>
           {%- when 'list' -%}
             <ul>
               {%- for filter_value in filter.values -%}
@@ -152,48 +234,175 @@
                 </li>
               {%- endfor -%}
             </ul>
-
-            <p>
-              <button type="submit" class="button button-small">Apply</button>
-            </p>
           {%- when 'price_range' -%}
-            <ul>
-              <li>
-                <label for="Filter-{{ filter.min_value.param_name }}">
-                  From {{ cart.currency.symbol }}
-                </label>
-                <input name="{{ filter.min_value.param_name }}"
-                  id="Filter-{{ filter.min_value.param_name }}"
-                  {% if filter.min_value.value -%}
-                    value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
-                  {%- endif %}
-                  type="number"
-                  placeholder="0"
-                  min="0"
-                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                >
-              </li>
-              <li>
-                <label for="Filter-{{ filter.max_value.param_name }}">
-                  To {{ cart.currency.symbol }}
-                </label>
-                <input name="{{ filter.max_value.param_name }}"
-                  id="Filter-{{ filter.max_value.param_name }}"
-                  {% if filter.max_value.value -%}
-                    value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
-                  {%- endif %}
-                  type="number"
-                  placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                  min="0"
-                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
-                >
-              </li>
-            </ul>
-            <p>
-              <button type="submit" class="button button-small">Apply</button>
-            </p>
+            {% liquid
+              assign range_max = filter.range_max | money_without_currency | replace: ',', ''
+              assign current_min = filter.min_value.value | default: 0 | money_without_currency | replace: ',', ''
+              assign current_max = filter.max_value.value | default: filter.range_max | money_without_currency | replace: ',', ''
+            %}
+            <input type="hidden"
+              name="{{ filter.min_value.param_name }}"
+              id="Filter-{{ filter.min_value.param_name }}"
+              value="{{ current_min }}"
+            >
+            <input type="hidden"
+              name="{{ filter.max_value.param_name }}"
+              id="Filter-{{ filter.max_value.param_name }}"
+              value="{{ current_max }}"
+            >
+            <div class="price-slider"
+              data-range-max="{{ range_max }}"
+              data-min-input="Filter-{{ filter.min_value.param_name }}"
+              data-max-input="Filter-{{ filter.max_value.param_name }}"
+            >
+              <div class="price-slider__track"></div>
+              <div class="price-slider__fill"></div>
+              <input type="range"
+                class="price-slider__min"
+                min="0"
+                max="{{ range_max }}"
+                step="1"
+                value="{{ current_min }}"
+              >
+              <input type="range"
+                class="price-slider__max"
+                min="0"
+                max="{{ range_max }}"
+                step="1"
+                value="{{ current_max }}"
+              >
+            </div>
+            <div class="price-slider__labels">
+              <span class="price-slider__label-min">{{ cart.currency.symbol }}{{ current_min }}</span>
+              <span class="price-slider__label-max">{{ cart.currency.symbol }}{{ current_max }}</span>
+            </div>
         {%- endcase -%}
       </div>
     </details>
   {%- endfor -%}
 </form>
+
+<script>
+(function() {
+  var form = document.querySelector('.filter-group');
+  if (form) form = form.closest('form');
+  if (!form) return;
+
+  var debounceTimer;
+  var productArea = document.getElementById('collection-results');
+
+  function buildUrl() {
+    var data = new FormData(form);
+    var params = new URLSearchParams(data);
+    return window.location.pathname + '?' + params.toString();
+  }
+
+  function submitForm() {
+    var url = buildUrl();
+
+    if (productArea) productArea.style.opacity = '0.5';
+
+    fetch(url, { credentials: 'same-origin' })
+      .then(function(res) {
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
+      })
+      .then(function(html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+
+        var newProductArea = doc.getElementById('collection-results');
+        if (newProductArea && productArea) {
+          productArea.innerHTML = newProductArea.innerHTML;
+          productArea.style.opacity = '';
+        } else {
+          window.location.href = url;
+          return;
+        }
+
+        var newFilters = doc.querySelectorAll('.filter-group');
+        var currentFilterGroups = form.querySelectorAll('.filter-group');
+        newFilters.forEach(function(newGroup, i) {
+          if (currentFilterGroups[i]) {
+            var summary = currentFilterGroups[i].querySelector('summary');
+            var newSummary = newGroup.querySelector('summary');
+            if (summary && newSummary) {
+              summary.innerHTML = newSummary.innerHTML;
+            }
+          }
+        });
+
+        history.replaceState(null, '', url);
+      })
+      .catch(function() {
+        window.location.href = url;
+      });
+  }
+
+  form.addEventListener('change', function(e) {
+    var target = e.target;
+    if (target.type === 'radio' || target.type === 'checkbox') {
+      submitForm();
+    }
+  });
+
+  // --- Price slider ---
+  document.querySelectorAll('.price-slider').forEach(function(slider) {
+    var rangeMax = parseFloat(slider.dataset.rangeMax) || 100;
+    var minRange = slider.querySelector('.price-slider__min');
+    var maxRange = slider.querySelector('.price-slider__max');
+    var fill = slider.querySelector('.price-slider__fill');
+    var minHidden = document.getElementById(slider.dataset.minInput);
+    var maxHidden = document.getElementById(slider.dataset.maxInput);
+    var container = slider.closest('.filter-group');
+    var minLabel = container.querySelector('.price-slider__label-min');
+    var maxLabel = container.querySelector('.price-slider__label-max');
+
+    var currencySymbol = minLabel ? minLabel.textContent.replace(/[\d.]/g, '').trim() : '$';
+
+    function updateFill() {
+      var minVal = parseFloat(minRange.value);
+      var maxVal = parseFloat(maxRange.value);
+      var leftPct = (minVal / rangeMax) * 100;
+      var rightPct = (maxVal / rangeMax) * 100;
+      fill.style.left = leftPct + '%';
+      fill.style.width = (rightPct - leftPct) + '%';
+    }
+
+    function onMinInput() {
+      var minVal = parseFloat(minRange.value);
+      var maxVal = parseFloat(maxRange.value);
+      if (minVal > maxVal) {
+        minRange.value = maxVal;
+        minVal = maxVal;
+      }
+      minHidden.value = minVal;
+      if (minLabel) minLabel.textContent = currencySymbol + minVal;
+      updateFill();
+    }
+
+    function onMaxInput() {
+      var minVal = parseFloat(minRange.value);
+      var maxVal = parseFloat(maxRange.value);
+      if (maxVal < minVal) {
+        maxRange.value = minVal;
+        maxVal = minVal;
+      }
+      maxHidden.value = maxVal;
+      if (maxLabel) maxLabel.textContent = currencySymbol + maxVal;
+      updateFill();
+    }
+
+    function debouncedSubmit() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function() { submitForm(); }, 500);
+    }
+
+    minRange.addEventListener('input', onMinInput);
+    maxRange.addEventListener('input', onMaxInput);
+    minRange.addEventListener('change', debouncedSubmit);
+    maxRange.addEventListener('change', debouncedSubmit);
+
+    updateFill();
+  });
+})();
+</script>
