@@ -117,8 +117,13 @@ endif
 {{ section.id | prepend: '#' }} .newsletter-signup-form__privacy {
   margin: 0;
   font-size: 0.8125rem;
-  color: var(--theme-text-secondary, var(--font-secondary-color));
-  opacity: 0.8;
+  color: var(--theme-text-primary, var(--font-primary-color));
+  text-align: left;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__privacy label {
+  color: inherit;
+  justify-content: flex-start;
+  gap: 8px;
 }
 {{ section.id | prepend: '#' }} .newsletter-signup-form__privacy a {
   color: inherit;
@@ -1203,7 +1208,7 @@ endif
           "type": "inline_richtext",
           "id": "privacy_text",
           "label": "Privacy text",
-          "default": "I have read and accept the <a href=\"#\">privacy policy</a>."
+          "default": "I have read and accept the <a href=\"/pages/privacy-policy\">privacy policy</a>."
         },
         {
           "type": "text",
