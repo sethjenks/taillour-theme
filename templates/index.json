@@ -37,7 +37,9 @@
             "button2_link": "#htp",
             "button2_anchor_link": "",
             "button2_enable": false,
-            "button2_style": "secondary"
+            "button2_style": "secondary",
+            "padding_top": 0,
+            "padding_bottom": 0
           }
         }
       },
@@ -134,7 +136,9 @@
           "settings": {
             "button_label": "Button label",
             "button_link": "",
-            "anchor_link": ""
+            "anchor_link": "",
+            "padding_top": 0,
+            "padding_bottom": 0
           }
         }
       },
@@ -177,7 +181,7 @@
         "family_object_position_mobile": "center bottom",
         "family_object_position_x_mobile": 46,
         "family_object_position_y_mobile": 63,
-        "family_y_overhang": 8,
+        "family_y_overhang": 24,
         "app_y_overhang": 0,
         "family_enable_absolute": true,
         "family_x_min": 35,
@@ -206,14 +210,14 @@
         "family_height_min_mobile": 46,
         "family_height_mobile": 50,
         "family_height_max_mobile": 100,
-        "app_image": "shopify://shop_images/group-3.png",
+        "app_image": "shopify://shop_images/group-4.png",
         "app_use_focal_point": true,
         "app_aspect_ratio": "2/3",
         "app_object_fit": "cover",
         "app_object_position": "left top",
         "app_position_mode": "custom",
         "app_object_position_x": 50,
-        "app_object_position_y": 25,
+        "app_object_position_y": 20,
         "app_object_position_mobile": "left top",
         "app_object_position_x_mobile": 50,
         "app_object_position_y_mobile": 50,
@@ -222,7 +226,7 @@
         "app_x": 45,
         "app_x_max": 100,
         "app_y_min": 0,
-        "app_y": 50,
+        "app_y": 60,
         "app_y_max": 100,
         "app_width_min": 10,
         "app_width": 100,
@@ -234,8 +238,8 @@
         "app_x_mobile": 50,
         "app_x_max_mobile": 100,
         "app_y_min_mobile": 0,
-        "app_y_mobile": 88,
-        "app_y_max_mobile": 100,
+        "app_y_mobile": 110,
+        "app_y_max_mobile": 110,
         "app_width_min_mobile": 10,
         "app_width_mobile": 100,
         "app_width_max_mobile": 100,
@@ -315,7 +319,9 @@
           "settings": {
             "button_label": "Create free account",
             "button_link": "https://app.getdub.com/register",
-            "anchor_link": ""
+            "anchor_link": "",
+            "padding_top": 0,
+            "padding_bottom": 0
           }
         }
       },
@@ -351,7 +357,7 @@
         "mobile_media_width": 100,
         "mobile_media_translate_x": -50,
         "mobile_media_space": 0,
-        "family_image": "shopify://shop_images/Leaderboard_2x_600ebc26-a63e-470c-b6e9-30125d2b84a8.png",
+        "family_image": "shopify://shop_images/Leaderboard-2_2x_1d01a3f0-67e9-4cc1-89f0-1f32e091d5ac.png",
         "family_use_focal_point": false,
         "family_aspect_ratio": "2/3",
         "family_object_fit": "cover",
@@ -457,7 +463,9 @@
           "settings": {
             "button_label": "Optional button?",
             "button_link": "#",
-            "anchor_link": ""
+            "anchor_link": "",
+            "padding_top": 0,
+            "padding_bottom": 0
           }
         }
       },
@@ -634,7 +642,9 @@
           "settings": {
             "button_label": "Find your game",
             "button_link": "https://app.getdub.com/register",
-            "anchor_link": ""
+            "anchor_link": "",
+            "padding_top": 0,
+            "padding_bottom": 0
           }
         }
       },
