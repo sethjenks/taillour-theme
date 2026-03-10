@@ -113,6 +113,8 @@
       {%- assign button2_link = block.settings.button2_anchor_link | default: block.settings.button2_link -%}
       {%- assign button2_enable = block.settings.button2_enable -%}
       {%- assign button2_style = block.settings.button2_style | default: 'secondary' -%}
+      {%- assign buttons_padding_top = block.settings.padding_top | default: 0 -%}
+      {%- assign buttons_padding_bottom = block.settings.padding_bottom | default: 0 -%}
   {%- endcase -%}
 {%- endfor -%}
 
@@ -150,7 +152,7 @@
       {%- if body_text != blank -%}
         <p class="promotion-hero-body">{{ body_text }}</p>
       {%- endif -%}
-      <div class="promotion-hero-buttons">
+      <div class="promotion-hero-buttons" style="padding-top: {{ buttons_padding_top | default: 0 | append: 'rem' }}; padding-bottom: {{ buttons_padding_bottom | default: 0 | append: 'rem' }};">
         {%- if button1_enable and button1_label != blank -%}
           <a class="button button-{{ button1_style }}" href="{{ button1_link | default: '#' }}">
             {{ button1_label }}
@@ -972,6 +974,26 @@
             }
           ],
           "default": "secondary"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
         }
       ]
     }

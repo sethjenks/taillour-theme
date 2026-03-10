@@ -67,11 +67,11 @@
                 {{ block.settings.text }}
               </div>
             {% when 'buttons' %}
-              <p>
+              <div style="padding-top: {{ block.settings.padding_top | default: 0 | append: 'rem' }}; padding-bottom: {{ block.settings.padding_bottom | default: 0 | append: 'rem' }};">
                 <a class="button button-primary" href="{{ block.settings.anchor_link | default: block.settings.button_link | default: '#' }}">
                   {{ block.settings.button_label }}
                 </a>
-              </p>
+              </div>
             {% when 'bullet_item' %}
               {%- capture icon_style -%}
                 --bullet-icon-bg: {{ block.settings.icon_background | default: '#a87be6' }};
@@ -429,6 +429,26 @@
           "id": "anchor_link",
           "label": "Anchor link",
           "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
         }
       ]
     },

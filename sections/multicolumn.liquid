@@ -2,7 +2,7 @@
 assign image_width = 600
 assign columns = 0
 for block in section.blocks
-  if block.type != 'header' and block.type != 'button'
+  if block.type != 'header' and block.type != 'button' and block.type != 'newsletter'
     assign columns = columns | plus: 1
   endif
 endfor
@@ -97,6 +97,47 @@ endif
     object-position: var(--column-object-position-mobile, center);
   }
 }
+{{ section.id | prepend: '#' }} .newsletter-signup-form {
+  --form-max-width: 480px;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__field {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  margin-bottom: 0.75rem;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__field input[type="email"] {
+  flex: 1;
+  min-width: 0;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__field .button {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__privacy {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary, var(--font-secondary-color));
+  opacity: 0.8;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__privacy a {
+  color: inherit;
+  text-decoration: underline;
+  background: transparent;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__privacy span {
+  background: transparent;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form h1,
+{{ section.id | prepend: '#' }} .newsletter-signup-form h2,
+{{ section.id | prepend: '#' }} .newsletter-signup-form h3 {
+  margin-bottom: 0.75rem;
+}
+@media screen and (max-width: 480px) {
+  {{ section.id | prepend: '#' }} .newsletter-signup-form__field {
+    flex-direction: column;
+  }
+}
 {% endstyle %}
 
 <div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
@@ -157,6 +198,43 @@ endif
             </a>
           </div>
         {% endunless %}
+      {% when 'newsletter' %}
+        {%- assign newsletter_alignment = block.settings.alignment | default: 'center' -%}
+        {%- assign newsletter_padding_top = block.settings.padding_top | default: 0 -%}
+        {%- assign newsletter_padding_bottom = block.settings.padding_bottom | default: 0 -%}
+        <div class="section {{ newsletter_alignment }}" style="padding-top: {{ newsletter_padding_top | append: 'rem' }}; padding-bottom: {{ newsletter_padding_bottom | append: 'rem' }};" {{ block.shopify_attributes }}>
+          {% form 'customer', class: 'form newsletter-signup-form center' %}
+            {% unless block.settings.heading == blank %}
+              <{{ block.settings.heading_size }}>
+                {{ block.settings.heading }}
+              </{{ block.settings.heading_size }}>
+            {% endunless %}
+
+            {% unless block.settings.text == blank %}
+              <div class="rte">
+                {{ block.settings.text }}
+              </div>
+            {% endunless %}
+            {% if form.posted_successfully? %}
+              <div class="rte">
+                <p><strong>{{ block.settings.success_message | default: "Thanks for signing up!" }}</strong></p>
+              </div>
+            {% endif %}
+            <div class="form-row newsletter-signup-form__field">
+              <label class="hide">Email</label>
+              <input type="email" name="contact[email]" placeholder="{{ block.settings.placeholder | default: 'Enter email address' }}" required>
+              <button type="submit" value="submit" class="button button-small button-{{ block.settings.button_style | default: 'primary' }}">{{ block.settings.button_label | default: "Sign up" }}</button>
+            </div>
+            {% unless block.settings.privacy_text == blank %}
+              <p class="newsletter-signup-form__privacy">
+                <label class="flex align-center middle">
+                  <input type="checkbox" required>
+                  <span>{{ block.settings.privacy_text }}</span>
+                </label>
+              </p>
+            {% endunless %}
+          {% endform %}
+        </div>
     {% endcase %}
   {% endfor %}
 
@@ -1050,6 +1128,128 @@ endif
           "id": "subtext",
           "label": "Subtext",
           "default": "<p>Choose a tournament. Make your picks before play begins.</p>"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter Signup",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Stay in the loop"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Email placeholder",
+          "default": "Enter email address"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Sign up"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "privacy_text",
+          "label": "Privacy text",
+          "default": "I have read and accept the <a href=\"#\">privacy policy</a>."
+        },
+        {
+          "type": "text",
+          "id": "success_message",
+          "label": "Success message",
+          "default": "Thanks for signing up!"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
         }
       ]
     }

@@ -28,12 +28,14 @@
         "buttons_zUiW9p": {
           "type": "buttons",
           "settings": {
-            "button1_label": "Make your picks",
+            "button1_label": "Join for free",
             "button1_link": "https://app.getdub.com/register",
+            "button1_anchor_link": "",
             "button1_enable": true,
             "button1_style": "primary",
-            "button2_label": "Shop merch",
-            "button2_link": "shopify://pages/how-it-works",
+            "button2_label": "How it works",
+            "button2_link": "#htp",
+            "button2_anchor_link": "",
             "button2_enable": false,
             "button2_style": "secondary"
           }
@@ -51,7 +53,7 @@
         "body_max_width": 520,
         "use_default_color_scheme": false,
         "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
-        "hero_image": "shopify://shop_images/hand-app-3_2x_e392d65f-b857-491d-bee7-ae750af53ad1.png",
+        "hero_image": "shopify://shop_images/hand-app-4_2x_64eb714c-f1d6-4c4d-a28a-494de288000b.png",
         "use_focal_point": false,
         "media_max_height_min": 60,
         "media_max_height": 60,
@@ -106,7 +108,8 @@
         "blob2_opacity": 65,
         "vertical_alignment": "center",
         "desktop_height": 50,
-        "mobile_height": 100
+        "mobile_height": 100,
+        "anchor_id": ""
       }
     },
     "image_with_text_ykcntk": {
@@ -130,7 +133,8 @@
           "disabled": true,
           "settings": {
             "button_label": "Button label",
-            "button_link": ""
+            "button_link": "",
+            "anchor_link": ""
           }
         }
       },
@@ -202,7 +206,7 @@
         "family_height_min_mobile": 46,
         "family_height_mobile": 50,
         "family_height_max_mobile": 100,
-        "app_image": "shopify://shop_images/group-leaderboard_2x_c4fba7a7-1f86-46df-9336-c38cd7e71eaa.png",
+        "app_image": "shopify://shop_images/group-3.png",
         "app_use_focal_point": true,
         "app_aspect_ratio": "2/3",
         "app_object_fit": "cover",
@@ -215,7 +219,7 @@
         "app_object_position_y_mobile": 50,
         "app_enable_absolute": true,
         "app_x_min": 0,
-        "app_x": 50,
+        "app_x": 45,
         "app_x_max": 100,
         "app_y_min": 0,
         "app_y": 50,
@@ -244,7 +248,8 @@
         "blob_x": 85,
         "blob_y": 50,
         "blob_blur": 40,
-        "blob_opacity": 80
+        "blob_opacity": 80,
+        "anchor_id": ""
       }
     },
     "image_with_text_pjRwPQ": {
@@ -253,7 +258,7 @@
         "heading_aRADHH": {
           "type": "heading",
           "settings": {
-            "text": "How to play",
+            "text": "Get the dub",
             "size": "h2"
           }
         },
@@ -289,8 +294,28 @@
             "icon_border_color": "rgba(0,0,0,0)",
             "icon_text_color": "#ffffff",
             "icon_shadow": true,
-            "title": "See how you stack up",
-            "subtext": "<p>Track your points on the leaderboard to see how your picks performed. </p>"
+            "title": "Compete with friends",
+            "subtext": "<p>Create or join friendly groups and earn points to climb the leaderboard.</p>"
+          }
+        },
+        "bullet_item_k6EHmt": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "4",
+            "icon_background": "#a87be6",
+            "icon_border_color": "#a87be6",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Win cool prizes",
+            "subtext": "<p>Top dubs get free merch!</p>"
+          }
+        },
+        "buttons_nE6HWA": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Create free account",
+            "button_link": "https://app.getdub.com/register",
+            "anchor_link": ""
           }
         }
       },
@@ -298,7 +323,9 @@
         "heading_aRADHH",
         "bullet_item_jVKF3V",
         "bullet_item_aVmKKp",
-        "bullet_item_VqwB6n"
+        "bullet_item_VqwB6n",
+        "bullet_item_k6EHmt",
+        "buttons_nE6HWA"
       ],
       "name": "How it Works",
       "settings": {
@@ -307,7 +334,7 @@
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "background_image": "shopify://shop_images/bg-how-to-play_2x_4d2e9fc0-62e1-4069-bbb7-43deda11cd88.png",
+        "background_image": "shopify://shop_images/bg-how-to-play-2.png",
         "padding_top_bottom": 6,
         "enable_padding_overrides": true,
         "padding_top": 2,
@@ -405,7 +432,8 @@
         "blob_x": 50,
         "blob_y": 50,
         "blob_blur": 40,
-        "blob_opacity": 80
+        "blob_opacity": 80,
+        "anchor_id": "htp"
       }
     },
     "image_with_video_NCkDCh": {
@@ -428,7 +456,8 @@
           "type": "buttons",
           "settings": {
             "button_label": "Optional button?",
-            "button_link": "#"
+            "button_link": "#",
+            "anchor_link": ""
           }
         }
       },
@@ -452,7 +481,8 @@
         "object_position": "center",
         "aspect_ratio": "4/3",
         "video_width": 1020,
-        "video_position": "left"
+        "video_position": "left",
+        "anchor_id": ""
       }
     },
     "testimonials_8h9VTE": {
@@ -461,20 +491,20 @@
         "testimonial_hdjBQR": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>“The predictions keep me sharp. I study the games harder than I ever did before.”</p>",
-            "name": "James Jenkins",
+            "quote": "<p>“It’s so fun to have the thrill of March Madness brought to other sports!”</p>",
+            "name": "Pickleball player",
             "title": "",
-            "location": "Member, Florida",
+            "location": "Florida",
             "avatar": "shopify://shop_images/Testimonial-image-2.png"
           }
         },
         "testimonial_8D3xb8": {
           "type": "testimonial",
           "settings": {
-            "quote": "<p>“It’s not just about winning. It’s about being part of something fun with people I care about.”</p>",
-            "name": "Sarah Mitchell",
+            "quote": "<p>“Finishing above my son on the leaderboard was awesome!  He couldn’t believe I correctly picked so many upsets.”</p>",
+            "name": "Parent of a competitive child,",
             "title": "",
-            "location": "Member, Dallas",
+            "location": "Texas",
             "avatar": "shopify://shop_images/Testimonial-image.png"
           }
         },
@@ -504,7 +534,8 @@
         "padding_top": 6,
         "padding_bottom": 0,
         "use_default_color_scheme": true,
-        "color_scheme": ""
+        "color_scheme": "",
+        "anchor_id": ""
       }
     },
     "raw_html_with_text_Jbkcak": {
@@ -520,7 +551,7 @@
         "text_hRDek3": {
           "type": "text",
           "settings": {
-            "text": "<p>Winners get free dub merch. The rest keep chasing the dub.</p>"
+            "text": "<p>Top dubs get free merch!</p>"
           }
         }
       },
@@ -543,7 +574,8 @@
         "vertical_alignment": "center",
         "html_position": "right",
         "use_default_color_scheme": true,
-        "color_scheme": ""
+        "color_scheme": "",
+        "anchor_id": ""
       }
     },
     "product_grid_9e9FqV": {
@@ -577,7 +609,8 @@
         "limit": 3,
         "products_per_row": 3,
         "use_default_color_scheme": true,
-        "color_scheme": ""
+        "color_scheme": "",
+        "anchor_id": ""
       }
     },
     "image_with_text_UbCM4w": {
@@ -600,7 +633,8 @@
           "type": "buttons",
           "settings": {
             "button_label": "Find your game",
-            "button_link": "https://app.getdub.com/register"
+            "button_link": "https://app.getdub.com/register",
+            "anchor_link": ""
           }
         }
       },
@@ -632,7 +666,7 @@
         "mobile_media_width": 100,
         "mobile_media_translate_x": -50,
         "mobile_media_space": 0,
-        "family_image": "shopify://shop_images/phone-sports-2_2x_99d059a4-a120-4575-ba52-437539eadaed.png",
+        "family_image": "shopify://shop_images/phone-sports-3_2x_4862a764-3ead-4831-8dc5-b34c3ce09104.png",
         "family_use_focal_point": false,
         "family_aspect_ratio": "4/5",
         "family_object_fit": "contain",
@@ -713,7 +747,8 @@
         "blob_x": 0,
         "blob_y": 100,
         "blob_blur": 100,
-        "blob_opacity": 50
+        "blob_opacity": 50,
+        "anchor_id": ""
       }
     },
     "multicolumn_6xcd7Q": {
@@ -730,12 +765,30 @@
             "show_button": false,
             "button_label": "Learn more",
             "button_link": "",
+            "anchor_link": "",
             "button_style": "primary",
             "button_alignment": "align-left"
           }
         },
+        "newsletter_kywA88": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Get early access to new tournaments and fun prizes",
+            "heading_size": "h3",
+            "text": "",
+            "placeholder": "Enter email address",
+            "button_label": "Sign up",
+            "button_style": "primary",
+            "privacy_text": "I have read and accept the <a href=\"#\">privacy policy</a>.",
+            "success_message": "Thanks for signing up!",
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "alignment": "align-left"
+          }
+        },
         "column_Mp6DfV": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/badge-device_2x_f90f8a28-acd8-44bf-80d0-163154a2c371.png",
             "show_image": true,
@@ -758,11 +811,13 @@
             "show_button": false,
             "button_label": "Button label",
             "button_link": "",
+            "anchor_link": "",
             "button_style": "primary"
           }
         },
         "column_fRhckF": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/badge-follow_2x_95013499-9d48-424b-ae29-8af4007cf096.png",
             "show_image": true,
@@ -785,11 +840,13 @@
             "show_button": false,
             "button_label": "Button label",
             "button_link": "",
+            "anchor_link": "",
             "button_style": "primary"
           }
         },
         "column_n9mipY": {
           "type": "column",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/badge-award_2x_0441acd0-5676-4a69-b2fb-b2e1c47c34e0.png",
             "show_image": true,
@@ -812,19 +869,21 @@
             "show_button": false,
             "button_label": "Button label",
             "button_link": "",
+            "anchor_link": "",
             "button_style": "primary"
           }
         }
       },
       "block_order": [
         "header_w99tRC",
+        "newsletter_kywA88",
         "column_Mp6DfV",
         "column_fRhckF",
         "column_n9mipY"
       ],
       "name": "Columns/Richtext",
       "settings": {
-        "background_image": "shopify://shop_images/bg-how-to-play_2x_4d2e9fc0-62e1-4069-bbb7-43deda11cd88.png",
+        "background_image": "shopify://shop_images/bg-how-to-play-2.png",
         "padding_top_bottom": 6,
         "enable_padding_overrides": true,
         "padding_top": 12,
@@ -836,7 +895,8 @@
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "use_default_color_scheme": false,
         "color_scheme": "scheme_2",
-        "swipe_on_mobile": false
+        "swipe_on_mobile": false,
+        "anchor_id": ""
       }
     },
     "multicolumn_dabeKn": {
@@ -861,10 +921,11 @@
             "text": "Ready to get your dub?",
             "size": "h1",
             "alignment": "center",
-            "content": "<p>Winning feels good. We made it even better.</p>",
+            "content": "<p>Winning feels good. Go get it.</p>",
             "show_button": true,
             "button_label": "Make your picks",
             "button_link": "https://app.getdub.com",
+            "anchor_link": "",
             "button_style": "purple"
           }
         }
@@ -886,7 +947,8 @@
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "use_default_color_scheme": false,
         "color_scheme": "scheme-ee222970-1679-436a-9f5c-1986d6d291fc",
-        "swipe_on_mobile": false
+        "swipe_on_mobile": false,
+        "anchor_id": ""
       }
     },
     "collection_grid_7w6HWG": {
@@ -903,7 +965,8 @@
         ],
         "collections_per_row": 4,
         "use_default_color_scheme": true,
-        "color_scheme": ""
+        "color_scheme": "",
+        "anchor_id": ""
       }
     },
     "multicolumn_VbBRUF": {
@@ -932,6 +995,7 @@
             "show_button": true,
             "button_label": "Button label",
             "button_link": "#",
+            "anchor_link": "",
             "button_style": "primary"
           }
         },
@@ -958,6 +1022,7 @@
             "show_button": true,
             "button_label": "",
             "button_link": "",
+            "anchor_link": "",
             "button_style": "primary"
           }
         },
@@ -984,6 +1049,7 @@
             "show_button": true,
             "button_label": "",
             "button_link": "",
+            "anchor_link": "",
             "button_style": "primary"
           }
         }
@@ -1006,7 +1072,8 @@
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
         "use_default_color_scheme": true,
         "color_scheme": "",
-        "swipe_on_mobile": true
+        "swipe_on_mobile": true,
+        "anchor_id": ""
       }
     },
     "newsletter_form_JJALbH": {
@@ -1019,7 +1086,8 @@
         "privacy_text": "I have read and accept the <a href=\"#\">privacy policy</a>.",
         "button_label": "Sign up",
         "use_default_color_scheme": true,
-        "color_scheme": ""
+        "color_scheme": "",
+        "anchor_id": ""
       }
     },
     "contact_form_EAWmhp": {
@@ -1118,7 +1186,8 @@
         "button_label": "Submit",
         "use_default_color_scheme": true,
         "color_scheme": "",
-        "thank_you_page": ""
+        "thank_you_page": "",
+        "anchor_id": ""
       }
     },
     "raw_html_with_text_XjAjHG": {
@@ -1158,7 +1227,8 @@
         "vertical_alignment": "center",
         "html_position": "right",
         "use_default_color_scheme": true,
-        "color_scheme": ""
+        "color_scheme": "",
+        "anchor_id": ""
       }
     }
   },
