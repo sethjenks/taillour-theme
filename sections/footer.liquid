@@ -78,15 +78,6 @@
     <div class="footer-section__bottom">
       <div class="footer-section__credits">
         <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
-        {%- if section.settings.legal_menu != blank -%}
-          <div class="footer-section__legal">
-            {%- for link in linklists[section.settings.legal_menu].links -%}
-              {%- unless link.url == '/search' or link.url == '/pages/data-sharing-opt-out' -%}
-                <a href="{{ link.url }}">{{ link.title }}</a>
-              {%- endunless -%}
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
       </div>
     </div>
   </div>

@@ -340,7 +340,7 @@
         "size": "h2",
         "show_description": false,
         "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
-        "background_image": "shopify://shop_images/bg-how-to-play-2.png",
+        "background_image": "shopify://shop_images/bg-how-to-play_2x_4d2e9fc0-62e1-4069-bbb7-43deda11cd88.png",
         "padding_top_bottom": 6,
         "enable_padding_overrides": true,
         "padding_top": 2,
@@ -510,7 +510,7 @@
           "type": "testimonial",
           "settings": {
             "quote": "<p>“Finishing above my son on the leaderboard was awesome!  He couldn’t believe I correctly picked so many upsets.”</p>",
-            "name": "Parent of a competitive child,",
+            "name": "Parent of a competitive child",
             "title": "",
             "location": "Texas",
             "avatar": "shopify://shop_images/Testimonial-image.png"
@@ -893,7 +893,7 @@
       ],
       "name": "Columns/Richtext",
       "settings": {
-        "background_image": "shopify://shop_images/bg-how-to-play-2.png",
+        "background_image": "shopify://shop_images/bg-football.png",
         "padding_top_bottom": 6,
         "enable_padding_overrides": true,
         "padding_top": 12,

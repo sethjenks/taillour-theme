@@ -23,10 +23,9 @@
         },
         "menu_tmPWFm": {
           "type": "menu",
-          "disabled": true,
           "settings": {
-            "heading": "Support",
-            "menu": "footer"
+            "heading": "Legal",
+            "menu": "legal-menu"
           }
         },
         "menu_3a6iVJ": {
@@ -45,16 +44,14 @@
       "name": "Footer",
       "settings": {
         "logo": "shopify://shop_images/dub-logo-white.svg",
-        "background_image": "shopify://shop_images/bg-footer-2.png",
+        "background_image": "shopify://shop_images/bg-footer_2x_f1a2784d-cbc0-4e1d-a054-5fdcab21b59d.png",
         "padding_top_bottom": 2,
         "enable_padding_overrides": false,
         "padding_top": 6,
         "padding_bottom": 6,
         "use_default_color_scheme": false,
         "color_scheme": "scheme_2",
-        "legal_menu": "legal-menu",
-        "cta_label": "Login",
-        "cta_link": "https://app.getdub.com"
+        "legal_menu": "legal-menu"
       }
     },
     "copyright": {
