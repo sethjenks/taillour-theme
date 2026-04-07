@@ -33,8 +33,8 @@
             "button1_anchor_link": "",
             "button1_enable": true,
             "button1_style": "primary",
-            "button2_label": "Log in",
-            "button2_link": "https://app.getdub.com",
+            "button2_label": "Get merch",
+            "button2_link": "shopify://collections/all",
             "button2_anchor_link": "",
             "button2_enable": true,
             "button2_style": "secondary",
@@ -120,7 +120,7 @@
         "heading_7EmBXk": {
           "type": "heading",
           "settings": {
-            "text": "Friendly competition for all ages.",
+            "text": "Friendly competition for all ages",
             "size": "h2"
           }
         },
@@ -320,7 +320,7 @@
             "button_label": "Create free account",
             "button_link": "https://app.getdub.com/register",
             "anchor_link": "",
-            "padding_top": 0,
+            "padding_top": 3,
             "padding_bottom": 0
           }
         }
@@ -357,7 +357,7 @@
         "mobile_media_width": 100,
         "mobile_media_translate_x": -50,
         "mobile_media_space": 0,
-        "family_image": "shopify://shop_images/Leaderboard-2_2x_1d01a3f0-67e9-4cc1-89f0-1f32e091d5ac.png",
+        "family_image": "shopify://shop_images/bracket-ornge.png",
         "family_use_focal_point": false,
         "family_aspect_ratio": "2/3",
         "family_object_fit": "cover",
@@ -373,11 +373,11 @@
         "family_enable_absolute": true,
         "family_x_min": 0,
         "family_x": 43,
-        "family_x_max": 100,
+        "family_x_max": 45,
         "family_y_min": 0,
-        "family_y": 75,
-        "family_y_max": 100,
-        "family_width_min": 10,
+        "family_y": 50,
+        "family_y_max": 60,
+        "family_width_min": 50,
         "family_width": 100,
         "family_width_max": 100,
         "family_height_min": 10,
@@ -385,13 +385,13 @@
         "family_height_max": 100,
         "family_y_overhang_mobile": 0,
         "app_y_overhang_mobile": 0,
-        "family_x_min_mobile": 0,
-        "family_x_mobile": 50,
-        "family_x_max_mobile": 100,
+        "family_x_min_mobile": 20,
+        "family_x_mobile": 20,
+        "family_x_max_mobile": 30,
         "family_y_min_mobile": 0,
-        "family_y_mobile": 73,
-        "family_y_max_mobile": 100,
-        "family_width_min_mobile": 10,
+        "family_y_mobile": 50,
+        "family_y_max_mobile": 50,
+        "family_width_min_mobile": 30,
         "family_width_mobile": 100,
         "family_width_max_mobile": 100,
         "family_height_min_mobile": 10,
@@ -627,7 +627,7 @@
         "heading_bLhcRh": {
           "type": "heading",
           "settings": {
-            "text": "Always something to play.",
+            "text": "Always something to play",
             "size": "h2"
           }
         },
@@ -767,7 +767,7 @@
         "header_w99tRC": {
           "type": "header",
           "settings": {
-            "title": "Wins are better together.",
+            "title": "Wins are better together",
             "title_alignment": "center",
             "title_size": "h1",
             "subtitle": "<p>With dub, competition brings people together. Whether you’re here to follow your instincts, study every matchup, or just play along for fun, there’s room for everyone.</p>",

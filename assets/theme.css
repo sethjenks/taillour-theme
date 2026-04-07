@@ -61,6 +61,7 @@ is yours! :)
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 /* !! General */
@@ -2094,6 +2095,12 @@ article img {
   filter: blur(var(--image-text-blob-blur, 40px));
   pointer-events: none;
   z-index: 1;
+}
+
+/* !! Section: Image with text */
+.image-text-section {
+  overflow-x: visible;
+  overflow-y: clip;
 }
 
 /* !! Section: Image banner (hero) */
