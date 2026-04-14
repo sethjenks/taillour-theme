@@ -2310,14 +2310,15 @@ article img {
 
 @media screen and (max-width: 768px) {
   .promotion-hero {
+    flex-direction: column;
+    align-items: stretch;
     padding-top: calc(
       var(--section-padding-top, var(--section-padding-default, 6rem)) *
         var(--section-padding-scale, 1) + var(--nav-offset)
     );
-    padding-bottom: calc(
-      var(--section-padding-bottom, var(--section-padding-default, 6rem)) *
-        var(--section-padding-scale, 1)
-    );
+    padding-bottom: 0;
+    min-height: auto;
+    overflow: hidden;
   }
   .promotion-hero-inner {
     padding: 0 24px;
@@ -2332,9 +2333,30 @@ article img {
   }
   .promotion-hero-body {
     font-size: 18px;
+    max-width: 100%;
   }
   .promotion-hero-media {
-    display: none;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: auto;
+  }
+  .promotion-hero-media img,
+  .promotion-hero-media svg {
+    width: clamp(
+      var(--promotion-media-width-min, 260px),
+      var(--promotion-media-width-preferred, 48vw),
+      var(--promotion-media-width-max, 520px)
+    );
+    height: auto;
+    max-width: 100%;
   }
   .large-media-section__inner {
     flex-direction: column;

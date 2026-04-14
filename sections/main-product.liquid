@@ -67,38 +67,50 @@ var default_image = {{ product.featured_image.id | default: 'null' }};
                 </div>
 
               {%- when 'title' -%}
-                <h1>
-                  {{- block.settings.title -}}
-                </h1>
+                <h1>{{ product.title }}</h1>
 
               {%- when "sku" -%}
-                <p class="small-text">
-                  {{ block.settings.label }}
-                  <span class="js--variant-sku">{{ current_variant.sku }}</span>
-                </p>
+                {%- if current_variant.sku != blank -%}
+                  <p class="small-text">
+                    {{ block.settings.label }}
+                    <span class="js--variant-sku">{{ current_variant.sku }}</span>
+                  </p>
+                {%- endif -%}
 
               {%- when 'text' -%}
-                <div class="rte">
-                  {{ block.settings.content }}
-                </div>
+                {%- if block.settings.use_product_description -%}
+                  {%- if product.description != blank -%}
+                    <div class="rte">
+                      {{ product.description }}
+                    </div>
+                  {%- endif -%}
+                {%- elsif block.settings.content != blank -%}
+                  <div class="rte">
+                    {{ block.settings.content }}
+                  </div>
+                {%- endif -%}
 
               {%- when 'rule' -%}
                 <hr>
 
               {%- when 'detail' -%}
-                <details{% if block.settings.open == true %} open{%- endif -%}>
-                  <summary>
-                    <span>{{ block.settings.title }}</span>
-                  </summary>
-                  <div class="rte">
-                    {{ block.settings.content }}
-                  </div>
-                </details>
+                {%- if block.settings.title != blank and block.settings.content != blank -%}
+                  <details{% if block.settings.open == true %} open{%- endif -%}>
+                    <summary>
+                      <span>{{ block.settings.title }}</span>
+                    </summary>
+                    <div class="rte">
+                      {{ block.settings.content }}
+                    </div>
+                  </details>
+                {%- endif -%}
 
               {%- when 'liquid' -%}
-                <div class="raw-html-content">
-                  {{ block.settings.html }}
-                </div>
+                {%- if block.settings.html != blank -%}
+                  <div class="raw-html-content">
+                    {{ block.settings.html }}
+                  </div>
+                {%- endif -%}
 
               {%- when 'product' %}
                 {% render 'purchase-together',
@@ -253,10 +265,8 @@ function goToImage(index, container=false) {
       "limit": 1,
       "settings": [
         {
-          "type": "text",
-          "id": "title",
-          "label": "Text",
-          "default": "{{ product.title }}"
+          "type": "paragraph",
+          "content": "Displays the product title from the product admin."
         }
       ]
     },
@@ -303,9 +313,16 @@ function goToImage(index, container=false) {
       "name": "Text",
       "settings": [
         {
+          "type": "checkbox",
+          "id": "use_product_description",
+          "label": "Use product description from admin",
+          "default": true
+        },
+        {
           "type": "richtext",
           "id": "content",
-          "label": "Content"
+          "label": "Content",
+          "info": "Shown when \"Use product description from admin\" is off. You can connect a product metafield as a dynamic source."
         }
       ]
     },

@@ -14,20 +14,13 @@
       "blocks": {
         "title_kGVXCN": {
           "type": "title",
-          "settings": {
-            "title": "{{ product.title }}"
-          }
-        },
-        "sku_waYyYi": {
-          "type": "sku",
-          "settings": {
-            "label": "SKU:"
-          }
+          "settings": {}
         },
         "text_VgqAwb": {
           "type": "text",
           "settings": {
-            "content": "{{ product.description }}"
+            "use_product_description": true,
+            "content": ""
           }
         },
         "rule_rd4jRV": {
@@ -41,107 +34,17 @@
             "show_quantity": true,
             "show_accelerated_checkout_buttons": true
           }
-        },
-        "rule_VKccTF": {
-          "type": "rule",
-          "settings": {}
-        },
-        "product_wtgCmw": {
-          "type": "product",
-          "settings": {
-            "heading": "Frequently purchased together",
-            "total_label": "Total Price:",
-            "limit": "2",
-            "thumbnail_size": 150
-          }
-        },
-        "text_NTqjMB": {
-          "type": "text",
-          "settings": {
-            "content": "<p><strong>Need the price further up? You can add as much information as you need here, and reorganise each part of the product details section via the customiser.</strong></p>"
-          }
-        },
-        "text_pLP6Me": {
-          "type": "text",
-          "settings": {
-            "content": "<p>Copyright by respective movie studios. Intended for personal use only and strictly forbidden to reproduce as printed posters.</p>"
-          }
-        },
-        "detail_gzcnpK": {
-          "type": "detail",
-          "settings": {
-            "title": "Some more information",
-            "content": "<p>These are details/summary tabs and you can add as many as you need via the customiser. There are no restrictions with Taillour - if you don't need them, you can remove them entirely from the section template.</p>",
-            "open": true
-          }
-        },
-        "detail_NhMUn6": {
-          "type": "detail",
-          "settings": {
-            "title": "Tabs can be set to open or closed by default",
-            "content": "<p>Any tab can be set to be open or closed as default, so important information is always displayed.</p>",
-            "open": false
-          }
         }
       },
       "block_order": [
         "title_kGVXCN",
-        "sku_waYyYi",
         "text_VgqAwb",
         "rule_rd4jRV",
-        "cart_QcHnC3",
-        "rule_VKccTF",
-        "product_wtgCmw",
-        "text_NTqjMB",
-        "text_pLP6Me",
-        "detail_gzcnpK",
-        "detail_NhMUn6"
+        "cart_QcHnC3"
       ],
       "settings": {
         "padding_top": 10,
         "padding_bottom": 0
-      }
-    },
-    "faqs_M7fRxe": {
-      "type": "faqs",
-      "blocks": {
-        "text_M6ENnC": {
-          "type": "text",
-          "settings": {
-            "title": "Show more information as FAQs",
-            "content": "<p>The FAQs section can be added anywhere within the store, and you can add as many as you need.</p>",
-            "open": true
-          }
-        },
-        "text_DYzPwt": {
-          "type": "text",
-          "settings": {
-            "title": "About the \"Recently Viewed\" section below",
-            "content": "<p>The recently viewed section below remembers the products the customer browsed on your store. It's a feature that our many of our clients requested and which customer's found useful. So, we've added it into Taillour too. 🙂 </p>",
-            "open": true
-          }
-        },
-        "text_ABWMfy": {
-          "type": "text",
-          "settings": {
-            "title": "About the \"You may also like...\" section below",
-            "content": "<p>This is the default product recommendations integration provided by Shopify. Integrated so you don't have to. 🙂 </p>",
-            "open": false
-          }
-        }
-      },
-      "block_order": [
-        "text_M6ENnC",
-        "text_DYzPwt",
-        "text_ABWMfy"
-      ],
-      "settings": {
-        "use_default_color_scheme": true,
-        "color_scheme": "",
-        "heading": "Frequently Asked Questions",
-        "size": "h2",
-        "show_description": false,
-        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>"
       }
     },
     "product_recommendations_jRYYgX": {
@@ -169,7 +72,6 @@
   },
   "order": [
     "product",
-    "faqs_M7fRxe",
     "product_recommendations_jRYYgX",
     "recently_viewed_yG6Mdn"
   ]
