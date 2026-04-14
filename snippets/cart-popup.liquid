@@ -1,17 +1,23 @@
 {% style %}
 #js--cart-popup {
   position: relative;
+  overflow: visible;
   summary {
     text-decoration: underline;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 }
 #cart-popup-summary {
-  position: fixed;
-  right: calc(((100vw - var(--max-width)) / 2) + 1rem);
-  width: 400px;
-  margin-top: 1rem;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.75rem);
+  width: min(400px, calc(100vw - 2rem));
   background-color: var(--white);
-  border: var(--border);
+  border: var(--field-border);
+  border-radius: var(--field-radius);
+  box-shadow: var(--field-shadow);
   z-index: 10;
   padding: 0 0 0.5rem 0;
   text-align: left;
@@ -23,9 +29,10 @@
   align-items: center;
   justify-content: space-between;
   font-size: var(--font-size);
+  padding: 16px 24px;
   button {
     font-size: 24px;
-    color: var(--black);
+    color: var(--night);
     background-color: transparent;
   }
 }
@@ -35,7 +42,7 @@
   overflow-y: auto;
 }
 .cart-popup-summary_actions {
-  border-top: var(--border);
+  border-top: var(--field-border);
 }
 .cart-popup-summary_item {
   display: grid;
@@ -46,7 +53,7 @@
   font-size: 1rem;
 }
 .cart-popup-summary_item + .cart-popup-summary_item {
-  border-top: 2px dashed var(--black);
+  border-top: var(--field-border-dashed-strong);
 }
 .cart-popup-summary_item:hover {
   background-color: var(--cream);
@@ -68,14 +75,16 @@
   font-size: 16px;
   width: 50px;
   background-color: var(--white);
-  border: 1px solid var(--black);
+  border: var(--field-border);
+  border-radius: var(--field-radius);
+  box-shadow: var(--field-shadow);
   padding: 0.25rem;
 }
 .cart-popup-summary_remove {
   background-color: rgba(0,0,0,0.1);
   font-family: var(--font-stack);
   font-size: 20px;
-  color: var(--black);
+  color: var(--night);
   display: inline-flex;
   width: 21px;
   height: 24px;
@@ -83,24 +92,28 @@
   justify-content: center;
   line-height: 0;
   &:hover {
-    background-color: var(--black);
+    background-color: var(--night);
     color: var(--white);
   }
 }
 #cart-popup-summary_total {
   display: flex;
   justify-content: space-between;
+  padding: 16px 24px;
 }
 #cart-popup-summary_buttons {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+  padding: 24px;
+  height: fit-content;
   .button {
     margin-left: 0;
-    flex: 1;
+    width: 100%;
   }
 }
 #cart-popup-summary_notification {
-  background-color: var(--black);
+  background-color: var(--night);
   color: var(--white);
   font-weight: var(--bold);
   text-align: center;
@@ -135,16 +148,29 @@
 {% endstyle %}
 
 <details id="js--cart-popup">
-  <summary>Cart (<span class="js--cart-counter">{{ cart.item_count }}</span>)</summary>
+  <summary aria-label="Cart">
+    <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="8" cy="21" r="1"></circle>
+      <circle cx="19" cy="21" r="1"></circle>
+      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.72a2 2 0 0 0 1.95-1.57L22 6H6"></path>
+    </svg>
+    (<span class="js--cart-counter">{{ cart.item_count }}</span>)
+  </summary>
   <div id="cart-popup-summary"></div>
 </details>
 
 <script>
-ready(() => {
+function initCartPopup() {
   renderCartSummary();
   ajaxAddToCart();
   handleCloseCartSummary();
-});
+}
+
+if (typeof ready === 'function') {
+  ready(initCartPopup);
+} else {
+  document.addEventListener('DOMContentLoaded', initCartPopup);
+}
 
 /*
  * Add item to cart and display the cart summary popup.
@@ -238,6 +264,9 @@ function updateCartLineItem(el) {
  */
 function renderCartSummary(showNotification=false) {
   const summary = document.getElementById('cart-popup-summary');
+  if (!summary) {
+    return Promise.resolve();
+  }
   let template = "";
   return fetch(window.Shopify.routes.root + 'cart.js')
     .then(response => response.json())
@@ -272,22 +301,27 @@ function renderCartSummary(showNotification=false) {
       template += `<div class="cart-popup-summary_item-group">`;
         cart.items.forEach(function(item){
           // Reduce the size of the image - we don't need fullsize for this!
-          let filepath = item.image;
-          let extIndex = filepath.lastIndexOf('.');
-          let filepathWithoutExtension = filepath.substring(0, extIndex);
-          let fileExtension = filepath.substring(extIndex);
-          let updatedImageSrc = `${filepathWithoutExtension}_{{ section.settings.cp_thumbnail_size | times: 2 }}x{{ section.settings.cp_thumbnail_size | times: 2 }}${fileExtension}`;
+          let imageSrc = item.image || (item.featured_image ? item.featured_image.url : null);
+          let updatedImageSrc = '';
+          if (imageSrc) {
+            let extIndex = imageSrc.lastIndexOf('.');
+            let filepathWithoutExtension = imageSrc.substring(0, extIndex);
+            let fileExtension = imageSrc.substring(extIndex);
+            updatedImageSrc = `${filepathWithoutExtension}_{{ section.settings.cp_thumbnail_size | times: 2 }}x{{ section.settings.cp_thumbnail_size | times: 2 }}${fileExtension}`;
+          }
 
           // Put the template together.
           template += `
             <div class="cart-popup-summary_item">
               <div class="cart-popup-summary_image">
-                <a href="${item.url}">
-                  <img src="${updatedImageSrc}"
-                    width="{{ section.settings.cp_thumbnail_size }}"
-                    height="{{ section.settings.cp_thumbnail_size }}"
-                    alt="${item.title}">
-                </a>
+                ${updatedImageSrc ? `
+                  <a href="${item.url}">
+                    <img src="${updatedImageSrc}"
+                      width="{{ section.settings.cp_thumbnail_size }}"
+                      height="{{ section.settings.cp_thumbnail_size }}"
+                      alt="${item.title}">
+                  </a>
+                ` : ''}
               </div>
               <div class="cart-popup-summary_title">
                 <a href="${item.url}">${item.quantity} x ${item.title}</a>
@@ -334,13 +368,33 @@ function renderCartSummary(showNotification=false) {
             </div>
           {% endif %}
           <div id="cart-popup-summary_buttons" class="cart-popup-summary_section">
-            <a class="button button-white" href="{{ routes.cart_url }}">
+            <a class="button button-white button-medium" href="{{ routes.cart_url }}">
               {{ section.settings.cp_button_label }}
             </a>
-            <a class="button" href="/checkout">{{ section.settings.cp_checkout_label }}</a>
+            <a class="button button-primary button-medium" href="/checkout">{{ section.settings.cp_checkout_label }}</a>
           </div>
         </div>`;
       summary.innerHTML = template;
+    })
+    .catch(() => {
+      summary.innerHTML = `
+        <div id="cart-popup-summary_heading" class="cart-popup-summary_section">
+          <strong>{{ section.settings.cp_heading }}</strong>
+          <div>
+            <button type="button"
+              onclick="document.getElementById('js--cart-popup').open=false;"
+              >&times;</button>
+          </div>
+        </div>
+        <div class="cart-popup-summary_section">
+          <p>Unable to load cart details right now.</p>
+        </div>
+        <div id="cart-popup-summary_buttons" class="cart-popup-summary_section">
+          <a class="button button-white button-medium" href="{{ routes.cart_url }}">
+            {{ section.settings.cp_button_label }}
+          </a>
+          <a class="button button-primary button-medium" href="/checkout">{{ section.settings.cp_checkout_label }}</a>
+        </div>`;
     });
 }
 
@@ -349,6 +403,14 @@ function renderCartSummary(showNotification=false) {
  */
 function handleCloseCartSummary() {
   const cartSummary = document.querySelector('#js--cart-popup');
+  if (!cartSummary) {
+    return;
+  }
+  cartSummary.addEventListener('toggle', function () {
+    if (cartSummary.open) {
+      renderCartSummary();
+    }
+  });
   // Close on escape.
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {

@@ -14,19 +14,29 @@
     "announcement": {
       "type": "announcement-bar",
       "settings": {
-        "text": "Welcome to the Taillour Demo store.",
-        "background": "",
-        "color": ""
+        "text": "Welcome to dub"
       }
     },
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "enable_cart_popup": true,
+        "cp_heading": "Your cart summary",
+        "cp_show_cart_items": true,
+        "cp_show_cart_total": true,
+        "cp_duration": 8,
+        "cp_thumbnail_size": 50,
+        "cp_show_additional_info": false,
+        "cp_additional_info": "",
+        "cp_button_label": "View Cart",
+        "cp_checkout_label": "Checkout now",
+        "cp_notification": "Item added to your cart."
+      }
     },
     "nav": {
       "type": "nav",
       "settings": {
-        "menu": "main-menu"
+        "menu": "main-navigation"
       }
     }
   },

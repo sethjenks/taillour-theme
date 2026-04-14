@@ -32,11 +32,46 @@ function getParam(name) {
   }
 }
 
+/*
+ * BUY IT NOW BUTTON SIZE
+ * Ensures Shopify accelerated checkout button matches sizing.
+ */
+function applyCheckoutButtonSizeClass() {
+  var selector = '.shopify-payment-button__button--unbranded';
+  var sizeClass = 'button-size-lg';
+
+  function applySize() {
+    document.querySelectorAll(selector).forEach(function (button) {
+      if (!button.classList.contains(sizeClass)) {
+        button.classList.add(sizeClass);
+      }
+    });
+  }
+
+  applySize();
+
+  var container = document.querySelector('.dynamic_checkout_buttons') || document.body;
+  if (!container || container.__sizeObserverAttached) {
+    return;
+  }
+  container.__sizeObserverAttached = true;
+
+  var observer = new MutationObserver(function () {
+    applySize();
+  });
+
+  observer.observe(container, { childList: true, subtree: true });
+}
+
 ready(function () {
   handleNumberStepper();
   handleVariantSelector();
   handleCloseDropdownMenus();
+  handleNavToggleButtons();
+  handleNavBreakpointTransition();
   handleNavToggles();
+  applyCheckoutButtonSizeClass();
+  initSmoothScroll();
 });
 
 /*
@@ -254,9 +289,70 @@ function checkVariants() {
  * Open/close main nav on mobile. This just applies a class
  * and the rest is done in CSS.
  */
+function setNavOpen(isOpen) {
+  let nav = document.querySelector('#header-nav');
+  if (!nav) {
+    return;
+  }
+  nav.classList.toggle('nav-open', isOpen);
+  let drawer = document.querySelector('.site-header__drawer');
+  if (drawer) {
+    drawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  }
+  document.body.classList.toggle('nav-open', isOpen);
+  document.querySelectorAll('[data-nav-toggle]').forEach(function (button) {
+    button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    button.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  });
+}
+
 function toggleNav() {
   let nav = document.querySelector('#header-nav');
-  nav.classList.toggle('nav-open');
+  if (!nav) {
+    return;
+  }
+  let isOpen = !nav.classList.contains('nav-open');
+  setNavOpen(isOpen);
+}
+
+function handleNavToggleButtons() {
+  document.querySelectorAll('[data-nav-toggle]').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      toggleNav();
+    });
+  });
+}
+
+function handleNavBreakpointTransition() {
+  var nav = document.getElementById('header-nav');
+  if (!nav || !window.matchMedia) {
+    return;
+  }
+  var mediaQuery = window.matchMedia('(max-width: 768px)');
+  var timeoutId = null;
+
+  function disableTransitions() {
+    nav.classList.add('nav-transition-off');
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(function () {
+      nav.classList.remove('nav-transition-off');
+    }, 300);
+  }
+
+  if (mediaQuery.matches) {
+    disableTransitions();
+  }
+
+  var handler = function () {
+    disableTransitions();
+  };
+
+  if (typeof mediaQuery.addEventListener === 'function') {
+    mediaQuery.addEventListener('change', handler);
+  } else if (typeof mediaQuery.addListener === 'function') {
+    mediaQuery.addListener(handler);
+  }
 }
 
 /*
@@ -299,11 +395,20 @@ function handleNumberStepper() {
  */
 function handleCloseDropdownMenus() {
   const nav = document.querySelector('#header-nav');
+  if (!nav) {
+    return;
+  }
+  const drawer = document.querySelector('.site-header__drawer');
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
-      nav.querySelectorAll('details[open]').forEach((detail) => {
-        detail.removeAttribute('open');
-      });
+      if (drawer) {
+        drawer.querySelectorAll('details[open]').forEach((detail) => {
+          detail.removeAttribute('open');
+        });
+      }
+      if (nav.classList.contains('nav-open')) {
+        setNavOpen(false);
+      }
     }
   });
 }
@@ -314,7 +419,14 @@ function handleCloseDropdownMenus() {
  */
 function handleNavToggles() {
   const nav = document.getElementById('header-nav');
-  let details = nav.querySelectorAll('details');
+  if (!nav) {
+    return;
+  }
+  const drawer = document.querySelector('.site-header__drawer');
+  if (!drawer) {
+    return;
+  }
+  let details = drawer.querySelectorAll('details');
   details.forEach(function (detail) {
     detail.addEventListener('toggle', function (event) {
       if (detail.open) {
@@ -323,6 +435,39 @@ function handleNavToggles() {
             otherDetail.open = false;
           }
         });
+      }
+    });
+  });
+}
+
+/*
+ * SMOOTH SCROLL
+ * Initializes Lenis for smooth scrolling and intercepts
+ * anchor link clicks to scroll to the target element.
+ */
+function initSmoothScroll() {
+  if (typeof Lenis === 'undefined') {
+    return;
+  }
+
+  var lenis = new Lenis();
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var targetId = this.getAttribute('href').substring(1);
+      if (!targetId) {
+        return;
+      }
+      var target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        lenis.scrollTo(target);
       }
     });
   });

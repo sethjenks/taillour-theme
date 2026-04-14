@@ -9,8 +9,92 @@
  */
 {
   "current": {
+    "logo": "shopify://shop_images/dub-logo.svg",
+    "favicon": "shopify://shop_images/favicon2.png",
+    "primary_font": "bricolage_grotesque_n7",
+    "secondary_font": "dm_sans_n4",
+    "primary_font_color_use_custom": false,
+    "secondary_font_color_source": "royal_purple",
+    "newsletter_popup": false,
+    "newsletter_duration": 30,
     "newsletter_heading": "Newsletter Sign-up",
     "newsletter_text": "This is the built-in newsletter signup pop-up form, which you can customise as required.",
-    "content_for_index": []
+    "default_color_scheme": "scheme_1",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_bar": false,
+          "text": "Welcome to dub",
+          "use_default_color_scheme": true,
+          "color_scheme": ""
+        }
+      },
+      "nav": {
+        "type": "nav",
+        "settings": {
+          "menu": "main-navigation",
+          "header_max_width": 1100,
+          "drawer_max_width": 320,
+          "show_cart": true,
+          "show_signup": false,
+          "signup_label": "Login",
+          "signup_link": "",
+          "show_login": false,
+          "login_label": "Login",
+          "login_link": "https://app.getdub.com/register",
+          "enable_cart_popup": false,
+          "cp_heading": "Your cart summary",
+          "cp_show_cart_items": true,
+          "cp_show_cart_total": true,
+          "cp_duration": 8,
+          "cp_thumbnail_size": 50,
+          "cp_show_additional_info": false,
+          "cp_additional_info": "",
+          "cp_button_label": "View Cart",
+          "cp_checkout_label": "Checkout now",
+          "cp_notification": "Item added to your cart."
+        }
+      }
+    },
+    "content_for_index": [],
+    "color_schemes": {
+      "scheme_1": {
+        "settings": {
+          "bg_primary": "#ffffff",
+          "bg_secondary": "#f5f1f1",
+          "bg_gradient": "",
+          "text_primary": "#181521",
+          "text_secondary": "#292237"
+        }
+      },
+      "scheme_2": {
+        "settings": {
+          "bg_primary": "#181521",
+          "bg_secondary": "#292237",
+          "bg_gradient": "",
+          "text_primary": "#ffffff",
+          "text_secondary": "#e2d6fc"
+        }
+      },
+      "scheme-ee222970-1679-436a-9f5c-1986d6d291fc": {
+        "settings": {
+          "bg_primary": "#d2fda7",
+          "bg_secondary": "#effe75",
+          "bg_gradient": "linear-gradient(136deg, rgba(210, 253, 167, 1) 11%, rgba(239, 254, 117, 1) 84%)",
+          "text_primary": "#181521",
+          "text_secondary": "#292237"
+        }
+      },
+      "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f": {
+        "settings": {
+          "bg_primary": "#f5f1f1",
+          "bg_secondary": "#f5f1f1",
+          "bg_gradient": "",
+          "text_primary": "#181521",
+          "text_secondary": "#292237"
+        }
+      }
+    }
   }
 }

@@ -1,18 +1,75 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "Footer",
   "type": "footer",
   "sections": {
-    "footer": {
+    "footer_FWzbiW": {
       "type": "footer",
-      "settings": {}
+      "blocks": {
+        "menu_pmkrgT": {
+          "type": "menu",
+          "settings": {
+            "heading": "Company",
+            "menu": "main-navigation"
+          }
+        },
+        "menu_tmPWFm": {
+          "type": "menu",
+          "settings": {
+            "heading": "Legal",
+            "menu": "legal-menu"
+          }
+        },
+        "menu_3a6iVJ": {
+          "type": "menu",
+          "settings": {
+            "heading": "Merch",
+            "menu": "footer-navigation-1"
+          }
+        }
+      },
+      "block_order": [
+        "menu_pmkrgT",
+        "menu_tmPWFm",
+        "menu_3a6iVJ"
+      ],
+      "name": "Footer",
+      "settings": {
+        "logo": "shopify://shop_images/dub-logo-white.svg",
+        "background_image": "shopify://shop_images/bg-footer_2x_f1a2784d-cbc0-4e1d-a054-5fdcab21b59d.png",
+        "padding_top_bottom": 2,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme_2",
+        "legal_menu": "legal-menu"
+      }
     },
     "copyright": {
       "type": "copyright",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "padding_top_bottom": 0,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme_2",
+        "text": ""
+      }
     }
   },
   "order": [
-    "footer",
+    "footer_FWzbiW",
     "copyright"
   ]
 }

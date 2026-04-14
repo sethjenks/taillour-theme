@@ -1,13 +1,28 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 <style>
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
 }
 {{ section.id | prepend: '#' }} .collections-grid {
   grid-template-columns: repeat({{ section.settings.collections_per_row }}, 1fr);
 }
 </style>
 
-<div id="{{ section.id }}" class="section-wrap" style="color:{{ section.settings.color | default:'inherit' }};">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section">
     {% if section.settings.show_heading == true %}
       <{{ section.settings.size }}>
@@ -48,6 +63,11 @@
     {
       "type": "header",
       "content": "Section Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
       "type": "checkbox",
@@ -112,15 +132,23 @@
       "default": 4
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ]
 }

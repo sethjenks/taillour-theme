@@ -40,7 +40,8 @@ Empty cart section.
 {% endcomment %}
 {% capture empty_cart %}
 <section>
-  <p>Your basket is empty. <a href="{{ shop.url }}" class="button">Let's go shopping</a></p>
+  <p>Your basket is empty.</p>
+  <p><a href="{{ shop.url }}" class="button button-primary">Go home</a></p>
 </section>
 {% endcapture %}
 <script>
@@ -86,7 +87,7 @@ const emptyCartHtml = `{{ empty_cart }}`;
               {{ section.settings.checkout_note }}
             </div>
             <div>
-              <button type="submit" name="checkout" class="button">
+              <button type="submit" name="checkout" class="button button-primary">
                 {{ section.settings.checkout_btn_label }}
               </button>
               {%- if additional_checkout_buttons -%}

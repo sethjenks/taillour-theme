@@ -2,17 +2,36 @@
 # This section must be added to the PDP for the recently viewed feature
 # to work correctly.
 assign image_width = 400
+assign active_scheme = settings.default_color_scheme
+if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank
+  assign active_scheme = section.settings.color_scheme
+endif
+assign scheme_class = ''
+if active_scheme != blank
+  assign scheme_class = 'color-' | append: active_scheme.id
+endif
 %}
 {% style %}
 #recently-viewed.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
 }
 #recently-viewed .products-grid {
-  grid-template-columns: repeat({{ section.settings.products_per_row }}, 1fr);
+  --product-card-min: 274px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--product-card-min), 1fr));
 }
+  #recently-viewed.recently-viewed--hidden {
+    display: none;
+  }
 {% endstyle %}
 
-<section id="recently-viewed" class="section-wrap" style="color:{{ section.settings.color | default:'inherit' }};">
+<section id="recently-viewed" class="section-wrap recently-viewed--hidden {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section">
     <{{- section.settings.size }}>
       {{- section.settings.heading -}}
@@ -79,8 +98,12 @@ function displayRecentlyViewed() {
   let items = _getRecentlyViewed();
   const limit = {{ section.settings.limit }};
   const el = document.getElementById("js--recently_viewed");
-  if (document.getElementById("recently-viewed") != null) {
+  const section = document.getElementById("recently-viewed");
+  if (section != null) {
     if (items.length > 0) {
+      const total = Math.min(items.length, limit);
+      let loadedCount = 0;
+      let insertedCount = 0;
       items.forEach(function(item, index) {
         if ((index + 1) <= limit) {
           let url = `/products/${item.handle}?view=card`;
@@ -99,17 +122,27 @@ function displayRecentlyViewed() {
               }
             })
             .then(function(card) {
-              el.insertAdjacentHTML("beforeend", card);
+              if (card) {
+                el.insertAdjacentHTML("beforeend", card);
+                insertedCount += 1;
+                section.classList.remove("recently-viewed--hidden");
+              }
             })
             .catch(function(error) {
               // Remove this item from the array.
               let cleanUpArray = items.filter((i) => i.handle != item.handle);
               localStorage.setItem("recentlyViewed", JSON.stringify(cleanUpArray));
+            })
+            .finally(function() {
+              loadedCount += 1;
+              if (loadedCount === total && insertedCount === 0) {
+                section.classList.add("recently-viewed--hidden");
+              }
             });
         }
       });
     } else {
-      document.getElementById("recently-viewed").style.display = "none";
+      section.classList.add("recently-viewed--hidden");
     }
   }
 };
@@ -139,6 +172,11 @@ ready(function() {
     {
       "type": "header",
       "content": "Section Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
       "type": "inline_richtext",
@@ -187,15 +225,23 @@ ready(function() {
       "default": 4
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ]
 }

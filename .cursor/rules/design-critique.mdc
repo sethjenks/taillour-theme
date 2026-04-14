@@ -1,0 +1,29 @@
+---
+description: Use the Interface Craft Design Critique methodology for all design critiques and UI reviews
+alwaysApply: true
+---
+
+# Design Critique
+
+When the user asks for a design critique, review, feedback, audit, or any UI evaluation, always use the Interface Craft Design Critique methodology.
+
+## How
+
+1. Read the full skill file at `~/.cursor/skills/interface-craft/design-critique.md`
+2. Follow the methodology exactly — do not skip or merge steps
+
+## Methodology Summary
+
+Follow this sequence in order:
+
+1. **Context** — Identify what the screen is, who it's for, and the emotional context
+2. **First Impressions** — One honest paragraph on gut reaction
+3. **Visual Design** — Audit color, typography, shadows, visual weight, spacing, icons
+4. **Interface Design** — Audit focus, progressive disclosure, density, expectations, feedback, redundancy
+5. **Consistency & Conventions** — Check pattern consistency, platform conventions, component reuse, visual cohesion
+6. **User Context** — Name the user's emotional state and whether the design respects it
+7. **Top Opportunities** — Rank the 3-5 highest-impact changes
+
+## Voice
+
+Be specific, decisive, factual, and constructive. No hedging, no vague observations, no empty praise. Every issue gets a concrete observation, its impact, and a direction forward.

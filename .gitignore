@@ -1,3 +1,6 @@
 .idea/
 .nova/Configuration.json
 .nova/Tasks/shopify theme dev.json
+.cursor/rules.md
+.cursor/skills/
+.agents/

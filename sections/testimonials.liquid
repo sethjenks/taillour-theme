@@ -1,0 +1,253 @@
+{%- liquid
+assign active_scheme = settings.default_color_scheme
+if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank
+  assign active_scheme = section.settings.color_scheme
+endif
+assign scheme_class = ''
+if active_scheme != blank
+  assign scheme_class = 'color-' | append: active_scheme.id
+endif
+assign padding_default = section.settings.padding_top_bottom | default: 6
+assign padding_top = padding_default
+assign padding_bottom = padding_default
+if section.settings.enable_padding_overrides
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+endif
+assign testimonial_count = 0
+for block in section.blocks
+  if block.type == 'testimonial'
+    assign testimonial_count = testimonial_count | plus: 1
+  endif
+endfor
+assign columns = 1
+if testimonial_count == 2
+  assign columns = 2
+elsif testimonial_count > 2
+  assign columns = 3
+endif
+-%}
+
+{% style %}
+#shopify-section-{{ section.id }} {
+  overflow: visible;
+  padding: 16px;
+}
+#{{ section.id }}.testimonials-section:before {
+  background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
+}
+{%- unless section.settings.max_width == blank or section.settings.max_width == 0 -%}
+#{{ section.id }}.testimonials-section {
+  --testimonials-max-width: {{ section.settings.max_width | append: 'px' }};
+}
+{%- endunless -%}
+{% endstyle %}
+
+<div
+  id="{{ section.id }}"
+  class="section-wrap testimonials-section {{ scheme_class }}"
+  style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }}; --testimonial-columns: {{ columns }}; --testimonial-float-offset-mobile: {{ section.settings.mobile_float_offset | append: 'px' }}; --testimonials-section-height: {{ section.settings.section_height | default: 320 | append: 'px' }}; --testimonial-panel-min-height: {{ section.settings.section_height | default: 320 | append: 'px' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}"
+>
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
+  <div class="testimonials-spacer" aria-hidden="true"></div>
+  <div class="testimonials-panel">
+    <div class="testimonials-grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'testimonial' -%}
+            <div class="testimonial-card" {{ block.shopify_attributes }}>
+              <div class="testimonial-card__avatar">
+                {%- if block.settings.avatar == blank -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder' }}
+                {%- else -%}
+                  {{ block.settings.avatar | image_url: width: 160 | image_tag: alt: block.settings.avatar.alt, loading: 'lazy' }}
+                {%- endif -%}
+              </div>
+              {%- unless block.settings.quote == blank -%}
+                <div class="testimonial-card__quote rte">
+                  {{ block.settings.quote }}
+                </div>
+              {%- endunless -%}
+              <div class="testimonial-card__meta">
+                {%- unless block.settings.name == blank -%}
+                  <div class="testimonial-card__name">{{ block.settings.name }}</div>
+                {%- endunless -%}
+                {%- unless block.settings.title == blank -%}
+                  <div class="testimonial-card__title">{{ block.settings.title }}</div>
+                {%- endunless -%}
+                {%- unless block.settings.location == blank -%}
+                  <div class="testimonial-card__location">{{ block.settings.location }}</div>
+                {%- endunless -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "testimonials-section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "number",
+      "id": "max_width",
+      "label": "Max width (px)",
+      "info": "Leave blank for the theme max width."
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section height (desktop)",
+      "min": 240,
+      "max": 600,
+      "step": 10,
+      "default": 320,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_bottom",
+      "label": "Section padding (top & bottom)",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "type": "range",
+      "id": "mobile_float_offset",
+      "label": "Mobile float offset (px)",
+      "info": "Negative values raise the panel on mobile.",
+      "min": -240,
+      "max": 0,
+      "step": 5,
+      "default": -100,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_padding_overrides",
+      "label": "Override top/bottom padding",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.enable_padding_overrides == true }}",
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_padding_overrides == true }}",
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "quote",
+          "label": "Quote",
+          "default": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Marcus Chen"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title/Role",
+          "default": "Pickleball enthusiast"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location/Subtitle",
+          "default": "Member, Dallas"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

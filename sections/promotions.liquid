@@ -1,60 +1,204 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
+{%- assign padding_default = section.settings.padding_top_bottom | default: 6 -%}
+{%- assign padding_top = padding_default -%}
+{%- assign padding_bottom = padding_default -%}
+{%- if section.settings.enable_padding_overrides -%}
+  {%- assign padding_top = section.settings.padding_top -%}
+  {%- assign padding_bottom = section.settings.padding_bottom -%}
+{%- endif -%}
+{%- assign position_mode = section.settings.position_mode | default: 'preset' -%}
+{%- assign object_position_desktop = section.settings.object_position -%}
+{%- if position_mode == 'custom' -%}
+  {%- assign object_position_desktop = section.settings.object_position_x | append: '% ' | append: section.settings.object_position_y | append: '%' -%}
+{%- endif -%}
+{%- assign object_position_mobile = section.settings.object_position_mobile | default: section.settings.object_position -%}
+{%- if position_mode == 'custom' -%}
+  {%- assign object_position_mobile = section.settings.object_position_x_mobile | append: '% ' | append: section.settings.object_position_y_mobile | append: '%' -%}
+{%- endif -%}
 {% style %}
-#{{ section.id }} .promotion-asset {
-  height: {{ section.settings.desktop_height | append: "vw" }};
+#{{ section.id }}.promotion-hero {
+  min-height: {{ section.settings.desktop_height | append: "vw" }};
+  --promotion-hero-align: {{ section.settings.vertical_alignment | default: 'center' }};
+  --promotion-media-max-height-min: {{ section.settings.media_max_height_min | append: "vh" }};
+  --promotion-media-max-height: {{ section.settings.media_max_height | append: "vh" }};
+  --promotion-media-max-height-max: {{ section.settings.media_max_height_max | append: "vh" }};
+  --promotion-media-width-min: {{ section.settings.media_width_min | append: "px" }};
+  --promotion-media-width-preferred: {{ section.settings.media_width_preferred | append: "vw" }};
+  --promotion-media-width-max: {{ section.settings.media_width_max | append: "px" }};
+  --promotion-media-top: {{ section.settings.media_top_inset | append: "px" }};
+  --promotion-media-offset-x-min: {{ section.settings.media_offset_x_min | append: "%" }};
+  --promotion-media-offset-x: {{ section.settings.media_offset_x | append: "%" }};
+  --promotion-media-offset-x-max: {{ section.settings.media_offset_x_max | append: "%" }};
+  --promotion-media-offset-y-min: {{ section.settings.media_offset_y_min | append: "%" }};
+  --promotion-media-offset-y: {{ section.settings.media_offset_y | append: "%" }};
+  --promotion-media-offset-y-max: {{ section.settings.media_offset_y_max | append: "%" }};
+  --promotion-content-max: {{ section.settings.content_max_width | append: "px" }};
+  --promotion-body-max: {{ section.settings.body_max_width | append: "px" }};
+  --promotion-blob-1-size: {{ section.settings.blob1_size | append: "vw" }};
+  --promotion-blob-1-x: {{ section.settings.blob1_x | append: "%" }};
+  --promotion-blob-1-y: {{ section.settings.blob1_y | append: "%" }};
+  --promotion-blob-1-color: {{ section.settings.blob1_color }};
+  --promotion-blob-1-blur: {{ section.settings.blob1_blur | append: "px" }};
+  --promotion-blob-1-opacity: {{ section.settings.blob1_opacity | divided_by: 100.0 }};
+  --promotion-blob-2-size: {{ section.settings.blob2_size | append: "vw" }};
+  --promotion-blob-2-x: {{ section.settings.blob2_x | append: "%" }};
+  --promotion-blob-2-y: {{ section.settings.blob2_y | append: "%" }};
+  --promotion-blob-2-color: {{ section.settings.blob2_color }};
+  --promotion-blob-2-blur: {{ section.settings.blob2_blur | append: "px" }};
+  --promotion-blob-2-opacity: {{ section.settings.blob2_opacity | divided_by: 100.0 }};
+  align-items: var(--promotion-hero-align);
 }
-#{{ section.id }} .promotion-asset img {
+#{{ section.id }} .promotion-hero-media img {
   object-fit: {{ section.settings.object_fit }};
-  object-position:{{ section.settings.object_position }};
+  {%- unless section.settings.use_focal_point -%}
+  object-position: {{ object_position_desktop }};
+  {%- endunless -%}
 }
 @media screen and (max-width: 768px) {
-  #{{ section.id }} .promotion-asset {
-    height: {{ section.settings.mobile_height | append: "vw" }};
+  #{{ section.id }}.promotion-hero {
+    min-height: {{ section.settings.mobile_height | append: "vw" }};
+    --promotion-media-max-height-min: {{ section.settings.media_max_height_min_mobile | append: "vh" }};
+    --promotion-media-max-height: {{ section.settings.media_max_height_mobile | append: "vh" }};
+    --promotion-media-max-height-max: {{ section.settings.media_max_height_max_mobile | append: "vh" }};
+    --promotion-media-width-min: {{ section.settings.media_width_min_mobile | append: "px" }};
+    --promotion-media-width-preferred: {{ section.settings.media_width_preferred_mobile | append: "vw" }};
+    --promotion-media-width-max: {{ section.settings.media_width_max_mobile | append: "px" }};
+    --promotion-media-offset-x-min: {{ section.settings.media_offset_x_min_mobile | append: "%" }};
+    --promotion-media-offset-x: {{ section.settings.media_offset_x_mobile | append: "%" }};
+    --promotion-media-offset-x-max: {{ section.settings.media_offset_x_max_mobile | append: "%" }};
+    --promotion-media-offset-y-min: {{ section.settings.media_offset_y_min_mobile | append: "%" }};
+    --promotion-media-offset-y: {{ section.settings.media_offset_y_mobile | append: "%" }};
+    --promotion-media-offset-y-max: {{ section.settings.media_offset_y_max_mobile | append: "%" }};
   }
+  {%- unless section.settings.use_focal_point -%}
+  #{{ section.id }} .promotion-hero-media img {
+    object-position: {{ object_position_mobile }};
+  }
+  {%- endunless -%}
 }
 {% endstyle %}
 
-<div id="{{ section.id }}" style="background-color:{{ section.settings.background }};">
-  <!-- image -->
-  <div class="promotion-asset">
-    {%- if section.settings.image == blank -%}
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
-    {%- else -%}
-      {%- assign image = section.settings.image -%}
-      <img src="{{ image | image_url: width: image.width }}"
-      width="{{ image.width }}"
-      height="{{ image.height }}"
-      alt="{{ image.alt }}"
-      loading="lazy">
-    {% endif %}
-  </div>
+{%- assign heading_text = '' -%}
+{%- assign heading_size = 'h1' -%}
+{%- assign body_text = '' -%}
+{%- assign button1_label = '' -%}
+{%- assign button1_link = '' -%}
+{%- assign button1_enable = false -%}
+{%- assign button1_style = 'primary' -%}
+{%- assign button2_label = '' -%}
+{%- assign button2_link = '' -%}
+{%- assign button2_enable = false -%}
+{%- assign button2_style = 'secondary' -%}
 
-  <!-- content -->
-  <div class="section">
-    <div class="promotion-content">
-      <div class="rte">
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-            {%- when 'heading' -%}
-              <{{- block.settings.size }}>{{ block.settings.text }}</{{- block.settings.size -}}>
-            {%- when 'text' -%}
-              <p>{{ block.settings.text }}</p>
-            {%- when 'buttons' -%}
-              <div>
-                {%- if block.settings.button1_enable -%}
-                  <a class="button" href="{{ block.settings.button1_link | default: '#' }}">
-                    {{ block.settings.button1_label }}
-                  </a>
-                {%- endif -%}
-                {% if block.settings.button2_enable %}
-                  <a class="button" href="{{ block.settings.button2_link | default: '#' }}">
-                    {{ block.settings.button2_label }}
-                  </a>
-                {%- endif -%}
-              </div>
-          {%- endcase -%}
-        {%- endfor -%}
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'heading' -%}
+      {%- assign heading_text = block.settings.text -%}
+      {%- assign heading_size = block.settings.size -%}
+    {%- when 'text' -%}
+      {%- assign body_text = block.settings.text -%}
+    {%- when 'buttons' -%}
+      {%- assign button1_label = block.settings.button1_label -%}
+      {%- assign button1_link = block.settings.button1_anchor_link | default: block.settings.button1_link -%}
+      {%- assign button1_enable = block.settings.button1_enable -%}
+      {%- assign button1_style = block.settings.button1_style | default: 'primary' -%}
+      {%- assign button2_label = block.settings.button2_label -%}
+      {%- assign button2_link = block.settings.button2_anchor_link | default: block.settings.button2_link -%}
+      {%- assign button2_enable = block.settings.button2_enable -%}
+      {%- assign button2_style = block.settings.button2_style | default: 'secondary' -%}
+      {%- assign buttons_padding_top = block.settings.padding_top | default: 0 -%}
+      {%- assign buttons_padding_bottom = block.settings.padding_bottom | default: 0 -%}
+  {%- endcase -%}
+{%- endfor -%}
+
+{%- assign hero_image = section.settings.hero_image -%}
+{%- assign hero_image_mobile = section.settings.hero_image_mobile -%}
+{%- assign primary_heading = section.settings.primary_text | default: heading_text -%}
+{%- assign secondary_heading = section.settings.secondary_text -%}
+
+<div
+  id="{{ section.id }}"
+  class="promotion-hero section-pad {{ scheme_class }}"
+  style="background-color: var(--theme-bg-primary, #ffffff); color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}{% if section.settings.background_image != blank %} background-image: url({{ section.settings.background_image | image_url: width: 2000 }}); background-size: cover; background-position: center; background-repeat: no-repeat;{% endif %}"
+>
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
+  {%- if section.settings.blob1_enable or section.settings.blob2_enable -%}
+    <div class="promotion-hero__blobs" aria-hidden="true">
+      {%- if section.settings.blob1_enable -%}
+        <span class="promotion-hero__blob promotion-hero__blob--one"></span>
+      {%- endif -%}
+      {%- if section.settings.blob2_enable -%}
+        <span class="promotion-hero__blob promotion-hero__blob--two"></span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <div class="section promotion-hero-inner">
+    <div class="promotion-hero-content">
+      {%- if primary_heading != blank -%}
+        <{{ heading_size }} class="promotion-hero-title">
+          <span class="promotion-hero-title-primary">{{ primary_heading }}</span>
+          {%- if secondary_heading != blank -%}
+            <span class="promotion-hero-title-secondary">{{ secondary_heading }}</span>
+          {%- endif -%}
+        </{{ heading_size }}>
+      {%- endif -%}
+      {%- if body_text != blank -%}
+        <p class="promotion-hero-body">{{ body_text }}</p>
+      {%- endif -%}
+      <div class="promotion-hero-buttons" style="padding-top: {{ buttons_padding_top | default: 0 | append: 'rem' }}; padding-bottom: {{ buttons_padding_bottom | default: 0 | append: 'rem' }};">
+        {%- if button1_enable and button1_label != blank -%}
+          <a class="button button-{{ button1_style }}" href="{{ button1_link | default: '#' }}">
+            {{ button1_label }}
+          </a>
+        {%- endif -%}
+        {%- if button2_enable and button2_label != blank -%}
+          <a class="button button-{{ button2_style }}" href="{{ button2_link | default: '#' }}">
+            {{ button2_label }}
+          </a>
+        {%- endif -%}
       </div>
     </div>
+  </div>
+
+  <div class="promotion-hero-media" aria-hidden="true">
+    {%- if hero_image == blank -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
+    {%- else -%}
+      {%- if section.settings.use_focal_point -%}
+        <picture>
+          {%- if hero_image_mobile != blank -%}
+            <source
+              media="(max-width: 768px)"
+              srcset="{{ hero_image_mobile | image_url: width: 900 }}"
+            >
+          {%- endif -%}
+          {{ hero_image | image_url: width: 1400 | image_tag: alt: hero_image.alt, loading: 'lazy' }}
+        </picture>
+      {%- else -%}
+        <picture>
+          {%- if hero_image_mobile != blank -%}
+            <source
+              media="(max-width: 768px)"
+              srcset="{{ hero_image_mobile | image_url: width: 900 }}"
+            >
+          {%- endif -%}
+          <img
+            src="{{ hero_image | image_url: width: 1400 }}"
+            width="{{ hero_image.width }}"
+            height="{{ hero_image.height }}"
+            alt="{{ hero_image.alt }}"
+            loading="lazy"
+          >
+        </picture>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </div>
 
@@ -69,18 +213,233 @@
   "settings": [
     {
       "type": "header",
-      "content": "Image Settings"
+      "content": "Hero Text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "primary_text",
+      "label": "Primary Text",
+      "default": "Make picks."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "secondary_text",
+      "label": "Secondary Text",
+      "default": "Get the dub."
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 320,
+      "max": 900,
+      "step": 10,
+      "default": 640,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "body_max_width",
+      "label": "Body max width",
+      "min": 240,
+      "max": 800,
+      "step": 10,
+      "default": 520,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "header",
+      "content": "Hero Image"
     },
     {
       "type": "image_picker",
-      "id": "image",
-      "label": "Image"
+      "id": "hero_image",
+      "label": "Hero Image"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background Colour",
-      "default": "#ffffff"
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Hero Image (mobile)",
+      "info": "Optional. Falls back to the desktop image when empty."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_focal_point",
+      "label": "Use image focal point",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Hero Image Bounds"
+    },
+    {
+      "type": "number",
+      "id": "media_max_height_min",
+      "label": "Image height minimum (desktop, vh)",
+      "default": 60
+    },
+    {
+      "type": "number",
+      "id": "media_max_height",
+      "label": "Image height preferred (desktop, vh)",
+      "default": 90,
+      "info": "Caps the image height so it does not overlap the header."
+    },
+    {
+      "type": "number",
+      "id": "media_max_height_max",
+      "label": "Image height maximum (desktop, vh)",
+      "default": 120
+    },
+    {
+      "type": "number",
+      "id": "media_top_inset",
+      "label": "Top boundary inset (px)",
+      "default": 0,
+      "info": "Adds extra space above the image while keeping it bottom-aligned."
+    },
+    {
+      "type": "number",
+      "id": "media_width_min",
+      "label": "Hero image width min (desktop, px)",
+      "default": 320
+    },
+    {
+      "type": "number",
+      "id": "media_width_preferred",
+      "label": "Hero image width preferred (desktop, vw)",
+      "default": 42
+    },
+    {
+      "type": "number",
+      "id": "media_width_max",
+      "label": "Hero image width max (desktop, px)",
+      "default": 640
+    },
+    {
+      "type": "number",
+      "id": "media_offset_x_min",
+      "label": "Hero image offset X min (desktop, %)",
+      "default": -30
+    },
+    {
+      "type": "number",
+      "id": "media_offset_x",
+      "label": "Hero image offset X preferred (desktop, %)",
+      "default": 0
+    },
+    {
+      "type": "number",
+      "id": "media_offset_x_max",
+      "label": "Hero image offset X max (desktop, %)",
+      "default": 30
+    },
+    {
+      "type": "number",
+      "id": "media_offset_y_min",
+      "label": "Hero image offset Y min (desktop, %)",
+      "default": -30
+    },
+    {
+      "type": "number",
+      "id": "media_offset_y",
+      "label": "Hero image offset Y preferred (desktop, %)",
+      "default": 0
+    },
+    {
+      "type": "number",
+      "id": "media_offset_y_max",
+      "label": "Hero image offset Y max (desktop, %)",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Hero Image Bounds (mobile)"
+    },
+    {
+      "type": "number",
+      "id": "media_max_height_min_mobile",
+      "label": "Image height minimum (mobile, vh)",
+      "default": 60
+    },
+    {
+      "type": "number",
+      "id": "media_max_height_mobile",
+      "label": "Image height preferred (mobile, vh)",
+      "default": 90
+    },
+    {
+      "type": "number",
+      "id": "media_max_height_max_mobile",
+      "label": "Image height maximum (mobile, vh)",
+      "default": 120
+    },
+    {
+      "type": "number",
+      "id": "media_width_min_mobile",
+      "label": "Hero image width min (mobile, px)",
+      "default": 260
+    },
+    {
+      "type": "number",
+      "id": "media_width_preferred_mobile",
+      "label": "Hero image width preferred (mobile, vw)",
+      "default": 48
+    },
+    {
+      "type": "number",
+      "id": "media_width_max_mobile",
+      "label": "Hero image width max (mobile, px)",
+      "default": 520
+    },
+    {
+      "type": "number",
+      "id": "media_offset_x_min_mobile",
+      "label": "Hero image offset X min (mobile, %)",
+      "default": -30
+    },
+    {
+      "type": "number",
+      "id": "media_offset_x_mobile",
+      "label": "Hero image offset X preferred (mobile, %)",
+      "default": 0
+    },
+    {
+      "type": "number",
+      "id": "media_offset_x_max_mobile",
+      "label": "Hero image offset X max (mobile, %)",
+      "default": 30
+    },
+    {
+      "type": "number",
+      "id": "media_offset_y_min_mobile",
+      "label": "Hero image offset Y min (mobile, %)",
+      "default": -30
+    },
+    {
+      "type": "number",
+      "id": "media_offset_y_mobile",
+      "label": "Hero image offset Y preferred (mobile, %)",
+      "default": 0
+    },
+    {
+      "type": "number",
+      "id": "media_offset_y_max_mobile",
+      "label": "Hero image offset Y max (mobile, %)",
+      "default": 30
     },
     {
       "type": "select",
@@ -112,24 +471,339 @@
       "label": "Position",
       "options": [
         {
+          "value": "left top",
+          "label": "Top left"
+        },
+        {
+          "value": "center top",
+          "label": "Top center"
+        },
+        {
+          "value": "right top",
+          "label": "Top right"
+        },
+        {
+          "value": "left center",
+          "label": "Center left"
+        },
+        {
           "value": "center",
           "label": "Center"
         },
         {
-          "value": "top",
+          "value": "right center",
+          "label": "Center right"
+        },
+        {
+          "value": "left bottom",
+          "label": "Bottom left"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom center"
+        },
+        {
+          "value": "right bottom",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "position_mode",
+      "label": "Position mode",
+      "options": [
+        {
+          "value": "preset",
+          "label": "Preset positions"
+        },
+        {
+          "value": "custom",
+          "label": "Custom X/Y"
+        }
+      ],
+      "default": "preset"
+    },
+    {
+      "type": "range",
+      "id": "object_position_x",
+      "label": "Position X (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "object_position_y",
+      "label": "Position Y (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "object_position_mobile",
+      "label": "Position (mobile)",
+      "options": [
+        {
+          "value": "left top",
+          "label": "Top left"
+        },
+        {
+          "value": "center top",
+          "label": "Top center"
+        },
+        {
+          "value": "right top",
+          "label": "Top right"
+        },
+        {
+          "value": "left center",
+          "label": "Center left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right center",
+          "label": "Center right"
+        },
+        {
+          "value": "left bottom",
+          "label": "Bottom left"
+        },
+        {
+          "value": "center bottom",
+          "label": "Bottom center"
+        },
+        {
+          "value": "right bottom",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "object_position_x_mobile",
+      "label": "Position X (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "object_position_y_mobile",
+      "label": "Position Y (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.position_mode == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Background & Blobs"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_bottom",
+      "label": "Section padding (top & bottom)",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_padding_overrides",
+      "label": "Override top/bottom padding",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.enable_padding_overrides == true }}",
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_padding_overrides == true }}",
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "type": "checkbox",
+      "id": "blob1_enable",
+      "label": "Show Blob 1",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "blob1_color",
+      "label": "Blob 1 color",
+      "default": "#b68bff"
+    },
+    {
+      "type": "range",
+      "id": "blob1_size",
+      "label": "Blob 1 size",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "default": 40,
+      "unit": "vw"
+    },
+    {
+      "type": "range",
+      "id": "blob1_x",
+      "label": "Blob 1 position X",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 75,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob1_y",
+      "label": "Blob 1 position Y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 55,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob1_blur",
+      "label": "Blob 1 blur",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "blob1_opacity",
+      "label": "Blob 1 opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 80,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "blob2_enable",
+      "label": "Show Blob 2",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "blob2_color",
+      "label": "Blob 2 color",
+      "default": "#f4ff85"
+    },
+    {
+      "type": "range",
+      "id": "blob2_size",
+      "label": "Blob 2 size",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "default": 36,
+      "unit": "vw"
+    },
+    {
+      "type": "range",
+      "id": "blob2_x",
+      "label": "Blob 2 position X",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 55,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob2_y",
+      "label": "Blob 2 position Y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 40,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "blob2_blur",
+      "label": "Blob 2 blur",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "blob2_opacity",
+      "label": "Blob 2 opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 80,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "flex-start",
           "label": "Top"
         },
         {
-          "value": "bottom",
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
           "label": "Bottom"
-        },
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "right",
-          "label": "Right"
         }
       ],
       "default": "center"
@@ -155,6 +829,12 @@
       "default": 100,
       "unit": "vw",
       "info": "Height of the section in relation to the device width."
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
   "blocks": [
@@ -221,10 +901,36 @@
           "label": "Button 1 Link"
         },
         {
+          "type": "text",
+          "id": "button1_anchor_link",
+          "label": "Button 1 Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
           "type": "checkbox",
           "id": "button1_enable",
           "default": true,
           "label": "Show Button 1?"
+        },
+        {
+          "type": "select",
+          "id": "button1_style",
+          "label": "Button 1 style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "primary"
         },
         {
           "type": "text",
@@ -238,10 +944,56 @@
           "label": "Button 2 Link"
         },
         {
+          "type": "text",
+          "id": "button2_anchor_link",
+          "label": "Button 2 Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
           "type": "checkbox",
           "id": "button2_enable",
           "default": false,
           "label": "Show Button 2?"
+        },
+        {
+          "type": "select",
+          "id": "button2_style",
+          "label": "Button 2 style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "secondary"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
         }
       ]
     }

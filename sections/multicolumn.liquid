@@ -1,6 +1,26 @@
 {% liquid
 assign image_width = 600
-assign columns = section.blocks.size
+assign columns = 0
+for block in section.blocks
+  if block.type != 'header' and block.type != 'button' and block.type != 'newsletter'
+    assign columns = columns | plus: 1
+  endif
+endfor
+assign active_scheme = settings.default_color_scheme
+if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank
+  assign active_scheme = section.settings.color_scheme
+endif
+assign scheme_class = ''
+if active_scheme != blank
+  assign scheme_class = 'color-' | append: active_scheme.id
+endif
+assign padding_default = section.settings.padding_top_bottom | default: 6
+assign padding_top = padding_default
+assign padding_bottom = padding_default
+if section.settings.enable_padding_overrides
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+endif
 %}
 
 {% style %}
@@ -9,14 +29,124 @@ assign columns = section.blocks.size
   gap: var(--column-section-gap);
 }
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
 }
 {{ section.id | prepend: '#' }} .column-section {
   grid-template-columns: repeat({{ columns }}, 1fr);
 }
+{{ section.id | prepend: '#' }} .column-section .column-image {
+  width: 100%;
+  height: 100%;
+  max-width: var(--column-image-max-width, 100%);
+  object-fit: var(--column-object-fit, cover);
+  object-position: var(--column-object-position-desktop, center);
+  aspect-ratio: var(--column-image-aspect-ratio);
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper {
+  display: flex;
+  margin-bottom: var(--column-image-gap, 0.5rem);
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper.align-left {
+  justify-content: flex-start;
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper.center {
+  justify-content: center;
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper.align-right {
+  justify-content: flex-end;
+}
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h1,
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h2,
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h3,
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h4,
+{{ section.id | prepend: '#' }} .column-section .column-image-wrapper + h5 {
+  margin-top: 0;
+}
+{{ section.id | prepend: '#' }} .column-section h1,
+{{ section.id | prepend: '#' }} .column-section h2,
+{{ section.id | prepend: '#' }} .column-section h3,
+{{ section.id | prepend: '#' }} .column-section h4,
+{{ section.id | prepend: '#' }} .column-section h5 {
+  color: var(--theme-text-primary, var(--font-primary-color));
+}
+{{ section.id | prepend: '#' }} .column-section .rte,
+{{ section.id | prepend: '#' }} .column-section .rte p {
+  color: var(--theme-text-secondary, var(--font-secondary-color));
+}
+{{ section.id | prepend: '#' }} .section h1,
+{{ section.id | prepend: '#' }} .section h2,
+{{ section.id | prepend: '#' }} .section h3,
+{{ section.id | prepend: '#' }} .section h4,
+{{ section.id | prepend: '#' }} .section h5 {
+  color: var(--theme-text-primary, var(--font-primary-color));
+}
+{{ section.id | prepend: '#' }} .section .rte,
+{{ section.id | prepend: '#' }} .section .rte p {
+  color: var(--theme-text-secondary, var(--font-secondary-color));
+}
+@media screen and (max-width: 768px) {
+  {{ section.id | prepend: '#' }} .column-section .column-image {
+    object-position: var(--column-object-position-mobile, center);
+  }
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form {
+  --form-max-width: 480px;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__field {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  margin-bottom: 0.75rem;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__field input[type="email"] {
+  flex: 1;
+  min-width: 0;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__field .button {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__privacy {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-primary, var(--font-primary-color));
+  text-align: left;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__privacy label {
+  color: inherit;
+  justify-content: flex-start;
+  gap: 8px;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__privacy a {
+  color: inherit;
+  text-decoration: underline;
+  background: transparent;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form__privacy span {
+  background: transparent;
+}
+{{ section.id | prepend: '#' }} .newsletter-signup-form h1,
+{{ section.id | prepend: '#' }} .newsletter-signup-form h2,
+{{ section.id | prepend: '#' }} .newsletter-signup-form h3 {
+  margin-bottom: 0.75rem;
+}
+@media screen and (max-width: 480px) {
+  {{ section.id | prepend: '#' }} .newsletter-signup-form__field {
+    flex-direction: column;
+  }
+}
 {% endstyle %}
 
-<div id="{{ section.id }}" class="section-wrap" style="color:{{ section.settings.color | default:'inherit' }};">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   {%- if section.settings.show_heading == true or section.settings.show_description == true -%}
     <div class="section">
       {%- if section.settings.show_heading == true -%}
@@ -33,50 +163,180 @@ assign columns = section.blocks.size
     </div>
   {%- endif -%}
 
-  <div class="section column-section{% if section.settings.swipe_on_mobile == true %} scrolly{% endif %}">
-    {% for block in section.blocks %}
-      {% assign image_height = image_width | divided_by: block.settings.image.aspect_ratio | ceil %}
-      <div>
-        {% if block.settings.show_image == true %}
-          {% if block.settings.image == blank %}
-            {{ 'collection-1' | placeholder_svg_tag: "placeholder" }}
-          {% else %}
-            {%- capture image_sizes -%}
-            width:100%; height:100%; object-fit: {{ block.settings.object_fit }}; object-position: {{ block.settings.object_position }}; aspect-ratio: {{ block.settings.aspect_ratio }};
-            {%- endcapture -%}
-            <div>
-              <img src="{{ block.settings.image | image_url: width: image_width }}"
-                width="{{ image_width }}"
-                height="{{ image_height }}"
-                style="{{- image_sizes | strip -}}"
-                alt="{{- block.settings.image.alt -}}"
-                loading="lazy">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'header' %}
+        {%- assign title_alignment = block.settings.title_alignment | default: 'align-left' -%}
+        {%- assign subtitle_alignment = block.settings.subtitle_alignment | default: 'align-left' -%}
+        {%- assign button_alignment = block.settings.button_alignment | default: 'align-left' -%}
+        <div class="section" {{ block.shopify_attributes }}>
+          {% unless block.settings.title == blank %}
+            <{{ block.settings.title_size }} class="{{ title_alignment }}">
+              {{ block.settings.title }}
+            </{{ block.settings.title_size }}>
+          {% endunless %}
+
+          {% unless block.settings.subtitle == blank %}
+            <div class="rte {{ subtitle_alignment }}">
+              {{ block.settings.subtitle }}
+            </div>
+          {% endunless %}
+
+          {% if block.settings.show_button == true and block.settings.button_label != blank %}
+            {%- assign header_button_style = block.settings.button_style | default: 'primary' -%}
+            <div class="{{ button_alignment }}">
+              <a class="button button-{{ header_button_style }}" href="{{ block.settings.anchor_link | default: block.settings.button_link | default: '#' }}">
+                {{ block.settings.button_label }}
+              </a>
             </div>
           {% endif %}
-        {% endif %}
-
-        {% unless block.settings.text == blank %}
-          <{{- block.settings.size }}>
-            {{- block.settings.text -}}
-          </{{- block.settings.size -}}>
-        {% endunless %}
-
-        {% unless block.settings.content == blank %}
-          <div class="rte">
-            {{- block.settings.content -}}
+        </div>
+      {% when 'button' %}
+        {%- assign button_alignment = block.settings.alignment | default: 'align-left' -%}
+        {%- assign button_style = block.settings.style | default: 'primary' -%}
+        {%- assign button_padding_top = block.settings.padding_top | default: 0 -%}
+        {%- assign button_padding_bottom = block.settings.padding_bottom | default: 0 -%}
+        {% unless block.settings.label == blank %}
+          <div class="section {{ button_alignment }}" style="padding-top: {{ button_padding_top | append: 'rem' }}; padding-bottom: {{ button_padding_bottom | append: 'rem' }};" {{ block.shopify_attributes }}>
+            <a class="button button-{{ button_style }}" href="{{ block.settings.anchor_link | default: block.settings.link | default: '#' }}">
+              {{ block.settings.label }}
+            </a>
           </div>
         {% endunless %}
+      {% when 'newsletter' %}
+        {%- assign newsletter_alignment = block.settings.alignment | default: 'center' -%}
+        {%- assign newsletter_padding_top = block.settings.padding_top | default: 0 -%}
+        {%- assign newsletter_padding_bottom = block.settings.padding_bottom | default: 0 -%}
+        <div class="section {{ newsletter_alignment }}" style="padding-top: {{ newsletter_padding_top | append: 'rem' }}; padding-bottom: {{ newsletter_padding_bottom | append: 'rem' }};" {{ block.shopify_attributes }}>
+          {% form 'customer', class: 'form newsletter-signup-form center' %}
+            {% unless block.settings.heading == blank %}
+              <{{ block.settings.heading_size }}>
+                {{ block.settings.heading }}
+              </{{ block.settings.heading_size }}>
+            {% endunless %}
 
-        {% if block.settings.show_button == true %}
-          <div>
-            <p>
-              <a class="button" href="{{ block.settings.button_link | default: '#' }}">
-                {{ block.settings.button_label | default: "Button Label" }}
-              </a>
-            </p>
+            {% unless block.settings.text == blank %}
+              <div class="rte">
+                {{ block.settings.text }}
+              </div>
+            {% endunless %}
+            {% if form.posted_successfully? %}
+              <div class="rte">
+                <p><strong>{{ block.settings.success_message | default: "Thanks for signing up!" }}</strong></p>
+              </div>
+            {% endif %}
+            <div class="form-row newsletter-signup-form__field">
+              <label class="hide">Email</label>
+              <input type="email" name="contact[email]" placeholder="{{ block.settings.placeholder | default: 'Enter email address' }}" required>
+              <button type="submit" value="submit" class="button button-small button-{{ block.settings.button_style | default: 'primary' }}">{{ block.settings.button_label | default: "Sign up" }}</button>
+            </div>
+            {% unless block.settings.privacy_text == blank %}
+              <p class="newsletter-signup-form__privacy">
+                <label class="flex align-center middle">
+                  <input type="checkbox" required>
+                  <span>{{ block.settings.privacy_text }}</span>
+                </label>
+              </p>
+            {% endunless %}
+          {% endform %}
+        </div>
+    {% endcase %}
+  {% endfor %}
+
+  <div class="section column-section{% if section.settings.swipe_on_mobile == true %} scrolly{% endif %}">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'column' %}
+          {% assign image_height = image_width | divided_by: block.settings.image.aspect_ratio | ceil %}
+          {%- assign column_alignment = block.settings.alignment | default: 'align-left' -%}
+          {%- assign image_alignment = block.settings.image_alignment | default: 'center' -%}
+          <div class="{{ column_alignment }}" {{ block.shopify_attributes }}>
+            {% if block.settings.show_image == true %}
+              {% if block.settings.image == blank %}
+                <div class="column-image-wrapper {{ image_alignment }}">
+                  {{ 'collection-1' | placeholder_svg_tag: "placeholder" }}
+                </div>
+              {% else %}
+                {%- assign position_mode = block.settings.position_mode | default: 'preset' -%}
+                {%- assign object_position_desktop = block.settings.object_position -%}
+                {%- if position_mode == 'custom' -%}
+                  {%- assign object_position_desktop = block.settings.object_position_x | append: '% ' | append: block.settings.object_position_y | append: '%' -%}
+                {%- endif -%}
+                {%- assign object_position_mobile = block.settings.object_position_mobile | default: block.settings.object_position -%}
+                {%- if position_mode == 'custom' -%}
+                  {%- assign object_position_mobile = block.settings.object_position_x_mobile | append: '% ' | append: block.settings.object_position_y_mobile | append: '%' -%}
+                {%- endif -%}
+                {%- capture image_styles -%}
+                --column-object-fit: {{ block.settings.object_fit }};
+                --column-object-position-desktop: {{ object_position_desktop }};
+                --column-object-position-mobile: {{ object_position_mobile }};
+                --column-image-aspect-ratio: {{ block.settings.aspect_ratio }};
+                --column-image-max-width: {{ block.settings.image_max_width | append: 'px' }};
+                {%- endcapture -%}
+                <div class="column-image-wrapper {{ image_alignment }}">
+                  {% if block.settings.use_focal_point %}
+                    {{ block.settings.image | image_url: width: image_width | image_tag: alt: block.settings.image.alt, loading: 'lazy', class: 'column-image', style: image_styles | strip }}
+                  {% else %}
+                    <img class="column-image" src="{{ block.settings.image | image_url: width: image_width }}"
+                      width="{{ image_width }}"
+                      height="{{ image_height }}"
+                      style="{{- image_styles | strip -}}"
+                      alt="{{- block.settings.image.alt -}}"
+                      loading="lazy">
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endif %}
+
+            {% unless block.settings.text == blank %}
+              <{{- block.settings.size }}>
+                {{- block.settings.text -}}
+              </{{- block.settings.size -}}>
+            {% endunless %}
+
+            {% unless block.settings.content == blank %}
+              <div class="rte">
+                {{- block.settings.content -}}
+              </div>
+            {% endunless %}
+
+            {% if block.settings.show_button == true %}
+              {%- assign column_button_style = block.settings.button_style | default: 'primary' -%}
+              <div>
+                <p>
+                  <a class="button button-{{ column_button_style }}" href="{{ block.settings.anchor_link | default: block.settings.button_link | default: '#' }}">
+                    {{ block.settings.button_label | default: "Button Label" }}
+                  </a>
+                </p>
+              </div>
+            {% endif %}
           </div>
-        {% endif %}
-      </div>
+        {% when 'bullet_item' %}
+          {%- capture icon_style -%}
+            --bullet-icon-bg: {{ block.settings.icon_background | default: '#a87be6' }};
+            --bullet-icon-border: {{ block.settings.icon_border_color | default: '#19212b' }};
+            --bullet-icon-text: {{ block.settings.icon_text_color | default: '#ffffff' }};
+            {%- if block.settings.icon_bg_image != blank -%}
+              background-image: url('{{ block.settings.icon_bg_image | image_url: width: 128 }}');
+            {%- endif -%}
+          {%- endcapture -%}
+
+          <div class="bullet-item" {{ block.shopify_attributes }}>
+            <div class="bullet-item__icon{% if block.settings.icon_shadow %} bullet-item__icon--shadow{% endif %}" style="{{ icon_style | strip }}">
+              {% unless block.settings.icon_text == blank %}
+                <span class="bullet-item__icon-text">{{ block.settings.icon_text }}</span>
+              {% endunless %}
+            </div>
+            <div class="bullet-item__content">
+              {% unless block.settings.title == blank %}
+                <div class="bullet-item__title">{{ block.settings.title }}</div>
+              {% endunless %}
+              {% unless block.settings.subtext == blank %}
+                <div class="bullet-item__subtext rte">{{ block.settings.subtext }}</div>
+              {% endunless %}
+            </div>
+          </div>
+      {% endcase %}
     {% endfor %}
   </div>
 </div>
@@ -111,6 +371,49 @@ assign columns = section.blocks.size
     {
       "type": "header",
       "content": "Section Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_bottom",
+      "label": "Section padding (top & bottom)",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_padding_overrides",
+      "label": "Override top/bottom padding",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.enable_padding_overrides == true }}",
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_padding_overrides == true }}",
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
     },
     {
       "type": "checkbox",
@@ -160,15 +463,17 @@ assign columns = section.blocks.size
       "default": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
     },
     {
       "type": "checkbox",
@@ -176,9 +481,245 @@ assign columns = section.blocks.size
       "label": "Swipe on mobile",
       "info": "Makes the columns left to right swipeable on mobile",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
   "blocks": [
+    {
+      "type": "header",
+      "name": "Header",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Headline"
+        },
+        {
+          "type": "select",
+          "id": "title_alignment",
+          "label": "Title alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
+        },
+        {
+          "type": "select",
+          "id": "title_size",
+          "label": "Title size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "<p>Describe the section in a short sentence.</p>"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_alignment",
+          "label": "Subtitle alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "label": "Show button",
+          "default": false
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Learn more"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "text",
+          "id": "anchor_link",
+          "label": "Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "select",
+          "id": "button_alignment",
+          "label": "Button alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "anchor_link",
+          "label": "Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
+        }
+      ]
+    },
     {
       "type": "column",
       "name": "Column",
@@ -194,6 +735,38 @@ assign columns = section.blocks.size
           "id": "show_image",
           "label": "Show image",
           "default": true
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "select",
+          "id": "image_alignment",
+          "label": "Image alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "range",
+          "id": "image_max_width",
+          "label": "Image max width",
+          "min": 40,
+          "max": 400,
+          "step": 4,
+          "default": 120,
+          "unit": "px"
         },
         {
           "visible_if": "{{ block.settings.show_image == true }}",
@@ -227,27 +800,156 @@ assign columns = section.blocks.size
           "label": "Position",
           "options": [
             {
+              "value": "left top",
+              "label": "Top left"
+            },
+            {
+              "value": "center top",
+              "label": "Top center"
+            },
+            {
+              "value": "right top",
+              "label": "Top right"
+            },
+            {
+              "value": "left center",
+              "label": "Center left"
+            },
+            {
               "value": "center",
               "label": "Center"
             },
             {
-              "value": "top",
-              "label": "Top"
+              "value": "right center",
+              "label": "Center right"
             },
             {
-              "value": "bottom",
-              "label": "Bottom"
+              "value": "left bottom",
+              "label": "Bottom left"
             },
             {
-              "value": "left",
-              "label": "Left"
+              "value": "center bottom",
+              "label": "Bottom center"
             },
             {
-              "value": "right",
-              "label": "Right"
+              "value": "right bottom",
+              "label": "Bottom right"
             }
           ],
           "default": "center"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "select",
+          "id": "position_mode",
+          "label": "Position mode",
+          "options": [
+            {
+              "value": "preset",
+              "label": "Preset positions"
+            },
+            {
+              "value": "custom",
+              "label": "Custom X/Y"
+            }
+          ],
+          "default": "preset"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true and block.settings.position_mode == 'custom' }}",
+          "type": "range",
+          "id": "object_position_x",
+          "label": "Position X (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true and block.settings.position_mode == 'custom' }}",
+          "type": "range",
+          "id": "object_position_y",
+          "label": "Position Y (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "select",
+          "id": "object_position_mobile",
+          "label": "Position (mobile)",
+          "options": [
+            {
+              "value": "left top",
+              "label": "Top left"
+            },
+            {
+              "value": "center top",
+              "label": "Top center"
+            },
+            {
+              "value": "right top",
+              "label": "Top right"
+            },
+            {
+              "value": "left center",
+              "label": "Center left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right center",
+              "label": "Center right"
+            },
+            {
+              "value": "left bottom",
+              "label": "Bottom left"
+            },
+            {
+              "value": "center bottom",
+              "label": "Bottom center"
+            },
+            {
+              "value": "right bottom",
+              "label": "Bottom right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true and block.settings.position_mode == 'custom' }}",
+          "type": "range",
+          "id": "object_position_x_mobile",
+          "label": "Position X (mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true and block.settings.position_mode == 'custom' }}",
+          "type": "range",
+          "id": "object_position_y_mobile",
+          "label": "Position Y (mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "visible_if": "{{ block.settings.show_image == true }}",
+          "type": "checkbox",
+          "id": "use_focal_point",
+          "label": "Use image focal point",
+          "default": false
         },
         {
           "visible_if": "{{ block.settings.show_image == true }}",
@@ -306,6 +1008,26 @@ assign columns = section.blocks.size
           "default": "h3"
         },
         {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "align-left"
+        },
+        {
           "type": "richtext",
           "id": "content",
           "label": "Content",
@@ -330,6 +1052,209 @@ assign columns = section.blocks.size
           "type": "url",
           "id": "button_link",
           "label": "Button Link"
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "text",
+          "id": "anchor_link",
+          "label": "Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
+          "visible_if": "{{ block.settings.show_button == true }}",
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "primary"
+        }
+      ]
+    },
+    {
+      "type": "bullet_item",
+      "name": "Bullet item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon text",
+          "default": "01"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_bg_image",
+          "label": "Icon background image"
+        },
+        {
+          "type": "color",
+          "id": "icon_background",
+          "label": "Icon background color",
+          "default": "#a87be6"
+        },
+        {
+          "type": "color",
+          "id": "icon_border_color",
+          "label": "Icon border color",
+          "default": "#19212b"
+        },
+        {
+          "type": "color",
+          "id": "icon_text_color",
+          "label": "Icon text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "checkbox",
+          "id": "icon_shadow",
+          "label": "Show icon shadow",
+          "default": true
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Make your picks"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "<p>Choose a tournament. Make your picks before play begins.</p>"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter Signup",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Stay in the loop"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Email placeholder",
+          "default": "Enter email address"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Sign up"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "purple",
+              "label": "Purple"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "privacy_text",
+          "label": "Privacy text",
+          "default": "I have read and accept the <a href=\"/pages/privacy-policy\">privacy policy</a>."
+        },
+        {
+          "type": "text",
+          "id": "success_message",
+          "label": "Success message",
+          "default": "Thanks for signing up!"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            {
+              "value": "align-left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "align-right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
         }
       ]
     }

@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-terms-of-service",
+      "settings": {
+        "max_width": 768
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

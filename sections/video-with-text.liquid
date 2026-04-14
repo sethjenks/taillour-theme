@@ -1,13 +1,47 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 {%- style -%}
 .video-text-left .video-text-asset {
   order: -1;
 }
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
+}
+{{ section.id | prepend: '#' }}.section-wrap {
+  --video-text-grid-align: {{ section.settings.vertical_alignment | default: 'center' }};
+}
+@media screen and (min-width: 769px) {
+  {{ section.id | prepend: '#' }} .grid-2 {
+    align-items: var(--video-text-grid-align);
+  }
+}
+{{ section.id | prepend: '#' }} .video-text-content h1,
+{{ section.id | prepend: '#' }} .video-text-content h2,
+{{ section.id | prepend: '#' }} .video-text-content h3,
+{{ section.id | prepend: '#' }} .video-text-content h4,
+{{ section.id | prepend: '#' }} .video-text-content h5 {
+  color: var(--theme-text-primary, var(--font-primary-color));
+}
+{{ section.id | prepend: '#' }} .video-text-content .rte,
+{{ section.id | prepend: '#' }} .video-text-content .rte p {
+  color: var(--theme-text-secondary, var(--font-secondary-color));
 }
 {%- endstyle -%}
 
-<div id="{{ section.id }}" class="section-wrap" style="color:{{ section.settings.color | default:'inherit' }};">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section">
     {%- if section.settings.show_heading == true -%}
       <{{ section.settings.size }}>
@@ -21,7 +55,7 @@
       </div>
     {%- endif -%}
 
-    <div class="grid-2 middle video-text-{{ section.settings.video_position }}">
+    <div class="grid-2 video-text-{{ section.settings.video_position }}">
       <!-- content -->
       <div class="video-text-content">
         {%- for block in section.blocks -%}
@@ -33,11 +67,36 @@
                 {{ block.settings.text }}
               </div>
             {% when 'buttons' %}
-              <p>
-                <a class="button" href="{{ block.settings.button_link | default: '#' }}">
+              <div style="padding-top: {{ block.settings.padding_top | default: 0 | append: 'rem' }}; padding-bottom: {{ block.settings.padding_bottom | default: 0 | append: 'rem' }};">
+                <a class="button button-primary" href="{{ block.settings.anchor_link | default: block.settings.button_link | default: '#' }}">
                   {{ block.settings.button_label }}
                 </a>
-              </p>
+              </div>
+            {% when 'bullet_item' %}
+              {%- capture icon_style -%}
+                --bullet-icon-bg: {{ block.settings.icon_background | default: '#a87be6' }};
+                --bullet-icon-border: {{ block.settings.icon_border_color | default: '#19212b' }};
+                --bullet-icon-text: {{ block.settings.icon_text_color | default: '#ffffff' }};
+                {%- if block.settings.icon_bg_image != blank -%}
+                  background-image: url('{{ block.settings.icon_bg_image | image_url: width: 128 }}');
+                {%- endif -%}
+              {%- endcapture -%}
+
+              <div class="bullet-item" {{ block.shopify_attributes }}>
+                <div class="bullet-item__icon{% if block.settings.icon_shadow %} bullet-item__icon--shadow{% endif %}" style="{{ icon_style | strip }}">
+                  {% unless block.settings.icon_text == blank %}
+                    <span class="bullet-item__icon-text">{{ block.settings.icon_text }}</span>
+                  {% endunless %}
+                </div>
+                <div class="bullet-item__content">
+                  {% unless block.settings.title == blank %}
+                    <div class="bullet-item__title">{{ block.settings.title }}</div>
+                  {% endunless %}
+                  {% unless block.settings.subtext == blank %}
+                    <div class="bullet-item__subtext rte">{{ block.settings.subtext }}</div>
+                  {% endunless %}
+                </div>
+              </div>
           {% endcase %}
         {%- endfor -%}
       </div>
@@ -90,6 +149,11 @@
       "content": "Section Settings"
     },
     {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
       "type": "checkbox",
       "id": "show_heading",
       "label": "Show heading",
@@ -137,15 +201,41 @@
       "default": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "header",
@@ -265,6 +355,12 @@
         }
       ],
       "default": "right"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
   "blocks": [
@@ -327,6 +423,85 @@
           "type": "url",
           "id": "button_link",
           "label": "Button Link"
+        },
+        {
+          "type": "text",
+          "id": "anchor_link",
+          "label": "Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        }
+      ]
+    },
+    {
+      "type": "bullet_item",
+      "name": "Bullet item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_text",
+          "label": "Icon text",
+          "default": "01"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_bg_image",
+          "label": "Icon background image"
+        },
+        {
+          "type": "color",
+          "id": "icon_background",
+          "label": "Icon background color",
+          "default": "#a87be6"
+        },
+        {
+          "type": "color",
+          "id": "icon_border_color",
+          "label": "Icon border color",
+          "default": "#19212b"
+        },
+        {
+          "type": "color",
+          "id": "icon_text_color",
+          "label": "Icon text color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "checkbox",
+          "id": "icon_shadow",
+          "label": "Show icon shadow",
+          "default": true
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "Make your picks"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "label": "Subtext",
+          "default": "<p>Choose a tournament. Make your picks before play begins.</p>"
         }
       ]
     }

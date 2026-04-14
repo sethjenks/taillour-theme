@@ -2,25 +2,37 @@
 assign image_width = 400
 assign image_height = image_width | divided_by: product.featured_image.aspect_ratio | ceil
 %}
-<a class="product-card" href="{{ product.url }}">
-  <div>
-    {% if product.featured_image == blank %}
-      {{ 'product-1' | placeholder_svg_tag: "placeholder" }}
-    {% else %}
-    <img src="{{- product.featured_image.src | image_url: width: image_width -}}"
-      width="{{- image_width -}}"
-      height="{{- image_height -}}"
-      alt="{{- product.featured_image.alt | escape | strip_html | strip_newlines -}}"
-      loading="lazy">
+<div class="product-card">
+  <a class="product-card__link" href="{{ product.url }}">
+    <div>
+      {% if product.featured_image == blank %}
+        {{ 'product-1' | placeholder_svg_tag: "placeholder" }}
+      {% else %}
+      <img src="{{- product.featured_image.src | image_url: width: image_width -}}"
+        width="{{- image_width -}}"
+        height="{{- image_height -}}"
+        alt="{{- product.featured_image.alt | escape | strip_html | strip_newlines -}}"
+        loading="lazy">
+        {% endif %}
+    </div>
+    <div>
+      <h3>{{ product.title }}</h3>
+      <p>
+        {% if product.compare_at_price > product.price %}
+          <span class="strike">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+        {{ product.price | money }}
+      </p>
+    </div>
+  </a>
+  <form class="product-card__form" method="post" action="{{ routes.cart_add_url }}">
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+    <button class="button button-secondary" type="submit" {% unless product.available %}disabled{% endunless %}>
+      {% if product.available %}
+        Add to cart
+      {% else %}
+        Sold out
       {% endif %}
-  </div>
-  <div>
-    <h3>{{ product.title }}</h3>
-    <p>
-      {% if product.compare_at_price > product.price %}
-        <span class="strike">{{ product.compare_at_price | money }}</span>
-      {% endif %}
-      {{ product.price | money }}
-    </p>
-  </div>
-</a>
+    </button>
+  </form>
+</div>

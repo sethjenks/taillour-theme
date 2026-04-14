@@ -1,13 +1,54 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
+{%- assign padding_default = section.settings.padding_top_bottom | default: 6 -%}
+{%- assign padding_top = padding_default -%}
+{%- assign padding_bottom = padding_default -%}
+{%- if section.settings.enable_padding_overrides -%}
+  {%- assign padding_top = section.settings.padding_top -%}
+  {%- assign padding_bottom = section.settings.padding_bottom -%}
+{%- endif -%}
 {%- style -%}
 .html-text-left .html-text-asset {
   order: -1;
 }
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
+}
+{{ section.id | prepend: '#' }}.section-wrap {
+  --html-text-grid-align: {{ section.settings.vertical_alignment | default: 'center' }};
+}
+@media screen and (min-width: 769px) {
+  {{ section.id | prepend: '#' }} .grid-2 {
+    align-items: var(--html-text-grid-align);
+  }
+}
+{{ section.id | prepend: '#' }} .html-text-content h1,
+{{ section.id | prepend: '#' }} .html-text-content h2,
+{{ section.id | prepend: '#' }} .html-text-content h3,
+{{ section.id | prepend: '#' }} .html-text-content h4,
+{{ section.id | prepend: '#' }} .html-text-content h5 {
+  color: var(--theme-text-primary, var(--font-primary-color));
+}
+{{ section.id | prepend: '#' }} .html-text-content .rte,
+{{ section.id | prepend: '#' }} .html-text-content .rte p {
+  color: var(--theme-text-secondary, var(--font-secondary-color));
 }
 {%- endstyle -%}
 
-<div id="{{ section.id }}" class="section-wrap" style="color:{{ section.settings.color | default:'inherit' }};">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color)); --section-padding-default: {{ padding_default | append: 'rem' }};{% if section.settings.enable_padding_overrides %} --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};{% endif %}">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section">
     {% if section.settings.show_heading == true %}
       <{{ section.settings.size }}>
@@ -21,7 +62,7 @@
       </div>
     {%- endif -%}
 
-    <div class="grid-2 middle html-text-{{ section.settings.html_position }}">
+    <div class="grid-2 html-text-{{ section.settings.html_position }}">
       <!-- content -->
       <div class="html-text-content">
         {%- for block in section.blocks -%}
@@ -33,11 +74,11 @@
                 {{ block.settings.text }}
               </div>
             {% when 'buttons' %}
-              <p>
-                <a class="button" href="{{ block.settings.button_link | default: '#' }}">
+              <div style="padding-top: {{ block.settings.padding_top | default: 0 | append: 'rem' }}; padding-bottom: {{ block.settings.padding_bottom | default: 0 | append: 'rem' }};">
+                <a class="button button-primary" href="{{ block.settings.anchor_link | default: block.settings.button_link | default: '#' }}">
                   {{ block.settings.button_label }}
                 </a>
-              </p>
+              </div>
           {% endcase %}
         {%- endfor -%}
       </div>
@@ -62,6 +103,49 @@
     {
       "type": "header",
       "content": "Section Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_bottom",
+      "label": "Section padding (top & bottom)",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_padding_overrides",
+      "label": "Override top/bottom padding",
+      "default": false
+    },
+    {
+      "visible_if": "{{ section.settings.enable_padding_overrides == true }}",
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_padding_overrides == true }}",
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 6,
+      "unit": "rem"
     },
     {
       "type": "checkbox",
@@ -117,6 +201,30 @@
       "info": "You can add HTML, CSS and limited Liquid markup."
     },
     {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
       "type": "select",
       "id": "html_position",
       "label": "HTML Position",
@@ -133,15 +241,23 @@
       "default": "right"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
   "blocks": [
@@ -204,6 +320,32 @@
           "type": "url",
           "id": "button_link",
           "label": "Button Link"
+        },
+        {
+          "type": "text",
+          "id": "anchor_link",
+          "label": "Anchor link",
+          "info": "Scroll to a section anchor (e.g. '#about'). Overrides the button link above."
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Padding top",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding bottom",
+          "min": 0,
+          "max": 24,
+          "step": 0.5,
+          "default": 0,
+          "unit": "rem"
         }
       ]
     }

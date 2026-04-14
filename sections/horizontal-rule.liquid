@@ -1,3 +1,4 @@
+{%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
 {% unless section.settings.full_width == true %}
 <div class="section">
 {% endunless %}
@@ -25,6 +26,12 @@
       "id": "full_width",
       "label": "Full width",
       "default": false
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ]
 }

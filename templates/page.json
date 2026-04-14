@@ -1,10 +1,706 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "page": {
-      "type": "main-page"
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "max_width": 0
+      }
+    },
+    "multicolumn_e3JAxU": {
+      "type": "multicolumn",
+      "blocks": {
+        "header_gHd7W7": {
+          "type": "header",
+          "settings": {
+            "title": "How to get your dub in 3 steps.",
+            "title_alignment": "center",
+            "title_size": "h1",
+            "subtitle": "",
+            "subtitle_alignment": "center",
+            "show_button": false,
+            "button_label": "Learn more",
+            "button_link": "",
+            "button_style": "primary",
+            "button_alignment": "align-left"
+          }
+        },
+        "button_Wwyt3t": {
+          "type": "button",
+          "settings": {
+            "label": "Learn more",
+            "link": "",
+            "padding_top": 0,
+            "padding_bottom": 3,
+            "style": "primary",
+            "alignment": "center"
+          }
+        },
+        "bullet_item_Fb7j99": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "1",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Make your picks",
+            "subtext": "<p>Choose a tournament. Make your picks before play begins.</p>"
+          }
+        },
+        "bullet_item_N6HNwe": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "2",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Watch it play out",
+            "subtext": "<p>Watch the results in real time. If your picks perform well, your points will start to stack up.</p>"
+          }
+        },
+        "bullet_item_mQxjHF": {
+          "type": "bullet_item",
+          "settings": {
+            "icon_text": "3",
+            "icon_background": "#a87be6",
+            "icon_border_color": "rgba(0,0,0,0)",
+            "icon_text_color": "#ffffff",
+            "icon_shadow": true,
+            "title": "Track your progress.",
+            "subtext": "<p>See how you stack up on the leaderboard. Join a group for a little more competitive fun. </p>"
+          }
+        },
+        "column_FQFPUx": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/badge-device_2x_f90f8a28-acd8-44bf-80d0-163154a2c371.png",
+            "show_image": true,
+            "image_alignment": "center",
+            "image_max_width": 64,
+            "object_fit": "contain",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 0,
+            "object_position_y": 0,
+            "object_position_mobile": "center bottom",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": true,
+            "aspect_ratio": "1/1",
+            "text": "Easy to join",
+            "size": "h3",
+            "alignment": "center",
+            "content": "<p>Find friends or make new ones with one click.</p>",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "column_dHUR7X": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/badge-follow_2x_95013499-9d48-424b-ae29-8af4007cf096.png",
+            "show_image": true,
+            "image_alignment": "center",
+            "image_max_width": 64,
+            "object_fit": "contain",
+            "object_position": "center top",
+            "position_mode": "custom",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
+            "aspect_ratio": "1/1",
+            "text": "Fun to follow",
+            "size": "h3",
+            "alignment": "center",
+            "content": "<p>Pick winners and watch your choices play out in real time.</p>",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "column_VR4XkX": {
+          "type": "column",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/badge-award_2x_0441acd0-5676-4a69-b2fb-b2e1c47c34e0.png",
+            "show_image": true,
+            "image_alignment": "center",
+            "image_max_width": 64,
+            "object_fit": "contain",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
+            "aspect_ratio": "1/1",
+            "text": "Compete for merch",
+            "size": "h3",
+            "alignment": "center",
+            "content": "<p>Climb the leaderboard and earn points to win cool dub merch.</p>",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "header_gHd7W7",
+        "button_Wwyt3t",
+        "bullet_item_Fb7j99",
+        "bullet_item_N6HNwe",
+        "bullet_item_mQxjHF",
+        "column_FQFPUx",
+        "column_dHUR7X",
+        "column_VR4XkX"
+      ],
+      "disabled": true,
+      "name": "Columns/Richtext",
+      "settings": {
+        "background_image": "shopify://shop_images/bg-purple-fade-bottom.png",
+        "padding_top_bottom": 6,
+        "enable_padding_overrides": true,
+        "padding_top": 12,
+        "padding_bottom": 6,
+        "show_heading": false,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme-2d7a3dcb-12a3-4304-bf82-e25ffd260f5f",
+        "swipe_on_mobile": false
+      }
+    },
+    "image_with_text_A6KVWi": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_XfUghC": {
+          "type": "heading",
+          "settings": {
+            "text": "Always something to play.",
+            "size": "h2"
+          }
+        },
+        "text_j6enQ9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Whether it’s pickleball, soccer, or whatever big championship is coming next, dub makes it easy to jump into any competition and enjoy it together.</p>"
+          }
+        },
+        "buttons_9gbFaa": {
+          "type": "buttons",
+          "settings": {
+            "button_label": "Find your game",
+            "button_link": "https://app.getdub.com/register"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XfUghC",
+        "text_j6enQ9",
+        "buttons_9gbFaa"
+      ],
+      "name": "Image & Text",
+      "settings": {
+        "show_heading": false,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "padding_top_bottom": 6,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme_1",
+        "text_columns": 6,
+        "media_columns": 6,
+        "vertical_alignment": "center",
+        "image_position": "right",
+        "mobile_media_absolute": false,
+        "mobile_media_top_offset": 0,
+        "mobile_media_left": 50,
+        "mobile_media_width": 100,
+        "mobile_media_translate_x": -50,
+        "mobile_media_space": 0,
+        "family_image": "shopify://shop_images/phone-sports-2_2x_99d059a4-a120-4575-ba52-437539eadaed.png",
+        "family_use_focal_point": false,
+        "family_aspect_ratio": "4/5",
+        "family_object_fit": "contain",
+        "family_object_position": "center",
+        "family_position_mode": "custom",
+        "family_object_position_x": 50,
+        "family_object_position_y": 100,
+        "family_object_position_mobile": "center",
+        "family_object_position_x_mobile": 50,
+        "family_object_position_y_mobile": 50,
+        "family_y_overhang": 0,
+        "app_y_overhang": 0,
+        "family_enable_absolute": true,
+        "family_x_min": 20,
+        "family_x": 40,
+        "family_x_max": 50,
+        "family_y_min": 0,
+        "family_y": 75,
+        "family_y_max": 100,
+        "family_width_min": 10,
+        "family_width": 100,
+        "family_width_max": 100,
+        "family_height_min": 10,
+        "family_height": 100,
+        "family_height_max": 100,
+        "family_y_overhang_mobile": 128,
+        "app_y_overhang_mobile": 0,
+        "family_x_min_mobile": 30,
+        "family_x_mobile": 40,
+        "family_x_max_mobile": 40,
+        "family_y_min_mobile": 0,
+        "family_y_mobile": 47,
+        "family_y_max_mobile": 100,
+        "family_width_min_mobile": 50,
+        "family_width_mobile": 100,
+        "family_width_max_mobile": 100,
+        "family_height_min_mobile": 10,
+        "family_height_mobile": 100,
+        "family_height_max_mobile": 100,
+        "app_use_focal_point": false,
+        "app_aspect_ratio": "1/1",
+        "app_object_fit": "contain",
+        "app_object_position": "center",
+        "app_position_mode": "preset",
+        "app_object_position_x": 50,
+        "app_object_position_y": 50,
+        "app_object_position_mobile": "center",
+        "app_object_position_x_mobile": 50,
+        "app_object_position_y_mobile": 50,
+        "app_enable_absolute": true,
+        "app_x_min": 0,
+        "app_x": 50,
+        "app_x_max": 100,
+        "app_y_min": 0,
+        "app_y": 50,
+        "app_y_max": 100,
+        "app_width_min": 10,
+        "app_width": 60,
+        "app_width_max": 100,
+        "app_height_min": 10,
+        "app_height": 60,
+        "app_height_max": 100,
+        "app_x_min_mobile": 0,
+        "app_x_mobile": 50,
+        "app_x_max_mobile": 100,
+        "app_y_min_mobile": 0,
+        "app_y_mobile": 50,
+        "app_y_max_mobile": 100,
+        "app_width_min_mobile": 10,
+        "app_width_mobile": 80,
+        "app_width_max_mobile": 100,
+        "app_height_min_mobile": 10,
+        "app_height_mobile": 80,
+        "app_height_max_mobile": 100,
+        "blob_enable": true,
+        "blob_color": "#b68bff",
+        "blob_size": 100,
+        "blob_x": 0,
+        "blob_y": 100,
+        "blob_blur": 100,
+        "blob_opacity": 50
+      }
+    },
+    "multicolumn_QPBVAR": {
+      "type": "multicolumn",
+      "blocks": {
+        "header_anbTCp": {
+          "type": "header",
+          "settings": {
+            "title": "Wins are better together.",
+            "title_alignment": "center",
+            "title_size": "h1",
+            "subtitle": "<p>With dub, competition brings people together. Whether you’re here to follow your instincts, study every matchup, or just play along for fun, there’s room for everyone.</p>",
+            "subtitle_alignment": "center",
+            "show_button": false,
+            "button_label": "Learn more",
+            "button_link": "",
+            "button_style": "primary",
+            "button_alignment": "align-left"
+          }
+        },
+        "column_D9aC98": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/badge-device_2x_f90f8a28-acd8-44bf-80d0-163154a2c371.png",
+            "show_image": true,
+            "image_alignment": "center",
+            "image_max_width": 64,
+            "object_fit": "contain",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 0,
+            "object_position_y": 0,
+            "object_position_mobile": "center bottom",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": true,
+            "aspect_ratio": "1/1",
+            "text": "Easy to join",
+            "size": "h3",
+            "alignment": "center",
+            "content": "<p>Find friends or make new ones with one click.</p>",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "column_4z4Mwm": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/badge-follow_2x_95013499-9d48-424b-ae29-8af4007cf096.png",
+            "show_image": true,
+            "image_alignment": "center",
+            "image_max_width": 64,
+            "object_fit": "contain",
+            "object_position": "center top",
+            "position_mode": "custom",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
+            "aspect_ratio": "1/1",
+            "text": "Fun to follow",
+            "size": "h3",
+            "alignment": "center",
+            "content": "<p>Pick winners and watch your choices play out in real time.</p>",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "column_EpKpk6": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/badge-award_2x_0441acd0-5676-4a69-b2fb-b2e1c47c34e0.png",
+            "show_image": true,
+            "image_alignment": "center",
+            "image_max_width": 64,
+            "object_fit": "contain",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
+            "aspect_ratio": "1/1",
+            "text": "Compete for merch",
+            "size": "h3",
+            "alignment": "center",
+            "content": "<p>Climb the leaderboard and earn points to win cool dub merch.</p>",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "header_anbTCp",
+        "column_D9aC98",
+        "column_4z4Mwm",
+        "column_EpKpk6"
+      ],
+      "name": "Columns/Richtext",
+      "settings": {
+        "background_image": "shopify://shop_images/bg-how-to-play_2x_4d2e9fc0-62e1-4069-bbb7-43deda11cd88.png",
+        "padding_top_bottom": 6,
+        "enable_padding_overrides": true,
+        "padding_top": 12,
+        "padding_bottom": 8,
+        "show_heading": false,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme_2",
+        "swipe_on_mobile": false
+      }
+    },
+    "testimonials_TGp8N6": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_3F9x3A": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
+            "name": "Marcus Chen",
+            "title": "Pickleball enthusiast",
+            "location": "Member, Dallas",
+            "avatar": "shopify://shop_images/Testimonial-image-1.png"
+          }
+        },
+        "testimonial_MQPrd4": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "<p>“I hadn’t talked to my college friends in years. Now we compete every week.”</p>",
+            "name": "Marcus Chen",
+            "title": "Pickleball enthusiast",
+            "location": "Member, Dallas",
+            "avatar": "shopify://shop_images/Testimonial-image-2.png"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_3F9x3A",
+        "testimonial_MQPrd4"
+      ],
+      "disabled": true,
+      "name": "Testimonials",
+      "settings": {
+        "section_height": 320,
+        "padding_top_bottom": 0,
+        "mobile_float_offset": -100,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "use_default_color_scheme": true,
+        "color_scheme": ""
+      }
+    },
+    "raw_html_with_text_Ed7Kir": {
+      "type": "raw-html-with-text",
+      "blocks": {
+        "heading_TNtVnw": {
+          "type": "heading",
+          "settings": {
+            "text": "Built to grow with the competition.",
+            "size": "h2"
+          }
+        },
+        "text_tiAiqR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We started with a simple idea: sports already bring people together. The dub app was built to make that connection easier and more fun.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_TNtVnw",
+        "text_tiAiqR"
+      ],
+      "disabled": true,
+      "name": "Custom Liquid & Text",
+      "settings": {
+        "padding_top_bottom": 0,
+        "enable_padding_overrides": true,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "show_heading": false,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "html": "",
+        "vertical_alignment": "center",
+        "html_position": "right",
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme_1"
+      }
+    },
+    "multicolumn_dtMBeX": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_kPAQBX": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/date-2023_2x_dfabea2f-704c-4198-bae0-dd1bc06b5cab.png",
+            "show_image": true,
+            "image_alignment": "align-left",
+            "image_max_width": 120,
+            "object_fit": "contain",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "left top",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": true,
+            "aspect_ratio": "4/3",
+            "text": "The idea took shape. We saw how friendly competition  reconnects people and strengthens local communities.",
+            "size": "h3",
+            "alignment": "align-left",
+            "content": "",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "column_9QxF7y": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/date-2024_2x_faeee48a-6184-4dc0-a7d5-4f661cb230fc.png",
+            "show_image": true,
+            "image_alignment": "align-left",
+            "image_max_width": 120,
+            "object_fit": "contain",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
+            "aspect_ratio": "4/3",
+            "text": "dub launched with pickleball and the first groups started competing.",
+            "size": "h3",
+            "alignment": "align-left",
+            "content": "",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "column_MzWcBw": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/date-2025_2x_310a6631-a414-4b7d-9872-eb6b519c8c6c.png",
+            "show_image": true,
+            "image_alignment": "align-left",
+            "image_max_width": 120,
+            "object_fit": "contain",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
+            "aspect_ratio": "4/3",
+            "text": "More sports. More tournaments. More ways to play together.",
+            "size": "h3",
+            "alignment": "align-left",
+            "content": "",
+            "show_button": false,
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "column_kPAQBX",
+        "column_9QxF7y",
+        "column_MzWcBw"
+      ],
+      "disabled": true,
+      "name": "Columns/Richtext",
+      "settings": {
+        "padding_top_bottom": 6,
+        "enable_padding_overrides": true,
+        "padding_top": 0,
+        "padding_bottom": 6,
+        "show_heading": false,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme_1",
+        "swipe_on_mobile": false
+      }
+    },
+    "multicolumn_K4yF7Q": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_BgFABU": {
+          "type": "column",
+          "settings": {
+            "show_image": false,
+            "image_alignment": "center",
+            "image_max_width": 120,
+            "object_fit": "cover",
+            "object_position": "center",
+            "position_mode": "preset",
+            "object_position_x": 50,
+            "object_position_y": 50,
+            "object_position_mobile": "center",
+            "object_position_x_mobile": 50,
+            "object_position_y_mobile": 50,
+            "use_focal_point": false,
+            "aspect_ratio": "4/3",
+            "text": "Ready to get your dub?",
+            "size": "h1",
+            "alignment": "center",
+            "content": "<p>Winning feels good. We made it even better.</p>",
+            "show_button": true,
+            "button_label": "Make your picks",
+            "button_link": "https://app.getdub.com",
+            "button_style": "purple"
+          }
+        }
+      },
+      "block_order": [
+        "column_BgFABU"
+      ],
+      "disabled": true,
+      "name": "CTA",
+      "settings": {
+        "background_image": "shopify://shop_images/bg-cta_2x_aa7703f9-cfb4-4792-a0f2-d524d925d337.png",
+        "padding_top_bottom": 12,
+        "enable_padding_overrides": false,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "show_heading": false,
+        "text": "Headline",
+        "size": "h2",
+        "show_description": false,
+        "description": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>",
+        "use_default_color_scheme": false,
+        "color_scheme": "scheme-ee222970-1679-436a-9f5c-1986d6d291fc",
+        "swipe_on_mobile": false
+      }
     }
   },
   "order": [
-    "page"
+    "page",
+    "multicolumn_e3JAxU",
+    "image_with_text_A6KVWi",
+    "multicolumn_QPBVAR",
+    "testimonials_TGp8N6",
+    "raw_html_with_text_Ed7Kir",
+    "multicolumn_dtMBeX",
+    "multicolumn_K4yF7Q"
   ]
 }

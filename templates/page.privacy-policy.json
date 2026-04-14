@@ -9,12 +9,14 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-account",
-      "settings": {}
+    "page": {
+      "type": "main-page",
+      "settings": {
+        "max_width": 768
+      }
     }
   },
   "order": [
-    "main"
+    "page"
   ]
 }

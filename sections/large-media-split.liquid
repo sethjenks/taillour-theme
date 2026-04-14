@@ -16,160 +16,139 @@
   {%- assign object_position_mobile = section.settings.object_position_x_mobile | append: '% ' | append: section.settings.object_position_y_mobile | append: '%' -%}
 {%- endif -%}
 {%- style -%}
-#{{ section.id }} {
-  background-color: var(--theme-bg-primary, #ffffff);
+#{{ section.id }}.large-media-section.section-wrap:before {
+  background: linear-gradient(
+    90deg,
+    var(--theme-bg-primary, #ffffff) 0%,
+    var(--theme-bg-primary, #ffffff) 45%,
+    var(--theme-bg-secondary, #f4ff9b) 100%
+  );
   {%- if section.settings.background_image != blank -%}
   background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   {%- endif -%}
-  height: {{ section.settings.desktop_height | append: "vw" }};
 }
-#{{ section.id }} img {
-  object-fit:{{ section.settings.object_fit }};
-  object-position:{{ object_position_desktop }};
+#{{ section.id }}.large-media-section.section-wrap {
+  --large-media-align: {{ section.settings.vertical_alignment | default: 'center' }};
+}
+#{{ section.id }} .large-media-section__inner {
+  align-items: var(--large-media-align);
+}
+#{{ section.id }} .large-media-section__media img {
+  object-fit: {{ section.settings.object_fit }};
+  object-position: {{ object_position_desktop }};
 }
 @media screen and (max-width: 768px) {
-  #{{ section.id }} {
-    height: {{ section.settings.mobile_height | append: "vw" }};
-  }
-  #{{ section.id }} img {
+  #{{ section.id }} .large-media-section__media img {
     object-position: {{ object_position_mobile }};
   }
 }
-{%-endstyle -%}
+{%- endstyle -%}
 
-<div id="{{ section.id }}" class="swiper {{ scheme_class }}" style="--font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+<div
+  id="{{ section.id }}"
+  class="section-wrap large-media-section {{ scheme_class }}"
+  style="color: var(--theme-text-primary, #1a1523); --section-body-color: var(--theme-text-secondary, #66626e); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));"
+>
   {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
-  <div class="image-carousel-content swiper-wrapper">
-    {%- for block in section.blocks -%}
-      <div class="swiper-slide" data-swiper-autoplay="{{- block.settings.delay | times: 1000 -}}">
-        {%- if block.settings.image == blank -%}
+  <div class="section large-media-section__inner">
+    <div class="large-media-section__text">
+      {%- if section.settings.title != blank -%}
+        <h2 class="large-media-section__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="large-media-section__body rte">
+          {{ section.settings.body }}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="large-media-section__media">
+      <div class="large-media-section__media-inner">
+        {%- if section.settings.image == blank -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
         {%- else -%}
-          {%- liquid
-          assign image = block.settings.image
-          assign image_width = 2000
-          assign image_height = image_width | divided_by: image.aspect_ratio | ceil
-          -%}
+          {%- assign image = section.settings.image -%}
           {%- if section.settings.use_focal_point -%}
-            {{ image | image_url: width: image_width | image_tag: alt: image.alt, loading: 'lazy' }}
+            {{ image | image_url: width: 1600 | image_tag: alt: image.alt, loading: 'lazy' }}
           {%- else -%}
-            <img src="{{image | image_url: width: image_width }}"
-              width="{{ image_width }}"
-              height="{{ image_height }}"
+            <img
+              src="{{ image | image_url: width: 1600 }}"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
               alt="{{ image.alt }}"
-            loading="lazy">
+              loading="lazy"
+            >
           {%- endif -%}
         {%- endif -%}
       </div>
-    {%- endfor -%}
+    </div>
   </div>
-
-  {%- if section.settings.show_pagination == true -%}
-    <div class="swiper-pagination"></div>
-  {%- endif -%}
-
-  {%- if section.settings.show_buttons == true -%}
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  {%- endif -%}
 </div>
-
-<script>
-(() => {
-  const target = '{{ section.id | prepend: "#" }}';
-  const init = () => {
-    new Swiper(target, {
-      loop: {{ section.settings.loop }},
-      autoplay: {{ section.settings.autoplay }},
-      pagination: {
-        el: '.swiper-pagination',
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      breakpoints: {
-        "768": {
-          slidesPerView: {{ section.settings.slides_per_view }}
-        }
-      }
-    });
-  };
-  const loadSwiper = () => {
-    if (window.Swiper) return Promise.resolve();
-    if (window.__swiperLoaderPromise) return window.__swiperLoaderPromise;
-    window.__swiperLoaderPromise = new Promise((resolve, reject) => {
-      if (!document.querySelector('link[data-swiper-css]')) {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
-        link.dataset.swiperCss = 'true';
-        document.head.appendChild(link);
-      }
-      let script = document.querySelector('script[data-swiper-js]');
-      if (!script) {
-        script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
-        script.defer = true;
-        script.dataset.swiperJs = 'true';
-        document.head.appendChild(script);
-      }
-      script.addEventListener('load', () => resolve());
-      script.addEventListener('error', () => reject());
-    });
-    return window.__swiperLoaderPromise;
-  };
-  loadSwiper().then(init);
-})();
-</script>
 
 {% schema %}
 {
-  "name": "Image Carousel (Full)",
+  "name": "Large Media Split",
   "tag": "section",
-  "class": "image-carousel-section",
+  "class": "large-media-section",
   "disabled_on": {
     "groups": ["header"]
   },
   "settings": [
     {
       "type": "header",
-      "content": "Image Settings",
-      "info": "A full-width image carousel."
+      "content": "Content"
     },
     {
-      "type": "range",
-      "id": "desktop_height",
-      "label": "Height (desktop)",
-      "min": 25,
-      "max": 100,
-      "step": 1,
-      "default": 33,
-      "info": "Height of the section in relation to the browser width."
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Friendly competition for all ages."
     },
     {
-      "type": "range",
-      "id": "mobile_height",
-      "label": "Height (mobile)",
-      "min": 25,
-      "max": 100,
-      "step": 1,
-      "default": 33,
-      "info": "Height of the section in relation to the device width."
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Everyone can be part of the dub club! Join our community of sports fans who enjoy predicting winners and competing for the top spot on the leaderboard.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical alignment (desktop)",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Theme"
     },
     {
       "type": "image_picker",
       "id": "background_image",
       "label": "Background image"
-    },
-    {
-      "type": "checkbox",
-      "id": "use_focal_point",
-      "label": "Use image focal point",
-      "default": false
     },
     {
       "type": "checkbox",
@@ -183,6 +162,16 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme_1"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_focal_point",
+      "label": "Use image focal point",
+      "default": false
     },
     {
       "type": "select",
@@ -357,82 +346,15 @@
       "visible_if": "{{ section.settings.position_mode == 'custom' }}"
     },
     {
-      "type": "header",
-      "content": "Carousel Settings"
-    },
-    {
-      "type": "range",
-      "id": "slides_per_view",
-      "label": "Slides per view",
-      "info": "Number of slides to show per view on desktop.",
-      "min": 1,
-      "max": 3,
-      "step": 1,
-      "default": 1
-    },
-    {
-      "type": "checkbox",
-      "id": "loop",
-      "label": "Loop",
-      "default": true,
-      "info": "Enable continuous loop mode."
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "Autoplay",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_pagination",
-      "label": "Show pagination",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_buttons",
-      "label": "Show prev/next buttons",
-      "default": true
-    },
-    {
       "type": "text",
       "id": "anchor_id",
       "label": "Anchor ID",
       "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
-  "blocks": [
-    {
-      "type": "image",
-      "name": "Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "range",
-          "id": "delay",
-          "label": "Delay",
-          "min": 1,
-          "max": 10,
-          "step": 1,
-          "unit": "s",
-          "default": 3
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Image Carousel (Full)",
-      "blocks": [
-        {
-          "type": "image"
-        }
-      ]
+      "name": "Large Media Split"
     }
   ]
 }

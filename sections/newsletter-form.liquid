@@ -1,10 +1,25 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 <style>
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
 }
 </style>
 
-<div id="{{ section.id }}" class="section-wrap" style="color:{{ section.settings.color | default:'inherit' }};">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section center">
     <{{- section.settings.size }}>
       {{ section.settings.heading }}
@@ -25,7 +40,7 @@
         <input type="email" name="contact[email]" placeholder="Enter email address" required>
       </div>
       <div class="form-row">
-        <button type="submit" value="submit">{{ section.settings.button_label | default: "Sign up" }}</button>
+        <button type="submit" value="submit" class="button button-primary">{{ section.settings.button_label | default: "Sign up" }}</button>
       </div>
       <p>
         <label class="flex align-center middle">
@@ -87,7 +102,7 @@
       "type": "inline_richtext",
       "id": "privacy_text",
       "label": "Privacy Text",
-      "default": "I have read and accept the <a href=\"#\">privacy policy</a>."
+      "default": "I have read and accept the <a href=\"/pages/privacy-policy\">privacy policy</a>."
     },
     {
       "type": "text",
@@ -100,15 +115,28 @@
       "content": "Section Settings"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ]
 }

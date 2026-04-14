@@ -1,6 +1,8 @@
 {% comment %}
 Get the first available variant
 {% endcomment %}
+{%- assign padding_top = section.settings.padding_top | default: 0 -%}
+{%- assign padding_bottom = section.settings.padding_bottom | default: 0 -%}
 {% assign current_variant = product.selected_or_first_available_variant %}
 
 <script>
@@ -11,7 +13,7 @@ var default_image = {{ product.featured_image.id | default: 'null' }};
 
 <link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
 
-<div class="section-wrap">
+<div class="section-wrap" style="--section-padding-default: 0rem; --section-padding-top: {{ padding_top | append: 'rem' }}; --section-padding-bottom: {{ padding_bottom | append: 'rem' }};">
   <div id="product" class="section">
     {% comment %}
     Product gallery.
@@ -65,38 +67,50 @@ var default_image = {{ product.featured_image.id | default: 'null' }};
                 </div>
 
               {%- when 'title' -%}
-                <h1>
-                  {{- block.settings.title -}}
-                </h1>
+                <h1>{{ product.title }}</h1>
 
               {%- when "sku" -%}
-                <p class="small-text">
-                  {{ block.settings.label }}
-                  <span class="js--variant-sku">{{ current_variant.sku }}</span>
-                </p>
+                {%- if current_variant.sku != blank -%}
+                  <p class="small-text">
+                    {{ block.settings.label }}
+                    <span class="js--variant-sku">{{ current_variant.sku }}</span>
+                  </p>
+                {%- endif -%}
 
               {%- when 'text' -%}
-                <div class="rte">
-                  {{ block.settings.content }}
-                </div>
+                {%- if block.settings.use_product_description -%}
+                  {%- if product.description != blank -%}
+                    <div class="rte">
+                      {{ product.description }}
+                    </div>
+                  {%- endif -%}
+                {%- elsif block.settings.content != blank -%}
+                  <div class="rte">
+                    {{ block.settings.content }}
+                  </div>
+                {%- endif -%}
 
               {%- when 'rule' -%}
                 <hr>
 
               {%- when 'detail' -%}
-                <details{% if block.settings.open == true %} open{%- endif -%}>
-                  <summary>
-                    <span>{{ block.settings.title }}</span>
-                  </summary>
-                  <div class="rte">
-                    {{ block.settings.content }}
-                  </div>
-                </details>
+                {%- if block.settings.title != blank and block.settings.content != blank -%}
+                  <details{% if block.settings.open == true %} open{%- endif -%}>
+                    <summary>
+                      <span>{{ block.settings.title }}</span>
+                    </summary>
+                    <div class="rte">
+                      {{ block.settings.content }}
+                    </div>
+                  </details>
+                {%- endif -%}
 
               {%- when 'liquid' -%}
-                <div class="raw-html-content">
-                  {{ block.settings.html }}
-                </div>
+                {%- if block.settings.html != blank -%}
+                  <div class="raw-html-content">
+                    {{ block.settings.html }}
+                  </div>
+                {%- endif -%}
 
               {%- when 'product' %}
                 {% render 'purchase-together',
@@ -152,8 +166,16 @@ sliderComponents.forEach(function(sliderComponent) {
   `);
     sliderContainer.insertAdjacentHTML("beforeend", `
       <div class="product-image-controls">
-        <button type="button" onclick="goToImage('prev');" class="image-prev">&larr;</button>
-        <button type="button" onclick="goToImage('next');" class="image-next">&rarr;</button>
+        <button type="button" onclick="goToImage('prev');" class="image-prev" aria-label="Previous image">
+          <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+        <button type="button" onclick="goToImage('next');" class="image-next" aria-label="Next image">
+          <svg class="site-header__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </button>
       </div>
   `);
   }
@@ -207,7 +229,32 @@ function goToImage(index, container=false) {
 {% schema %}
 {
   "name": "Product Details",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 0,
+      "unit": "rem"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 24,
+      "step": 0.5,
+      "default": 0,
+      "unit": "rem"
+    }
+  ],
   "blocks": [
     {
       "type":"@app"
@@ -218,10 +265,8 @@ function goToImage(index, container=false) {
       "limit": 1,
       "settings": [
         {
-          "type": "text",
-          "id": "title",
-          "label": "Text",
-          "default": "{{ product.title }}"
+          "type": "paragraph",
+          "content": "Displays the product title from the product admin."
         }
       ]
     },
@@ -268,9 +313,16 @@ function goToImage(index, container=false) {
       "name": "Text",
       "settings": [
         {
+          "type": "checkbox",
+          "id": "use_product_description",
+          "label": "Use product description from admin",
+          "default": true
+        },
+        {
           "type": "richtext",
           "id": "content",
-          "label": "Content"
+          "label": "Content",
+          "info": "Shown when \"Use product description from admin\" is off. You can connect a product metafield as a dynamic source."
         }
       ]
     },

@@ -12,8 +12,192 @@
     "settings": [
       {
         "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "image_picker",
         "id": "favicon",
         "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "primary_font",
+        "label": "Primary font",
+        "default": "dm_sans_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "secondary_font",
+        "label": "Secondary font",
+        "default": "bricolage_grotesque_n4"
+      },
+      {
+        "type": "select",
+        "id": "primary_font_color_source",
+        "label": "Primary font color",
+        "options": [
+          {
+            "value": "ink",
+            "label": "Ink"
+          },
+          {
+            "value": "night",
+            "label": "Night"
+          },
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "cream",
+            "label": "Cream"
+          },
+          {
+            "value": "lavender",
+            "label": "Lavender"
+          },
+          {
+            "value": "purple",
+            "label": "Purple"
+          },
+          {
+            "value": "royal_purple",
+            "label": "Royal Purple"
+          },
+          {
+            "value": "mint",
+            "label": "Mint"
+          },
+          {
+            "value": "lemon",
+            "label": "Lemon"
+          }
+        ],
+        "default": "night"
+      },
+      {
+        "type": "checkbox",
+        "id": "primary_font_color_use_custom",
+        "label": "Override primary font color",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "primary_font_color_custom",
+        "label": "Custom primary font color",
+        "default": "#292237"
+      },
+      {
+        "type": "select",
+        "id": "secondary_font_color_source",
+        "label": "Secondary font color",
+        "options": [
+          {
+            "value": "ink",
+            "label": "Ink"
+          },
+          {
+            "value": "night",
+            "label": "Night"
+          },
+          {
+            "value": "white",
+            "label": "White"
+          },
+          {
+            "value": "cream",
+            "label": "Cream"
+          },
+          {
+            "value": "lavender",
+            "label": "Lavender"
+          },
+          {
+            "value": "purple",
+            "label": "Purple"
+          },
+          {
+            "value": "royal_purple",
+            "label": "Royal Purple"
+          },
+          {
+            "value": "mint",
+            "label": "Mint"
+          },
+          {
+            "value": "lemon",
+            "label": "Lemon"
+          }
+        ],
+        "default": "ink"
+      },
+      {
+        "type": "checkbox",
+        "id": "secondary_font_color_use_custom",
+        "label": "Override secondary font color",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "secondary_font_color_custom",
+        "label": "Custom secondary font color",
+        "default": "#181521"
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_block_padding_top",
+        "label": "Button block padding top",
+        "min": 0,
+        "max": 12,
+        "step": 0.5,
+        "default": 0,
+        "unit": "rem"
+      },
+      {
+        "type": "range",
+        "id": "button_block_padding_bottom",
+        "label": "Button block padding bottom",
+        "min": 0,
+        "max": 12,
+        "step": 0.5,
+        "default": 0,
+        "unit": "rem"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "form_max_width",
+        "label": "Form max width",
+        "min": 320,
+        "max": 900,
+        "step": 10,
+        "default": 600,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "dialog_max_width",
+        "label": "Dialog max width",
+        "min": 320,
+        "max": 720,
+        "step": 10,
+        "default": 480,
+        "unit": "px"
       }
     ]
   },
@@ -53,6 +237,172 @@
         "id": "newsletter_btn_label",
         "label": "Submit button label",
         "default": "Sign up"
+      },
+      {
+        "type": "checkbox",
+        "id": "newsletter_use_default_color_scheme",
+        "label": "Use default color scheme",
+        "default": true
+      },
+      {
+        "type": "color_scheme",
+        "id": "newsletter_color_scheme",
+        "label": "Color scheme",
+        "default": "scheme_1"
+      },
+      {
+        "type": "select",
+        "id": "newsletter_content_alignment",
+        "label": "Content alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "justify",
+            "label": "Justify"
+          }
+        ],
+        "default": "center"
+      }
+    ]
+  },
+  {
+    "name": "Theme Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink",
+        "default": "#181521"
+      },
+      {
+        "type": "color",
+        "id": "color_night",
+        "label": "Night",
+        "default": "#292237"
+      },
+      {
+        "type": "color",
+        "id": "color_white",
+        "label": "White",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_cream",
+        "label": "Cream",
+        "default": "#F5F1F1"
+      },
+      {
+        "type": "color",
+        "id": "color_lavender",
+        "label": "Lavender",
+        "default": "#E2D6FC"
+      },
+      {
+        "type": "color",
+        "id": "color_purple",
+        "label": "Purple",
+        "default": "#685196"
+      },
+      {
+        "type": "color",
+        "id": "color_smoke_purple",
+        "label": "Smoke Purple",
+        "default": "#66626E"
+      },
+      {
+        "type": "color",
+        "id": "color_royal_purple",
+        "label": "Royal Purple",
+        "default": "#3F0765"
+      },
+      {
+        "type": "color",
+        "id": "color_mint",
+        "label": "Mint",
+        "default": "#D2FDA7"
+      },
+      {
+        "type": "color",
+        "id": "color_lemon",
+        "label": "Lemon",
+        "default": "#EFFE75"
+      }
+    ]
+  },
+  {
+    "name": "Color Schemes",
+    "settings": [
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "header",
+            "content": "Theme colors"
+          },
+          {
+            "type": "color",
+            "id": "bg_primary",
+            "label": "Primary background",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "bg_secondary",
+            "label": "Secondary background",
+            "default": "#f5f1f1"
+          },
+          {
+            "type": "color_background",
+            "id": "bg_gradient",
+            "label": "Background gradient"
+          },
+          {
+            "type": "color",
+            "id": "text_primary",
+            "label": "Primary text",
+            "default": "#181521"
+          },
+          {
+            "type": "color",
+            "id": "text_secondary",
+            "label": "Secondary text",
+            "default": "#292237"
+          }
+        ],
+        "role": {
+          "text": "text_primary",
+          "background": {
+            "solid": "bg_primary",
+            "gradient": "bg_gradient"
+          },
+          "links": "text_secondary",
+          "icons": "text_primary",
+          "primary_button": "bg_secondary",
+          "on_primary_button": "text_secondary",
+          "primary_button_border": "bg_secondary",
+          "secondary_button": "bg_primary",
+          "on_secondary_button": "text_secondary",
+          "secondary_button_border": "text_secondary"
+        }
+      },
+      {
+        "type": "color_scheme",
+        "id": "default_color_scheme",
+        "label": "Default color scheme",
+        "default": "scheme_1"
       }
     ]
   }

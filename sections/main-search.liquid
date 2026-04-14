@@ -3,7 +3,8 @@
   max-width: 600px;
 }
 {{ section.id | prepend: '#'}} .products-grid {
-  grid-template-columns: repeat({{ section.settings.products_per_row }}, 1fr);
+  --product-card-min: 274px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--product-card-min), 1fr));
 }
 </style>
 
@@ -23,7 +24,7 @@
         value="{{ search.terms }}"
         placeholder="Enter product name or keywords..."
         maxlength="128">
-      <button type="submit" class="button solid">Search</button>
+      <button type="submit" class="button button-primary solid">Search</button>
     </form>
     <hr>
 

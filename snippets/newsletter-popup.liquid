@@ -1,29 +1,50 @@
 {% unless request.path == routes.cart_url or request.path == "/challenge" %}
+  {%- assign active_scheme = settings.default_color_scheme -%}
+  {%- if settings.newsletter_use_default_color_scheme == false and settings.newsletter_color_scheme != blank -%}
+    {%- assign active_scheme = settings.newsletter_color_scheme -%}
+  {%- endif -%}
+  {%- assign scheme_class = '' -%}
+  {%- if active_scheme != blank -%}
+    {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+  {%- endif -%}
+
   <style>
-  #custom_signup label {
-    display: none;
-  }
-  .custom_signup-closeicon {
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.5rem;
+  .custom_signup-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    padding: 0;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: var(--field-border);
   }
-  .custom_signup-closetxt {
-    font-size: 14px;
-  }
-  #custom_signup h3 {
+  .custom_signup-title h3 {
     font-size: 2rem;
+    margin: 0;
+    flex: 1;
+    text-align: inherit;
   }
-  #custom_signup input[type="email"] {
+  dialog#custom_signup .button-close:focus-visible {
+    outline: none;
+  }
+  .custom_signup-body {
+    padding-top: 0.75rem;
+  }
+  .custom_signup-align-left {
+    text-align: left;
+  }
+  .custom_signup-align-center {
     text-align: center;
-    border-radius: 50px;
+  }
+  .custom_signup-align-right {
+    text-align: right;
+  }
+  .custom_signup-align-justify {
+    text-align: justify;
+  }
+  dialog#custom_signup {
+    background-color: var(--theme-bg-primary, var(--night));
+    color: var(--theme-text-primary, var(--white));
+    box-shadow: 0 32px 80px rgba(26, 21, 35, 0.4);
   }
   dialog#custom_signup[open] {
     opacity: 1;
@@ -51,35 +72,52 @@
   }
   </style>
 
-  <dialog id="custom_signup">
-    <button class="custom_signup-closeicon button button-white" type="button" onclick="dismissPopup();">
-      &times;
-    </button>
-    <h3>{{ settings.newsletter_heading }}</h3>
-    <p>{{ settings.newsletter_text }}</p>
-    {% form 'customer' %}
-      {% if form.posted_successfully? %}
-        <div class="rte">
-          <p><strong>Thanks for signing up!</strong></p>
+  <dialog id="custom_signup" class="{{ scheme_class }} custom_signup-align-{{ settings.newsletter_content_alignment | default: 'center' }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+    <div class="custom_signup-header">
+      <div class="custom_signup-title">
+        <h3>{{ settings.newsletter_heading }}</h3>
+      </div>
+      <div class="custom_signup-actions">
+        <button class="custom_signup-close button-close" type="button" onclick="dismissPopup();">
+          &times;
+        </button>
+      </div>
+    </div>
+    <div class="custom_signup-body">
+      <p class="custom_signup-text">{{ settings.newsletter_text }}</p>
+      {% form 'customer' %}
+        {% if form.posted_successfully? %}
+          <div class="rte">
+            <p><strong>Thanks for signing up!</strong></p>
+          </div>
+        {% endif %}
+        <div class="form-row">
+          <input type="email" name="contact[email]" placeholder="Enter email address" required>
         </div>
-      {% endif %}
-      <div class="form-row">
-        <label for="email">Email</label>
-        <input type="email" name="contact[email]" placeholder="Enter email address" required>
-      </div>
-      <div class="form-row">
-        <button type="submit" value="submit" class="button button-white">{{ settings.newsletter_btn_label }}</button>
-      </div>
-      <div class="form-row">
-        <a href="#" class="custom_signup-closetxt" onclick="dismissPopup();return false;">Close</a>
-      </div>
-    {% endform %}
+        <div class="form-row">
+          <button type="submit" value="submit" class="button button-primary">{{ settings.newsletter_btn_label }}</button>
+        </div>
+      {% endform %}
+    </div>
   </dialog>
 
   <script>
   const dialog = document.querySelector('#custom_signup');
   const durationInSecs = {{ settings.newsletter_duration }};
-  const formSuccess = getParam('contact_posted');
+  const getParamFallback = function(name) {
+    if ('URLSearchParams' in window) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+    const params = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (params == null) {
+      return null;
+    }
+    return decodeURI(params[1]) || 0;
+  };
+  const formSuccess = typeof window.getParam === 'function'
+    ? window.getParam('contact_posted')
+    : getParamFallback('contact_posted');
   // Check cookie.
   let cookieValue = false;
   if (document.cookie.includes("dismiss_popup=")) {

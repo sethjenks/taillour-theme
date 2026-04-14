@@ -1,3 +1,4 @@
+{%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
 <div class="raw-html-section-content">
   {{ section.settings.html }}
 </div>
@@ -21,6 +22,12 @@
       "id": "html",
       "label": "HTML/Liquid",
       "info": "You can add HTML, CSS and limited Liquid markup."
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ]
 }

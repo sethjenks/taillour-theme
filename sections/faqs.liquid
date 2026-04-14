@@ -1,10 +1,37 @@
+{%- assign active_scheme = settings.default_color_scheme -%}
+{%- if section.settings.use_default_color_scheme == false and section.settings.color_scheme != blank -%}
+  {%- assign active_scheme = section.settings.color_scheme -%}
+{%- endif -%}
+{%- assign scheme_class = '' -%}
+{%- if active_scheme != blank -%}
+  {%- assign scheme_class = 'color-' | append: active_scheme.id -%}
+{%- endif -%}
 {% style %}
 {{ section.id | prepend: '#' }}.section-wrap:before {
-  background-color:{{ section.settings.background | default: '#ffffff' }}
+  background-color: var(--theme-bg-primary, #ffffff);
+  {%- if section.settings.background_image != blank -%}
+  background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  {%- endif -%}
+}
+{{ section.id | prepend: '#' }} .section h1,
+{{ section.id | prepend: '#' }} .section h2,
+{{ section.id | prepend: '#' }} .section h3,
+{{ section.id | prepend: '#' }} .section h4,
+{{ section.id | prepend: '#' }} .section h5,
+{{ section.id | prepend: '#' }} .section summary {
+  color: var(--theme-text-primary, var(--font-primary-color));
+}
+{{ section.id | prepend: '#' }} .section .rte,
+{{ section.id | prepend: '#' }} .section .rte p {
+  color: var(--theme-text-secondary, var(--font-secondary-color));
 }
 {% endstyle %}
 
-<div id="{{ section.id }}" class="section-wrap" style="color:{{ section.settings.color | default:'inherit' }};">
+<div id="{{ section.id }}" class="section-wrap {{ scheme_class }}" style="color: var(--theme-text-primary, inherit); --font-primary-color: var(--theme-text-primary, var(--font-primary-color)); --font-secondary-color: var(--theme-text-secondary, var(--font-secondary-color));">
+  {%- if section.settings.anchor_id != blank -%}<div id="{{ section.settings.anchor_id }}"></div>{%- endif -%}
   <div class="section">
     <div class="center">
       <{{- section.settings.size }}>
@@ -58,15 +85,22 @@
       "content": "Section Settings"
     },
     {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#ffffff"
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
-      "type": "color",
-      "id": "color",
-      "label": "Text Colour"
+      "type": "checkbox",
+      "id": "use_default_color_scheme",
+      "label": "Use default color scheme",
+      "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.use_default_color_scheme == false }}",
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme_1"
     },
     {
       "type": "inline_richtext",
@@ -106,6 +140,12 @@
       "id": "description",
       "label": "Description",
       "default": "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias blanditiis libero ut laboriosam. Velit, architecto atque repellat sapiente hic eius eos consequuntur perspiciatis quos. Veritatis eveniet esse minima repellendus!</p>"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Enter a unique ID (e.g. 'about') so buttons can scroll to this section using '#about'."
     }
   ],
   "blocks": [
